@@ -15,6 +15,10 @@ import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
+// TEMPLATE component!
+// To access, log into the the app and go to: http://localhost:3000/template 
+import Template from "./components/Template";
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -46,6 +50,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/template" component={Template} />
             </Switch>
           </div>
         </Router>
