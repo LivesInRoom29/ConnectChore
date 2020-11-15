@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const hmController = require("../../controllers/household-members-controller");
+const userController = require("../../controllers/user-controller");
 const passport = require("passport");
 // for authenticating routes
 //require("../../config/passport")(passport);
@@ -35,7 +36,12 @@ router.post("/", async function(req, res) {
       name: name,
       userId: userId
     });
-    res.json(data);
+    // adds the _id of the new member to the array in User
+    const addHMtoUser = await userController.update(
+      { _id: userId },
+      { $push: {householdMembers : data._id}}
+    )
+    res.status(200).send(data);
   } catch (err) {
     res.status(503).json(err);
   }
@@ -53,7 +59,7 @@ router.get("/:id", async function(req, res) {
   }
 });
 
-// update a household member
+// update a household member (by id)
 router.put("/:id", async function(req, res) {
   const id = req.params.id;
   try {
