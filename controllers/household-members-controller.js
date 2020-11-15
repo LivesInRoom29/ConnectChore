@@ -9,5 +9,8 @@ module.exports = {
   },
   create: function(body) {
     return db.HouseholdMember.create(body);
+  },
+  update: function(id, body) {
+    return db.HouseholdMember.findOneAndUpdate(id, body);
   }
 }
