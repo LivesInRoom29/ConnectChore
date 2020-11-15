@@ -44,7 +44,7 @@ router.post("/", async function(req, res) {
 // Matches with "/api/household-members/:id"
 // get one household-member by id
 router.get("/:id", async function(req, res) {
-  const {id} = req.params.id;
+  const id = req.params.id;
   try {
     const data = await hmController.findById(id);
     res.send(data);
@@ -55,7 +55,7 @@ router.get("/:id", async function(req, res) {
 
 // update a household member
 router.put("/:id", async function(req, res) {
-  const {id} = req.params.id;
+  const id = req.params.id;
   try {
     const data = await hmController.update({ _id: id }, req.body);
     res.send(data);
