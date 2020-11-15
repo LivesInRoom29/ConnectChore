@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // Connect to the Mongo DB
 mongoose.connect(
     // during development, create a local .env file for MONGODB_URI
-    db.mongoURI,
+    db.mongoURI || "mongodb://localhost/ConnectChore",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
