@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create Schema
-const HouseholdMemSchema = new Schema({
+const HouseholdMemberSchema = new Schema({
   name: {
     type: String,
     required: true
   },
-  user: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "User"
   }
 });
-module.exports = HouseholdMem = mongoose.model("HouseholdMem", HouseholdMemSchema);
+module.exports = HouseholdMember = mongoose.model("HouseholdMember", HouseholdMemberSchema);
