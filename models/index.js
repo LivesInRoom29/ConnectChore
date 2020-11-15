@@ -1,6 +1,6 @@
 module.exports = {
   User: require("./User"),
-  HouseholdMem: require("./HouseholdMem"),
+  HouseholdMember: require("./HouseholdMember"),
   ChoreList: require("./ChoreList"),
   Task: require("./Task"),
   Reward: require("./Reward"),
