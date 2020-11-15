@@ -1,5 +1,5 @@
-require("dotenv").config();
 const express = require("express");
+require("dotenv").config();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
@@ -17,26 +17,31 @@ app.use(
 );
 app.use(bodyParser.json());
 
-// Connect to the Mongo DB
-mongoose.connect(
-    // during development, create a local .env file for MONGODB_URI
-    db.mongoURI,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false
-    }
-)
-    .then(() => console.log("MongoDB successfully connected"))
-    .catch(err => console.log(err));
-
-// Passport middleware
-app.use(passport.initialize());
-// Passport config
-require("./config/passport")(passport);
-// Routes
-app.use("/api/users", users);
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+  
+  // Passport middleware
+  app.use(passport.initialize());
+  // Passport config
+  require("./config/passport")(passport);
+  // Routes
+  app.use("/api/users", users);
+  
+  // Connect to the Mongo DB
+  mongoose.connect(
+      // during development, create a local .env file for MONGODB_URI
+      db.mongoURI,
+      {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          useCreateIndex: true,
+          useFindAndModify: false
+      }
+  )
+      .then(() => console.log("MongoDB successfully connected"))
+      .catch(err => console.log(err));
 
 const port = process.env.PORT || 5000; // process.env.port is Heroku's port if you choose to deploy the app there
 
