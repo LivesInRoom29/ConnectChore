@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 
 const choreListSchema = new Schema({
 
-  user: {
+  date: {
+    type: Date,
+    required: true
+  },
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "User"
   },
@@ -21,10 +25,6 @@ const choreListSchema = new Schema({
       default: false
     }
   }],
-  date: {
-    type: Date,
-    required: true
-  },
   completionStatus: {
     type: Boolean,
     default: false
