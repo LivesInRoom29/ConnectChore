@@ -19,7 +19,7 @@ const taskSchema = new Schema({
   },
   completedBy: {
     type: Schema.Types.ObjectId,
-    ref: "HouseholdMem"
+    ref: "HouseholdMember"
   },
   completedOn: {
     type: Date,

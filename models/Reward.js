@@ -6,9 +6,9 @@ const rewardSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "RewardDescription"
   },
-  householdMem: {
+  householdMember: {
     type: Schema.Types.ObjectId,
-    ref: "HouseholdMem"
+    ref: "HouseholdMember"
   },
   user: {
     type: Schema.Types.ObjectId,

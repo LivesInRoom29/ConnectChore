@@ -9,7 +9,7 @@ const choreListSchema = new Schema({
   },
   completedBy: {
     type: Schema.Types.ObjectId,
-    ref: "HouseholdMem"
+    ref: "HouseholdMember"
   },
   tasks: [{
     task: {
