@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import 'materialize-css';
+import { Row} from 'react-materialize';
+import Chores from "../chores/chores";
+import Game from "../gamecard/gameCard";
 
 class Dashboard extends Component {
     onLogoutClick = e => {
@@ -14,7 +18,10 @@ class Dashboard extends Component {
         const { user } = this.props.auth;
         
         return (
-            <div style={{ height: "75vh" }} className="container valign-wrapper">
+
+                <div style={{ height: "75vh" }} className="container valign-wrapper">
+                <Chores/>
+                <Game />
                 <div className="row">
                     <div className="col s12 center-align">
                         <h4>
@@ -39,9 +46,13 @@ class Dashboard extends Component {
                     </div>
                 </div>
             </div>
+           
         );
-    }
+        
+    };
+
 }
+
 
 Dashboard.propTypes = {
     logoutUser: PropTypes.func.isRequired,
