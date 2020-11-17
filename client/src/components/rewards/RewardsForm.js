@@ -21,13 +21,13 @@ class Rewards extends Component {
             pointvalue: "",
             rewards: [
                 {
-                    rewardDescription: "Ice cream for breakfast",
+                    description: "Ice cream for breakfast",
                     value: 30,
                     userId: "5fb0747008cf063145ebc887",
                     _id: "123456"
                 },
                 {
-                    rewardDescription: "Friday night movie pick",
+                    description: "Friday night movie pick",
                     value: 10,
                     userId: "5fb0747008cf063145ebc887",
                     _id: "123456"
@@ -70,7 +70,7 @@ class Rewards extends Component {
 
         API.addRewardDescription(
             {
-                rewardDescription: this.state.reward,
+                description: this.state.reward,
                 value: this.state.pointvalue,
                 userId: this.auth.user.id
             }
@@ -91,6 +91,7 @@ class Rewards extends Component {
     // RENDER TEST:
     // Clicking ADD REWARD adds reward as expected to DB for the logged in user only?
     // Clicking the X box successuflly removes the rewarddescription entry for the logged in user only?
+    // How do we set the completedOn date when the X is clicked in the list?
 
     render() {
 
@@ -154,6 +155,7 @@ class Rewards extends Component {
                     <Col md={8}>
                         <h2>Household Rewards</h2>
                         A list of the rewards will dynamically render here once the API call is built.
+                        {/* Filter to non-deleted and map that array */}
                         {this.state.rewards.length ? (
                             <ListGroup variant="flush">
                                 {this.state.rewards.map(reward => (
@@ -167,7 +169,12 @@ class Rewards extends Component {
                                             variant="light"
                                             className="float-right text-danger" 
                                             onClick={
-                                                () => API.deleteRewardDescription(reward._id)
+                                                () => API.deleteRewardDescription(
+                                                    reward._id,
+                                                    { 
+                                                        isDeleted: true
+                                                    }
+                                                )
                                                 .then(res => console.log(res))
                                                 .catch(err => console.log(err))
                                             }
