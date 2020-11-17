@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import "materialize-css";
 import { Col, Card, Icon, CardTitle, Row } from "react-materialize";
 
 class Chores extends Component {

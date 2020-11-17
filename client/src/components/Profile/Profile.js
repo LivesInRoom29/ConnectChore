@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import 'materialize-css';
-import { Row} from 'react-materialize';
 import Chores from "../chores/chores";
 import Game from "../gamecard/gameCard";
 
-class Dashboard extends Component {
+
+class Profile extends Component {
     onLogoutClick = e => {
         e.preventDefault();
         
@@ -54,7 +53,7 @@ class Dashboard extends Component {
 }
 
 
-Dashboard.propTypes = {
+Profile.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 };
@@ -66,4 +65,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { logoutUser }
-)(Dashboard);
+)(Profile);

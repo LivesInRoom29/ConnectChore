@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import "materialize-css";
+
 import { Col, Card, Icon, CardTitle, Row } from "react-materialize";
 
 class Game extends Component {
@@ -11,11 +11,7 @@ class Game extends Component {
       <Row>
         <Col m={6} s={12}>
           <Card
-            actions={[
-              <a key="1" href="#">
-                This is a Link
-              </a>,
-            ]}
+            
             closeIcon={<Icon>close</Icon>}
             header={
               <CardTitle image="https://i0.wp.com/www.org4life.com/wp-content/uploads/2016/10/Depositphotos_72499939_m-2015.jpg">
@@ -24,7 +20,7 @@ class Game extends Component {
             }
             revealIcon={<Icon>more_vert</Icon>}
           >
-            Here is the standard card with an image thumbnail.
+            
           </Card>
         </Col>
       </Row>
