@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const rewardSchema = new Schema({
-  rewardDescription: {
+  rewardDescriptionId: {
     type: Schema.Types.ObjectId,
     ref: "RewardDescription"
   },
-  householdMember: {
+  householdMemberId: {
     type: Schema.Types.ObjectId,
     ref: "HouseholdMember"
   },
-  user: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "users"
   },
