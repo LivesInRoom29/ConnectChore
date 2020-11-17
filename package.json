@@ -1,7 +1,7 @@
 {
-  "name": "mern-auth",
+  "name": "connect-chore",
   "version": "1.0.0",
-  "description": "auth for chore tracker",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -13,19 +13,26 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
+  "proxy": "http://localhost:5000",
   "author": "hilary ferraro",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "if-env": "^1.0.4",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
+    "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.10.13",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "react-bootstrap": "^4.2.1",
+    "react-materialize": "^3.9.3",
+    "redux": "^4.0.5",
     "validator": "^13.1.17"
   },
   "devDependencies": {

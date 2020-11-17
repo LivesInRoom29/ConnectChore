@@ -11,7 +11,7 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            errors: {}
+            errors: ""
         };
     }
 
@@ -22,7 +22,7 @@ class Login extends Component {
         }
       }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.auth.isAuthenticated) {
           this.props.history.push("/dashboard"); // push user to dashboard when they login
         }

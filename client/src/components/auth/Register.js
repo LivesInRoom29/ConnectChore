@@ -13,7 +13,7 @@ class Register extends Component {
             email: "",
             password: "",
             password2: "",
-            errors: {}
+            errors: ""
         };
     }
 
@@ -24,7 +24,7 @@ class Register extends Component {
         }
       }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
