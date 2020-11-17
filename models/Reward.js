@@ -2,18 +2,22 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const rewardSchema = new Schema({
-  rewardDescription: {
+  rewardDescriptionId: {
     type: Schema.Types.ObjectId,
     ref: "RewardDescription"
   },
-  householdMem: {
+  householdMemberId: {
     type: Schema.Types.ObjectId,
-    ref: "HouseholdMem"
+    ref: "HouseholdMember"
   },
-  user: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "users"
   },
+  isDeleted: {
+    type: Boolean,
+    deafult: false
+  }
 });
 
 module.exports = Reward = mongoose.model("Reward", rewardSchema);
