@@ -38,7 +38,7 @@ class Rewards extends Component {
     }
 
     // get rewards data from the DB
-    // HOW do we use the specific logged in user in-state so that we only get that users rewards from this API call?
+    // TEST: will passing in user.id to the API call successfully get us the rewards for the logged in user only?
     componentDidMount() {
         const { user } = this.props.auth
 
@@ -64,6 +64,7 @@ class Rewards extends Component {
         );
     };
     
+    // TEST when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
     addRewardClick = e => {
         e.preventDefault();
 
@@ -78,19 +79,18 @@ class Rewards extends Component {
             
     };
 
-    // deleteRewardClick = e => {
-    //     e.preventDefault();
+    // NOTE: not sure this would work
+    // FUNCTION ADDED INLINE TO BUTTON BELOW
+    deleteRewardClick = e => {
+        API.deleteRewardDescription(this.props.rewards._id)
+        .then( res => console.log(res))
+        .catch(err => console.log(err))
+            
+    };
 
-    //     API.deleteRewardDescription(this.state
-            
-    //             rewardDescription: this.state.reward,
-    //             value: this.state.pointvalue,
-    //             userId: this.auth.user.id
-            
-    //     ).then( res => console.log(res))
-    //     .catch(err => console.log(err));
-            
-    // };
+    // RENDER TEST:
+    // Clicking ADD REWARD adds reward as expected to DB for the logged in user only?
+    // Clicking the X box successuflly removes the rewarddescription entry for the logged in user only?
 
     render() {
 
@@ -104,12 +104,23 @@ class Rewards extends Component {
                             <h4>
                                 <b>Hey there,</b> {user.name.split(" ")[0]}
                                 <p className="text-body">
-                                    Want to include some motivation to your household's day to day chores? Add potential rewards for a job well done! A few examples could be: pick-a-movie night, ice cream for breakfast, buy a new book, stay up late for 30 extra minutes. The possibilities are endless.
+                                    Want to include some motivation to your household's day to day chores? <br />
+                                    Add potential rewards for a job well done! <br />
+                                    <br />
+                                    A few examples could be: 
+                                    <ul>
+                                        <li>★pick-a-movie night</li>
+                                        <li>★ice cream for breakfast</li>
+                                        <li>★buy a new book</li>
+                                        <li>★stay up late for 30 extra minutes.</li>
+                                    </ul>
+                                    <br />
+                                    The possibilities are endless.<br />
                             </p>
                             </h4>
                             <Form.Row>
                                 <Form.Group as={Col} md="6" controlId="formReward">
-                                    <Form.Label>Enter a reward:</Form.Label>
+                                    <Form.Label>Add a reward:</Form.Label>
                                     <Form.Control 
                                         type="input"
                                         name="reward"
@@ -119,7 +130,7 @@ class Rewards extends Component {
                                     />
                                 </Form.Group>
                                 <Form.Group as={Col} md="2" controlId="formValue">
-                                    <Form.Label>Enter a points value:</Form.Label>
+                                    <Form.Label>Include a points value:</Form.Label>
                                     <Form.Control 
                                         type="input"
                                         name="value"
@@ -155,7 +166,11 @@ class Rewards extends Component {
                                         <Button
                                             variant="light"
                                             className="float-right text-danger" 
-                                            onClick={this.deleteRewardClick}
+                                            onClick={
+                                                () => API.deleteRewardDescription(reward._id)
+                                                .then(res => console.log(res))
+                                                .catch(err => console.log(err))
+                                            }
                                         >
                                             <span >X</span>
                                         </Button>
