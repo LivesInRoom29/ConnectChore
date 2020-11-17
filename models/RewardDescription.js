@@ -9,6 +9,10 @@ const rewardDescriptionSchema = new Schema({
   value: {
     type: String
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  },
   isDeleted: {
     type: Boolean,
     deafult: false

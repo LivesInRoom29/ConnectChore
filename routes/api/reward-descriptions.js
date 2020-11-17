@@ -27,13 +27,14 @@ router.get("/",
 
 // To create a new reward description
 router.post("/", async function(req, res) {
-  const { description, value } = req.body
+  const { description, value, userId } = req.body
 
   try {
     const data = await rewardDescriptionController
   .create({
       description: description,
-      value: value
+      value: value,
+      userid: userId
     });
     res.json(data);
   } catch (err) {
