@@ -3,13 +3,17 @@ const Schema = mongoose.Schema;
 
 const choreListSchema = new Schema({
 
-  user: {
+  date: {
+    type: Date,
+    required: true
+  },
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "User"
   },
   completedBy: {
     type: Schema.Types.ObjectId,
-    ref: "HouseholdMem"
+    ref: "HouseholdMember"
   },
   tasks: [{
     task: {
@@ -21,10 +25,6 @@ const choreListSchema = new Schema({
       default: false
     }
   }],
-  date: {
-    type: Date,
-    required: true
-  },
   completionStatus: {
     type: Boolean,
     default: false
@@ -32,6 +32,10 @@ const choreListSchema = new Schema({
   reward: {
     type: Schema.Types.ObjectId,
     ref: "Reward"
+  },
+  isDeleted: {
+    type: Boolean,
+    deafult: false
   }
 });
 
