@@ -23,6 +23,12 @@ const taskSchema = new Schema({
   },
   completedOn: {
     type: Date,
+    // when first created, should be null
+    default: null
+  },
+  isDeleted: {
+    type: Boolean,
+    deafult: false
   }
 });
 
