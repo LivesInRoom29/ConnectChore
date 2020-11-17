@@ -30,7 +30,7 @@
     "mongoose": "^5.10.13",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "react-bootstrap": "^4.2.1",
+    "react-bootstrap": "^1.4.0",
     "react-materialize": "^3.9.3",
     "redux": "^4.0.5",
     "validator": "^13.1.17"
