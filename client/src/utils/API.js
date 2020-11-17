@@ -12,8 +12,9 @@ export default {
     addRewardDescription: function(rewardData) {
         return Axios.post(`/api/rewards/`, rewardData);
     },
-    deleteRewardDescription: function(rewardDescriptionId) {
-        return Axios.delete(`/api/rewards/${rewardDescriptionId}`);
+    // we are not hard-deleting, how do we set the date?
+    deleteRewardDescription: function(rewardDescriptionId, rewardData) {
+        return Axios.put(`/api/rewards/${rewardDescriptionId}`, rewardData);
     }
 
     // Chore Calls
