@@ -1,11 +1,15 @@
+// Need for React and Redux
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+// Bootstrap components
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import ListGroup from 'react-bootstrap/ListGroup';
+// API calls
 import API from "../../utils/API";
 
 class Rewards extends Component {
@@ -14,8 +18,21 @@ class Rewards extends Component {
         super(props)
         this.state = {
             reward: "",
-            value: "",
-            rewards: [],
+            pointvalue: "",
+            rewards: [
+                {
+                    rewardDescription: "Ice cream for breakfast",
+                    value: 30,
+                    userId: "5fb0747008cf063145ebc887",
+                    _id: "123456"
+                },
+                {
+                    rewardDescription: "Friday night movie pick",
+                    value: 10,
+                    userId: "5fb0747008cf063145ebc887",
+                    _id: "123456"
+                }
+            ],
             auth: {}
         }
     }
@@ -23,7 +40,9 @@ class Rewards extends Component {
     // get rewards data from the DB
     // HOW do we use the specific logged in user in-state so that we only get that users rewards from this API call?
     componentDidMount() {
-        API.getRewardDescriptions(this.props.auth.user.id)
+        const { user } = this.props.auth
+
+        API.getRewardDescriptions(user.id)
             .then(res => this.setState(
                 { 
                     rewards: res.data 
@@ -51,13 +70,27 @@ class Rewards extends Component {
         API.addRewardDescription(
             {
                 rewardDescription: this.state.reward,
-                value: this.state.value,
+                value: this.state.pointvalue,
                 userId: this.auth.user.id
             }
         ).then( res => console.log(res))
         .catch(err => console.log(err));
             
     };
+
+    // deleteRewardClick = e => {
+    //     e.preventDefault();
+
+    //     API.deleteRewardDescription(this.state
+            
+    //             rewardDescription: this.state.reward,
+    //             value: this.state.pointvalue,
+    //             userId: this.auth.user.id
+            
+    //     ).then( res => console.log(res))
+    //     .catch(err => console.log(err));
+            
+    // };
 
     render() {
 
@@ -85,12 +118,12 @@ class Rewards extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
-                                <Form.Group as={Col} md="3" controlId="formValue">
-                                    <Form.Label>Enter a value:</Form.Label>
+                                <Form.Group as={Col} md="2" controlId="formValue">
+                                    <Form.Label>Enter a points value:</Form.Label>
                                     <Form.Control 
                                         type="input"
                                         name="value"
-                                        value={this.state.value}
+                                        value={this.state.pointsvalue}
                                         placeholder="10" 
                                         onChange={this.handleInputChange}
                                     />
@@ -107,9 +140,31 @@ class Rewards extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col md={8}>
                         <h2>Household Rewards</h2>
                         A list of the rewards will dynamically render here once the API call is built.
+                        {this.state.rewards.length ? (
+                            <ListGroup variant="flush">
+                                {this.state.rewards.map(reward => (
+                                    <ListGroup.Item 
+                                        key={reward._id} 
+                                        data-id={reward._id} 
+                                        className="align-items-center"
+                                    >
+                                        {reward.rewardDescription} (points: {reward.value}) 
+                                        <Button
+                                            variant="light"
+                                            className="float-right text-danger" 
+                                            onClick={this.deleteRewardClick}
+                                        >
+                                            <span >X</span>
+                                        </Button>
+                                </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                        ) : (
+                            <h3>No rewards to display!</h3>
+                        )}
                     </Col>
                 </Row>
             </Container>
