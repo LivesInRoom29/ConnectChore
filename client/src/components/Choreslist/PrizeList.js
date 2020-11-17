@@ -16,6 +16,19 @@ class PrizeList extends Component {
         this.props.delete(key);
     }
 
+    render() {
+        var PrizeEntries = this.props.entries;
+        var PrizeItems = PrizeEntries.map(this.createPrizes);
+
+        return (
+            <ul className="theList">
+                <FlipMove duration={150} easing="ease-out">{/* this is to animate the earase effect */}
+                    {PrizeItems}
+                </FlipMove>
+            </ul>
+        );
+    }
+
 }
 
 export default PrizeList;
