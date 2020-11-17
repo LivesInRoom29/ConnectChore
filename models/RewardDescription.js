@@ -9,6 +9,10 @@ const rewardDescriptionSchema = new Schema({
   value: {
     type: String
   },
+  isDeleted: {
+    type: Boolean,
+    deafult: false
+  }
 });
 
 module.exports = RewardDescription = mongoose.model("RewardDescription", rewardDescriptionSchema);

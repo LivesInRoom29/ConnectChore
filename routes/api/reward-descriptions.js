@@ -57,6 +57,7 @@ router.get("/:id", async function(req, res) {
 // not sure if we need this
 // update a reward descriptionby id
 // in req.body, can pass in updated description or value
+// Use this to "delete" as well - pass in {isDeleted: true}
 router.put("/:id", async function(req, res) {
   const id = req.params.id;
   try {

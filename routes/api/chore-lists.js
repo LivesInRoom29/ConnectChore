@@ -62,6 +62,7 @@ router.get("/:id", async function(req, res) {
 
 // update a chore list by id
 // in req.body, can pass in updated date, completedBy (ref to household-member), tasks, reward, completionStatus
+// Use this to "delete" as well - pass in {isDeleted: true}
 router.put("/:id", async function(req, res) {
   const id = req.params.id;
   try {

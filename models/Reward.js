@@ -14,6 +14,10 @@ const rewardSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
+  isDeleted: {
+    type: Boolean,
+    deafult: false
+  }
 });
 
 module.exports = Reward = mongoose.model("Reward", rewardSchema);
