@@ -9,6 +9,14 @@ const rewardDescriptionSchema = new Schema({
   value: {
     type: String
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "users"
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = RewardDescription = mongoose.model("RewardDescription", rewardDescriptionSchema);
