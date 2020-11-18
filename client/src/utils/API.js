@@ -7,14 +7,14 @@ import Axios from "axios"
 export default {
     // Reward Calls
     getRewardDescriptions: function(userid) {
-        return Axios.get(`/api/rewards/${userid}`);
+        return Axios.get(`/api/reward-descriptions/user/${userid}`);
     },
     addRewardDescription: function(rewardData) {
-        return Axios.post(`/api/rewards/`, rewardData);
+        return Axios.post(`/api/reward-descriptions/`, rewardData);
     },
     // we are not hard-deleting, how do we set the date?
     deleteRewardDescription: function(rewardDescriptionId, rewardData) {
-        return Axios.put(`/api/rewards/${rewardDescriptionId}`, rewardData);
+        return Axios.put(`/api/reward-descriptions/${rewardDescriptionId}`, rewardData);
     }
 
     // Chore Calls
