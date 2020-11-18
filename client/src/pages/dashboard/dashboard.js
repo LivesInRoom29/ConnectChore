@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navbar from "../../components/navbar/Navbar";
 import Profile from "../../components/Profile/Profile";
+import RewardsForm from "../../components/rewards/RewardsForm";
 
 function Dashboard(props) {
     const [user, setUser] = useState([])
@@ -11,6 +12,7 @@ function Dashboard(props) {
         <div>
             <Navbar />
             <Profile />
+            <RewardsForm />
             
             
         </div>
