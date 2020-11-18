@@ -34,7 +34,7 @@ router.post("/", async function(req, res) {
   .create({
       description: description,
       value: value,
-      userid: userId
+      userId: userId
     });
     res.json(data);
   } catch (err) {
@@ -49,6 +49,19 @@ router.get("/:id", async function(req, res) {
   try {
     const data = await rewardDescriptionController
   .findById(id);
+    res.send(data);
+  } catch (err) {
+    res.status(503).end(err);
+  }
+});
+
+// Matches with "/api/reward-descriptions/user/:id"
+// get all rewards by userId
+router.get("/user/:id", async function(req, res) {
+  const id = req.params.id;
+  try {
+    const data = await rewardDescriptionController
+  .findByUserId(id);
     res.send(data);
   } catch (err) {
     res.status(503).end(err);
