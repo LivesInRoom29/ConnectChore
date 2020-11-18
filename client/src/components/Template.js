@@ -4,6 +4,29 @@ import { connect } from "react-redux";
 
 class Template extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            householdMember: "Jimmy",
+            choreListDate: "",
+            choreList: []
+        }
+    }
+
+    // functions start here
+
+    // change handlers:
+        //  to bring the field values into state so they can be used:
+        // this.setState(householdmember, choreListDate)
+        
+    // On "submit click":
+        // const { user } = this.props.auth;
+        // API call to get all chorelists associated with the logged in user
+        // setting state of the page to choreList: res.data
+
+
+    
+    // do a render for all cards to generate the board.
     render() {
         // Bringing in the logged in user!
         const { user } = this.props.auth;
