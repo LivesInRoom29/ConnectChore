@@ -4,17 +4,16 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import "./App.css";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from "react-redux";
 import store from "./store";
 
-import Navbar from "./components/layout/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import Dashboard from "./components/dashboard/Dashboard";
-import Rewards from "./components/rewards/RewardsForm";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template 
