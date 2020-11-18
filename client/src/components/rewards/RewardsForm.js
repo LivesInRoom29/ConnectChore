@@ -19,31 +19,21 @@ class Rewards extends Component {
         this.state = {
             reward: "",
             pointvalue: "",
-            rewards: [
-                {
-                    description: "Ice cream for breakfast",
-                    value: 30,
-                    userId: "5fb0747008cf063145ebc887",
-                    _id: "123456"
-                },
-                {
-                    description: "Friday night movie pick",
-                    value: 10,
-                    userId: "5fb0747008cf063145ebc887",
-                    _id: "123456"
-                }
-            ],
+            rewards: [],
             auth: {}
         }
     }
 
     // get rewards data from the DB
-    // TEST: will passing in user.id to the API call successfully get us the rewards for the logged in user only?
+    // TEST-pass: will passing in user.id to the API call successfully get us the rewards for the logged in user only?
     componentDidMount() {
         const { user } = this.props.auth
 
         API.getRewardDescriptions(user.id)
-            .then(res => this.setState(
+            .then(res => 
+                //console.log(res)
+                
+                this.setState(
                 { 
                     rewards: res.data 
                 }
@@ -64,34 +54,35 @@ class Rewards extends Component {
         );
     };
     
-    // TEST when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
+    // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
     addRewardClick = e => {
-        e.preventDefault();
+        // leaving commented out to refresh the whole page for now
+        //e.preventDefault();
+
+        const { user } = this.props.auth;
+        console.log("user id");
+        console.log(user.id);
+        console.log("this state reward");
+        console.log(this.state.reward);
+        console.log("this state pointvalue");
+        console.log(this.state.pointvalue);
+
+        const {reward, pointvalue} = this.state;
 
         API.addRewardDescription(
             {
-                description: this.state.reward,
-                value: this.state.pointvalue,
-                userId: this.auth.user.id
+                description: reward,
+                value: pointvalue,
+                userId: user.id
             }
         ).then( res => console.log(res))
         .catch(err => console.log(err));
             
     };
 
-    // NOTE: not sure this would work
-    // FUNCTION ADDED INLINE TO BUTTON BELOW
-    deleteRewardClick = e => {
-        API.deleteRewardDescription(this.props.rewards._id)
-        .then( res => console.log(res))
-        .catch(err => console.log(err))
-            
-    };
-
-    // RENDER TEST:
+    // RENDER TEST-pass:
     // Clicking ADD REWARD adds reward as expected to DB for the logged in user only?
     // Clicking the X box successuflly removes the rewarddescription entry for the logged in user only?
-    // How do we set the completedOn date when the X is clicked in the list?
 
     render() {
 
@@ -109,6 +100,7 @@ class Rewards extends Component {
                                     Add potential rewards for a job well done! <br />
                                     <br />
                                     A few examples could be: 
+                                </p>
                                     <ul>
                                         <li>★pick-a-movie night</li>
                                         <li>★ice cream for breakfast</li>
@@ -116,8 +108,8 @@ class Rewards extends Component {
                                         <li>★stay up late for 30 extra minutes.</li>
                                     </ul>
                                     <br />
-                                    The possibilities are endless.<br />
-                            </p>
+                                <p>The possibilities are endless.<br />
+                                </p>
                             </h4>
                             <Form.Row>
                                 <Form.Group as={Col} md="6" controlId="formReward">
@@ -134,8 +126,8 @@ class Rewards extends Component {
                                     <Form.Label>Include a points value:</Form.Label>
                                     <Form.Control 
                                         type="input"
-                                        name="value"
-                                        value={this.state.pointsvalue}
+                                        name="pointvalue"
+                                        value={this.state.pointvalue}
                                         placeholder="10" 
                                         onChange={this.handleInputChange}
                                     />
@@ -155,7 +147,7 @@ class Rewards extends Component {
                     <Col md={8}>
                         <h2>Household Rewards</h2>
                         A list of the rewards will dynamically render here once the API call is built.
-                        {/* Filter to non-deleted and map that array */}
+                        {/* Eventually filter down to non-deleted and map that array */}
                         {this.state.rewards.length ? (
                             <ListGroup variant="flush">
                                 {this.state.rewards.map(reward => (
@@ -164,7 +156,7 @@ class Rewards extends Component {
                                         data-id={reward._id} 
                                         className="align-items-center"
                                     >
-                                        {reward.rewardDescription} (points: {reward.value}) 
+                                        {reward.description} (points: {reward.value}) 
                                         <Button
                                             variant="light"
                                             className="float-right text-danger" 
