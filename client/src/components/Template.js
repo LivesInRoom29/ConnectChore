@@ -1,3 +1,4 @@
+// Need for React and Redux
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -6,6 +7,7 @@ class Template extends Component {
 
     constructor(props) {
         super(props)
+        // what does your page need to know?
         this.state = {
             householdMember: "Jimmy",
             choreListDate: "",
@@ -14,14 +16,15 @@ class Template extends Component {
     }
 
     // functions start here
-
+    
+    // when i get input from the user, what will have to change in my state?
     // change handlers:
-        //  to bring the field values into state so they can be used:
+        // to bring the field values into state so they can be used:
         // this.setState(householdmember, choreListDate)
-        
+
     // On "submit click":
         // const { user } = this.props.auth;
-        // API call to get all chorelists associated with the logged in user
+        // API call to get all chorelists associated with the householdmember and the chorelist date
         // setting state of the page to choreList: res.data
 
 
