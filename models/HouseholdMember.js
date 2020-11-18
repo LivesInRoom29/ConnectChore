@@ -9,7 +9,7 @@ const HouseholdMemberSchema = new Schema({
   },
   userId: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: "users"
   }
 });
 module.exports = HouseholdMember = mongoose.model("HouseholdMember", HouseholdMemberSchema);
