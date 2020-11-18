@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import axios from "axios";
-
-export default {
-
-};
-=======
 /* eslint-disable import/no-anonymous-default-export */
 // api call to get rewards
 // addRewardDescription
@@ -33,4 +26,3 @@ export default {
 
     // Household Member calls
 }
->>>>>>> 6e68de60dd40c22d08809276f1b728ad50190f06
