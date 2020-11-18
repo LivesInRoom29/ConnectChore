@@ -24,7 +24,12 @@ export default {
         return Axios.put(`/api/reward-descriptions/${rewardDescriptionId}`, rewardData);
     }
 
-    // Chore Calls
+    /*
+    // Chore Calls - will have to refine
+    // getChoreListForGame: function(userId, householdMemberId, choreListDate) {
+        return Axios.get(`api/chorelist/${householdMemberId}/${choreListDate});
+    }
+    */
 
     // Household Member calls
 }
