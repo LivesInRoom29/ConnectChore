@@ -13,12 +13,8 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-<<<<<<< HEAD
-import Dashboard from "./pages/Dashboard/Dashboard";
-=======
 import Dashboard from "./pages/Dashboard/Dashboard"; //New dahsboard page
 // import Profile from "./components/Profile/Profile";
->>>>>>> aac41c5a2d80ca44f0d3966bf34b09bc466625ea
 import Rewards from "./components/rewards/RewardsForm";
 
 // TEMPLATE component!
@@ -44,6 +40,7 @@ if (localStorage.jwtToken) {
   }
 }
 
+//path routes
 class App extends Component {
   render() {
     return (
