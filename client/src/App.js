@@ -14,6 +14,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Rewards from "./components/rewards/RewardsForm";
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template 
