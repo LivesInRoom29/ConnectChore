@@ -59,6 +59,19 @@ router.get("/:id", async function(req, res) {
   }
 });
 
+// Matches with "/api/household-members/user/:id"
+// get all household members by userId
+router.get("/user/:id", async function(req, res) {
+  const id = req.params.id;
+  try {
+    const data = await hmController
+  .findByUserId(id);
+    res.send(data);
+  } catch (err) {
+    res.status(503).end(err);
+  }
+});
+
 // update a household member (by id)
 router.put("/:id", async function(req, res) {
   const id = req.params.id;
