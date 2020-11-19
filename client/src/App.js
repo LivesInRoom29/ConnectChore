@@ -13,15 +13,9 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-<<<<<<< HEAD
-import Dashboard from "./pages/Dashboard/Dashboard"; //New dahsboard page
-// import Profile from "./components/Profile/Profile";
-import Rewards from "./components/rewards/RewardsForm";
-=======
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Game from "./pages/GameCard/Game";
 import Footer from "./components/footer/footer";
->>>>>>> d538186e3424de317bf7748729501a32cd2f99c7
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template 
@@ -60,11 +54,7 @@ class App extends Component {
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/template" component={Template} />
-<<<<<<< HEAD
-              <PrivateRoute exact path="/rewards" component={Rewards} />
-=======
               <PrivateRoute exact path="/game" component={Game} />
->>>>>>> d538186e3424de317bf7748729501a32cd2f99c7
             </Switch>
             <Footer />
           </div>
