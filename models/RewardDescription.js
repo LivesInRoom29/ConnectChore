@@ -15,7 +15,7 @@ const rewardDescriptionSchema = new Schema({
   },
   isDeleted: {
     type: Boolean,
-    deafult: false
+    default: false
   }
 });
 
