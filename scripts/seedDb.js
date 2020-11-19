@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 ObjectId = require("mongodb").ObjectID;
 const db = require("../models");
-const choreListController = require("../controllers/chore-list-controller");
 
 
 // This file empties all collection and inserts the documents below
@@ -12,7 +11,7 @@ mongoose.connect(
 );
 
 //create the user with authentification
-// use user: Roxy1, id: ObjectId("5fb08aef14900580a42f8aca")
+//**UPDATE THIS with a user you have on your local machine** */
 const userID = ObjectId("5fb03b9527ae29af605a190a");
 
 const householdMemberSeed = [
@@ -45,33 +44,45 @@ const rewardDescriptionSeed = [
 ];
 
 const seedReward = (hmId, rdId) => {
-  db.Reward.collection.insertOne(
-    {
-      rewardDescriptionId: ObjectId(rdId),
-      householdMemberId: ObjectId(hmId),
-      userId: userID
-    }
-  )
-  .then(data => {
-    return data.ops[0]._id;
-  })
+  db.Reward
+    .remove({})
+    .then(() => db.Reward.collection.insertOne(
+      {
+        rewardDescriptionId: ObjectId(rdId),
+        householdMemberId: ObjectId(hmId),
+        userId: userID
+      }
+    ))
+    .then(data => {
+      return data.ops[0]._id;
+    })
 }
 
-const seedTask = (name, description, frequency, clId, hmId) => {
+const addTaskToChorelist = (choreListID, taskId) => {
+  db.ChoreList.collection.findOneAndUpdate({ _id: choreListID }, { $push: {tasks : {task: ObjectId(taskId), completionStatus: false }}}, {new: true})
+    .then(data => {
+      console.log(`Task ID ${taskId} added to ChoreList ${choreListID}`);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
+const seedTask = (description, frequency, clId) => {
   db.Task.collection.insertOne(
     {
-      name: name,
+      // name: name,
       description: description,
       frequency: frequency,
-      choreList: ObjectId(clId),
-      completedBy: ObjectId(hmId),
-      completedOn: null,
+      // choreList: ObjectId(clId),
+      // completedBy: ObjectId(hmId),
+      // completedOn: null,
       isDeleted: false
     })
     .then(data => {
       console.log(data.result.n + " task records inserted!");
       const refId = data.ops[0]._id;
-      choreListController.update({ _id: clId }, { $push: {tasks : ObjectId(refId)}})
+      addTaskToChorelist(clId, refId);
       return refId;
     })
     .catch(err => {
@@ -80,52 +91,37 @@ const seedTask = (name, description, frequency, clId, hmId) => {
     })
 }
 
+// returns a promise so that the tasks aren't created before the chore-list
 const seedChoreList = (date, hmId, rewardId) => {
-  db.ChoreList.collection.insertOne(
-    {
-      date: date,
-      userId: userID,
-      completedBy: ObjectId(hmId),
-      tasks: [],
-      completionStatus: false,
-      reward: ObjectId(rewardId)
-    }
-  )
-  .then(data => {
-    console.log(data.result.n + " choreList records inserted!");
-    console.log("seedChorelist returns", data.ops[0]._id);
-    return data.ops[0]._id;
-  })
-  .catch(err => {
-    console.log(err);
-    process.exit(1);
-  })
+  return new Promise((resolve, reject) => {
+    db.ChoreList.collection.insertOne(
+      {
+        date: date,
+        userId: userID,
+        completedBy: ObjectId(hmId),
+        tasks: [],
+        completionStatus: false,
+        reward: ObjectId(rewardId)
+      }
+    )
+    .then(data => {
+      console.log(data.result.n + " choreList records inserted!");
+      console.log("chorelist created Id:", data.ops[0]._id);
+      resolve(data.ops[0]._id);
+    })
+    .catch(err => {
+      console.log("seedChorelist Error", err);
+      reject(err);
+    })
+  });
 }
-
-// maybe not for the user?
-// db.User
-//   .remove({})
-//   .then(() => db.User.collection.insertMany(bookSeed))
-//   .then(data => {
-//     console.log(data.result.n + " records inserted!");
-//     process.exit(0);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   });
-
-// db.HouseholdMember
-//   .remove({})
-  // .then(() =>
 
 const seedDB = () => {
   let hmId1, hmId2;
   let rdId1, rdId2, rdId3;
-  let rewardId1, rewardId2, rewardId3;
-  let taskId1, taskId2, taskId3;
+  let rewardId1, rewardId2, rewardId3, rewardId4, rewardId5;
+  let taskId1, taskId2, taskId3, taskId4, taskId5, taskId6;
   let chorelistId1, chorelistId2;
-
 
   db.HouseholdMember.collection.insertMany(householdMemberSeed)
     .then(data => {
@@ -138,7 +134,13 @@ const seedDB = () => {
       process.exit(1);
     });
 
-  db.RewardDescription.collection.insertMany(rewardDescriptionSeed)
+  // Remove all documents from RewardDescription collection
+  // Add new documents from array above
+  // Once that's completed, seed the Rewards and save the ID for those to the 4 variables.
+  db.RewardDescription
+    .remove({})
+    .then(() => db.RewardDescription.collection.insertMany(rewardDescriptionSeed)
+    )
     .then(data => {
       console.log(data.result.n + " reward description records inserted!");
       rdId1 = data.ops[0]._id;
@@ -151,11 +153,21 @@ const seedDB = () => {
       rewardId3 = seedReward(hmId1, rdId3);
       rewardId4 = seedReward(hmId2, rdId1);
       rewardId5 = seedReward(hmId2, rdId2);
-      chorelistId1 = seedChoreList("2020-12-12", hmId1, rewardId1);
-      chorelistId2 = seedChoreList("2020-12-14", hmId2, rewardId4);
-      taskId1 = seedTask("laundry", "clean, dry, and fold one load", 1, chorelistId1, hmId1);
-      taskId2 = seedTask("dished", "clean, dry, and put away dishes for one meal load", 2, chorelistId1, hmId1);
-      taskId3 = seedTask("clean room", "everything should be put away, vacuum", 1, chorelistId1, hmId1);
+      // SeedChoreList returns a promise that resolves with the chore-list ID to be used to seed the 3 tasks.
+      seedChoreList("2020-12-12", hmId1, rewardId1)
+        .then(result => {
+          chorelistId1 = result;
+          taskId1 = seedTask("laundy: clean, dry, and fold one load", 1, chorelistId1);
+          taskId2 = seedTask("dishes: clean, dry, and put away dishes for one meal load", 2, chorelistId1);
+          taskId3 = seedTask("clean room: everything should be put away, vacuum", 1, chorelistId1);
+        });
+      seedChoreList("2020-12-14", hmId2, rewardId4)
+        .then(result => {
+          chorelistId2 = result;
+          taskId4 = seedTask("task1", 1, chorelistId2);
+          taskId5 = seedTask("task2", 2, chorelistId2);
+          taskId6 = seedTask("task3", 3, chorelistId2);
+        });
     })
     .catch(err => {
       console.error(err);
@@ -164,25 +176,3 @@ const seedDB = () => {
 }
 
 seedDB();
-// db.HouseholdMember.collection.insertMany(householdMemberSeed)
-//   .then(data => {
-//     console.log(data.result.n + " HM records inserted!");
-//     console.log (data.ops[0]._id)
-//     process.exit(0);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   });
-
-// db.RewardDescription.collection.insertMany(rewardDescriptionSeed)
-//   .then(data => {
-//     console.log(data.result.n + " reward description records inserted!");
-//   })
-//   .then(data => {
-//     console.log(data)
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   });
