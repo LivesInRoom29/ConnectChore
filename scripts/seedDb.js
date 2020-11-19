@@ -94,7 +94,9 @@ const seedTask = (description, frequency, clId) => {
 // returns a promise so that the tasks aren't created before the chore-list
 const seedChoreList = (date, hmId, rewardId) => {
   return new Promise((resolve, reject) => {
-    db.ChoreList.collection.insertOne(
+    db.ChoreList
+    .remove({})
+    .then(() => db.ChoreList.collection.insertOne(
       {
         date: date,
         userId: userID,
@@ -103,7 +105,7 @@ const seedChoreList = (date, hmId, rewardId) => {
         completionStatus: false,
         reward: ObjectId(rewardId)
       }
-    )
+    ))
     .then(data => {
       console.log(data.result.n + " choreList records inserted!");
       console.log("chorelist created Id:", data.ops[0]._id);
@@ -147,7 +149,7 @@ const seedDB = () => {
       rdId2 = data.ops[1]._id;
       rdId3 = data.ops[2]._id;
     })
-    .then(data => {
+    .then(() => {
       rewardId1 = seedReward(hmId1, rdId1);
       rewardId2 = seedReward(hmId1, rdId2);
       rewardId3 = seedReward(hmId1, rdId3);
@@ -167,7 +169,7 @@ const seedDB = () => {
           taskId4 = seedTask("task1", 1, chorelistId2);
           taskId5 = seedTask("task2", 2, chorelistId2);
           taskId6 = seedTask("task3", 3, chorelistId2);
-        });
+        })
     })
     .catch(err => {
       console.error(err);
