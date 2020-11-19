@@ -14,6 +14,6 @@ module.exports = {
     return db.ChoreList.findOneAndUpdate(id, body);
   },
   addTask: function(id, taskId) {
-    return db.ChoreList.findOneAndUpdate(id, taskId);
+    return db.ChoreList.findOneAndUpdate(id, taskId, { new: true});
   }
 }
