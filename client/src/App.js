@@ -13,7 +13,7 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Dashboard from "./pages/dashboard/dashboard";
 import Game from "./pages/GameCard/Game";
 import Footer from "./components/footer/footer";
 

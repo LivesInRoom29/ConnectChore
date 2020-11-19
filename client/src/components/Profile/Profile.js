@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import Chores from "../chores/chores";
+import Chores from "../Chores/chores";
 import Game from "../gamecard/gameCard";
 
 
