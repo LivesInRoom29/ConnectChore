@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const choreListController = require("../../controllers/chore-list-controller");
 const passport = require("passport");
+ObjectId = require("mongodb").ObjectID;
+
 // for authenticating routes
 //require("../../config/passport")(passport);
 //const jwt = require("jsonwebtoken");
@@ -67,6 +69,27 @@ router.put("/:id", async function(req, res) {
   const id = req.params.id;
   try {
     const data = await choreListController.update({ _id: id }, req.body);
+    res.send(data);
+  } catch (err) {
+    res.status(503).end(err);
+  }
+});
+
+// Matches with "/api/chore-lists/tasks/:id"
+// to add tasks to the array
+// req should have { task: taskID, completionStatus: false }
+router.put("/tasks/:id", async function(req, res) {
+  const id = req.params.id;
+  console.log("req body:", req.body);
+  try {
+    const data = await choreListController.addTask(
+      {_id: id},
+      { $push: {
+        tasks: [
+          {task: ObjectId(req.body.task), completionStatus: false }
+        ]
+      }}
+    );
     res.send(data);
   } catch (err) {
     res.status(503).end(err);
