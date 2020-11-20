@@ -21,7 +21,7 @@ mongoose.connect(
 
 //create the user with authentification
 //**UPDATE THIS with a user you have on your local machine** */
-const userID = ObjectId("5fb03b9527ae29af605a190a");
+const userID = ObjectId("5fb00b6367bcf0b260b1998a");
 
 const householdMemberSeed = [
   {
@@ -54,7 +54,7 @@ const rewardDescriptionSeed = [
 
 const seedReward = (hmId, rdId) => {
   db.Reward
-    .remove({})
+    .deleteMany({})
     .then(() => db.Reward.collection.insertOne(
       {
         rewardDescriptionId: ObjectId(rdId),
@@ -78,14 +78,17 @@ const addTaskToChorelist = (choreListID, taskId) => {
 }
 
 const seedTask = (description, frequency, clId) => {
-  db.Task.collection.insertOne(
-    {
-      // name: name,
-      description: description,
-      frequency: frequency,
-      userId: userID,
-      isDeleted: false
-    })
+  db.Task
+    .deleteMany({})
+    .then(() => db.Task.collection.insertOne(
+      {
+        // name: name,
+        description: description,
+        frequency: frequency,
+        userId: userID,
+        isDeleted: false
+      })
+    )
     .then(data => {
       console.log(data.result.n + " task records inserted!");
       const refId = data.ops[0]._id;
@@ -102,7 +105,7 @@ const seedTask = (description, frequency, clId) => {
 const seedChoreList = (date, hmId, rewardId) => {
   return new Promise((resolve, reject) => {
     db.ChoreList
-    .remove({})
+    .deleteMany({})
     .then(() => db.ChoreList.collection.insertOne(
       {
         date: date,
@@ -147,11 +150,11 @@ const seedDB = () => {
       process.exit(1);
     });
 
-  // Remove all documents from RewardDescription collection
+  // deleteMany all documents from RewardDescription collection
   // Add new documents from array above
   // Once that's completed, seed the Rewards and save the ID for those to the 4 variables.
   db.RewardDescription
-    .remove({})
+    .deleteMany({})
     .then(() => db.RewardDescription.collection.insertMany(rewardDescriptionSeed)
     )
     .then(data => {
