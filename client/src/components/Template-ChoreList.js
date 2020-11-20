@@ -3,21 +3,18 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-class Template extends Component {
+class ChoreList extends Component {
 
     constructor(props) {
         super(props)
         // what does your page need to know?
         this.state = {
             householdMember: "Jimmy",
-            choreListDate: "",
-            choreListID: "",
-            tasks: [
-                {
-                    description: "Laundry",
-                    frequency: ""
-                }
-            ]
+            choreListDate: "12/24/2020",
+            choreList: ["take out the trash", "walk the dog", "rake the lawn"]
+            //householdMember: "",
+            //choreListDate: "",
+            // choreList: []
         }
     }
 
@@ -26,12 +23,12 @@ class Template extends Component {
     // when i get input from the user, what will have to change in my state?
     // change handlers:
         // to bring the field values into state so they can be used:
-        // this.setState(householdmember, choreListDate)
+        // this.setState(householdmember, choreListDate, coreList)
 
     // On "submit click":
         // const { user } = this.props.auth;
-        // API call to get all chorelists associated with the householdmember and the chorelist date
-        // setting state of the page to choreList: res.data
+        // API call to post chorelist information
+        // Successful post - "chorelist added!"
 
 
     
@@ -47,7 +44,7 @@ class Template extends Component {
 }
 
 // REDUX Stuff - to make sure you have access to the logged in user!!
-Template.propTypes = {
+ChoreList.propTypes = {
     auth: PropTypes.object.isRequired
 };
 
@@ -57,6 +54,6 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps
-)(Template);
+)(ChoreList);
 
 // Update "Template" with the name of your component.

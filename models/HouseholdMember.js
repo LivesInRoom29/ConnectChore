@@ -10,6 +10,10 @@ const HouseholdMemberSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref: "users"
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false
   }
 });
 module.exports = HouseholdMember = mongoose.model("HouseholdMember", HouseholdMemberSchema);

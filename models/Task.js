@@ -13,6 +13,19 @@ const taskSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
+  // choreList: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "ChoreList"
+  // },
+  // completedBy: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "HouseholdMember"
+  // },
+  // completedOn: {
+  //   type: Date,
+  //   // when first created, should be null
+  //   default: null
+  // },
   isDeleted: {
     type: Boolean,
     deafult: false
