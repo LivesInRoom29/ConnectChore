@@ -1,6 +1,8 @@
+// Need for React and Redux
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
 import { logoutUser } from "../../actions/authActions";
 
 import { Col, Card, Icon, CardTitle, Row } from "react-materialize";

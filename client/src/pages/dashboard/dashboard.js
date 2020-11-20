@@ -1,6 +1,7 @@
-import React from "react";
-//import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+// Need for React and Redux
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 // import Navbar from "../../components/navbar/Navbar";
 import Profile from "../../components/Profile/Profile";
 import RewardsForm from "../../components/rewards/RewardsForm";
