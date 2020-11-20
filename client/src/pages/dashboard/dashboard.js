@@ -1,23 +1,53 @@
-import React, { Component, useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
+//import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Navbar from "../../components/navbar/Navbar";
+// import Navbar from "../../components/navbar/Navbar";
 import Profile from "../../components/Profile/Profile";
 import RewardsForm from "../../components/rewards/RewardsForm";
+import Sidebar from "../../components/sidebar/Sidebar";
+//import "../../components/sidebar/sidebar.css";
 
-function Dashboard(props) {
-    const [user, setUser] = useState([])
+import Button from 'react-bootstrap/Button'
 
-    return (
-        <div>
-            <Navbar />
-            <Profile />
-            <RewardsForm />
+// Bootstrap components
+import { Container, Row, Col } from "react-bootstrap";
+
+//import ListGroup from "react-bootstrap/ListGroup";
+
+const Dashboard = (props) => {
+  return (
+    <>
+      {/* <Sidebar /> */}
+      {/* <Navbar /> */}
+
+      <div className="mb-2">
+    <Button variant="primary" size="lg">
+      Create a Member
+    </Button>{' '}
+    <Button variant="primary" size="lg">
+      Create a Chore List
+    </Button>{' '}
+    <Button variant="primary" size="lg">
+      Play ConnectChore
+    </Button>{' '}
+    
+  </div>
+      {/* <Container fluid>
+      
+        <Row>
+          <Col xs={2} id="sidebar-wrapper">
             
-            
-        </div>
-        
-    )
+          </Col>
+          <Col xs={10} id="page-content-wrapper">
+            this is a test
+          </Col>
+        </Row>
+        <Row>
+          
+        </Row>
+      </Container> */}
+    </>
+  );
 };
 
 export default Dashboard;
