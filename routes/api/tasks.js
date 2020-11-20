@@ -23,6 +23,18 @@ router.get("/",
   }
 );
 
+// get all tasks by userId = /api/tasks
+router.get("/user/:id", async function(req, res) {
+  const id = req.params.id;
+  try {
+    const data = await taskController
+  .findByUserId(id);
+    res.send(data);
+  } catch (err) {
+    res.status(503).end(err);
+  }
+});
+
 // To create a new task
 // maybe instead, have the task be created when the chore-list is?
 // completion status is not included here - by default it's false

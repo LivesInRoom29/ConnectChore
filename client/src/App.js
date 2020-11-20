@@ -16,6 +16,7 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import Rewards from "./components/rewards/RewardsForm";
 import HouseholdMemberForm from "./components/householdmembers/HouseholdMemberForm";
+import ChoreList from "./components/chorelist/ChoreList";
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template 
@@ -56,6 +57,7 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/rewards" component={Rewards} />
               <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
+              <PrivateRoute exact path="/addchorelist" component={ChoreList} />
               
               {/* TEMPLATE ROUTES */}
               <PrivateRoute exact path="/template" component={Template} />
