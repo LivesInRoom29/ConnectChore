@@ -15,6 +15,8 @@ import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import Rewards from "./components/rewards/RewardsForm";
+import Game from "./components/game/game";
+import Footer from "./components/footer/footer";
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template 
@@ -53,7 +55,9 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/template" component={Template} />
               <PrivateRoute exact path="/rewards" component={Rewards} />
+              <PrivateRoute exact path="/game" component={Game} />
             </Switch>
+            <Footer />
           </div>
         </Router>
       </Provider>
