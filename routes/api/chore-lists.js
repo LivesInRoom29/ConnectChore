@@ -29,6 +29,18 @@ router.get("/",
   }
 );
 
+router.get("/user/:id",
+  async function(req, res) {
+    const id = req.params.id;
+    try {
+      const data = await choreListController.findByUserId(id);
+      res.json(data);
+    } catch (err) {
+      res.status(503).json(err);
+    }
+  }
+);
+
 // To create a new chore-list
 // completion status is not included here - by default it's false
 router.post("/", async function(req, res) {
