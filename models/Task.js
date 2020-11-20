@@ -13,6 +13,10 @@ const taskSchema = new Schema({
     type: Number,
     default: 1,
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "users"
+  },
   // choreList: {
   //   type: Schema.Types.ObjectId,
   //   ref: "ChoreList"
