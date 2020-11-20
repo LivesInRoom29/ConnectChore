@@ -4,8 +4,8 @@ module.exports = {
   findAll: function() {
     return db.RewardDescription.find();
   },
-  findByUserId: function(userid) {
-    return db.RewardDescription.find({userId: userid})
+  findByUserId: function(userId) {
+    return db.RewardDescription.find({userId: userId});
   },
   findById: function(id) {
     return db.RewardDescription.findById(id);
