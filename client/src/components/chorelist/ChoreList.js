@@ -8,83 +8,105 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
+// Date picker
+import DatePicker from "react-datepicker";
+import { format } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
 
-class ChoreList extends React.Component {
+class ChoreList extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             assignedto: "",
-            date: "",
-            reward:"",
+            startDate: new Date(),
+            reward: "",
             choreLists: [],
             householdMembers: [],
             rewards: [],
             validateDisplay: false
         }
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     // get rewards data from the DB
     // TEST-pass: will passing in user.id to the API call successfully get us the rewards for the logged in user only?
-    // componentDidMount() {
-    //     const { user } = this.props.auth
+    componentDidMount() {
+        const { user } = this.props.auth
 
-    //     API.getChoreLists(user.id)
-    //         .then(res => 
-    //             //console.log(res)
-                
-    //             this.setState(
-    //             { 
-    //                 choreLists: res.data 
-    //             }
-    //         ))
-    //         .catch(err => console.log(err));
-    // }
+        var promise = new Promise((resolve, reject) => {
+            API.getRewardDescriptions(user.id)
+                .then(res => resolve(res))
+                .catch(err => reject(Error("API failed")));
+        })
+
+        promise.then(result => {
+            this.setState(
+                {
+                    rewards: result.data
+                }
+            )
+        });
+
+        var promisetwo = new Promise((resolve, reject) => {
+            API.getHouseholdMembers(user.id)
+                .then(res => resolve(res))
+                .catch(err => reject(Error("API failed")));
+        })
+
+        promisetwo.then(result => {
+            this.setState(
+                {
+                    householdMembers: result.data
+                }
+            )
+        });
+    }
+
+    handleChange(date) {
+        this.setState({
+          startDate: new Date(date)
+        });
+      }
 
     // get the input values and add to state
     handleInputChange = event => {
         event.preventDefault();
-        
+
         this.setState(
-            { 
-               // ...this.state,
+            {
+                // ...this.state,
                 [event.target.name]: event.target.value
                 // chorelist date and reward
             }
         );
     };
-    
+
     // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
-    addChoresClick = e => {
+    addChoreListClick = e => {
         // leaving commented out to refresh the whole page for now
         //e.preventDefault();
-
+       
+        let mainDate = format(this.state.startDate, "MM/dd/yyyy");
         const { user } = this.props.auth;
-        console.log("user id");
-        console.log(user.id);
-        console.log("this state chores");
-        console.log(this.state.reward);
-        console.log("this state pointvalue");
-        console.log(this.state.pointvalue);
+        const { assignedto, reward } = this.state;
 
-        const {assignedto, date, reward} = this.state;
-
-        API.addchoreListDescription(
+        API.addChoreList(
             {
                 completedBy: assignedto,
-                date: date,
+                date: mainDate,
                 reward: reward,
                 userId: user.id
             }
-        ).then( res => console.log(res))
-        .catch(err => console.log(err));
-            
+        ).then(res => console.log(res))
+            .catch(err => console.log(err));
+
     };
 
-    // RENDER TEST-pass:
+    // RENDER TEST:
     // Clicking ADD REWARD adds reward as expected to DB for the logged in user only?
     // Clicking the X box successuflly removes the rewarddescription entry for the logged in user only?
 
@@ -102,22 +124,22 @@ class ChoreList extends React.Component {
                                 <p className="text-body">
                                     Add chores for the day! <br />
                                     <br />
-                                    forexample: 
+                                    forexample:
                                 </p>
-                                    <ul>
-                                        <li>★clean Dishes</li>
-                                        <li>★clean Bedroom</li>
-                                        <li>★work the Dog</li>
-                                        <li>★Do homework.</li>
-                                    </ul>
-                                    <br />
+                                <ul>
+                                    <li>★clean Dishes</li>
+                                    <li>★clean Bedroom</li>
+                                    <li>★work the Dog</li>
+                                    <li>★Do homework.</li>
+                                </ul>
+                                <br />
                                 <p>The possibilities are endless.<br />
                                 </p>
                             </h4>
                             <Form.Row>
-                            <Form.Group as={Col} md="6" controlId="formHouseholdMember">
+                                <Form.Group as={Col} md="6" controlId="formHouseholdMember">
                                     <Form.Label>Pick someone:</Form.Label>
-                                    <Form.Control 
+                                    <Form.Control
                                         as="select"
                                         name="assignedto"
                                         value={this.state.assignedto}
@@ -127,21 +149,32 @@ class ChoreList extends React.Component {
                                         {/* Map the household members to the drop-down */}
                                         {
                                             this.state.householdMembers.map(member => (
-                                            <option 
-                                                key={member._id}
-                                                value={member._id}
-                                            >
-                                                {member.name}
-                                            </option>
+                                                <option
+                                                    key={member._id}
+                                                    value={member._id}
+                                                >
+                                                    {member.name}
+                                                </option>
                                             ))
                                         }
                                     </Form.Control>
                                 </Form.Group>
-                                </Form.Row>
-                                <Form.Row>
-                                <Form.Group as={Col} md="6" controlId="formHouseholdMember">
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} md="6" controlId="formDatePicker">
+                                    <Form.Label className="mr-5">Select a date:</Form.Label>
+                                    <DatePicker
+                                        selected={this.state.startDate}
+                                        //onSelect={handleDateSelect} //when day is clicked
+                                        onChange={this.handleChange} //only when value has changed
+                                        dateFormat="MM/dd/yyyy"
+                                    />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} md="6" controlId="formReward">
                                     <Form.Label>Pick a reward:</Form.Label>
-                                    <Form.Control 
+                                    <Form.Control
                                         as="select"
                                         name="reward"
                                         value={this.state.reward}
@@ -151,66 +184,31 @@ class ChoreList extends React.Component {
                                         {/* Map the household members to the drop-down */}
                                         {
                                             this.state.rewards.map(reward => (
-                                            <option 
-                                                key={reward._id}
-                                                value={reward._id}
-                                            >
-                                                {reward.description}
-                                            </option>
+                                                <option
+                                                    key={reward._id}
+                                                    value={reward._id}
+                                                >
+                                                    {reward.description}
+                                                </option>
                                             ))
                                         }
                                     </Form.Control>
                                 </Form.Group>
                             </Form.Row>
-                            <Form.Row>
-                            {/* date */}
-                            </Form.Row>
-                            <Button 
-                                variant="primary" 
+                            <Button
+                                variant="primary"
                                 type="submit"
-                                onClick={this.addRewardClick}
+                                onClick={this.addChoreListClick}
                             >
-                                Add reward
+                                Create chorelist
                             </Button>
                         </Form>
                     </Col>
                 </Row>
                 <Row>
                     <Col md={8}>
-                        <h2>Household Rewards</h2>
-                        A list of the rewards will dynamically render here once the API call is built.
-                        {/* Eventually filter down to non-deleted and map that array */}
-                        {this.state.rewards.length ? (
-                            <ListGroup variant="flush">
-                                {this.state.rewards.map(reward => (
-                                    <ListGroup.Item 
-                                        key={reward._id} 
-                                        data-id={reward._id} 
-                                        className="align-items-center"
-                                    >
-                                        {reward.description} (points: {reward.value}) 
-                                        <Button
-                                            variant="light"
-                                            className="float-right text-danger" 
-                                            onClick={
-                                                () => API.deleteRewardDescription(
-                                                    reward._id,
-                                                    { 
-                                                        isDeleted: true
-                                                    }
-                                                )
-                                                .then(res => console.log(res))
-                                                .catch(err => console.log(err))
-                                            }
-                                        >
-                                            <span >X</span>
-                                        </Button>
-                                </ListGroup.Item>
-                                ))}
-                            </ListGroup>
-                        ) : (
-                            <h3>No rewards to display!</h3>
-                        )}
+                        <h2>Your Chorelist</h2>
+                            <h3>No chorelists to display!</h3>
                     </Col>
                 </Row>
             </Container>
