@@ -11,7 +11,13 @@ class Template extends Component {
         this.state = {
             householdMember: "Jimmy",
             choreListDate: "",
-            choreList: []
+            choreListID: "",
+            tasks: [
+                {
+                    description: "Laundry",
+                    frequency: ""
+                }
+            ]
         }
     }
 
