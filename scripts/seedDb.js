@@ -1,13 +1,22 @@
 const mongoose = require("mongoose");
+const database = require("../config/keys");
+require("dotenv").config();
 ObjectId = require("mongodb").ObjectID;
 const db = require("../models");
 
 
-// This file empties all collection and inserts the documents below
+// ** This file EMPTIES all collections (except for user and household member) and inserts the documents below
 
+// Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/connectChore"
+  // during development, create a local .env file for MONGODB_URI
+  process.env.MONGODB_URI,
+  {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
+  }
 );
 
 //create the user with authentification
@@ -74,7 +83,7 @@ const seedTask = (description, frequency, clId) => {
       // name: name,
       description: description,
       frequency: frequency,
-      userId: userID,                     
+      userId: userID,
       isDeleted: false
     })
     .then(data => {
@@ -128,6 +137,10 @@ const seedDB = () => {
       console.log(data.result.n + " HM records inserted!");
       hmId1 = data.ops[0]._id;
       hmId2 = data.ops[1]._id;
+    })
+    .then(() => {
+      //add the householdMembers to the array for householdMembers in User
+      db.User.collection.findOneAndUpdate({ _id: userID }, { $push: {householdMembers: { $each: [ObjectId(hmId1), ObjectId(hmId2)]}}}, {new: true})
     })
     .catch(err => {
       console.error(err);
