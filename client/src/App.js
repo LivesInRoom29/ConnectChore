@@ -17,7 +17,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Rewards from "./components/rewards/RewardsForm";
 import Chore from "./components/chore/chore";
 import Chorelist from "./components/chorelist/chorelist"
-import Chorelista from "./components/chorelista/chorelista";
+import Chorelista from "./components/chorelista/Chorelista";
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template 

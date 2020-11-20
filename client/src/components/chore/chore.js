@@ -1,5 +1,5 @@
 import React from "react";
-import { postChore } from "../actions/authActions"
+//import { postChore } from "../actions/authActions"
 import { connect } from "react-redux";
 
 
@@ -24,7 +24,7 @@ export class addChores extends React.Component {
     if (this.state.choreName.trim() === "") {
       this.showValidator()
     } else {
-      this.props.dispatch(postChore(this.state));
+      //this.props.dispatch(postChore(this.state));
       this.props.toggleForm()
       this.setState = {
         choreName: "",

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import chorelist from "../chorelist/chorelist"
 
 class Dashboard extends Component {
     onLogoutClick = e => {
@@ -24,6 +25,7 @@ class Dashboard extends Component {
                                 <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
                             </p>
                         </h4>
+                        <chorelist />
                         <button
                             style={{
                                 width: "150px",

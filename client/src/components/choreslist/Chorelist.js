@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+//import Chorelist from "chorelist";
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -12,7 +13,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
 
-class ChoreListDemo extends Component {
+class Chorelist extends React.Component {
 
     constructor(props) {
         super(props)
@@ -168,7 +169,7 @@ class ChoreListDemo extends Component {
     }
 }
 
-ChoreListDemo.propTypes = {
+Chorelist.propTypes = {
     auth: PropTypes.object.isRequired
 };
 
@@ -178,4 +179,4 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps
-)(ChoreListDemo);
+)(Chorelist);
