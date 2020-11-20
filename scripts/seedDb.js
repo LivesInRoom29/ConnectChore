@@ -74,9 +74,7 @@ const seedTask = (description, frequency, clId) => {
       // name: name,
       description: description,
       frequency: frequency,
-      // choreList: ObjectId(clId),
-      // completedBy: ObjectId(hmId),
-      // completedOn: null,
+      userId: userID,                     
       isDeleted: false
     })
     .then(data => {
