@@ -35,15 +35,32 @@ export default {
     },
 
     // NOT TESTED YET
-    // CHORELIST CALLS - /api/household-members/
+    // CHORELIST CALLS - /api/chore-lists
     // get chores for a one household member
     getChoreListForHouseholdMember: function(householdMemberId, choreListDate) {
-        return Axios.get(`api/chorelist/${householdMemberId}/${choreListDate}`);
+        return Axios.get(`/api/chore-lists/${householdMemberId}/${choreListDate}`);
     },
     // add a chorelist
     addChoreList: function(choreListData) {
-        return Axios.post(`api/household-members`, choreListData);
+        return Axios.post(`/api/chore-lists/`, choreListData);
+    },
+    deleteChoreList: function(choreListId, choreListData) {
+        return Axios.put(`/api/chore-lists/${choreListId}`, choreListData);
+    },
+
+    // TASK CALLS - /api/tasks
+    // get tasks
+    //getTask: function()
+
+    // add tasks - /api/tasks/
+    addTask: function(taskData) {
+        return Axios.post(`/api/tasks/`, taskData);
+    },
+    deleteTask: function(taskId, taskData) {
+
+        return Axios.post(`/api/tasks/${taskId}`, taskData); 
     }
+    
     
 
     // Rewards calls - /api/rewards/
