@@ -23,7 +23,7 @@ export default {
     // HOUSEHOLD MEMBER CALLS - matches /api/household-members/
     // get a list of household members for logged in user
     getHouseholdMembers: function(userid) {
-        return Axios.get(`api/household-members/user/${userid}`);
+        return Axios.get(`/api/household-members/user/${userid}`);
     },
     // add household member
     addHouseholdMember: function(houseHoldMemberData) {
@@ -36,6 +36,11 @@ export default {
 
     // NOT TESTED YET
     // CHORELIST CALLS - /api/chore-lists
+    
+    // get Chore List details by choreListId -- ADD THIS TO CONTROLLER
+    getChoreLists: function(userid) {
+        return Axios.get(`/api/chore-lists/user/${userid}`);
+    },
     // get chores for a one household member
     getChoreListForHouseholdMember: function(householdMemberId, choreListDate) {
         return Axios.get(`/api/chore-lists/${householdMemberId}/${choreListDate}`);
@@ -57,7 +62,6 @@ export default {
         return Axios.post(`/api/tasks/`, taskData);
     },
     deleteTask: function(taskId, taskData) {
-
         return Axios.post(`/api/tasks/${taskId}`, taskData); 
     }
     
