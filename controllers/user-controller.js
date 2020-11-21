@@ -12,4 +12,12 @@ module.exports = {
   update: function(id, body) {
     return db.User.findOneAndUpdate(id, body);
   }
+  // getHouseholdMembers: function(id) {
+  //   return (
+  //     db.User.findById(id).populate("householdMembers")
+  //       .exec(function(err, foundUser) {
+  //         send(foundUser);
+  //       })
+  //   )
+  // }
 }

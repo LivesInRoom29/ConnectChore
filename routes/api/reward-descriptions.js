@@ -14,10 +14,10 @@ const passport = require("passport");
 //add authentication with:
 // router.get("/", passport.authenticate("jwt", {session: false}),
 router.get("/",
-  async function(req, res) {
+  async function (req, res) {
     try {
       const data = await rewardDescriptionController
-    .findAll();
+        .findAll();
       res.json(data);
     } catch (err) {
       res.status(503).json(err);
@@ -26,16 +26,16 @@ router.get("/",
 );
 
 // To create a new reward description
-router.post("/", async function(req, res) {
+router.post("/", async function (req, res) {
   const { description, value, userId } = req.body
 
   try {
     const data = await rewardDescriptionController
-  .create({
-      description: description,
-      value: value,
-      userId: userId
-    });
+      .create({
+        description: description,
+        value: value,
+        userId: userId
+      });
     res.json(data);
   } catch (err) {
     res.status(503).json(err);
@@ -44,11 +44,10 @@ router.post("/", async function(req, res) {
 
 // Matches with "/api/reward-descriptions/:id"
 // get one reward description by id
-router.get("/:id", async function(req, res) {
+router.get("/:id", async function (req, res) {
   const id = req.params.id;
   try {
-    const data = await rewardDescriptionController
-  .findById(id);
+    const data = await rewardDescriptionController.findById(id);
     res.send(data);
   } catch (err) {
     res.status(503).end(err);
@@ -57,11 +56,10 @@ router.get("/:id", async function(req, res) {
 
 // Matches with "/api/reward-descriptions/user/:id"
 // get all rewards by userId
-router.get("/user/:id", async function(req, res) {
+router.get("/user/:id", async function (req, res) {
   const id = req.params.id;
   try {
-    const data = await rewardDescriptionController
-  .findByUserId(id);
+    const data = await rewardDescriptionController.findByUserId(id);
     res.send(data);
   } catch (err) {
     res.status(503).end(err);
@@ -72,11 +70,10 @@ router.get("/user/:id", async function(req, res) {
 // update a reward descriptionby id
 // in req.body, can pass in updated description or value
 // Use this to "delete" as well - pass in {isDeleted: true}
-router.put("/:id", async function(req, res) {
+router.put("/:id", async function (req, res) {
   const id = req.params.id;
   try {
-    const data = await rewardDescriptionController
-  .update({ _id: id }, req.body);
+    const data = await rewardDescriptionController.update({ _id: id }, req.body);
     res.send(data);
   } catch (err) {
     res.status(503).end(err);
