@@ -7,9 +7,9 @@ class Navbar extends Component {
     return (
 
       <nav>
-      <div class="nav-wrapper">
-        <a href="/" class="brand-logo center">ConnectChore</a>
-        {/* <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <div className="nav-wrapper">
+        <a href="/" className="brand-logo center">ConnectChore</a>
+        {/* <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li><a href="/game">Game</a></li>
           <li><a href="/rewards">Rewards</a></li>
           <li><a href="/chores">Chores</a></li>
@@ -20,10 +20,10 @@ class Navbar extends Component {
 
 /* <>
 <nav>
-<div class="nav-wrapper">
-  <a href="#!" class="brand-logo">Logo</a>
-  <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-  <ul class="right hide-on-med-and-down">
+<div className="nav-wrapper">
+  <a href="#!" className="brand-logo">Logo</a>
+  <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+  <ul className="right hide-on-med-and-down">
     <li><a href="sass.html">Sass</a></li>
     <li><a href="badges.html">Components</a></li>
     <li><a href="collapsible.html">Javascript</a></li>
@@ -32,7 +32,7 @@ class Navbar extends Component {
 </div>
 </nav>
 
-<ul class="sidenav" id="mobile-demo">
+<ul className="sidenav" id="mobile-demo">
 <li><a href="sass.html">Sass</a></li>
 <li><a href="badges.html">Components</a></li>
 <li><a href="collapsible.html">Javascript</a></li>
