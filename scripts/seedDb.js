@@ -108,7 +108,7 @@ const seedChoreList = (date, hmId, rewardId) => {
     .deleteMany({})
     .then(() => db.ChoreList.collection.insertOne(
       {
-        date: date,
+        date: new Date(date),
         userId: userID,
         completedBy: ObjectId(hmId),
         tasks: [],
