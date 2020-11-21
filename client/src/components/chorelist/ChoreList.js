@@ -1,80 +1,218 @@
 import React from "react";
 //import styles from "../componentStyles/ChoreList.css";
 import { connect } from "react-redux";
-//import ChoreForm from "./ChoreForm";
-//import Chore from "./chore";
-import { Link } from "react-router-dom";
-export class Chorelist extends React.Component {
-  state = {
-    formDisplay: false
-  };
-  toggleForm(event) {
-    this.setState({
-      formDisplay: !this.state.formDisplay
-    });
-  }
-  render() {
-    let formComponent;
-    if (this.state.formDisplay) {
-      //formComponent = <ChoreForm toggleForm={this.toggleForm.bind(this)} />;
+// Bootstrap components
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+// Date picker
+import DatePicker from "react-datepicker";
+import { format } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
+// API calls
+import API from "../../utils/API";
+
+class ChoreList extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            assignedto: "",
+            startDate: new Date(),
+            reward: "",
+            choreLists: [],
+            householdMembers: [],
+            rewards: [],
+            validateDisplay: false
+        }
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
-    //if no chores in chart yet, show explanatory message so user knows how to interact with the tool
-    // let noChoresYet;
-    // if (this.props.chores.length === 0) {
-    //   noChoresYet = (
-    //     <div className={styles.chartExplainBox}>
-    //       <div className={styles.iconContain}>
-    //         <img
-    //           className={styles.choreIcon}
-    //           alt="Bucket and mop icon"
-    //           src={require("../images/bucket.png")} />
-    //       </div>
-    //       <p className={styles.explainText}><b>Your household</b> hasn't created any chores yet! To begin your list, click the "Add Chore" button above.</p>
-    //       <p className={styles.explainText}><b>Give the chore</b> a name, then decide how many times it should be done each week and how many points it should be worth (based on the difficulty or grodiness of the chore—you decide).</p>
-    //       <p className={styles.explainText}><b>When you</b> complete a chore, get points by clicking on one of the circles inside the chore and selecting your name from the dropdown menu. Happy tidying!</p>
-    //     </div>
-    //   )
-    // }
-    const choreKeys = Object.keys(this.props.chores)
-    const chores = choreKeys.map((choreKey, index) => {
-      // return <Chore
-      //   key={index}
-      //   {...this.props.chores[choreKey]}
-      //   completions={this.props.completions.filter(comp => comp.choreId === this.props.chores[choreKey].id)}
-      //   members={this.props.members}
-      //  />;
-    });
-    return (
-      <div 
-      //  className={styles.choreListContainer}
-       >
-        <div 
-        // className={styles.resetContainer}
-        >
-          This chart shows chore completions from the last 7 days. To see more a detailed chore history, check out the <Link to="/stats"> Household Stats</Link> page.
-        </div>
-        <div 
-        // className={styles.listTop}
-        >
-          {formComponent}
-          <div 
-          // className={styles.choreButtonContainer}
-          >
-            <button
-              // className={styles.addChore}
-              onClick={() => {
-                this.toggleForm();
-              }}
-            >
-              Add Chore
-            </button>
-          </div>
-        </div>
-        {/* {noChoresYet} */}
-        {chores}
-      </div>
-    );
-  }
+
+    // get rewards data from the DB
+    // TEST-pass: will passing in user.id to the API call successfully get us the rewards for the logged in user only?
+    componentDidMount() {
+        const { user } = this.props.auth
+
+        var promise = new Promise((resolve, reject) => {
+            API.getRewardDescriptions(user.id)
+                .then(res => resolve(res))
+                .catch(err => reject(Error("API failed")));
+        })
+
+        promise.then(result => {
+            this.setState(
+                {
+                    rewards: result.data
+                }
+            )
+        });
+
+        var promisetwo = new Promise((resolve, reject) => {
+            API.getHouseholdMembers(user.id)
+                .then(res => resolve(res))
+                .catch(err => reject(Error("API failed")));
+        })
+
+        promisetwo.then(result => {
+            this.setState(
+                {
+                    householdMembers: result.data
+                }
+            )
+        });
+    }
+
+    handleChange(date) {
+        this.setState({
+          startDate: new Date(date)
+        });
+      }
+
+    // get the input values and add to state
+    handleInputChange = event => {
+        event.preventDefault();
+
+        this.setState(
+            {
+                // ...this.state,
+                [event.target.name]: event.target.value
+                // chorelist date and reward
+            }
+        );
+    };
+
+    // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
+    addChoreListClick = e => {
+        // leaving commented out to refresh the whole page for now
+        //e.preventDefault();
+       
+        let mainDate = format(this.state.startDate, "MM/dd/yyyy");
+        const { user } = this.props.auth;
+        const { assignedto, reward } = this.state;
+
+        API.addChoreList(
+            {
+                completedBy: assignedto,
+                date: mainDate,
+                reward: reward,
+                userId: user.id
+            }
+        ).then(res => console.log(res))
+            .catch(err => console.log(err));
+
+    };
+
+    // RENDER TEST:
+    // Clicking ADD REWARD adds reward as expected to DB for the logged in user only?
+    // Clicking the X box successuflly removes the rewarddescription entry for the logged in user only?
+
+    render() {
+
+        const { user } = this.props.auth;
+
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <Form>
+                            <h4>
+                                <b>Hey there,</b> {user.name.split(" ")[0]}
+                                <p className="text-body">
+                                    Add chores for the day! <br />
+                                    <br />
+                                    forexample:
+                                </p>
+                                <ul>
+                                    <li>★clean Dishes</li>
+                                    <li>★clean Bedroom</li>
+                                    <li>★work the Dog</li>
+                                    <li>★Do homework.</li>
+                                </ul>
+                                <br />
+                                <p>The possibilities are endless.<br />
+                                </p>
+                            </h4>
+                            <Form.Row>
+                                <Form.Group as={Col} md="6" controlId="formHouseholdMember">
+                                    <Form.Label>Pick someone:</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name="assignedto"
+                                        value={this.state.assignedto}
+                                        // placeholder="Wash the dishes" 
+                                        onChange={this.handleInputChange}
+                                    >
+                                        {/* Map the household members to the drop-down */}
+                                        {
+                                            this.state.householdMembers.map(member => (
+                                                <option
+                                                    key={member._id}
+                                                    value={member._id}
+                                                >
+                                                    {member.name}
+                                                </option>
+                                            ))
+                                        }
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} md="6" controlId="formDatePicker">
+                                    <Form.Label className="mr-5">Select a date:</Form.Label>
+                                    <DatePicker
+                                        selected={this.state.startDate}
+                                        //onSelect={handleDateSelect} //when day is clicked
+                                        onChange={this.handleChange} //only when value has changed
+                                        dateFormat="MM/dd/yyyy"
+                                    />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} md="6" controlId="formReward">
+                                    <Form.Label>Pick a reward:</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name="reward"
+                                        value={this.state.reward}
+                                        // placeholder="Wash the dishes" 
+                                        onChange={this.handleInputChange}
+                                    >
+                                        {/* Map the household members to the drop-down */}
+                                        {
+                                            this.state.rewards.map(reward => (
+                                                <option
+                                                    key={reward._id}
+                                                    value={reward._id}
+                                                >
+                                                    {reward.description}
+                                                </option>
+                                            ))
+                                        }
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Button
+                                variant="primary"
+                                type="submit"
+                                onClick={this.addChoreListClick}
+                            >
+                                Create chorelist
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={8}>
+                        <h2>Your Chorelist</h2>
+                            <h3>No chorelists to display!</h3>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    }
 }
 export const mapStateToProps = state => ({
   members: state.chart.members,
