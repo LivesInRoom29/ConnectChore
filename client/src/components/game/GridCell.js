@@ -8,8 +8,10 @@ class GridCell extends Component {
   handleClick(){
     console.log(`clicked on columns ${this.props.x}`)
 
-    this.props.sendTileDrop(this.props.x);
+    this.props.sendTileDrop(this.props.x, this.props.y);
+
   }
+
     render() {
       const board = this.props.board;
       const x = this.props.x;
@@ -24,8 +26,8 @@ class GridCell extends Component {
         }
       }
       return (
-        <div className={classes} onClick={() => this.handleClick()}>
-          <p>{this.props.x}, {this.props.y}</p>
+        <div className={classes} style= {{backgroundColor: this.props.color}} onClick={() => this.handleClick()}>
+          
         </div>
       )
     }
@@ -34,13 +36,13 @@ class GridCell extends Component {
 
 const stateToProps = state => {
   return {
-    board: state.board,
+    board: state.game.board,
   };
 };
 
 const dispatchToProps = dispatch => {
   return {
-    sendTileDrop: col => dispatch(dropTile(col))
+    sendTileDrop: (col, row) => dispatch(dropTile(col, row))
     }
 };
 

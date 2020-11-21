@@ -1,5 +1,18 @@
+import produce from 'immer';
 
-const initial = {
+const createDefaultBoard = () => {
+    const box = [];
+    for (let y = 5; y >= 0; y--) {
+      const row = [];
+      for (let x = 0; x < 7; x++) {
+        row.push({color: 'pink'});
+    }
+
+      box.push(row);
+    }
+    return box;
+}
+export const initial = {
     current: "red", // can also be black
     board: [
         [], //col 1
@@ -9,21 +22,32 @@ const initial = {
         [], //col 5
         [], //col 6
         [] //col 7
-    ]
-}
-export default function reducer(state,action) {
+    ],
+
+    box: createDefaultBoard()
+};
+
+
+const reducer = produce((state = initial, action) => {
     if (action.type === "DROP_TILE") {
         console.log("dropping onto col" + action.payload);
-        const tile = state.current;
-        const col = state.board[action.payload].concat(tile); // new column
+        const {col, row, color} = action.payload;
+        
+        let dropToRow = state.box.length-1;
+        state.box.some((currentRow, index) => {
+            if (currentRow[col].color !== 'pink') {
+                dropToRow = index-1;
+                return true;
+            }
+            return false;
+        }) 
+        console.log(dropToRow);
+        state.box[dropToRow][col].color = 'red';
 
-        const board = state.board.slice(); // need to copy, can't change directly
-        board[action.payload] = col;  // need to update column with new tile
-
-        return {
-            current: state.current === 'red' ? 'black' : 'red',
-            board: board,
-        }
+        return 
+      
     }
     return state;
-};
+});
+
+export default reducer;

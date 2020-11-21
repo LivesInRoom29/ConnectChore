@@ -1,29 +1,44 @@
-// Need for React and Redux
+import { connect } from "react-redux";
 import React, { Component } from "react";
 import GridCell from "./GridCell";
+import { dropTile } from "../../actions/gameActions";
 import "./game.css";
 
-
 class GameBox extends Component {
-  render() {
-    const cells = [];
-    for (let y = 5; y >= 0; y--) {
-      const row = [];
-      for (let x = 0; x < 7; x++) {
-        const key = `${x}${y}`;
-        cells.push(<GridCell x={x} y={y} key={key} />)
-      }
-
-      cells.push(<div key={y} className="row">{row}</div>)
+  constructor (props){
+    super(props);
+    this.state={
+      player1Color: 'red',
+      player2Color: 'blue',
+      currentPlayer: 'player1'
     }
-    return (
-      <div>
-        {cells}
+  };
+
+  // setPlayerColor() {
+  //   return this.props.user.{}
+  // };
+
+
+  createCells() {
+    return this.props.game.box.map((row, rowNum) => (
+      <div className="row" key={rowNum}>
+        {row.map((cell, cellNum) => (
+          <GridCell color={cell.color} x={cellNum} y={rowNum} key={`${cellNum}${rowNum}`} />
+        ))}
       </div>
-      
-    );
+    ));
   }
+
+  componentDidMount() {
+
+    console.log(this.props);
+  }
+  render() {    
+    return <div>{this.createCells()}</div>;
+  }
+}
+
+const mapStateToProps = (state) => {
+  return state;
 };
-
-
-export default GameBox;
+export default connect(mapStateToProps, { dropTile })(GameBox);
