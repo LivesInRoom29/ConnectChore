@@ -156,7 +156,7 @@ class Rewards extends Component {
                                         data-id={reward._id} 
                                         className="align-items-center"
                                     >
-                                        {reward.description} (points: {reward.value}) 
+                                        {reward.description} (points: {reward.value || 0}) 
                                         <Button
                                             variant="light"
                                             className="float-right text-danger" 
