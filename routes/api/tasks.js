@@ -36,9 +36,7 @@ router.get("/user/:id", async function(req, res) {
 });
 
 // To create a new task
-// maybe instead, have the task be created when the chore-list is?
 // completion status is not included here - by default it's false
-// maybe have completion status too? then updated the completedOn when that is updated?
 router.post("/", async function(req, res) {
   const { description, frequency, userId } = req.body;
 

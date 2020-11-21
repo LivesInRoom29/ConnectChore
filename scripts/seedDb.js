@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const database = require("../config/keys");
+//const database = require("../config/keys");
 require("dotenv").config();
 ObjectId = require("mongodb").ObjectID;
 const db = require("../models");
@@ -108,7 +108,7 @@ const seedChoreList = (date, hmId, rewardId) => {
     .deleteMany({})
     .then(() => db.ChoreList.collection.insertOne(
       {
-        date: date,
+        date: new Date(date),
         userId: userID,
         completedBy: ObjectId(hmId),
         tasks: [],

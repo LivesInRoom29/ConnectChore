@@ -48,6 +48,7 @@ router.post("/", async function(req, res) {
   //may have to do something with tasks here first
   //create array with the correct structure (array of _ids)
   // tasks - an array of objects each a task _id and completion status(false by default)
+  // if you don't pass in tasks, it will be an empty array; then you can add tasks later (see route below for adding tasks)
   try {
     const data = await choreListController.create({
       date: date,
@@ -68,6 +69,22 @@ router.get("/:id", async function(req, res) {
   const id = req.params.id;
   try {
     const data = await choreListController.findById(id);
+    res.send(data);
+  } catch (err) {
+    res.status(503).end(err);
+  }
+});
+
+// Get the chorelist for a specific household member and date
+// the date can be passed in with format "yyyy-mm-dd"
+router.get("/householdmember/:id", async function(req, res) {
+  const householdMemberId = req.params.id;
+  const cldate = new Date(req.body.date);
+  try {
+    const data = await choreListController.findByHouseholdMemberAndDate(
+      householdMemberId,
+      cldate
+    ).populate("tasks.task");
     res.send(data);
   } catch (err) {
     res.status(503).end(err);
