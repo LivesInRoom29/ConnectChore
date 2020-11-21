@@ -19,4 +19,7 @@ module.exports = {
   findByUserId: function(userId) {
     return db.ChoreList.find({userId: userId});
   },
+  findByHouseholdMemberAndDate: function(householdMemberId, date) {
+    return db.ChoreList.find({completedBy: householdMemberId, date: date});
+  }
 }
