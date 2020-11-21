@@ -1,0 +1,30 @@
+footer {
+    background: #999999;
+    /* background-image: url(wave.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 200px; */
+    color: #fff;
+    text-align: center;
+    padding: 40px;
+    font-family: Poppins, sans-serif;
+    position: sticky;
+}
+
+footer .social {
+    font-size: 24px;
+    color: white; 
+    text-decoration: none;
+    /* position: absolute; */
+  }
+  
+  footer .social a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+  }
+  
+  footer .social a:hover {
+    color: turquoise;
+  }

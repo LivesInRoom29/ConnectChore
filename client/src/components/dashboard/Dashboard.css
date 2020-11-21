@@ -1,0 +1,53 @@
+h3 {
+  text-align: center;
+  color: teal;
+}
+
+.module {
+    background: 
+      linear-gradient(
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.4)
+      ),
+      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg);
+    background-size: cover;
+    width: 100%;
+    height: 250px;
+    margin: 10 0 0 10px;
+    position: relative;
+    /* float: left; */
+  }
+  
+  .mid h2 {
+    font-weight: 900;
+    color: white;
+    text-transform: uppercase;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2rem;
+    transform: translate(-50%, -50%);
+  }
+
+  .waves-effect.waves-light.btn {
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    background-color: turquoise;
+    color: white;
+    padding: 12px;
+    align-items: center;
+}
+
+button {
+  width: 150px;
+  height: 50px;
+  border-radius: 50px;
+  letter-spacing: 1px;
+  background-color: turquoise;
+  color: white;
+  padding: 12px;
+  align-items: center;
+}
