@@ -1,231 +1,84 @@
-// Need for React and Redux
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
+//import styles from "../componentStyles/ChoreList.css";
 import { connect } from "react-redux";
-// Bootstrap components
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
-// API calls
-import API from "../../utils/API";
-
-class ChoreList extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            assignedto: "",
-            date: "",
-            reward:"",
-            choreLists: [],
-            householdMembers: [],
-            rewards: [],
-            validateDisplay: false
-        }
+//import ChoreForm from "./ChoreForm";
+//import Chore from "./chore";
+import { Link } from "react-router-dom";
+export class Chorelist extends React.Component {
+  state = {
+    formDisplay: false
+  };
+  toggleForm(event) {
+    this.setState({
+      formDisplay: !this.state.formDisplay
+    });
+  }
+  render() {
+    let formComponent;
+    if (this.state.formDisplay) {
+      //formComponent = <ChoreForm toggleForm={this.toggleForm.bind(this)} />;
     }
-
-    // get rewards data from the DB
-    // TEST-pass: will passing in user.id to the API call successfully get us the rewards for the logged in user only?
-    // componentDidMount() {
-    //     const { user } = this.props.auth
-
-    //     API.getChoreLists(user.id)
-    //         .then(res => 
-    //             //console.log(res)
-                
-    //             this.setState(
-    //             { 
-    //                 choreLists: res.data 
-    //             }
-    //         ))
-    //         .catch(err => console.log(err));
+    //if no chores in chart yet, show explanatory message so user knows how to interact with the tool
+    // let noChoresYet;
+    // if (this.props.chores.length === 0) {
+    //   noChoresYet = (
+    //     <div className={styles.chartExplainBox}>
+    //       <div className={styles.iconContain}>
+    //         <img
+    //           className={styles.choreIcon}
+    //           alt="Bucket and mop icon"
+    //           src={require("../images/bucket.png")} />
+    //       </div>
+    //       <p className={styles.explainText}><b>Your household</b> hasn't created any chores yet! To begin your list, click the "Add Chore" button above.</p>
+    //       <p className={styles.explainText}><b>Give the chore</b> a name, then decide how many times it should be done each week and how many points it should be worth (based on the difficulty or grodiness of the chore—you decide).</p>
+    //       <p className={styles.explainText}><b>When you</b> complete a chore, get points by clicking on one of the circles inside the chore and selecting your name from the dropdown menu. Happy tidying!</p>
+    //     </div>
+    //   )
     // }
-
-    // get the input values and add to state
-    handleInputChange = event => {
-        event.preventDefault();
-        
-        this.setState(
-            { 
-               // ...this.state,
-                [event.target.name]: event.target.value
-                // chorelist date and reward
-            }
-        );
-    };
-    
-    // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
-    addChoresClick = e => {
-        // leaving commented out to refresh the whole page for now
-        //e.preventDefault();
-
-        const { user } = this.props.auth;
-        console.log("user id");
-        console.log(user.id);
-        console.log("this state chores");
-        console.log(this.state.reward);
-        console.log("this state pointvalue");
-        console.log(this.state.pointvalue);
-
-        const {assignedto, date, reward} = this.state;
-
-        API.addchoreListDescription(
-            {
-                completedBy: assignedto,
-                date: date,
-                reward: reward,
-                userId: user.id
-            }
-        ).then( res => console.log(res))
-        .catch(err => console.log(err));
-            
-    };
-
-    // RENDER TEST-pass:
-    // Clicking ADD REWARD adds reward as expected to DB for the logged in user only?
-    // Clicking the X box successuflly removes the rewarddescription entry for the logged in user only?
-
-    render() {
-
-        const { user } = this.props.auth;
-
-        return (
-            <Container>
-                <Row>
-                    <Col>
-                        <Form>
-                            <h4>
-                                <b>Hey there,</b> {user.name.split(" ")[0]}
-                                <p className="text-body">
-                                    Add chores for the day! <br />
-                                    <br />
-                                    forexample: 
-                                </p>
-                                    <ul>
-                                        <li>★clean Dishes</li>
-                                        <li>★clean Bedroom</li>
-                                        <li>★work the Dog</li>
-                                        <li>★Do homework.</li>
-                                    </ul>
-                                    <br />
-                                <p>The possibilities are endless.<br />
-                                </p>
-                            </h4>
-                            <Form.Row>
-                            <Form.Group as={Col} md="6" controlId="formHouseholdMember">
-                                    <Form.Label>Pick someone:</Form.Label>
-                                    <Form.Control 
-                                        as="select"
-                                        name="assignedto"
-                                        value={this.state.assignedto}
-                                        // placeholder="Wash the dishes" 
-                                        onChange={this.handleInputChange}
-                                    >
-                                        {/* Map the household members to the drop-down */}
-                                        {
-                                            this.state.householdMembers.map(member => (
-                                            <option 
-                                                key={member._id}
-                                                value={member._id}
-                                            >
-                                                {member.name}
-                                            </option>
-                                            ))
-                                        }
-                                    </Form.Control>
-                                </Form.Group>
-                                </Form.Row>
-                                <Form.Row>
-                                <Form.Group as={Col} md="6" controlId="formHouseholdMember">
-                                    <Form.Label>Pick a reward:</Form.Label>
-                                    <Form.Control 
-                                        as="select"
-                                        name="reward"
-                                        value={this.state.reward}
-                                        // placeholder="Wash the dishes" 
-                                        onChange={this.handleInputChange}
-                                    >
-                                        {/* Map the household members to the drop-down */}
-                                        {
-                                            this.state.rewards.map(reward => (
-                                            <option 
-                                                key={reward._id}
-                                                value={reward._id}
-                                            >
-                                                {reward.description}
-                                            </option>
-                                            ))
-                                        }
-                                    </Form.Control>
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                            {/* date */}
-                            </Form.Row>
-                            <Button 
-                                variant="primary" 
-                                type="submit"
-                                onClick={this.addRewardClick}
-                            >
-                                Add reward
-                            </Button>
-                        </Form>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={8}>
-                        <h2>Household Rewards</h2>
-                        A list of the rewards will dynamically render here once the API call is built.
-                        {/* Eventually filter down to non-deleted and map that array */}
-                        {this.state.rewards.length ? (
-                            <ListGroup variant="flush">
-                                {this.state.rewards.map(reward => (
-                                    <ListGroup.Item 
-                                        key={reward._id} 
-                                        data-id={reward._id} 
-                                        className="align-items-center"
-                                    >
-                                        {reward.description} (points: {reward.value}) 
-                                        <Button
-                                            variant="light"
-                                            className="float-right text-danger" 
-                                            onClick={
-                                                () => API.deleteRewardDescription(
-                                                    reward._id,
-                                                    { 
-                                                        isDeleted: true
-                                                    }
-                                                )
-                                                .then(res => console.log(res))
-                                                .catch(err => console.log(err))
-                                            }
-                                        >
-                                            <span >X</span>
-                                        </Button>
-                                </ListGroup.Item>
-                                ))}
-                            </ListGroup>
-                        ) : (
-                            <h3>No rewards to display!</h3>
-                        )}
-                    </Col>
-                </Row>
-            </Container>
-        );
-    }
+    const choreKeys = Object.keys(this.props.chores)
+    const chores = choreKeys.map((choreKey, index) => {
+      // return <Chore
+      //   key={index}
+      //   {...this.props.chores[choreKey]}
+      //   completions={this.props.completions.filter(comp => comp.choreId === this.props.chores[choreKey].id)}
+      //   members={this.props.members}
+      //  />;
+    });
+    return (
+      <div 
+      //  className={styles.choreListContainer}
+       >
+        <div 
+        // className={styles.resetContainer}
+        >
+          This chart shows chore completions from the last 7 days. To see more a detailed chore history, check out the <Link to="/stats"> Household Stats</Link> page.
+        </div>
+        <div 
+        // className={styles.listTop}
+        >
+          {formComponent}
+          <div 
+          // className={styles.choreButtonContainer}
+          >
+            <button
+              // className={styles.addChore}
+              onClick={() => {
+                this.toggleForm();
+              }}
+            >
+              Add Chore
+            </button>
+          </div>
+        </div>
+        {/* {noChoresYet} */}
+        {chores}
+      </div>
+    );
+  }
 }
-
-ChoreList.propTypes = {
-    auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-    auth: state.auth
+export const mapStateToProps = state => ({
+  members: state.chart.members,
+  chores: state.chart.chores,
+  completions: state.chart.completions
 });
-
-export default connect(
-    mapStateToProps
-)(ChoreList);
+export default connect(mapStateToProps)(Chorelist);
