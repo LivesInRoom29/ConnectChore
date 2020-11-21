@@ -40,13 +40,14 @@ router.get("/user/:id", async function(req, res) {
 // completion status is not included here - by default it's false
 // maybe have completion status too? then updated the completedOn when that is updated?
 router.post("/", async function(req, res) {
-  const { description, frequency } = req.body;
+  const { description, frequency, userId } = req.body;
 
   try {
     const data = await taskController.create({
       // name: name,
       description: description,
       frequency: frequency,
+      userId: userId
       //choreList: choreList,
       //completedBy: completedBy,
       //completedOn: completedOn
