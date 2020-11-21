@@ -4,6 +4,9 @@ module.exports = {
   findAll: function() {
     return db.HouseholdMember.find();
   },
+  findByUserId: function(userid) {
+    return db.HouseholdMember.find({userId: userid})
+  },
   findById: function(id) {
     return db.HouseholdMember.findById(id);
   },
