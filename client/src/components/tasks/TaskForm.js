@@ -12,7 +12,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
 
-class Rewards extends Component {
+class TaskForm extends Component {
 
     constructor(props) {
         super(props)
@@ -181,7 +181,7 @@ class Rewards extends Component {
     }
 }
 
-Rewards.propTypes = {
+TaskForm.propTypes = {
     auth: PropTypes.object.isRequired
 };
 
@@ -191,4 +191,4 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps
-)(Rewards);
+)(TaskForm);
