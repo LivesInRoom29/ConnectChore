@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
@@ -31,53 +32,53 @@ class Dashboard extends Component {
                     <br />
                     <br />
                     <Row>
-                        <Col lg={true}><a href="/chores"><div class="module mid">
+                        <Col lg={true}><Link to="/addchorelist"><div className="module mid">
                             <h2>Chores</h2>
-                        </div></a></Col>
-                        <Col lg={true}><a href="/game"><div class="module mid">
+                        </div></Link></Col>
+                        <Col lg={true}><Link to="/game"><div className="module mid">
                             <h2>Game</h2>
-                        </div></a></Col>
+                        </div></Link></Col>
                     </Row>
                     <Row>
                         <Col lg={true}>
-                            <a href="/rewards"><div class="module mid">
+                            <Link to="/rewards"><div className="module mid">
                                 <h2>Rewards</h2>
-                            </div></a></Col>
-                        <Col lg={true}><a href="/chores"><div class="module mid">
-                            <h2>Card 4</h2>
-                        </div></a></Col>
+                            </div></Link></Col>
+                        <Col lg={true}><Link to="/addtasks"><div className="module mid">
+                            <h2>Tasks</h2>
+                        </div></Link></Col>
                     </Row>
                     <Button variant="outline-info" onClick={this.onLogoutClick}>Logout</Button>
                 </Container>
 
 
 
-                {/* <div class="container">
-                    <div class="row">
-                        <div class="col">
-                        <a href="/chores"><div class="module mid">
+                {/* <div className="container">
+                    <div className="row">
+                        <div className="col">
+                        <a href="/chores"><div className="module mid">
                             <h2>Chores</h2>
                         </div></a>
                 </div>
-                        <div class="col">
-                        <a href="/chores"><div class="module mid">
+                        <div className="col">
+                        <a href="/chores"><div className="module mid">
                             <h2>Chores</h2>
                         </div></a>
                 </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                        <a href="/chores"><div class="module mid">
+                    <div className="row">
+                        <div className="col">
+                        <a href="/chores"><div className="module mid">
                             <h2>Chores</h2>
                         </div></a>
                 </div>
-                        <div class="col">
-                        <a href="/chores"><div class="module mid">
+                        <div className="col">
+                        <a href="/chores"><div className="module mid">
                             <h2>Chores</h2>
                         </div></a>
                  </div>
-                        <div class="col">
-                        <a href="/chores"><div class="module mid">
+                        <div className="col">
+                        <a href="/chores"><div className="module mid">
                             <h2>Chores</h2>
                         </div></a>
                  </div>
@@ -89,7 +90,7 @@ class Dashboard extends Component {
                 <br />
 
 
-                <a class="waves-effect waves-light btn" onClick={this.onLogoutClick}>Logout</a>
+                <a className="waves-effect waves-light btn" onClick={this.onLogoutClick}>Logout</a>
 
                 <div className="button"><button
                     style={{

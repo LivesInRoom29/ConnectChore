@@ -19,6 +19,7 @@ import Game from "./components/game/game";
 import Footer from "./components/footer/footer";
 import HouseholdMemberForm from "./components/householdmembers/HouseholdMemberForm";
 import ChoreList from "./components/chorelist/ChoreList";
+import TaskForm from "./components/tasks/TaskForm";
 import GameBox from "./components/game/GameBox";
 
 // TEMPLATE component!
@@ -62,6 +63,7 @@ class App extends Component {
               <PrivateRoute exact path="/game" component={Game} />
               <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
               <PrivateRoute exact path="/addchorelist" component={ChoreList} />
+              <PrivateRoute exact path="/addtasks" component={TaskForm} />
               
               {/* TEMPLATE ROUTES */}
               <PrivateRoute exact path="/template" component={Template} />

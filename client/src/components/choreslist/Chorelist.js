@@ -122,18 +122,7 @@ class ChoreList extends Component {
                             <h4>
                                 <b>Hey there,</b> {user.name.split(" ")[0]}
                                 <p className="text-body">
-                                    Add chores for the day! <br />
-                                    <br />
-                                    forexample:
-                                </p>
-                                <ul>
-                                    <li>★clean Dishes</li>
-                                    <li>★clean Bedroom</li>
-                                    <li>★work the Dog</li>
-                                    <li>★Do homework.</li>
-                                </ul>
-                                <br />
-                                <p>The possibilities are endless.<br />
+                                    Create a chorelist for the day! <br />
                                 </p>
                             </h4>
                             <Form.Row>
@@ -200,7 +189,7 @@ class ChoreList extends Component {
                                 type="submit"
                                 onClick={this.addChoreListClick}
                             >
-                                Create chorelist
+                                Add list
                             </Button>
                         </Form>
                     </Col>
