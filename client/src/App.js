@@ -23,6 +23,7 @@ import HouseholdMemberForm from "./components/householdmembers/HouseholdMemberFo
 import Template from "./components/Template";
 import ChoreListDemo from "./components/chorelist-demo/ChoreListDemo";
 import DropDownDemo from "./components/chorelist-demo/DropDownDemo";
+import GameBox from "./components/game/GameBox";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -62,6 +63,7 @@ class App extends Component {
               <PrivateRoute exact path="/template" component={Template} />
               <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
               <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
+              <PrivateRoute exact path="/connectchoregame" component={GameBox} />
             </Switch>
           </div>
         </Router>

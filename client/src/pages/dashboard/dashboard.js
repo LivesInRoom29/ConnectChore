@@ -8,6 +8,7 @@ import RewardsForm from "../../components/rewards/RewardsForm";
 import Sidebar from "../../components/sidebar/Sidebar";
 //import "../../components/sidebar/sidebar.css";
 
+import GameBox from "../../components/game/GameBox";
 import Button from 'react-bootstrap/Button'
 
 // Bootstrap components
@@ -21,12 +22,16 @@ const Dashboard = (props) => {
       {/* <Sidebar /> */}
       {/* <Navbar /> */}
 
+      <GameBox />
       <div className="mb-2">
     <Button variant="primary" size="lg">
       Create a Member
     </Button>{' '}
     <Button variant="primary" size="lg">
       Create a Chore List
+    </Button>{' '}
+    <Button variant="primary" size="lg">
+      Create a Task  List
     </Button>{' '}
     <Button variant="primary" size="lg">
       Play ConnectChore
