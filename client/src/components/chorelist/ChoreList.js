@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 //import styles from "../componentStyles/ChoreList.css";
 import { connect } from "react-redux";
 // Bootstrap components
@@ -219,4 +219,4 @@ export const mapStateToProps = state => ({
   chores: state.chart.chores,
   completions: state.chart.completions
 });
-export default connect(mapStateToProps)(Chorelist);
+export default connect(mapStateToProps)(ChoreList);
