@@ -23,7 +23,7 @@ export default {
     // HOUSEHOLD MEMBER CALLS - matches /api/household-members/
     // get a list of household members for logged in user
     getHouseholdMembers: function(userid) {
-        return Axios.get(`api/household-members/user/${userid}`);
+        return Axios.get(`/api/household-members/user/${userid}`);
     },
     // add household member
     addHouseholdMember: function(houseHoldMemberData) {
@@ -35,15 +35,38 @@ export default {
     },
 
     // NOT TESTED YET
-    // CHORELIST CALLS - /api/household-members/
+    // CHORELIST CALLS - /api/chore-lists
+    
+    // get Chore List details by choreListId -- ADD THIS TO CONTROLLER
+    getChoreLists: function(userid) {
+        return Axios.get(`/api/chore-lists/user/${userid}`);
+    },
     // get chores for a one household member
     getChoreListForHouseholdMember: function(householdMemberId, choreListDate) {
-        return Axios.get(`api/chorelist/${householdMemberId}/${choreListDate}`);
+        return Axios.get(`/api/chore-lists/${householdMemberId}/${choreListDate}`);
     },
     // add a chorelist
     addChoreList: function(choreListData) {
-        return Axios.post(`api/household-members`, choreListData);
+        return Axios.post(`/api/chore-lists/`, choreListData);
+    },
+    deleteChoreList: function(choreListId, choreListData) {
+        return Axios.put(`/api/chore-lists/${choreListId}`, choreListData);
+    },
+
+    // TASK CALLS - /api/tasks
+    // get tasks
+    getTasks: function(userid) {
+        return Axios.post(`/api/tasks/user/${userid}`);
+    },
+
+    // add tasks - /api/tasks/
+    addTask: function(taskData) {
+        return Axios.post(`/api/tasks/`, taskData);
+    },
+    deleteTask: function(taskId, taskData) {
+        return Axios.post(`/api/tasks/${taskId}`, taskData); 
     }
+    
     
 
     // Rewards calls - /api/rewards/

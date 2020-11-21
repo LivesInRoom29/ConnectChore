@@ -23,20 +23,32 @@ router.get("/",
   }
 );
 
+// get all tasks by userId = /api/tasks
+router.get("/user/:id", async function(req, res) {
+  const id = req.params.id;
+  try {
+    const data = await taskController
+  .findByUserId(id);
+    res.send(data);
+  } catch (err) {
+    res.status(503).end(err);
+  }
+});
+
 // To create a new task
 // maybe instead, have the task be created when the chore-list is?
 // completion status is not included here - by default it's false
 // maybe have completion status too? then updated the completedOn when that is updated?
 router.post("/", async function(req, res) {
-  const { name, description, frequency, choreList, completedBy } = req.body;
+  const { description, frequency } = req.body;
 
   try {
     const data = await taskController.create({
-      name: name,
+      // name: name,
       description: description,
       frequency: frequency,
-      choreList: choreList,
-      completedBy: completedBy,
+      //choreList: choreList,
+      //completedBy: completedBy,
       //completedOn: completedOn
     });
     res.json(data);
@@ -58,7 +70,7 @@ router.get("/:id", async function(req, res) {
 });
 
 // update a task by id
-// in req.body, can pass in updated frequency, choreList (ref to chore-list), completedBy (ref to household-member), completedOn
+// in req.body, can pass in updated description or frequency
 // Use this to "delete" as well - pass in {isDeleted: true}
 router.put("/:id", async function(req, res) {
   const id = req.params.id;
