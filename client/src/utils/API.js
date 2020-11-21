@@ -56,7 +56,7 @@ export default {
     // TASK CALLS - /api/tasks
     // get tasks
     getTasks: function(userid) {
-        return Axios.post(`/api/tasks/user/${userid}`);
+        return Axios.get(`/api/tasks/user/${userid}`);
     },
 
     // add tasks - /api/tasks/
