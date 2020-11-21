@@ -1,3 +1,38 @@
-.container {
+.landing-container {
     margin-top: 75px;
+    padding: 0px 400px;
+    vertical-align: middle;
 }
+
+
+/* MEDIA QUERIES */
+@media(max-width: 580px) {
+  /* Navigation Styles */
+  .landing-container {
+    margin-top: 150px;
+    padding: 0px 20px;
+    vertical-align: middle;
+}
+}
+
+/* .landing.btn {
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    background-color: turquoise;
+    color: white;
+    padding: 12px;
+    align-items: center;
+}
+
+button {
+  width: 150px;
+  height: 50px;
+  border-radius: 50px;
+  letter-spacing: 1px;
+  background-color: turquoise;
+  color: white;
+  padding: 12px;
+  align-items: center;
+} */
