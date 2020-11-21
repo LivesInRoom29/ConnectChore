@@ -17,10 +17,14 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Rewards from "./components/rewards/RewardsForm";
 import Game from "./components/game/game";
 import Footer from "./components/footer/footer";
+import HouseholdMemberForm from "./components/householdmembers/HouseholdMemberForm";
+import ChoreList from "./components/chorelist/ChoreList";
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template 
 import Template from "./components/Template";
+import ChoreListDemo from "./components/chorelist-demo/ChoreListDemo";
+import DropDownDemo from "./components/chorelist-demo/DropDownDemo";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -53,9 +57,15 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/template" component={Template} />
               <PrivateRoute exact path="/rewards" component={Rewards} />
               <PrivateRoute exact path="/game" component={Game} />
+              <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
+              <PrivateRoute exact path="/addchorelist" component={ChoreList} />
+              
+              {/* TEMPLATE ROUTES */}
+              <PrivateRoute exact path="/template" component={Template} />
+              <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
+              <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
             </Switch>
             <Footer />
           </div>

@@ -12,5 +12,11 @@ module.exports = {
   },
   update: function(id, body) {
     return db.ChoreList.findOneAndUpdate(id, body);
-  }
+  },
+  addTask: function(id, taskId) {
+    return db.ChoreList.findOneAndUpdate(id, taskId, { new: true});
+  },
+  findByUserId: function(userId) {
+    return db.ChoreList.find({userId: userId});
+  },
 }
