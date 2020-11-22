@@ -1,24 +1,53 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { dropTile } from "../../actions/gameActions";
+import "./game.css";
+
 
 class GridCell extends Component {
-    constructor(props) {
-        super(props) 
-        this.handleClick = this.handleClick.bind(this);
-    }
-    
-    handleClick() {
-        console.log(`Clicked on column ${this.props.x}`)
-    }
+  handleClick(){
+    console.log(`clicked on columns ${this.props.x}`)
+
+    this.props.sendTileDrop(this.props.x, this.props.y);
+
+  }
 
     render() {
-        return (
-            <div onClick={this.handleClick()}>
-                <p>{this.props.x}, {this.props.y}</p>
-            </div>
-        )
+      const board = this.props.board;
+      const x = this.props.x;
+      const y = this.props.y;
+      let classes = 'cell';
+
+      if (board[x][y] !== undefined) {
+        if (board[x][y] === 'red'){
+          classes =+ 'p2';
+        } else {
+          classes =+ 'p1';
+        }
+      }
+      return (
+        <div className={classes} style= {{backgroundColor: this.props.color}} onClick={() => this.handleClick()}>
+          
+        </div>
+      )
     }
-}
+};
 
-export default GridCell;
 
-//x is column, y is row
+const stateToProps = state => {
+  return {
+    board: state.game.board,
+  };
+};
+
+const dispatchToProps = dispatch => {
+  return {
+    sendTileDrop: (col, row) => dispatch(dropTile(col, row))
+    }
+};
+
+
+export default connect(stateToProps, dispatchToProps)(GridCell);
+
+
+
