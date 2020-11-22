@@ -55,11 +55,14 @@ class Login extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div style={{ height: "75vh" }} className="auth-container">
-                <div style={{ marginTop: "4rem" }} className="row">
-                    <div className="col s8">
+            <div style={{ height: "90vh" }} className="auth-container">
+                <div>
+                    <br />
+                    <br />
+                    <br />
+                    <div className="col s8 loginform animation">
                         <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i> Back to home</Link>
+                            <i className="material-icons left">keyboard_backspace</i> Back to Home</Link>
                         <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                             <br />
                             <h4 className="auth">Welcome Back!</h4>

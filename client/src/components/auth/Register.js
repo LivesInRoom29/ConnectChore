@@ -56,9 +56,12 @@ class Register extends Component {
         const { errors } = this.state;
         return (
             <>
-                <div style={{ height: "75vh" }} className="auth-container">
-                    <div className="row">
-                        <div className="col s8">
+                <div style={{ height: "110vh" }} className="auth-container">
+                    <div>
+                        <br />
+                        <br />
+                        <br />
+                        <div className="col s8 loginform animation">
                             <Link to="/" className="btn-flat waves-effect">
                                 <i className="material-icons left">keyboard_backspace</i> Back to home</Link>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
@@ -147,11 +150,6 @@ class Register extends Component {
                         </div>
                     </div>
                 </div>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
             </>
         );
     }
