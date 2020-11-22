@@ -22,7 +22,7 @@ import Footer from "./components/footer/footer";
 import HouseholdMemberForm from "./components/householdmembers/HouseholdMemberForm";
 import ChoreList from "./components/chorelist/ChoreList";
 import TaskForm from "./components/tasks/TaskForm";
-import GameBox from "./components/game/GameBox";
+
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template
@@ -76,7 +76,9 @@ class App extends Component {
               <PrivateRoute exact path="/template" component={Template} />
               <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
               <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
+              <div className="GameBox">
               <PrivateRoute exact path ="/connectchoregame" component={GameBox} />
+              </div>
             </Switch>
             <Footer />
           </div>

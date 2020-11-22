@@ -1,9 +1,11 @@
 .cell{
 border: 1px solid black;
 display: inline-block;
-padding: 20px;
+padding: 30px;
 font: monospace;
 cursor: pointer;
+margin-top: 0;
+margin-bottom: 0 
 };
 
 .cell.p1 {
@@ -14,4 +16,13 @@ cursor: pointer;
 .cell.p2 {
     background-color: red;
     color: black
+}
+
+/* .game-container{
+    /* margin-top: 50px; */
+    /* margin-bottom: 50px; */
+ */
+
+.game-row{
+    margin-bottom: -7px;
 }

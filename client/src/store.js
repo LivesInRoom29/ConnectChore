@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
-import { initial } from "./reducers/gamereducer";
+import { initial } from "./reducers/gameReducer";
 
 const initialState = {
     game: initial

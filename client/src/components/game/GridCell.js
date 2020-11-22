@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { connect } from "react-redux";
 import { dropTile } from "../../actions/gameActions";
 import "./game.css";
@@ -26,9 +27,10 @@ class GridCell extends Component {
         }
       }
       return (
+        
         <div className={classes} style= {{backgroundColor: this.props.color}} onClick={() => this.handleClick()}>
-          
         </div>
+        
       )
     }
 };
