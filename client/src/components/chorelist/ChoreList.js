@@ -123,6 +123,7 @@ class ChoreList extends Component {
             .then(res => {
                 console.log(res.data);
                 //this.setState({ tasks: res.data.tasks })
+                // need to populate the tasks from the chorelist first.
             }
         )
     }
