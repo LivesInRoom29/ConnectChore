@@ -21,6 +21,8 @@ class TaskDropDown extends Component {
             choresLists: [],
             auth: {}
         }
+        this.handleInputChange = this.handleInputChange.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
     }
 
     //get tasks data from the DB
@@ -58,9 +60,9 @@ class TaskDropDown extends Component {
 
     handleInputChange = event => {
         event.preventDefault();
-        
+
         this.setState(
-            { 
+            {
                 //..this.state
                 [event.target.name]: event.target.value
                 // don't include ...this.state so the value changes when the drop-down changes 
@@ -68,24 +70,25 @@ class TaskDropDown extends Component {
         );
     };
 
-    // addChoreListClick = e => {
-    //     // leaving commented out to refresh the whole page for now
-    //     //e.preventDefault();
-       
-    //     //let mainDate = format(this.state.startDate, "MM/dd/yyyy");
-    //     const { task } = this.props.auth;
-    //     const { assignedto, reward } = this.state;
+    addTaskClick = e => {
+        // leaving commented out to refresh the whole page for now
+        //e.preventDefault();
 
-    //     API.addChoreList(
-    //         {
-    //             completedBy: assignedto,
-    //             reward: reward,
-    //             //userId: user.id
-    //         }
-    //     ).then(res => console.log(res))
-    //         .catch(err => console.log(err));
+        //let mainDate = format(this.state.startDate, "MM/dd/yyyy");
+        const { task } = this.props.auth;
+        const { choosetask, } = this.state;
 
-    // };
+        API.addTaskToChoreList(
+            {
+                //add tasks to chorelist
+                description: task,
+                tasks: choosetask
+
+            }
+        ).then(res => console.log(res))
+            .catch(err => console.log(err));
+
+    };
 
 
     //drop down menu for tasklist
@@ -126,10 +129,10 @@ class TaskDropDown extends Component {
                 <Button
                     variant="primary"
                     type="submit"
-                    //onClick={this.someFunction}
+                    onClick={this.addTaskClick}
                 >
                     Submit
-                            </Button>
+                </Button>
             </Form>
         )
     }
