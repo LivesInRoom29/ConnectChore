@@ -68,24 +68,24 @@ class TaskDropDown extends Component {
         );
     };
 
-    addChoreListClick = e => {
-        // leaving commented out to refresh the whole page for now
-        //e.preventDefault();
+    // addChoreListClick = e => {
+    //     // leaving commented out to refresh the whole page for now
+    //     //e.preventDefault();
        
-        //let mainDate = format(this.state.startDate, "MM/dd/yyyy");
-        const { task } = this.props.auth;
-        const { assignedto, reward } = this.state;
+    //     //let mainDate = format(this.state.startDate, "MM/dd/yyyy");
+    //     const { task } = this.props.auth;
+    //     const { assignedto, reward } = this.state;
 
-        API.addChoreList(
-            {
-                completedBy: assignedto,
-                reward: reward,
-                //userId: user.id
-            }
-        ).then(res => console.log(res))
-            .catch(err => console.log(err));
+    //     API.addChoreList(
+    //         {
+    //             completedBy: assignedto,
+    //             reward: reward,
+    //             //userId: user.id
+    //         }
+    //     ).then(res => console.log(res))
+    //         .catch(err => console.log(err));
 
-    };
+    // };
 
 
     //drop down menu for tasklist
