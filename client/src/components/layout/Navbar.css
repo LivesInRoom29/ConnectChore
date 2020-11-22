@@ -1,3 +1,15 @@
 nav {
     background-color: #42b984;
 }
+
+nav img {
+    height: 60px;
+    padding: 5px;
+
+}
+
+@media(max-width: 580px) {
+    nav img {
+        height: 45px;
+    }
+  }
