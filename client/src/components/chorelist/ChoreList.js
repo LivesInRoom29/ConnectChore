@@ -91,28 +91,28 @@ class ChoreList extends Component {
     };
 
     // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
-    // addChoreListClick = e => {
-    //     // leaving commented out to refresh the whole page for now
-    //     e.preventDefault();
+    addChoreListClick = e => {
+        // leaving commented out to refresh the whole page for now
+        e.preventDefault();
 
-    //     let mainDate = format(this.state.startDate, "MM/dd/yyyy");
-    //     const { user } = this.props.auth;
-    //     const { assignedto, reward } = this.state;
+        let mainDate = format(this.state.startDate, "MM/dd/yyyy");
+        const { user } = this.props.auth;
+        const { assignedto, reward } = this.state;
 
-    //     API.addChoreList(
-    //         {
-    //             completedBy: assignedto,
-    //             date: mainDate,
-    //             reward: reward,
-    //             userId: user.id
-    //         }
-    //     ).then(res => {
-    //         this.setState({ choreListToEdit: res.data._id });
-    //         console.log(res.data._id);
-    //     })
-    //         .catch(err => console.log(err));
+        API.addChoreList(
+            {
+                completedBy: assignedto,
+                date: mainDate,
+                reward: reward,
+                userId: user.id
+            }
+        ).then(res => {
+            this.setState({ choreListToEdit: res.data._id });
+            console.log(res.data._id);
+        })
+            .catch(err => console.log(err));
 
-    // };
+    };
 
     //For now, just adding a hard-coded task for testing
     // addTaskClick = e => {
@@ -144,12 +144,14 @@ class ChoreList extends Component {
 
         const chorelistEditor = this.state.choreListToEdit ? (
             <>
-                <TaskDropDown />
+                <TaskDropDown
+                    choreListToEdit={this.state.choreListToEdit}
+                />
                 <br />
-                <ChoreListTask
+                {/* <ChoreListTask
                     tasks={this.state.tasks}
                     completionCheckboxChange={this.completionCheckboxChange}
-                />
+                /> */}
             </>
         ) : (
             <>
