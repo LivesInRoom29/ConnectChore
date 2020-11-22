@@ -4,7 +4,7 @@
 import Axios from "axios"
 
 export default {
-    
+
     // REWARD DESCRIPTION CALLS - /api/reward-descriptions/
     // get reward descriptions by logged in user
     getRewardDescriptions: function(userid) {
@@ -19,7 +19,7 @@ export default {
         return Axios.put(`/api/reward-descriptions/${rewardDescriptionId}`, rewardData);
     },
 
-    
+
     // HOUSEHOLD MEMBER CALLS - matches /api/household-members/
     // get a list of household members for logged in user
     getHouseholdMembers: function(userid) {
@@ -36,7 +36,7 @@ export default {
 
     // NOT TESTED YET
     // CHORELIST CALLS - /api/chore-lists
-    
+
     // get Chore List details by choreListId -- ADD THIS TO CONTROLLER
     getChoreLists: function(userid) {
         return Axios.get(`/api/chore-lists/user/${userid}`);
@@ -52,6 +52,10 @@ export default {
     deleteChoreList: function(choreListId, choreListData) {
         return Axios.put(`/api/chore-lists/${choreListId}`, choreListData);
     },
+    // add tasks to chorelist
+    addTaskToChoreList: function(choreListId, taskId) {
+        return Axios.put(`/api/chore-lists/tasks/${choreListId}`, taskId);
+    },
 
     // TASK CALLS - /api/tasks
     // get tasks
@@ -64,10 +68,10 @@ export default {
         return Axios.post(`/api/tasks/`, taskData);
     },
     deleteTask: function(taskId, taskData) {
-        return Axios.post(`/api/tasks/${taskId}`, taskData); 
+        return Axios.post(`/api/tasks/${taskId}`, taskData);
     }
-    
-    
+
+
 
     // Rewards calls - /api/rewards/
 }
