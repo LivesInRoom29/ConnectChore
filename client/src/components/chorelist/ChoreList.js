@@ -14,6 +14,9 @@ import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
+import TaskDDTemp from "../chorelist-tasks/TaskDDtemp";
+import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
+
 
 class ChoreList extends Component {
 
@@ -26,7 +29,8 @@ class ChoreList extends Component {
             choreLists: [],
             householdMembers: [],
             rewards: [],
-            chorelistAdded: false,
+            tasks: [],
+            choreListToEdit: "",
             validateDisplay: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -89,7 +93,7 @@ class ChoreList extends Component {
     // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
     addChoreListClick = e => {
         // leaving commented out to refresh the whole page for now
-        //e.preventDefault();
+        e.preventDefault();
 
         let mainDate = format(this.state.startDate, "MM/dd/yyyy");
         const { user } = this.props.auth;
@@ -102,18 +106,59 @@ class ChoreList extends Component {
                 reward: reward,
                 userId: user.id
             }
-        ).then(res => console.log(res))
+        ).then(res => {
+            this.setState({ choreListToEdit: res.data._id });
+            console.log(res.data._id);
+        })
             .catch(err => console.log(err));
 
     };
 
+    //For now, just adding a hard-coded task for testing
+    addTaskClick = e => {
+        e.preventDefault();
+        const taskID = e.target.dataset.dataID;
+
+        API.addTaskToChoreList(this.state.choreListToEdit, taskID)
+            .then(res => {
+                console.log(res.data);
+                //this.setState({ tasks: res.data.tasks })
+            }
+        )
+    }
+
+    completionCheckboxChange = e => {
+        console.log("e:", e);
+    }
+
+
+
     // RENDER TEST:
-    // Clicking ADD REWARD adds reward as expected to DB for the logged in user only?
-    // Clicking the X box successuflly removes the rewarddescription entry for the logged in user only?
+    // Clicking ADD LIST adds chorelist as expected to DB for the logged in user only? -- YES
+    // Clicking ADD LIST renders other half of the page - to add tasks to the chorelist
+    //
 
     render() {
 
         const { user } = this.props.auth;
+
+        const chorelistEditor = this.state.choreListToEdit ? (
+            <>
+                <TaskDDTemp
+                    addTaskClick={this.addTaskClick}
+                />
+                <br />
+                <ChoreListTask
+                    tasks={this.state.tasks}
+                    completionCheckboxChange={this.completionCheckboxChange}
+                />
+            </>
+        ) : (
+            <>
+                <h2>Your Chorelist</h2>
+                <h3>No chorelists to display!</h3>
+            </>
+        )
 
         return (
             <Container>
@@ -194,11 +239,10 @@ class ChoreList extends Component {
                             </Button>
                         </Form>
                     </Col>
-                </Row>
-                <Row>
-                    <Col md={8}>
-                        <h2>Your Chorelist</h2>
-                        <h3>No chorelists to display!</h3>
+                {/* </Row>
+                <Row> */}
+                    <Col md={6}>
+                        {chorelistEditor}
                     </Col>
                 </Row>
             </Container>
