@@ -1,38 +1,31 @@
 .landing-container {
-    margin-top: 75px;
+    margin-top: 120px;
     padding: 0px 400px;
     vertical-align: middle;
 }
 
+h1 {
+  color: #00adef;
+}
+
+.waves-effect.waves-brown.waves-ripple:hover {
+  background-color: white;
+}
+
 
 /* MEDIA QUERIES */
-@media(max-width: 580px) {
-  /* Navigation Styles */
+@media(max-width: 768px) {
   .landing-container {
     margin-top: 150px;
-    padding: 0px 20px;
+    padding: 0px 60px;
     vertical-align: middle;
 }
 }
 
-/* .landing.btn {
-    width: 200px;
-    height: 50px;
-    border-radius: 50px;
-    letter-spacing: 1px;
-    background-color: turquoise;
-    color: white;
-    padding: 12px;
-    align-items: center;
+@media(max-width: 580px) {
+  .landing-container {
+    margin-top: 120px;
+    padding: 0px 20px;
+    vertical-align: middle;
 }
-
-button {
-  width: 150px;
-  height: 50px;
-  border-radius: 50px;
-  letter-spacing: 1px;
-  background-color: turquoise;
-  color: white;
-  padding: 12px;
-  align-items: center;
-} */
+}
