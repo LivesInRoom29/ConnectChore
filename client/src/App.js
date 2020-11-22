@@ -21,6 +21,8 @@ import Rewards from "./components/rewards/RewardsForm";
 import Footer from "./components/footer/footer";
 import HouseholdMemberForm from "./components/householdmembers/HouseholdMemberForm";
 import ChoreList from "./components/chorelist/ChoreList";
+import TaskForm from "./components/tasks/TaskForm";
+import GameBox from "./components/game/GameBox";
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template
@@ -68,26 +70,13 @@ class App extends Component {
                 component={HouseholdMemberForm}
               />
               <PrivateRoute exact path="/addchorelist" component={ChoreList} />
-
+              <PrivateRoute exact path="/addtasks" component={TaskForm} />
+              
               {/* TEMPLATE ROUTES */}
               <PrivateRoute exact path="/template" component={Template} />
-              <PrivateRoute
-                exact
-                path="/chorelistdemo"
-                component={ChoreListDemo}
-              />
-              <PrivateRoute
-                exact
-                path="/dropdowndemo"
-                component={DropDownDemo}
-              />
-              {/* <Provider store={storeGame}> */}
-                <Route
-                  exact
-                  path="/connectchoregame"
-                  component={GameBox}
-                />
-              {/* </Provider> */}
+              <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
+              <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
+              <PrivateRoute exact path ="/connectchoregame" component={GameBox} />
             </Switch>
             <Footer />
           </div>

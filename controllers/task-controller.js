@@ -4,7 +4,7 @@ module.exports = {
   findAll: function() {
     return db.Task.find();
   },
-  findByUserId: function() {
+  findByUserId: function(userId) {
     return db.Task.find({userId: userId});
   },
   findById: function(id) {
