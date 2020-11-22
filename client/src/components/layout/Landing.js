@@ -12,14 +12,20 @@ class Landing extends Component {
   render() {
     return (
       <div style={{ background: this.state.color }} id="main">
-        <div style={{ height: "75vh" }} className="landing-container">
+        <div style={{ height: "90vh" }} className="landing-container">
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <div className="row">
             <div className="col s12 center-align">
               <h1>
                 <b>Chores just got a lot more fun!</b>
               </h1>
               <br />
-              <p className="flow-text grey-text text-darken-1">
+              <p>
                 Simply create a list of household chores and assign tasks to family members. Add rewards for checking items off the to-do list and battle it out with a game of Connect Four!
             </p>
               <br />
@@ -44,6 +50,7 @@ class Landing extends Component {
                     width: "140px",
                     borderRadius: "30px",
                     padding: "14px",
+                    backgroundColor: "#ffffff",
                     color: "#42b984",
                     border: "2px solid",
                     letterSpacing: "1.5px"
