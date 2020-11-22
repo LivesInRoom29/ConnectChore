@@ -14,7 +14,7 @@ import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
-import TaskDDTemp from "../chorelist-tasks/TaskDDtemp";
+import TaskDropDown from "../taskdropdown/TaskDropDown";
 import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
 
 
@@ -91,41 +91,41 @@ class ChoreList extends Component {
     };
 
     // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
-    addChoreListClick = e => {
-        // leaving commented out to refresh the whole page for now
-        e.preventDefault();
+    // addChoreListClick = e => {
+    //     // leaving commented out to refresh the whole page for now
+    //     e.preventDefault();
 
-        let mainDate = format(this.state.startDate, "MM/dd/yyyy");
-        const { user } = this.props.auth;
-        const { assignedto, reward } = this.state;
+    //     let mainDate = format(this.state.startDate, "MM/dd/yyyy");
+    //     const { user } = this.props.auth;
+    //     const { assignedto, reward } = this.state;
 
-        API.addChoreList(
-            {
-                completedBy: assignedto,
-                date: mainDate,
-                reward: reward,
-                userId: user.id
-            }
-        ).then(res => {
-            this.setState({ choreListToEdit: res.data._id });
-            console.log(res.data._id);
-        })
-            .catch(err => console.log(err));
+    //     API.addChoreList(
+    //         {
+    //             completedBy: assignedto,
+    //             date: mainDate,
+    //             reward: reward,
+    //             userId: user.id
+    //         }
+    //     ).then(res => {
+    //         this.setState({ choreListToEdit: res.data._id });
+    //         console.log(res.data._id);
+    //     })
+    //         .catch(err => console.log(err));
 
-    };
+    // };
 
     //For now, just adding a hard-coded task for testing
-    addTaskClick = e => {
-        e.preventDefault();
-        const taskID = e.target.dataset.dataID;
+    // addTaskClick = e => {
+    //     e.preventDefault();
+    //     const taskID = e.target.dataset.dataID;
 
-        API.addTaskToChoreList(this.state.choreListToEdit, taskID)
-            .then(res => {
-                console.log(res.data);
-                //this.setState({ tasks: res.data.tasks })
-            }
-        )
-    }
+    //     API.addTaskToChoreList(this.state.choreListToEdit, taskID)
+    //         .then(res => {
+    //             console.log(res.data);
+    //             //this.setState({ tasks: res.data.tasks })
+    //         }
+    //     )
+    // }
 
     completionCheckboxChange = e => {
         console.log("e:", e);
@@ -144,9 +144,7 @@ class ChoreList extends Component {
 
         const chorelistEditor = this.state.choreListToEdit ? (
             <>
-                <TaskDDTemp
-                    addTaskClick={this.addTaskClick}
-                />
+                <TaskDropDown />
                 <br />
                 <ChoreListTask
                     tasks={this.state.tasks}

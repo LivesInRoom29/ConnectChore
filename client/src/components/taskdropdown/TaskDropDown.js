@@ -15,12 +15,11 @@ class TaskDropDown extends Component {
         super(props)
         this.state = {
             choosetask: "",
-            tasksid: "",
             tasks: [],
             description: "",
             auth: {}
         }
-        this.handleInputChange = this.handleInputChange.bind(this);
+        //this.handleInputChange = this.handleInputChange.bind(this);
         //this.handleChange = this.handleChange.bind(this);
     }
 
@@ -29,45 +28,46 @@ class TaskDropDown extends Component {
         const { user } = this.props.auth
 
         var promise = new Promise((resolve, reject) => {
-            API.getRewardDescriptions(user.id)
+            API.getTasks(user.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
         })
 
         promise.then(result => {
+            console.log(result);
             this.setState(
                 {
-                    rewards: result.data
+                    tasks: result.data
                 }
             )
         });
 
-        var promisetwo = new Promise((resolve, reject) => {
-            API.getHouseholdMembers(user.id)
-                .then(res => resolve(res))
-                .catch(err => reject(Error("API failed")));
-        })
+        // var promisetwo = new Promise((resolve, reject) => {
+        //     API.getHouseholdMembers(user.id)
+        //         .then(res => resolve(res))
+        //         .catch(err => reject(Error("API failed")));
+        // })
 
-        promisetwo.then(result => {
-            this.setState(
-                {
-                    householdMembers: result.data
-                }
-            )
-        });
+        // promisetwo.then(result => {
+        //     this.setState(
+        //         {
+        //             householdMembers: result.data
+        //         }
+        //     )
+        // });
     }
 
-    handleInputChange = event => {
-        event.preventDefault();
+    // handleInputChange = event => {
+    //     event.preventDefault();
 
-        this.setState(
-            {
-                //..this.state
-                [event.target.name]: event.target.value
-                // don't include ...this.state so the value changes when the drop-down changes 
-            }
-        );
-    };
+    //     this.setState(
+    //         {
+    //             //..this.state
+    //             [event.target.name]: event.target.value
+    //             // don't include ...this.state so the value changes when the drop-down changes 
+    //         }
+    //     );
+    // };
 
     addTaskClick = e => {
         // leaving commented out to refresh the whole page for now
@@ -113,12 +113,12 @@ class TaskDropDown extends Component {
                         >
                             {/* Map the tasks to the drop-down */}
                             {
-                                this.state.tasks.map(tasklist => (
+                                this.state.tasks.map(task => (
                                     <option
-                                        key={tasklist._id}
-                                        value={tasklist._id}
+                                        key={task._id}
+                                        value={task._id}
                                     >
-                                        {tasklist.description}
+                                        {task.description}
                                     </option>
                                 ))
                             }
@@ -130,7 +130,7 @@ class TaskDropDown extends Component {
                     type="submit"
                     onClick={this.addTaskClick}
                 >
-                    Submit
+                    Add Task
                 </Button>
             </Form>
         )
