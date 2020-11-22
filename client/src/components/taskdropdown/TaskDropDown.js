@@ -19,7 +19,7 @@ class TaskDropDown extends Component {
             description: "",
             auth: {}
         }
-        //this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
         //this.handleChange = this.handleChange.bind(this);
     }
 
@@ -34,10 +34,11 @@ class TaskDropDown extends Component {
         })
 
         promise.then(result => {
-            console.log(result);
+            console.log("data:", result.data);
             this.setState(
                 {
-                    tasks: result.data
+                    tasks: result.data,
+                    choosetask: result.data[0]._id
                 }
             )
         });
@@ -57,38 +58,50 @@ class TaskDropDown extends Component {
         // });
     }
 
-    // handleInputChange = event => {
-    //     event.preventDefault();
+    handleInputChange = event => {
+        event.preventDefault();
 
-    //     this.setState(
-    //         {
-    //             //..this.state
-    //             [event.target.name]: event.target.value
-    //             // don't include ...this.state so the value changes when the drop-down changes 
-    //         }
-    //     );
-    // };
+        this.setState(
+            {
+                //..this.state
+                [event.target.name]: event.target.value
+                // don't include ...this.state so the value changes when the drop-down changes
+            }
+        );
+    };
 
     addTaskClick = e => {
         // leaving commented out to refresh the whole page for now
-        //e.preventDefault();
+        e.preventDefault();
+        console.log("e:", e.target);
 
-        //let mainDate = format(this.state.startDate, "MM/dd/yyyy");
-        const { task } = this.props.auth;
-        const { choosetask, } = this.state;
+        const choreListId = this.props.choreListToEdit;
+        console.log("chorelist:", choreListId);
 
-        API.addTaskToChoreList(
-            {
-                //add tasks to chorelist
-                description: task,
-                tasks: choosetask
+        const { choosetask } = this.state;
 
-            }
-        ).then(res => console.log(res))
+        console.log("choosetask:", choosetask);
+
+        API.addTaskToChoreList(choreListId, choosetask)
+            .then(res => {
+                console.log("res.data:", res.data);
+                //this.setState({ tasks: res.data.tasks })
+            })
             .catch(err => console.log(err));
 
-    };
+        //For now, just adding a hard-coded task for testing
+    // addTaskClick = e => {
+    //     e.preventDefault();
+    //     const taskID = e.target.dataset.dataID;
 
+    //     API.addTaskToChoreList(this.state.choreListToEdit, taskID)
+    //         .then(res => {
+    //             console.log(res.data);
+    //             //this.setState({ tasks: res.data.tasks })
+    //         }
+    //     )
+    // }
+    };
 
     //drop down menu for tasklist
     render() {
@@ -108,7 +121,7 @@ class TaskDropDown extends Component {
                             as="select"
                             name="choosetask"
                             value={this.state.choosetask}
-                            // placeholder="Wash the dishes" 
+                            // placeholder="Wash the dishes"
                             onChange={this.handleInputChange}
                         >
                             {/* Map the tasks to the drop-down */}
