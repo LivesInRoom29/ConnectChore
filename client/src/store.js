@@ -1,8 +1,11 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
+import { initial } from "./reducers/gamereducer";
 
-const initialState = {};
+const initialState = {
+    game: initial
+};
 const middleware = [thunk];
 
 const store = createStore(

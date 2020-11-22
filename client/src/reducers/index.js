@@ -1,10 +1,13 @@
 import { combineReducers } from "redux";
+import gameReducer from "./gamereducer";
 import authReducer from "./authReducers";
 import errorReducer from "./errorReducers";
+ 
 
 export default combineReducers({
   auth: authReducer,
-  errors: errorReducer
+  errors: errorReducer,
+  game: gameReducer,
 });
 
 

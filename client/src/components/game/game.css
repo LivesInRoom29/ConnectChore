@@ -1,0 +1,17 @@
+.cell{
+border: 1px solid black;
+display: inline-block;
+padding: 20px;
+font: monospace;
+cursor: pointer;
+};
+
+.cell.p1 {
+    background-color: black;
+    color: white;
+}
+
+.cell.p2 {
+    background-color: red;
+    color: black
+}
