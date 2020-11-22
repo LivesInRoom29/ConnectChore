@@ -18,7 +18,6 @@ class TaskDropDown extends Component {
             tasksid: "",
             tasks: [],
             description: "",
-            choresLists: [],
             auth: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -26,37 +25,37 @@ class TaskDropDown extends Component {
     }
 
     //get tasks data from the DB
-    // componentDidMount() {
-    //     const { user } = this.props.auth
+    componentDidMount() {
+        const { user } = this.props.auth
 
-    //     var promise = new Promise((resolve, reject) => {
-    //         API.getRewardDescriptions(user.id)
-    //             .then(res => resolve(res))
-    //             .catch(err => reject(Error("API failed")));
-    //     })
+        var promise = new Promise((resolve, reject) => {
+            API.getRewardDescriptions(user.id)
+                .then(res => resolve(res))
+                .catch(err => reject(Error("API failed")));
+        })
 
-    //     promise.then(result => {
-    //         this.setState(
-    //             {
-    //                 rewards: result.data
-    //             }
-    //         )
-    //     });
+        promise.then(result => {
+            this.setState(
+                {
+                    rewards: result.data
+                }
+            )
+        });
 
-    //     var promisetwo = new Promise((resolve, reject) => {
-    //         API.getHouseholdMembers(user.id)
-    //             .then(res => resolve(res))
-    //             .catch(err => reject(Error("API failed")));
-    //     })
+        var promisetwo = new Promise((resolve, reject) => {
+            API.getHouseholdMembers(user.id)
+                .then(res => resolve(res))
+                .catch(err => reject(Error("API failed")));
+        })
 
-    //     promisetwo.then(result => {
-    //         this.setState(
-    //             {
-    //                 householdMembers: result.data
-    //             }
-    //         )
-    //     });
-    // }
+        promisetwo.then(result => {
+            this.setState(
+                {
+                    householdMembers: result.data
+                }
+            )
+        });
+    }
 
     handleInputChange = event => {
         event.preventDefault();
