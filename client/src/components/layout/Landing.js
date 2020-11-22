@@ -25,9 +25,9 @@ class Landing extends Component {
                 <b>Chores just got a lot more fun!</b>
               </h1>
               <br />
-              <p>
+              <h5>
                 Simply create a list of household chores and assign tasks to family members. Add rewards for checking items off the to-do list and battle it out with a game of Connect Four!
-            </p>
+            </h5>
               <br />
               <div className="col s6">
                 <Link
