@@ -1,0 +1,26 @@
+.auth-container {
+    margin-top: 100px;
+    padding: 0px 400px 0px 400px;
+    vertical-align: middle;
+}
+
+h4.auth {
+    color: #00adef;
+    font-size: 36px;
+}
+
+/* MEDIA QUERIES */
+@media(max-width: 768px) {
+    .auth-container {
+        margin-top: 100px;
+        padding: 0px 60px;
+        vertical-align: middle;
+    }
+  }
+@media(max-width: 580px) {
+    .auth-container {
+        margin-top: 100px;
+        padding: 0px 20px;
+        vertical-align: middle;
+    }
+  }
