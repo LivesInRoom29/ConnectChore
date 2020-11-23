@@ -21,7 +21,7 @@ mongoose.connect(
 
 //create the user with authentification
 //**UPDATE THIS with a user you have on your local machine** */
-const userID = ObjectId("5fb00b6367bcf0b260b1998a");
+const userID = ObjectId("5fb01ece95db3816c1dbeabd");
 
 const householdMemberSeed = [
   {
