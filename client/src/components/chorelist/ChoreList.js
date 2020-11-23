@@ -14,7 +14,7 @@ import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
-import TaskDDTemp from "../chorelist-tasks/TaskDDtemp";
+import TaskDropDown from "../taskdropdown/TaskDropDown";
 import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
 
 
@@ -115,18 +115,17 @@ class ChoreList extends Component {
     };
 
     //For now, just adding a hard-coded task for testing
-    addTaskClick = e => {
-        e.preventDefault();
-        const taskID = e.target.dataset.dataID;
+    // addTaskClick = e => {
+    //     e.preventDefault();
+    //     const taskID = e.target.dataset.dataID;
 
-        API.addTaskToChoreList(this.state.choreListToEdit, taskID)
-            .then(res => {
-                console.log(res.data);
-                //this.setState({ tasks: res.data.tasks })
-                // need to populate the tasks from the chorelist first.
-            }
-        )
-    }
+    //     API.addTaskToChoreList(this.state.choreListToEdit, taskID)
+    //         .then(res => {
+    //             console.log(res.data);
+    //             //this.setState({ tasks: res.data.tasks })
+    //         }
+    //     )
+    // }
 
     completionCheckboxChange = e => {
         console.log("e:", e);
@@ -145,14 +144,14 @@ class ChoreList extends Component {
 
         const chorelistEditor = this.state.choreListToEdit ? (
             <>
-                <TaskDDTemp
-                    addTaskClick={this.addTaskClick}
+                <TaskDropDown
+                    choreListToEdit={this.state.choreListToEdit}
                 />
                 <br />
-                <ChoreListTask
+                {/* <ChoreListTask
                     tasks={this.state.tasks}
                     completionCheckboxChange={this.completionCheckboxChange}
-                />
+                /> */}
             </>
         ) : (
             <>
