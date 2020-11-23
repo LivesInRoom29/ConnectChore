@@ -14,6 +14,10 @@ import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
+import TaskDropDown from "../taskdropdown/TaskDropDown";
+import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
+import filterDeleted from "../../utils/filterDeleted";
+
 
 class ChoreList extends Component {
 
@@ -26,6 +30,9 @@ class ChoreList extends Component {
             choreLists: [],
             householdMembers: [],
             rewards: [],
+            tasks: [],
+            choreListToEdit: "",
+            choreListData: {},
             validateDisplay: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -44,23 +51,38 @@ class ChoreList extends Component {
         })
 
         promise.then(result => {
+            // filter the deleted rewards out of the data to store in state
+            const undeletedRewards = filterDeleted(result.data);
+
+            // set the rewards state to be the undeletedRewards and
+            // the reward state to be the id for the first reward in that array
             this.setState(
                 {
-                    rewards: result.data
+                    rewards: undeletedRewards,
+                    reward: undeletedRewards[0]._id
                 }
             )
         });
 
         var promisetwo = new Promise((resolve, reject) => {
             API.getHouseholdMembers(user.id)
-                .then(res => resolve(res))
+                .then(res => {
+                    console.log("household members:", res.data);
+                    resolve(res)
+                })
                 .catch(err => reject(Error("API failed")));
         })
 
         promisetwo.then(result => {
+            // filter the deleted household members out of the data to store in state
+            const undeletedHMs = filterDeleted(result.data)
+
+            // set the householdMembers state to be the undeletedHMs and
+            // the assignedto state to be the first household member in that array
             this.setState(
                 {
-                    householdMembers: result.data
+                    householdMembers: undeletedHMs,
+                    assignedto: undeletedHMs[0]._id
                 }
             )
         });
@@ -68,9 +90,9 @@ class ChoreList extends Component {
 
     handleChange(date) {
         this.setState({
-          startDate: new Date(date)
+            startDate: new Date(date)
         });
-      }
+    }
 
     // get the input values and add to state
     handleInputChange = event => {
@@ -88,8 +110,8 @@ class ChoreList extends Component {
     // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
     addChoreListClick = e => {
         // leaving commented out to refresh the whole page for now
-        //e.preventDefault();
-       
+        e.preventDefault();
+
         let mainDate = format(this.state.startDate, "MM/dd/yyyy");
         const { user } = this.props.auth;
         const { assignedto, reward } = this.state;
@@ -101,18 +123,59 @@ class ChoreList extends Component {
                 reward: reward,
                 userId: user.id
             }
-        ).then(res => console.log(res))
+        ).then(res => {
+            this.setState({ choreListToEdit: res.data._id });
+        })
             .catch(err => console.log(err));
-
     };
 
+    // add Task added to the TaskDropDown component for now
+    //For now, just adding a hard-coded task for testing
+    // addTaskClick = e => {
+    //     e.preventDefault();
+    //     const taskID = e.target.dataset.dataID;
+
+    //     API.addTaskToChoreList(this.state.choreListToEdit, taskID)
+    //         .then(res => {
+    //             console.log(res.data);
+    //             //this.setState({ tasks: res.data.tasks })
+    //         }
+    //     )
+    // }
+
+    completionCheckboxChange = e => {
+        console.log("e:", e);
+    }
+
+
     // RENDER TEST:
-    // Clicking ADD REWARD adds reward as expected to DB for the logged in user only?
-    // Clicking the X box successuflly removes the rewarddescription entry for the logged in user only?
+    // Clicking ADD LIST adds chorelist as expected to DB for the logged in user only? -- YES
+    // Clicking ADD LIST renders other half of the page - to add tasks to the chorelist:
+    // -- renders the dropdown menu for tasks to add -- YES
+    // -- renders the list of tasks when added to the chorelist -- not yet
 
     render() {
 
         const { user } = this.props.auth;
+        const choreListID = this.state.choreListToEdit;
+
+        const chorelistEditor = choreListID ? (
+            <>
+                <TaskDropDown
+                    choreListToEdit={choreListID}
+                />
+                <br />
+                {/* <ChoreListTask
+                    tasks={this.state.tasks}
+                    completionCheckboxChange={this.completionCheckboxChange}
+                /> */}
+            </>
+        ) : (
+            <>
+                <h2>Your Chorelist</h2>
+                <h3>No chorelists to display!</h3>
+            </>
+        )
 
         return (
             <Container>
@@ -132,7 +195,7 @@ class ChoreList extends Component {
                                         as="select"
                                         name="assignedto"
                                         value={this.state.assignedto}
-                                        // placeholder="Wash the dishes" 
+                                        // placeholder="Wash the dishes"
                                         onChange={this.handleInputChange}
                                     >
                                         {/* Map the household members to the drop-down */}
@@ -167,7 +230,7 @@ class ChoreList extends Component {
                                         as="select"
                                         name="reward"
                                         value={this.state.reward}
-                                        // placeholder="Wash the dishes" 
+                                        // placeholder="Wash the dishes"
                                         onChange={this.handleInputChange}
                                     >
                                         {/* Map the household members to the drop-down */}
@@ -193,11 +256,10 @@ class ChoreList extends Component {
                             </Button>
                         </Form>
                     </Col>
-                </Row>
-                <Row>
-                    <Col md={8}>
-                        <h2>Your Chorelist</h2>
-                            <h3>No chorelists to display!</h3>
+                {/* </Row>
+                <Row> */}
+                    <Col md={6}>
+                        {chorelistEditor}
                     </Col>
                 </Row>
             </Container>
