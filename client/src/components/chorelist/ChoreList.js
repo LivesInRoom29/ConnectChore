@@ -16,6 +16,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import API from "../../utils/API";
 import TaskDropDown from "../taskdropdown/TaskDropDown";
 import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
+import filterDeleted from "../../utils/filterDeleted";
 
 
 class ChoreList extends Component {
@@ -49,23 +50,38 @@ class ChoreList extends Component {
         })
 
         promise.then(result => {
+            // filter the deleted rewards out of the data to store in state
+            const undeletedRewards = filterDeleted(result.data);
+
+            // set the rewards state to be the undeletedRewards and
+            // the reward state to be the id for the first reward in that array
             this.setState(
                 {
-                    rewards: result.data
+                    rewards: undeletedRewards,
+                    reward: undeletedRewards[0]._id
                 }
             )
         });
 
         var promisetwo = new Promise((resolve, reject) => {
             API.getHouseholdMembers(user.id)
-                .then(res => resolve(res))
+                .then(res => {
+                    console.log("household members:", res.data);
+                    resolve(res)
+                })
                 .catch(err => reject(Error("API failed")));
         })
 
         promisetwo.then(result => {
+            // filter the deleted household members out of the data to store in state
+            const undeletedHMs = filterDeleted(result.data)
+
+            // set the householdMembers state to be the undeletedHMs and
+            // the assignedto state to be the first household member in that array
             this.setState(
                 {
-                    householdMembers: result.data
+                    householdMembers: undeletedHMs,
+                    assignedto: undeletedHMs[0]._id
                 }
             )
         });
