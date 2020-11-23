@@ -62,6 +62,8 @@ class ChoreList extends Component {
                 });
             }
 
+            // set the rewards state to be the undeletedRewards and
+            // the reward state to be the id for the first reward in that array
             this.setState(
                 {
                     rewards: undeletedRewards,
