@@ -32,6 +32,7 @@ class ChoreList extends Component {
             rewards: [],
             tasks: [],
             choreListToEdit: "",
+            choreListData: {},
             validateDisplay: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -124,12 +125,11 @@ class ChoreList extends Component {
             }
         ).then(res => {
             this.setState({ choreListToEdit: res.data._id });
-            console.log(res.data._id);
         })
             .catch(err => console.log(err));
-
     };
 
+    // add Task added to the TaskDropDown component for now
     //For now, just adding a hard-coded task for testing
     // addTaskClick = e => {
     //     e.preventDefault();
@@ -148,20 +148,21 @@ class ChoreList extends Component {
     }
 
 
-
     // RENDER TEST:
     // Clicking ADD LIST adds chorelist as expected to DB for the logged in user only? -- YES
-    // Clicking ADD LIST renders other half of the page - to add tasks to the chorelist
-    //
+    // Clicking ADD LIST renders other half of the page - to add tasks to the chorelist:
+    // -- renders the dropdown menu for tasks to add -- YES
+    // -- renders the list of tasks when added to the chorelist -- not yet
 
     render() {
 
         const { user } = this.props.auth;
+        const choreListID = this.state.choreListToEdit;
 
-        const chorelistEditor = this.state.choreListToEdit ? (
+        const chorelistEditor = choreListID ? (
             <>
                 <TaskDropDown
-                    choreListToEdit={this.state.choreListToEdit}
+                    choreListToEdit={choreListID}
                 />
                 <br />
                 {/* <ChoreListTask
