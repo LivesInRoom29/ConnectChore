@@ -70,25 +70,31 @@ class TaskDropDown extends Component {
         );
     };
 
-    addTaskClick = e => {
+    addTaskClick = async (e) => {
         // leaving commented out to refresh the whole page for now
         e.preventDefault();
         console.log("e:", e.target);
 
         const choreListId = this.props.choreListToEdit;
-        console.log("chorelist:", choreListId);
 
         const { choosetask } = this.state;
+        console.log("choose task: ", choosetask);
 
-        console.log("choosetask:", choosetask);
-
-        API.addTaskToChoreList(choreListId, choosetask)
+        await API.addTaskToChoreList(choreListId, choosetask)
             .then(res => {
                 console.log("res.data:", res.data);
-                //this.setState({ tasks: res.data.tasks })
             })
             .catch(err => console.log(err));
 
+
+        const listWithTasks = await API.getChoreListWithTasks(choreListId)
+            .then(res => {
+                console.log("list with tasks res: ", res)
+                return res;
+            })
+            .catch(err => console.log(err));
+
+        console.log("after list with tasks: ", listWithTasks);
         //For now, just adding a hard-coded task for testing
     // addTaskClick = e => {
     //     e.preventDefault();
