@@ -16,6 +16,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import API from "../../utils/API";
 import TaskDropDown from "../taskdropdown/TaskDropDown";
 import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
+import filterDeleted from "../../utils/filterDeleted";
 
 
 class ChoreList extends Component {
@@ -49,18 +50,8 @@ class ChoreList extends Component {
         })
 
         promise.then(result => {
-            const allRewards = result.data
-            const undeletedRewards = [];
-
-            // if there are rewards in the array
-            if (allRewards.length) {
-                // loop through the array; if the isDeleted property is false on each reward, add it to the undeletedRewards array
-                allRewards.forEach(reward => {
-                    if (!reward.isDeleted) {
-                        undeletedRewards.push(reward);
-                    }
-                });
-            }
+            // filter the deleted rewards out of the data to store in state
+            const undeletedRewards = filterDeleted(result.data);
 
             // set the rewards state to be the undeletedRewards and
             // the reward state to be the id for the first reward in that array
@@ -82,18 +73,8 @@ class ChoreList extends Component {
         })
 
         promisetwo.then(result => {
-            const householdMembers = result.data
-            const undeletedHMs = [];
-
-            // if there are household members in the array
-            if (householdMembers.length) {
-                // loop through the array; if the isDeleted property is false on each household member, add it to the undeletedHMs array
-                householdMembers.forEach(element => {
-                    if (!element.isDeleted) {
-                        undeletedHMs.push(element);
-                    }
-                });
-            }
+            // filter the deleted household members out of the data to store in state
+            const undeletedHMs = filterDeleted(result.data)
 
             // set the householdMembers state to be the undeletedHMs and
             // the assignedto state to be the first household member in that array
