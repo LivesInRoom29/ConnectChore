@@ -49,23 +49,56 @@ class ChoreList extends Component {
         })
 
         promise.then(result => {
+            const allRewards = result.data
+            const undeletedRewards = [];
+
+            // if there are rewards in the array
+            if (allRewards.length) {
+                // loop through the array; if the isDeleted property is false on each reward, add it to the undeletedRewards array
+                allRewards.forEach(reward => {
+                    if (!reward.isDeleted) {
+                        undeletedRewards.push(reward);
+                    }
+                });
+            }
+
             this.setState(
                 {
-                    rewards: result.data
+                    rewards: undeletedRewards,
+                    reward: undeletedRewards[0]._id
                 }
             )
         });
 
         var promisetwo = new Promise((resolve, reject) => {
             API.getHouseholdMembers(user.id)
-                .then(res => resolve(res))
+                .then(res => {
+                    console.log("household members:", res.data);
+                    resolve(res)
+                })
                 .catch(err => reject(Error("API failed")));
         })
 
         promisetwo.then(result => {
+            const householdMembers = result.data
+            const undeletedHMs = [];
+
+            // if there are household members in the array
+            if (householdMembers.length) {
+                // loop through the array; if the isDeleted property is false on each household member, add it to the undeletedHMs array
+                householdMembers.forEach(element => {
+                    if (!element.isDeleted) {
+                        undeletedHMs.push(element);
+                    }
+                });
+            }
+
+            // set the householdMembers state to be the undeletedHMs and
+            // the assignedto state to be the first household member in that array
             this.setState(
                 {
-                    householdMembers: result.data
+                    householdMembers: undeletedHMs,
+                    assignedto: undeletedHMs[0]._id
                 }
             )
         });
