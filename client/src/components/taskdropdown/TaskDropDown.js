@@ -8,15 +8,15 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 
 import API from "../../utils/API";
+import { setTasksAction } from "../../actions/chorelistActions";
 
 class TaskDropDown extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
             choosetask: "",
             allTasks: [],
-            chorelistTasks: [],
+            //chorelistTasks: [],
             description: "",
             auth: {}
         }
@@ -66,26 +66,18 @@ class TaskDropDown extends Component {
 
         // Add task to the chorelist
         await API.addTaskToChoreList(choreListId, choosetask)
-            .then(res => {
-                console.log("res.data:", res.data);
-            })
-            .catch(err => console.log(err));
 
         // listWithTasks will be the chorelist populated with all task data (not just reference Ids)
-        const listWithTasks = await API.getChoreListWithTasks(choreListId)
-            .then(res => {
-                return res;
-            })
-            .catch(err => console.log(err));
+        try {
+            const listWithTasks = await API.getChoreListWithTasks(choreListId)
 
-        // Store the array of tasks with all data in chorelistTasks state
-        this.setState(
-            {
-                chorelistTasks: listWithTasks.data.tasks
-            }
-        )
-
-        console.log("state chorelistTasks array: ", this.state.chorelistTasks);
+            console.log("list of tasks: ", listWithTasks.data.tasks);
+            // Store the array of tasks with all data in chorelistTasks state
+            this.props.setTasks(listWithTasks.data.tasks);
+            console.log("state chorelistTasks array: ", this.props.tasks);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     //drop down menu for tasklist
@@ -140,9 +132,17 @@ TaskDropDown.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    tasks: state.chorelist.tasks
 });
 
+const mapDispatchToProps = (dispatch, props) => (
+    {
+        setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
+    }
+)
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(TaskDropDown);
