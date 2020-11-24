@@ -30,7 +30,7 @@ class ChoreList extends Component {
             choreLists: [],
             householdMembers: [],
             rewards: [],
-            tasks: [],
+            chorelistTasks: [],
             choreListToEdit: "",
             choreListData: {},
             validateDisplay: false
@@ -158,11 +158,13 @@ class ChoreList extends Component {
 
         const { user } = this.props.auth;
         const choreListID = this.state.choreListToEdit;
+        const chorelistTasksArray = this.state.chorelistTasks;
 
         const chorelistEditor = choreListID ? (
             <>
                 <TaskDropDown
                     choreListToEdit={choreListID}
+                   // tasksArray={chorelistTasksArray}
                 />
                 <br />
                 {/* <ChoreListTask
