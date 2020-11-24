@@ -1,8 +1,11 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
+import { initialChorelistState } from "./reducers/chorelistReducer";
 
-const initialState = {};
+const initialState = {
+    chorelist: initialChorelistState
+};
 const middleware = [thunk];
 
 const store = createStore(
