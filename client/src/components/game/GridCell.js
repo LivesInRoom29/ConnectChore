@@ -6,13 +6,22 @@ import "./game.css";
 
 
 class GridCell extends Component {
+
+  
+  
   handleClick(){
+    
+   
     console.log(`clicked on columns ${this.props.x}`)
 
     this.props.sendTileDrop(this.props.x, this.props.y);
 
-  }
+    // loop through the board prop
 
+        // check to see if there is 4 of the same color diagnoal 
+
+  }
+  //CHECK HORIZONTAL
     render() {
       const board = this.props.board;
       const x = this.props.x;
@@ -21,9 +30,9 @@ class GridCell extends Component {
 
       if (board[x][y] !== undefined) {
         if (board[x][y] === 'red'){
-          classes =+ 'p2';
+          classes += 'p2';
         } else {
-          classes =+ 'p1';
+          classes += 'p1';
         }
       }
       return (

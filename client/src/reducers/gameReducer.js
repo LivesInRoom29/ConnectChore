@@ -5,7 +5,7 @@ const createDefaultBoard = () => {
     for (let y = 5; y >= 0; y--) {
       const row = [];
       for (let x = 0; x < 7; x++) {
-        row.push({color: 'pink'});
+        row.push({color: 'white'});
     }
 
       box.push(row);
@@ -23,7 +23,7 @@ export const initial = {
         [], //col 6
         [] //col 7
     ],
-
+    clicks: 0,
     box: createDefaultBoard()
 };
 
@@ -35,7 +35,7 @@ const reducer = produce((state = initial, action) => {
         
         let dropToRow = state.box.length-1;
         state.box.some((currentRow, index) => {
-            if (currentRow[col].color !== 'pink') {
+            if (currentRow[col].color !== 'white') {
                 dropToRow = index-1;
                 return true;
             }
@@ -43,7 +43,9 @@ const reducer = produce((state = initial, action) => {
         }) 
         console.log(dropToRow);
         state.box[dropToRow][col].color = 'red';
-
+        
+        if (state.clicks % 2 !== 0 ) {state.box[dropToRow][col].color = 'yellow'}
+        state.clicks++
         return 
       
     }

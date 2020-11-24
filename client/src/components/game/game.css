@@ -1,11 +1,12 @@
 .cell{
 border: 1px solid black;
+border-radius: 50%;  
 display: inline-block;
 padding: 30px;
 font: monospace;
 cursor: pointer;
 margin-top: 0;
-margin-bottom: 0 
+margin-bottom: -6px;
 };
 
 .cell.p1 {
@@ -23,6 +24,14 @@ margin-bottom: 0
     /* margin-bottom: 50px; */
  */
 
-.game-row{
-    margin-bottom: -7px;
+ .game-row:last-child{
+
+    margin-top: -50px;
+}
+
+.grid{
+    border: black;
+    background: blue;
+    width: fit-content;
+    margin: auto;
 }
