@@ -4,6 +4,10 @@ export const initialChorelistState = {
   tasks: []
 };
 
+// From immer docs: https://immerjs.github.io/immer/docs/introduction
+// immer creates a temporary draftState based off of the current state
+// once the mutations are complete, immer, it returns the nextState based on the changes to the draftState
+// So the state itself is never mutated.
 const chorelistReducer = produce((draft = initialChorelistState, action) => {
   //switch statement
   switch(action.type) {
