@@ -30,7 +30,8 @@ class MemberChoreList extends Component {
     // get household members from the DB
     // TEST: will be passing the user.id to the API call to successfully get us the chorelists data
     componentDidMount() {
-        const { user } = this.props.auth
+        const { user, choreList } = this.props.auth;
+        //const { choreList } = this.state;
 
         var promise = new Promise((resolve, reject) => {
             API.getHouseholdMembers(user.id)
@@ -45,21 +46,15 @@ class MemberChoreList extends Component {
                     householdMembers: res.data
                 }
             )
-        }).catch(err => console.log(err));
+        })
 
         var promisetwo = new Promise((resolve, reject) => {
-            //const { user } = this.props.auth
-            API.getChoreLists(user.id)
-                .then(res => {
-                    console.log("user", res.data);
-                    resolve(res)
-                })
+            API.getChoreLists(choreList.id)
+                .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
         })
 
         promisetwo.then(res => {
-            //const undeletedChorelists = filterDeleted(result.data);
-
             this.setState(
                 {
                     choreListId: res.data[0]._id,
@@ -67,7 +62,7 @@ class MemberChoreList extends Component {
                 }
             )
         })
-        
+
     }
 
     // // get the input values and add to state
@@ -127,10 +122,10 @@ class MemberChoreList extends Component {
                                 </Form.Group>
                             </Form.Row>
                             {/* button to display lists for each houesholdmember*/}
-                            <Button 
-                                variant="primary" 
+                            <Button
+                                variant="primary"
                                 type="submit"
-                                // onClick={this.addRewardClick}
+                            // onClick={this.addRewardClick}
                             >
                                 Generate Chorelist
                             </Button>
@@ -145,9 +140,9 @@ class MemberChoreList extends Component {
                         {this.state.choreList.length ? (
                             <ListGroup variant="flush">
                                 {this.state.choreList.map(displayList => (
-                                    <ListGroup.Item 
-                                        key={displayList._id} 
-                                        data-id={displayList._id} 
+                                    <ListGroup.Item
+                                        key={displayList._id}
+                                        data-id={displayList._id}
                                         className="align-items-center"
                                     >
                                         {displayList.name}
@@ -167,12 +162,12 @@ class MemberChoreList extends Component {
                                         >
                                             <span >X</span>
                                         </Button> */}
-                                </ListGroup.Item>
+                                    </ListGroup.Item>
                                 ))}
                             </ListGroup>
                         ) : (
-                            <h3>No choreslist to display</h3>
-                        )}
+                                <h3>No choreslist to display</h3>
+                            )}
                     </Col>
                 </Row>
             </Container>
