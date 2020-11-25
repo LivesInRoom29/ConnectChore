@@ -72,20 +72,20 @@ class GameBox extends Component {
   }
 
  
-  handlePlayerChange = (event) => {
-    let currentPlayerColor= this.state.currentPlayer.color;
-    let p1Color = this.state.player1.color;
-    let p2Color = this.state.player2.color;
+  // handlePlayerChange = (event) => {
+  //   let currentPlayerColor= this.state.currentPlayer.color;
+  //   let p1Color = this.state.player1.color;
+  //   let p2Color = this.state.player2.color;
    
-    if (currentPlayerColor !== undefined) {
+  //   if (currentPlayerColor !== undefined) {
       
-    }
+  //   }
    
    
-    // return (this.state.currentPlayer === this.player1) ? this.state.player2: this.state.player1;
+  //   // return (this.state.currentPlayer === this.player1) ? this.state.player2: this.state.player1;
     
     
-  };
+  // };
     
  
 
