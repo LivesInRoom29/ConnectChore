@@ -1,78 +1,107 @@
 // import React, { Component } from "react";
-import React from "react";
-import { useSelector } from "react-redux";
-import Table from 'react-bootstrap/Table'
-import Form from 'react-bootstrap/Form'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { setTasksAction } from "../../actions/chorelistActions";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
+import "./choreListTasks.css";
 
-// class ChoreListTask extends Component {
 
+class ChoreListTasks extends Component {
 
-  // tasks array should include completionStatus
   // constructor(props) {
   //   super(props);
   //   this.state = {
   //     tasks: []
   //   }
-
   // }
 
-const ChoreListTasks = (props) => {
+  render() {
+    const tasks = this.props.tasks;
+    const checkbox = this.props.completionStatus ? (
+      <FontAwesomeIcon icon={faCheckSquare} />
+    ) : (
+      <FontAwesomeIcon icon={faSquare} />
+    )
 
-  //logged in user
-  const { user } = useSelector(state => state.auth);
-
-  // const [ tasks, setTasks ] = React.useState({
-  //   tasks: []
-  // });
-
-  const { tasks, completionCheckboxChange } = props;
-
-  return (
-    <Table striped bordered hover size="sm">
-      <thead>
-        <tr>
-          <th>Task</th>
-          <th>Frequency</th>
-          <th>Done?</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* if tasks exist map the chosen tasks here. */}
-        {tasks.length ?
-          tasks.map((task) => {
-            const { _id, description, frequency } = task;
-            return (
-              <tr key={_id}>
-                <td>{description}</td>
-                <td>{frequency}</td>
-                <td>
-                  <Form>
-                    <Form.Check
-                      type="checkbox"
-                      label="Check When Done"
-                      onChange={completionCheckboxChange}
-                      />
-                  </Form>
-                </td>
-              </tr>
-            )
-          }) : (
-            null
+    return (
+      <>
+      <Row>
+        <Col xs="4" md="6">
+          <h5>Task</h5>
+        </Col>
+        <Col xs="3" md="2">
+          <h5>Frequency</h5>
+        </Col>
+        <Col xs="2" md="2">
+          <h5>Done?</h5>
+        </Col>
+        <Col xs="2" md="2">
+          <h5>Delete</h5>
+        </Col>
+      </Row>
+      {/* if tasks exist map the chosen tasks here. */}
+      {tasks.length ?
+        tasks.map((task) => {
+          const { _id, description, frequency } = task.task;
+          return (
+            <Row key={_id}>
+              <Col xs="4" md="6">
+                <p>{description}</p>
+              </Col>
+              <Col xs="3" md="2">
+                <p>{frequency}</p>
+              </Col>
+              <Col xs="2" md="2">
+                <Button
+                  variant="outline-success"
+                  type="button"
+                  className="taskListButton"
+                >
+                  {checkbox}
+                </Button>
+              </Col>
+              <Col xs="2" md="2">
+                <Button
+                  variant="outline-danger"
+                  type="button"
+                  className="taskListButton"
+                >
+                  X
+                </Button>
+              </Col>
+            </Row>
           )
-
-        }
-      </tbody>
-    </Table>
-  )
+        }) : (
+          null
+        )
+      }
+      </>
+    )
+  }
 }
 
-  // render() {
 
-  //   return(
+ChoreListTasks.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
-  //   )
-  // }
+const mapStateToProps = state => ({
+  auth: state.auth,
+  tasks: state.chorelist.tasks
+});
 
-// }
+const mapDispatchToProps = (dispatch, props) => (
+  {
+      setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
+  }
+)
 
-export default ChoreListTasks;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChoreListTasks);
