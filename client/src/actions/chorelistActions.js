@@ -11,3 +11,14 @@ export const setTasksAction = (tasksArray) => (
     payload: tasksArray
   }
 );
+
+export const changeCompletionAction = (newCompletionStatus) => (
+  {
+    type: "CHANGE_TASK_COMPLETION",
+    payload: newCompletionStatus
+  }
+)
+
+export const deleteTask = () => (
+  {type: "DELETE_TASK"}
+)

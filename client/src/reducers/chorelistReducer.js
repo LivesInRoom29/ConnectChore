@@ -1,7 +1,7 @@
 import produce from "immer";
 
 export const initialChorelistState = {
-  tasks: []
+  tasks: [],
 };
 
 // From immer docs: https://immerjs.github.io/immer/docs/introduction
@@ -16,6 +16,12 @@ const chorelistReducer = produce((draft = initialChorelistState, action) => {
       return;
     case "SET_TASKS":
       draft.tasks = action.payload;
+      return;
+    case "CHANGE_TASK_COMPLETION":
+      draft.tasks.completionStatus = action.payload;
+      return;
+    case "DELETE_TASK":
+      draft.tasks.task.isDeleted = true;
       return;
     default:
       return draft;
