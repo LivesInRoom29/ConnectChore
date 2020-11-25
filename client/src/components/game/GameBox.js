@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 // API calls
 import API from "../../utils/API";
-import { Button, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import GridCell from "./GridCell";
 import Form from "react-bootstrap/Form";
 import { dropTile } from "../../actions/gameActions";
