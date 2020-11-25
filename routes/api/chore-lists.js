@@ -104,7 +104,7 @@ router.get("/withtasks/:id", async function(req, res) {
 
 // update a chore list by id
 // in req.body, can pass in updated date, completedBy (ref to household-member), tasks, reward, completionStatus
-// Use this to "delete" as well - pass in {isDeleted: true}
+// Use this to "delete" the chorelist as well - pass in {isDeleted: true}
 router.put("/:id", async function(req, res) {
   const id = req.params.id;
   try {
@@ -134,5 +134,31 @@ router.put("/tasks/:id", async function(req, res) {
     res.status(503).end(err);
   }
 });
+
+// To update a task in a chorelist to show it's been completed
+//matches with /api/chore-lists/complete-task
+//in req.body need to pass in {taskId: ----} with id#
+router.put("/completetask", async function(req, res) {
+  //const chorelistId = req.params.id;
+  console.log("RAN IT");
+  console.log("req.body", req.body);
+  const taskId = req.body.taskId;
+  const completionStatus = req.body.completionStatus;
+  console.log("taskID: ", taskId);
+  try {
+    const data = await choreListController.updateTaskCompletionStatus(
+      {"tasks._id": taskId},
+      { $set : {"tasks.$.completionStatus" : completionStatus}}
+    );
+    res.send(data);
+  } catch (err) {
+    res.status(503).end(err);
+  }
+});
+
+// to delete a task just from the chorelist
+// use $pull
+
+
 
 module.exports = router;
