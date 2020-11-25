@@ -158,7 +158,7 @@ class ChoreList extends Component {
 
         const { user } = this.props.auth;
         const choreListID = this.state.choreListToEdit;
-        const chorelistTasksArray = this.state.chorelistTasks;
+        // const chorelistTasksArray = this.state.chorelistTasks;
 
         const chorelistEditor = choreListID ? (
             <>
@@ -167,10 +167,10 @@ class ChoreList extends Component {
                    // tasksArray={chorelistTasksArray}
                 />
                 <br />
-                {/* <ChoreListTask
-                    tasks={this.state.tasks}
-                    completionCheckboxChange={this.completionCheckboxChange}
-                /> */}
+                <ChoreListTask
+                    //tasks={this.state.tasks}
+                    // completionCheckboxChange={this.completionCheckboxChange}
+                />
             </>
         ) : (
             <>
@@ -260,7 +260,7 @@ class ChoreList extends Component {
                     </Col>
                 {/* </Row>
                 <Row> */}
-                    <Col md={6}>
+                    <Col md={8}>
                         {chorelistEditor}
                     </Col>
                 </Row>
