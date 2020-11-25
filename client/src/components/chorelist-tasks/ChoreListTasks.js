@@ -12,21 +12,39 @@ import "./choreListTasks.css";
 
 
 class ChoreListTasks extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+        auth: {}
+    }
+  }
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     tasks: []
-  //   }
-  // }
+  handleCompletionStatusChange = e => {
+    const currentCompletionStatus = e.target.value;
+
+    const choreListId = this.props.choreListToEdit;
+
+    
+
+  };
+
+  handleDeleteTask = e => {
+    const deletionStatus = e.target.value;
+
+    const choreListId = this.props.choreListToEdit;
+
+  };
 
   render() {
     const tasks = this.props.tasks;
-    const checkbox = this.props.completionStatus ? (
-      <FontAwesomeIcon icon={faCheckSquare} />
-    ) : (
-      <FontAwesomeIcon icon={faSquare} />
-    )
+    const checkbox = (completionStatus) => {
+
+      return completionStatus ? (
+        <FontAwesomeIcon icon={faCheckSquare} />
+      ) : (
+        <FontAwesomeIcon icon={faSquare} />
+      )
+    };
 
     return (
       <>
@@ -47,7 +65,7 @@ class ChoreListTasks extends Component {
       {/* if tasks exist map the chosen tasks here. */}
       {tasks.length ?
         tasks.map((task) => {
-          const { _id, description, frequency } = task.task;
+          const { _id, description, frequency, isDeleted } = task.task;
           return (
             <Row key={_id}>
               <Col xs="4" md="6">
@@ -60,16 +78,20 @@ class ChoreListTasks extends Component {
                 <Button
                   variant="outline-success"
                   type="button"
+                  value={task.completionStatus}
                   className="taskListButton"
+                  onClick={this.handleCompletionStatusChange}
                 >
-                  {checkbox}
+                  {checkbox(task.completionStatus)}
                 </Button>
               </Col>
               <Col xs="2" md="2">
                 <Button
                   variant="outline-danger"
                   type="button"
+                  value={isDeleted}
                   className="taskListButton"
+                  onClick={this.handleDeleteTask}
                 >
                   X
                 </Button>
@@ -83,7 +105,7 @@ class ChoreListTasks extends Component {
       </>
     )
   }
-}
+};
 
 
 ChoreListTasks.propTypes = {
