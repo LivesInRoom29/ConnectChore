@@ -1,0 +1,37 @@
+.auth-container {
+    padding: 0px 525px 0px 525px;
+    vertical-align: middle;
+    background: rgb(201,244,255);
+    background: radial-gradient(circle, rgba(201,244,255,1) 0%, rgba(0,204,255,1) 100%);
+}
+
+.loginform{
+    height: auto;
+    padding: 40px;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+  }
+
+h4.auth {
+    color: #00adef;
+    font-size: 36px;
+}
+
+.animation {
+    animation: headShake;
+    animation-duration: 1s;
+}
+
+/* MEDIA QUERIES */
+@media(max-width: 768px) {
+    .auth-container {
+        padding: 0px 60px;
+        vertical-align: middle;
+    }
+  }
+@media(max-width: 580px) {
+    .auth-container {
+        padding: 0px 20px;
+        vertical-align: middle;
+    }
+  }
