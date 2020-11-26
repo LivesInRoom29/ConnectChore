@@ -24,5 +24,8 @@ module.exports = {
   },
   updateTaskCompletionStatus: function(taskId, completionStatus) {
     return db.ChoreList.findOneAndUpdate(taskId, completionStatus, { new: true });
+  },
+  removeTask: function(id, taskId) {
+    return db.ChoreList.findOneAndUpdate(id, taskId, { new: true });
   }
 }
