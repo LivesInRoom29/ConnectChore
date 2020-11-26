@@ -11,18 +11,23 @@ h3.dashboard {
 }
 
 .module {
-    background: 
+    /* background: 
       linear-gradient(
         rgba(0, 0, 0, 0.4),
-        rgba(0, 0, 0, 0.4)
-      ),
-      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg);
+        rgba(0, 0, 0, 0.4)); */
+      /* ),
+      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg); */
+    background-color: #00adef;
     background-size: cover;
+    border-radius: 20px;
     width: 100%;
     height: 250px;
     margin: 10 0 0 10px;
     position: relative;
-    /* float: left; */
+  }
+
+  .module:hover {
+      background-color: #08124B;
   }
   
   .mid h2 {
@@ -50,42 +55,55 @@ h3.dashboard {
   /* MEDIA QUERIES */
 @media(max-width: 768px) {
   .module {
-    background: 
+    /* background: 
       linear-gradient(
         rgba(0, 0, 0, 0.4),
         rgba(0, 0, 0, 0.4)
       ),
-      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg);
+      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg); */
+    background-color: #00adef;
     background-size: cover;
+    border-radius: 20px;
     width: 100%;
     height: 250px;
     margin: 20px 100px 0px 0px;
-    /* padding: 100px 100px; */
     position: relative;
-    /* float: left; */
   }
+
+  .module:hover {
+    background-color: #08124B;
+}
 
   .dashboard-btn {
     text-align: center;
   }
 }
 
+.animate:hover {
+  animation: pulse;
+  animation-duration: 1s;
+}
+
 @media(max-width: 580px) {
   .module {
-    background: 
+    /* background: 
       linear-gradient(
         rgba(0, 0, 0, 0.4),
         rgba(0, 0, 0, 0.4)
       ),
-      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg);
+      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg); */
+    background-color: #00adef;
     background-size: cover;
+    border-radius: 20px;
     width: 100%;
     height: 250px;
     margin: 20px 100px 0px 0px;
-    /* padding: 100px 100px; */
     position: relative;
-    /* float: left; */
   }
+
+  .module:hover {
+    background-color: #08124B;
+}
 
   .dashboard-btn {
     text-align: center;
