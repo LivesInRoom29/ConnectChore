@@ -1,78 +1,129 @@
 // import React, { Component } from "react";
-import React from "react";
-import { useSelector } from "react-redux";
-import Table from 'react-bootstrap/Table'
-import Form from 'react-bootstrap/Form'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { setTasksAction } from "../../actions/chorelistActions";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
+import "./choreListTasks.css";
 
-// class ChoreListTask extends Component {
 
+class ChoreListTasks extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+        auth: {}
+    }
+  }
 
-  // tasks array should include completionStatus
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     tasks: []
-  //   }
+  handleCompletionStatusChange = e => {
+    const currentCompletionStatus = e.target.value;
 
-  // }
+    const choreListId = this.props.choreListToEdit;
 
-const ChoreListTasks = (props) => {
+    
 
-  //logged in user
-  const { user } = useSelector(state => state.auth);
+  };
 
-  // const [ tasks, setTasks ] = React.useState({
-  //   tasks: []
-  // });
+  handleDeleteTask = e => {
+    const deletionStatus = e.target.value;
 
-  const { tasks, completionCheckboxChange } = props;
+    const choreListId = this.props.choreListToEdit;
 
-  return (
-    <Table striped bordered hover size="sm">
-      <thead>
-        <tr>
-          <th>Task</th>
-          <th>Frequency</th>
-          <th>Done?</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* if tasks exist map the chosen tasks here. */}
-        {tasks.length ?
-          tasks.map((task) => {
-            const { _id, description, frequency } = task;
-            return (
-              <tr key={_id}>
-                <td>{description}</td>
-                <td>{frequency}</td>
-                <td>
-                  <Form>
-                    <Form.Check
-                      type="checkbox"
-                      label="Check When Done"
-                      onChange={completionCheckboxChange}
-                      />
-                  </Form>
-                </td>
-              </tr>
-            )
-          }) : (
-            null
+  };
+
+  render() {
+    const tasks = this.props.tasks;
+    const checkbox = (completionStatus) => {
+
+      return completionStatus ? (
+        <FontAwesomeIcon icon={faCheckSquare} />
+      ) : (
+        <FontAwesomeIcon icon={faSquare} />
+      )
+    };
+
+    return (
+      <>
+      <Row>
+        <Col xs="4" md="6">
+          <h5>Task</h5>
+        </Col>
+        <Col xs="3" md="2">
+          <h5>Frequency</h5>
+        </Col>
+        <Col xs="2" md="2">
+          <h5>Done?</h5>
+        </Col>
+        <Col xs="2" md="2">
+          <h5>Delete</h5>
+        </Col>
+      </Row>
+      {/* if tasks exist map the chosen tasks here. */}
+      {tasks.length ?
+        tasks.map((task) => {
+          const { _id, description, frequency, isDeleted } = task.task;
+          return (
+            <Row key={_id}>
+              <Col xs="4" md="6">
+                <p>{description}</p>
+              </Col>
+              <Col xs="3" md="2">
+                <p>{frequency}</p>
+              </Col>
+              <Col xs="2" md="2">
+                <Button
+                  variant="outline-success"
+                  type="button"
+                  value={task.completionStatus}
+                  className="taskListButton"
+                  onClick={this.handleCompletionStatusChange}
+                >
+                  {checkbox(task.completionStatus)}
+                </Button>
+              </Col>
+              <Col xs="2" md="2">
+                <Button
+                  variant="outline-danger"
+                  type="button"
+                  value={isDeleted}
+                  className="taskListButton"
+                  onClick={this.handleDeleteTask}
+                >
+                  X
+                </Button>
+              </Col>
+            </Row>
           )
+        }) : (
+          null
+        )
+      }
+      </>
+    )
+  }
+};
 
-        }
-      </tbody>
-    </Table>
-  )
-}
 
-  // render() {
+ChoreListTasks.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
-  //   return(
+const mapStateToProps = state => ({
+  auth: state.auth,
+  tasks: state.chorelist.tasks
+});
 
-  //   )
-  // }
+const mapDispatchToProps = (dispatch, props) => (
+  {
+      setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
+  }
+)
 
-// }
-
-export default ChoreListTasks;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChoreListTasks);
