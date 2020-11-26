@@ -68,9 +68,9 @@ class ChoreList extends Component {
 
     handleChange(date) {
         this.setState({
-          startDate: new Date(date)
+            startDate: new Date(date)
         });
-      }
+    }
 
     // get the input values and add to state
     handleInputChange = event => {
@@ -89,7 +89,7 @@ class ChoreList extends Component {
     addChoreListClick = e => {
         // leaving commented out to refresh the whole page for now
         //e.preventDefault();
-       
+
         let mainDate = format(this.state.startDate, "MM/dd/yyyy");
         const { user } = this.props.auth;
         const { assignedto, reward } = this.state;
@@ -119,6 +119,9 @@ class ChoreList extends Component {
                 <Row>
                     <Col>
                         <Form>
+                            <br />
+                            <br />
+                            <br />
                             <h4>
                                 <b>Hey there,</b> {user.name.split(" ")[0]}
                                 <p className="text-body">
@@ -197,7 +200,10 @@ class ChoreList extends Component {
                 <Row>
                     <Col md={8}>
                         <h2>Your Chorelist</h2>
-                            <h3>No chorelists to display!</h3>
+                        <h3>No chorelists to display!</h3>
+                        <br />
+                        <br />
+                        <br />
                     </Col>
                 </Row>
             </Container>
