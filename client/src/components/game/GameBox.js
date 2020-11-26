@@ -4,8 +4,9 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Button, Container } from "react-bootstrap";
 import GridCell from "./GridCell";
+
 import Form from "react-bootstrap/Form";
-import { dropTile } from "../../actions/gameActions";
+import { dropTile, resetGame } from "../../actions/gameActions";
 import "./game.css";
 
 class GameBox extends Component {
@@ -29,13 +30,9 @@ class GameBox extends Component {
     this.initGame = this.initGame.bind(this);
   }
 
-  initGame() {
-    this.setState({
-      board: [],
-      currentPlayer: this.state.player1,
-      gameOver: false,
-      message: "",
-    });
+  initGame(dispatch) {
+    console.log("init game")
+    this.props.resetGame()
   }
 
   createCells() {
@@ -66,9 +63,6 @@ class GameBox extends Component {
       currentPlayer: selectedPlayer,
     });
     console.log(selectedPlayer);
-    // return this.state.currentPlayer === this.state.player1
-    //   ? this.state.player2
-    //   : this.state.player1;
   };
 
   componentDidMount() {
@@ -88,11 +82,13 @@ class GameBox extends Component {
 
     console.log(this.props);
   }
+
+
   render() {
     return (
       <div>
         <Button onClick={() => {this.initGame()}} className="Start Game">
-          Start Game
+          New Game
         </Button>
         <Form>
           <Form.Row>
@@ -144,4 +140,4 @@ class GameBox extends Component {
 const mapStateToProps = (state) => {
   return state;
 };
-export default connect(mapStateToProps, { dropTile })(GameBox);
+export default connect(mapStateToProps, { dropTile, resetGame })(GameBox);
