@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 
 import API from "../../utils/API";
 import { setTasksAction } from "../../actions/chorelistActions";
+import filterDeleted from "../../utils/filterDeleted";
 
 class TaskDropDown extends Component {
     constructor(props) {
@@ -35,10 +36,14 @@ class TaskDropDown extends Component {
         })
 
         promise.then(result => {
+            // filter the deleted tasks out of the data to store in state
+            const undeletedTasks = filterDeleted(result.data);
+            const firstTask = undeletedTasks[0] ? undeletedTasks[0]._id : "";
+
             this.setState(
                 {
                     allTasks: result.data,
-                    choosetask: result.data[0]._id
+                    choosetask: firstTask
                 }
             )
         });
