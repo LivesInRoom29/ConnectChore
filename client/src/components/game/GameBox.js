@@ -1,4 +1,3 @@
-import { connect } from "react-redux";
 import React, { Component } from "react";
 // API calls
 import API from "../../utils/API";

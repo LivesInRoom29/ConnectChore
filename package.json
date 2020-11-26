@@ -1,7 +1,7 @@
 {
-  "name": "connect-chore",
+  "name": "mern-auth",
   "version": "1.0.0",
-  "description": "",
+  "description": "auth for chore tracker",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -14,11 +14,13 @@
     "heroku-postbuild": "npm run build",
     "seed": "node scripts/seedDB.js"
   },
-  "proxy": "http://localhost:5000",
   "author": "hilary ferraro",
   "license": "MIT",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
+    "animate.css": "^4.1.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
@@ -28,14 +30,9 @@
     "immer": "^8.0.0",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.10.13",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "react-bootstrap": "^1.4.0",
-    "react-datepicker": "^3.3.0",
-    "react-materialize": "^3.9.3",
-    "redux": "^4.0.5",
     "validator": "^13.1.17"
   },
   "devDependencies": {
