@@ -13,30 +13,32 @@ class GameBox extends Component {
     super(props);
     this.state = {
       player1: {
-        color: "red"
+        color: "red",
       },
       player2: {
-        color: "yellow"
+        color: "yellow",
       },
       currentPlayer: {
-        color: ""
+        color: "",
       },
       householdMembers: [],
+      board: [],
+      gameOver: false,
+      message: "",
     };
     this.initGame = this.initGame.bind(this);
   }
 
-  initGame(){
+  initGame() {
     this.setState({
+      board: [],
       currentPlayer: this.state.player1,
+      gameOver: false,
+      message: "",
     });
-    
   }
- 
- 
-  createCells() {
 
-  
+  createCells() {
     return this.props.game.box.map((row, rowNum) => (
       // <Container className="game-container">
       <div className="game-row" key={rowNum}>
@@ -51,56 +53,23 @@ class GameBox extends Component {
       </div>
       // </Container>
     ));
-    
   }
 
   selectPlayer = (event) => {
     console.log(event.target.value);
     console.log(event.target.name);
     const selectedPlayer = this.state.householdMembers.find((member) => {
-      return event.target.value === member._id
+      return event.target.value === member._id;
     });
-    selectedPlayer.color="player1" === event.target.name ? "red" : "blue";
+    selectedPlayer.color = "player1" === event.target.name ? "red" : "blue";
     this.setState({
-      currentPlayer:selectedPlayer
+      currentPlayer: selectedPlayer,
     });
-    console.log( selectedPlayer);
+    console.log(selectedPlayer);
     // return this.state.currentPlayer === this.state.player1
     //   ? this.state.player2
     //   : this.state.player1;
-    
-  }
-
- 
-  // handlePlayerChange = (event) => {
-  //   let currentPlayerColor= this.state.currentPlayer.color;
-  //   let p1Color = this.state.player1.color;
-  //   let p2Color = this.state.player2.color;
-   
-  //   if (currentPlayerColor !== undefined) {
-      
-  //   }
-   
-   
-  //   // return (this.state.currentPlayer === this.player1) ? this.state.player2: this.state.player1;
-    
-    
-  // };
-    
- 
-
-  // get the input values and add to state
-  //   handlePlayerChange = event => {
-  //     event.preventDefault();
-
-  //     this.setState(
-  //         {
-  //             ...this.state,
-  //             [event.target.name]: event.target.value
-
-  //         }
-  //     );
-  // };
+  };
 
   componentDidMount() {
     const { user } = this.props.auth;
@@ -119,10 +88,12 @@ class GameBox extends Component {
 
     console.log(this.props);
   }
-  render() {  
+  render() {
     return (
       <div>
-        <Button onClick={this.initGame} className="Start Game">Start Game</Button>
+        <Button onClick={() => {this.initGame()}} className="Start Game">
+          Start Game
+        </Button>
         <Form>
           <Form.Row>
             <Form.Group controlId="formHouseholdMember">
@@ -161,9 +132,10 @@ class GameBox extends Component {
             </Form.Group>
           </Form.Row>
         </Form>
-        <div className="grid">        
-        <div>{this.createCells()}</div>
-      </div>
+        <div className="grid">
+          <div>{this.createCells()}</div>
+        </div>
+        <p>{this.state.message}</p>
       </div>
     );
   }
