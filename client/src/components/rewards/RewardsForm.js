@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
+import "../../App.css";
 
 class Rewards extends Component {
 
@@ -30,30 +31,30 @@ class Rewards extends Component {
         const { user } = this.props.auth
 
         API.getRewardDescriptions(user.id)
-            .then(res => 
+            .then(res =>
                 //console.log(res)
-                
+
                 this.setState(
-                { 
-                    rewards: res.data 
-                }
-            ))
+                    {
+                        rewards: res.data
+                    }
+                ))
             .catch(err => console.log(err));
     }
 
     // get the input values and add to state
     handleInputChange = event => {
         event.preventDefault();
-        
+
         this.setState(
-            { 
+            {
                 ...this.state,
                 [event.target.name]: event.target.value
                 // reward and value
             }
         );
     };
-    
+
     // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
     addRewardClick = e => {
         // leaving commented out to refresh the whole page for now
@@ -67,7 +68,7 @@ class Rewards extends Component {
         console.log("this state pointvalue");
         console.log(this.state.pointvalue);
 
-        const {reward, pointvalue} = this.state;
+        const { reward, pointvalue } = this.state;
 
         API.addRewardDescription(
             {
@@ -75,9 +76,9 @@ class Rewards extends Component {
                 value: pointvalue,
                 userId: user.id
             }
-        ).then( res => console.log(res))
-        .catch(err => console.log(err));
-            
+        ).then(res => console.log(res))
+            .catch(err => console.log(err));
+
     };
 
     // RENDER TEST-pass:
@@ -93,94 +94,100 @@ class Rewards extends Component {
                 <Row>
                     <Col>
                         <Form>
+                            <br />
+                            <br />
+                            <br />
                             <h4>
-                                <b>Hey there,</b> {user.name.split(" ")[0]}
+                                <b>Hey there,</b> {user.name.split(" ")[0]}!
                                 <p className="text-body">
+                                <br />
                                     Want to include some motivation to your household's day to day chores? <br />
                                     Add potential rewards for a job well done! <br />
                                     <br />
-                                    A few examples could be: 
+                                    A few examples could be:
                                 </p>
-                                    <ul>
-                                        <li>★pick-a-movie night</li>
-                                        <li>★ice cream for breakfast</li>
-                                        <li>★buy a new book</li>
-                                        <li>★stay up late for 30 extra minutes.</li>
-                                    </ul>
-                                    <br />
+                                <ul>
+                                    <li>★pick-a-movie night</li>
+                                    <li>★ice cream for breakfast</li>
+                                    <li>★buy a new book</li>
+                                    <li>★stay up late for 30 extra minutes.</li>
+                                </ul>
+                                <br />
                                 <p>The possibilities are endless.<br />
                                 </p>
                             </h4>
                             <Form.Row>
                                 <Form.Group as={Col} md="6" controlId="formReward">
                                     <Form.Label>Add a reward:</Form.Label>
-                                    <Form.Control 
+                                    <Form.Control
                                         type="input"
                                         name="reward"
                                         value={this.state.reward}
-                                        placeholder="Wash the dishes" 
+                                        placeholder="Ice Cream"
                                         onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
                                 <Form.Group as={Col} md="2" controlId="formValue">
                                     <Form.Label>Include a points value:</Form.Label>
-                                    <Form.Control 
+                                    <Form.Control
                                         type="input"
                                         name="pointvalue"
                                         value={this.state.pointvalue}
-                                        placeholder="10" 
+                                        placeholder="10"
                                         onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
                             </Form.Row>
-                            <Button 
-                                variant="primary" 
+                            <br />
+                            <Button className="btn btn-large waves-effect waves-green waves-ripple hoverable"
                                 type="submit"
-                                onClick={this.addRewardClick}
-                            >
-                                Add reward
-                            </Button>
+                                onClick={this.addRewardClick}>Add reward</Button>
                         </Form>
                     </Col>
                 </Row>
+                <br />
+                <br />
                 <Row>
                     <Col md={8}>
                         <h2>Household Rewards</h2>
-                        A list of the rewards will dynamically render here once the API call is built.
+                        <p>A list of the recently added rewards for completing chores.</p>
                         {/* Eventually filter down to non-deleted and map that array */}
                         {this.state.rewards.length ? (
                             <ListGroup variant="flush">
                                 {this.state.rewards.map(reward => (
-                                    <ListGroup.Item 
-                                        key={reward._id} 
-                                        data-id={reward._id} 
+                                    <ListGroup.Item
+                                        key={reward._id}
+                                        data-id={reward._id}
                                         className="align-items-center"
                                     >
-                                        {reward.description} (points: {reward.value || 0}) 
+                                        {reward.description} (points: {reward.value || 0})
                                         <Button
                                             variant="light"
-                                            className="float-right text-danger" 
+                                            className="float-right text-danger"
                                             onClick={
                                                 () => API.deleteRewardDescription(
                                                     reward._id,
-                                                    { 
+                                                    {
                                                         isDeleted: true
                                                     }
                                                 )
-                                                .then(res => console.log(res))
-                                                .catch(err => console.log(err))
+                                                    .then(res => console.log(res))
+                                                    .catch(err => console.log(err))
                                             }
                                         >
                                             <span >X</span>
                                         </Button>
-                                </ListGroup.Item>
+                                    </ListGroup.Item>
                                 ))}
                             </ListGroup>
                         ) : (
-                            <h3>No rewards to display!</h3>
-                        )}
+                                <h3>No rewards to display!</h3>
+                            )}
                     </Col>
                 </Row>
+                <br />
+                <br />
+                <br />
             </Container>
         );
     }

@@ -1,3 +1,37 @@
-.container {
-    margin-top: 75px;
+.landing-container {
+    background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("https://images.pexels.com/photos/373548/pexels-photo-373548.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0px 400px;
+    vertical-align: middle;
+}
+
+h1 {
+  color: #ffffff;
+}
+
+h5 {
+  color: #ffffff;
+  font-size: 24px;
+}
+
+
+/* MEDIA QUERIES */
+@media(max-width: 768px) {
+  .landing-container {
+    padding: 0px 60px;
+    vertical-align: middle;
+}
+}
+
+@media(max-width: 580px) {
+  .landing-container {
+    padding: 0px 20px;
+    vertical-align: middle;
+}
 }
