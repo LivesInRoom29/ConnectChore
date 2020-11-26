@@ -1,10 +1,5 @@
 footer {
     background: #999999;
-    /* background-image: url(wave.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 200px; */
     color: #fff;
     text-align: center;
     padding: 40px;
@@ -12,19 +7,10 @@ footer {
     position: sticky;
 }
 
-footer .social {
-    font-size: 24px;
-    color: white; 
-    text-decoration: none;
-    /* position: absolute; */
-  }
-  
-  footer .social a {
+  h4 a {
     color: white;
-    text-decoration: none;
-    padding: 15px;
   }
-  
-  footer .social a:hover {
-    color: turquoise;
+
+  h4 a:hover:visited {
+    color: teal; 
   }

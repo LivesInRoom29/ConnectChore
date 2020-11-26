@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body, p {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* HEADERS */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* BUTTONS */
+.waves-effect.waves-green.waves-ripple {
+    background-color: #42b984;
+    color: #ffffff;
+    width: 150px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    border-radius: 30px;
+    border: none;
+    letter-spacing: 1.5px;
+  }
+
+.waves-effect.waves-green.waves-ripple:hover {
+    background-color: #42b984;
+    color: #ffffff;
+    width: 150px;    
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    border-radius: 30px;
+    border: none;
+    letter-spacing: 1.5px;
+  }

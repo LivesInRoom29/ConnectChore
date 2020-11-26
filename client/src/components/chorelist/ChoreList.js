@@ -167,6 +167,9 @@ class ChoreList extends Component {
                 <Row>
                     <Col>
                         <Form>
+                            <br />
+                            <br />
+                            <br />
                             <h4>
                                 <b>Hey there,</b> {user.name.split(" ")[0]}
                                 <p className="text-body">
