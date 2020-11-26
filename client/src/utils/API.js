@@ -60,6 +60,10 @@ export default {
     addTaskToChoreList: function(choreListId, taskId) {
         return Axios.put(`/api/chore-lists/tasks/${choreListId}`, {task: taskId});
     },
+    //change completion status of a task in the chorelist
+    updateTaskCompletion: function(taskId, completionStatus) {
+        return Axios.put(`/api/chore-lists/completetask/${taskId}`, {completionStatus: completionStatus});
+    },
     // deleteTaskFromChoreList: function(choreListId, taskIndex) {
     //     return Axios.put(`/api/chore-list/${choreListId}`, )
     // },
