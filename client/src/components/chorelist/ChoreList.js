@@ -68,7 +68,6 @@ class ChoreList extends Component {
         var promisetwo = new Promise((resolve, reject) => {
             API.getHouseholdMembers(user.id)
                 .then(res => {
-                    console.log("household members:", res.data);
                     resolve(res)
                 })
                 .catch(err => reject(Error("API failed")));
