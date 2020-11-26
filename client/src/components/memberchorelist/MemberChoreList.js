@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import API from "../../utils/API";
+import { format } from "date-fns";
 // API calls
 //import filterDeleted from "../../utils/filterDeleted";
 //import API from "../../utils/API";
@@ -19,16 +20,19 @@ class MemberChoreList extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            assignedto: "",
             householdMemberId: "",
             householdMembers: [],
-            choreListId: "",
-            choreList: [],
-            choreListData: {}
+            choreLists: [],
+            choreListDate: "",
+            choreListData: {},
+            filteredChoreLists: []
         }
+        this.onClickFilter = this.onClickFilter.bind(this);
     }
 
     // get household members from the DB
-    // TEST: will be passing the user.id to the API call to successfully get us the chorelists data
+    // TEST: will be passing the user.id and the choreList.id to the API call to successfully get us the chorelists data
     componentDidMount() {
         const { user, choreList } = this.props.auth;
         //const { choreList } = this.state;
@@ -49,34 +53,57 @@ class MemberChoreList extends Component {
         })
 
         var promisetwo = new Promise((resolve, reject) => {
-            API.getChoreLists(choreList.id)
+            API.getChoreLists(user.id)
+            //console.log(choreList.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
         })
 
         promisetwo.then(res => {
+            //console.log(res);
             this.setState(
                 {
-                    choreListId: res.data[0]._id,
-                    choreList: res.data
+                    //choreListId: res.data[0]._id,
+                    choreLists: res.data
                 }
             )
         })
 
     }
 
-    // // get the input values and add to state
-    // handleInputChange = event => {
-    //     event.preventDefault();
+    // //get input chorelist data and add state
+    // getChoreListClick = e => {
+    //     // leaving commented out to refresh the whole page for now
+    //     e.preventDefault();
 
-    //     this.setState(
-    //         {
-    //             [event.target.name]: event.target.value
-    //             // household member id
-    //             // don't include ...this.state so the value changes when the drop-down changes 
-    //         }
-    //     );
+    //     console.log("click");
     // };
+
+    // get the input values and add to state
+    handleInputChange = event => {
+        event.preventDefault();
+
+        this.setState(
+            {
+                [event.target.name]: event.target.value
+                // household member id
+                // don't include ...this.state so the value changes when the drop-down changes 
+            }
+        );
+    };
+
+    onClickFilter = (event) => {
+        event.preventDefault();
+        console.log(this.state.householdMemberId);
+        console.log(this.state.choreLists);
+        const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
+        console.log(filteredLists);
+        this.setState(
+            {
+                filteredChoreLists: filteredLists
+            }
+        )
+    }
 
     render() {
 
@@ -125,7 +152,7 @@ class MemberChoreList extends Component {
                             <Button
                                 variant="primary"
                                 type="submit"
-                            // onClick={this.addRewardClick}
+                                onClick={this.onClickFilter}
                             >
                                 Generate Chorelist
                             </Button>
@@ -137,15 +164,15 @@ class MemberChoreList extends Component {
                     <Col md={8}>
                         <h4>Display Chorelist for a given householdmember down here</h4>
                         {/* Eventually filter down to non-deleted and map that array */}
-                        {this.state.choreList.length ? (
+                        {this.state.filteredChoreLists.length ? (
                             <ListGroup variant="flush">
-                                {this.state.choreList.map(displayList => (
+                                {this.state.filteredChoreLists.map(displayList => (
                                     <ListGroup.Item
                                         key={displayList._id}
                                         data-id={displayList._id}
                                         className="align-items-center"
                                     >
-                                        {displayList.name}
+                                        {format(new Date(displayList.date),"MM/dd/yyyy")}
                                         {/* <Button
                                             variant="light"
                                             className="float-right text-danger" 
