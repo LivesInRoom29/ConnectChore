@@ -60,6 +60,9 @@ export default {
     addTaskToChoreList: function(choreListId, taskId) {
         return Axios.put(`/api/chore-lists/tasks/${choreListId}`, {task: taskId});
     },
+    // deleteTaskFromChoreList: function(choreListId, taskIndex) {
+    //     return Axios.put(`/api/chore-list/${choreListId}`, )
+    // },
 
     // TASK CALLS - /api/tasks
     // get tasks
