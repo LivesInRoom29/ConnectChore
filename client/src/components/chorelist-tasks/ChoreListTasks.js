@@ -21,12 +21,9 @@ class ChoreListTasks extends Component {
 
   handleCompletionStatusChange = async e => {
     const choreListId = this.props.choreListToEdit;
-
     //using e.currentTarget here instead of e.target so that the click event
     // is always linked to the button itself and not to the icon in the button
     const taskId = e.currentTarget.dataset.id;
-    console.log("task id: ", taskId);
-
     const currentCompletionStatus = e.currentTarget.value;
     let newCompletionStatus;
 
@@ -47,12 +44,23 @@ class ChoreListTasks extends Component {
     }
   };
 
-  handleDeleteTask = e => {
-    console.log("e.target: ", e.currentTarget);
-
-    const deletionStatus = e.currentTarget.value;
-
+  handleDeleteTask = async e => {
     const choreListId = this.props.choreListToEdit;
+
+    //using e.currentTarget here instead of e.target so that the click event
+    // is always linked to the button itself and not to the icon in the button
+    const taskId = e.currentTarget.dataset.id;
+    console.log("task id: ", taskId)
+
+    await API.deleteTaskFromChoreList(choreListId, taskId);
+
+    try {
+      const newListWithTasks = await API.getChoreListWithTasks(choreListId);
+      console.log("new list: ", newListWithTasks);
+      this.props.setTasks(newListWithTasks.data.tasks);
+    } catch (err) {
+        console.log(err);
+    }
 
   };
 
@@ -83,10 +91,10 @@ class ChoreListTasks extends Component {
           <h5>Delete</h5>
         </Col>
       </Row>
-      {/* if tasks exist map the chosen tasks here. */}
+      {/* if tasks exist map the chosen tasks here, otherwise return Null */}
       {tasks.length ?
         tasks.map((task) => {
-          const { description, frequency, isDeleted } = task.task;
+          const { description, frequency } = task.task;
           return (
             <Row key={task._id}>
               <Col xs="4" md="6">
@@ -111,7 +119,6 @@ class ChoreListTasks extends Component {
                 <Button
                   variant="outline-danger"
                   type="button"
-                  value={isDeleted}
                   data-id={task._id}
                   className="taskListButton"
                   onClick={this.handleDeleteTask}
