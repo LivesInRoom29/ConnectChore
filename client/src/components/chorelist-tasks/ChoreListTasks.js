@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
 import "./choreListTasks.css";
-
+import API from "../../utils/API";
 
 class ChoreListTasks extends Component {
   constructor(props) {
@@ -19,19 +19,48 @@ class ChoreListTasks extends Component {
     }
   }
 
-  handleCompletionStatusChange = e => {
-    const currentCompletionStatus = e.target.value;
-
+  handleCompletionStatusChange = async e => {
     const choreListId = this.props.choreListToEdit;
+    //using e.currentTarget here instead of e.target so that the click event
+    // is always linked to the button itself and not to the icon in the button
+    const taskId = e.currentTarget.dataset.id;
+    const currentCompletionStatus = e.currentTarget.value;
+    let newCompletionStatus;
 
-    
+    if (currentCompletionStatus === "false") {
+      newCompletionStatus = true;
+    } else {
+      newCompletionStatus = false;
+    }
 
+    //update the completion of the status in the chorelist (not populated with task data)
+    await API.updateTaskCompletion(taskId, newCompletionStatus);
+
+    try {
+      const newListWithTasks = await API.getChoreListWithTasks(choreListId);
+      this.props.setTasks(newListWithTasks.data.tasks);
+    } catch (err) {
+        console.log(err);
+    }
   };
 
-  handleDeleteTask = e => {
-    const deletionStatus = e.target.value;
-
+  handleDeleteTask = async e => {
     const choreListId = this.props.choreListToEdit;
+
+    //using e.currentTarget here instead of e.target so that the click event
+    // is always linked to the button itself and not to the icon in the button
+    const taskId = e.currentTarget.dataset.id;
+    console.log("task id: ", taskId)
+
+    await API.deleteTaskFromChoreList(choreListId, taskId);
+
+    try {
+      const newListWithTasks = await API.getChoreListWithTasks(choreListId);
+      console.log("new list: ", newListWithTasks);
+      this.props.setTasks(newListWithTasks.data.tasks);
+    } catch (err) {
+        console.log(err);
+    }
 
   };
 
@@ -62,12 +91,12 @@ class ChoreListTasks extends Component {
           <h5>Delete</h5>
         </Col>
       </Row>
-      {/* if tasks exist map the chosen tasks here. */}
+      {/* if tasks exist map the chosen tasks here, otherwise return Null */}
       {tasks.length ?
         tasks.map((task) => {
-          const { _id, description, frequency, isDeleted } = task.task;
+          const { description, frequency } = task.task;
           return (
-            <Row key={_id}>
+            <Row key={task._id}>
               <Col xs="4" md="6">
                 <p>{description}</p>
               </Col>
@@ -79,6 +108,7 @@ class ChoreListTasks extends Component {
                   variant="outline-success"
                   type="button"
                   value={task.completionStatus}
+                  data-id={task._id}
                   className="taskListButton"
                   onClick={this.handleCompletionStatusChange}
                 >
@@ -89,7 +119,7 @@ class ChoreListTasks extends Component {
                 <Button
                   variant="outline-danger"
                   type="button"
-                  value={isDeleted}
+                  data-id={task._id}
                   className="taskListButton"
                   onClick={this.handleDeleteTask}
                 >
