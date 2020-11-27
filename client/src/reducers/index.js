@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import authReducer from "./authReducers";
 import errorReducer from "./errorReducers";
+import chorelistReducer from "./chorelistReducer";
 
 export default combineReducers({
   auth: authReducer,
-  errors: errorReducer
+  errors: errorReducer,
+  chorelist: chorelistReducer
 });
 
 
@@ -15,4 +17,4 @@ export default combineReducers({
 // Import all our actions from our types.js file
 // Define our initialState
 // Define how state should change based on actions with a switch statement
-// Had to update import statements by adding "s" 
+// Had to update import statements by adding "s"

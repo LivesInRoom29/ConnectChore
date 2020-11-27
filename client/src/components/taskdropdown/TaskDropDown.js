@@ -8,14 +8,16 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 
 import API from "../../utils/API";
+import { setTasksAction } from "../../actions/chorelistActions";
+import filterDeleted from "../../utils/filterDeleted";
 
 class TaskDropDown extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
             choosetask: "",
-            tasks: [],
+            allTasks: [],
+            //chorelistTasks: [],
             description: "",
             auth: {}
         }
@@ -23,7 +25,7 @@ class TaskDropDown extends Component {
         //this.handleChange = this.handleChange.bind(this);
     }
 
-    //get tasks data from the DB
+    //get all tasks saved by the user from the DB
     componentDidMount() {
         const { user } = this.props.auth
 
@@ -34,30 +36,20 @@ class TaskDropDown extends Component {
         })
 
         promise.then(result => {
-            console.log("data:", result.data);
+            // filter the deleted tasks out of the data to store in state
+            const undeletedTasks = filterDeleted(result.data);
+            const firstTask = undeletedTasks[0] ? undeletedTasks[0]._id : "";
+
             this.setState(
                 {
-                    tasks: result.data,
-                    choosetask: result.data[0]._id
+                    allTasks: result.data,
+                    choosetask: firstTask
                 }
             )
         });
-
-        // var promisetwo = new Promise((resolve, reject) => {
-        //     API.getHouseholdMembers(user.id)
-        //         .then(res => resolve(res))
-        //         .catch(err => reject(Error("API failed")));
-        // })
-
-        // promisetwo.then(result => {
-        //     this.setState(
-        //         {
-        //             householdMembers: result.data
-        //         }
-        //     )
-        // });
     }
 
+    // this sets the state for the choosetask using the dropdown menu
     handleInputChange = event => {
         event.preventDefault();
 
@@ -71,42 +63,23 @@ class TaskDropDown extends Component {
     };
 
     addTaskClick = async (e) => {
-        // leaving commented out to refresh the whole page for now
         e.preventDefault();
-        console.log("e:", e.target);
 
         const choreListId = this.props.choreListToEdit;
 
         const { choosetask } = this.state;
-        console.log("choose task: ", choosetask);
 
-        await API.addTaskToChoreList(choreListId, choosetask)
-            .then(res => {
-                console.log("res.data:", res.data);
-            })
-            .catch(err => console.log(err));
+        // Add task to the chorelist
+        await API.addTaskToChoreList(choreListId, choosetask);
 
-
-        const listWithTasks = await API.getChoreListWithTasks(choreListId)
-            .then(res => {
-                console.log("list with tasks res: ", res)
-                return res;
-            })
-            .catch(err => console.log(err));
-
-        console.log("after list with tasks: ", listWithTasks);
-        //For now, just adding a hard-coded task for testing
-    // addTaskClick = e => {
-    //     e.preventDefault();
-    //     const taskID = e.target.dataset.dataID;
-
-    //     API.addTaskToChoreList(this.state.choreListToEdit, taskID)
-    //         .then(res => {
-    //             console.log(res.data);
-    //             //this.setState({ tasks: res.data.tasks })
-    //         }
-    //     )
-    // }
+        // listWithTasks will be the chorelist populated with all task data (not just reference Ids)
+        try {
+            const listWithTasks = await API.getChoreListWithTasks(choreListId);
+            // Store the array of tasks with all data in chorelistTasks state
+            this.props.setTasks(listWithTasks.data.tasks);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     //drop down menu for tasklist
@@ -132,7 +105,7 @@ class TaskDropDown extends Component {
                         >
                             {/* Map the tasks to the drop-down */}
                             {
-                                this.state.tasks.map(task => (
+                                this.state.allTasks.map(task => (
                                     <option
                                         key={task._id}
                                         value={task._id}
@@ -161,9 +134,17 @@ TaskDropDown.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    tasks: state.chorelist.tasks
 });
 
+const mapDispatchToProps = (dispatch, props) => (
+    {
+        setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
+    }
+)
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(TaskDropDown);

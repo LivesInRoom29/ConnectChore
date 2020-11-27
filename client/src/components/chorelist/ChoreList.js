@@ -30,7 +30,7 @@ class ChoreList extends Component {
             choreLists: [],
             householdMembers: [],
             rewards: [],
-            tasks: [],
+            chorelistTasks: [],
             choreListToEdit: "",
             choreListData: {},
             validateDisplay: false
@@ -53,13 +53,14 @@ class ChoreList extends Component {
         promise.then(result => {
             // filter the deleted rewards out of the data to store in state
             const undeletedRewards = filterDeleted(result.data);
+            const firstReward = undeletedRewards[0] ? undeletedRewards[0]._id : "";
 
             // set the rewards state to be the undeletedRewards and
             // the reward state to be the id for the first reward in that array
             this.setState(
                 {
                     rewards: undeletedRewards,
-                    reward: undeletedRewards[0]._id
+                    reward: firstReward
                 }
             )
         });
@@ -67,7 +68,6 @@ class ChoreList extends Component {
         var promisetwo = new Promise((resolve, reject) => {
             API.getHouseholdMembers(user.id)
                 .then(res => {
-                    console.log("household members:", res.data);
                     resolve(res)
                 })
                 .catch(err => reject(Error("API failed")));
@@ -75,14 +75,15 @@ class ChoreList extends Component {
 
         promisetwo.then(result => {
             // filter the deleted household members out of the data to store in state
-            const undeletedHMs = filterDeleted(result.data)
+            const undeletedHMs = filterDeleted(result.data);
+            const firstHouseholdMember = undeletedHMs[0] ? undeletedHMs[0]._id : "";
 
             // set the householdMembers state to be the undeletedHMs and
             // the assignedto state to be the first household member in that array
             this.setState(
                 {
                     householdMembers: undeletedHMs,
-                    assignedto: undeletedHMs[0]._id
+                    assignedto: firstHouseholdMember
                 }
             )
         });
@@ -109,7 +110,6 @@ class ChoreList extends Component {
 
     // TEST-pass: when clicking the ADD REWARD, does the reward successfully get added to rewarddescription for the logged in user only?
     addChoreListClick = e => {
-        // leaving commented out to refresh the whole page for now
         e.preventDefault();
 
         let mainDate = format(this.state.startDate, "MM/dd/yyyy");
@@ -126,49 +126,33 @@ class ChoreList extends Component {
         ).then(res => {
             this.setState({ choreListToEdit: res.data._id });
         })
-            .catch(err => console.log(err));
+        .catch(err => console.log(err));
     };
-
-    // add Task added to the TaskDropDown component for now
-    //For now, just adding a hard-coded task for testing
-    // addTaskClick = e => {
-    //     e.preventDefault();
-    //     const taskID = e.target.dataset.dataID;
-
-    //     API.addTaskToChoreList(this.state.choreListToEdit, taskID)
-    //         .then(res => {
-    //             console.log(res.data);
-    //             //this.setState({ tasks: res.data.tasks })
-    //         }
-    //     )
-    // }
-
-    completionCheckboxChange = e => {
-        console.log("e:", e);
-    }
 
 
     // RENDER TEST:
     // Clicking ADD LIST adds chorelist as expected to DB for the logged in user only? -- YES
     // Clicking ADD LIST renders other half of the page - to add tasks to the chorelist:
     // -- renders the dropdown menu for tasks to add -- YES
-    // -- renders the list of tasks when added to the chorelist -- not yet
+    // -- renders the list of tasks when added to the chorelist -- YES
 
     render() {
 
         const { user } = this.props.auth;
         const choreListID = this.state.choreListToEdit;
+        // const chorelistTasksArray = this.state.chorelistTasks;
 
         const chorelistEditor = choreListID ? (
             <>
                 <TaskDropDown
                     choreListToEdit={choreListID}
+                   // tasksArray={chorelistTasksArray}
                 />
                 <br />
-                {/* <ChoreListTask
-                    tasks={this.state.tasks}
-                    completionCheckboxChange={this.completionCheckboxChange}
-                /> */}
+                <ChoreListTask
+                    choreListToEdit={choreListID}
+                    // completionCheckboxChange={this.completionCheckboxChange}
+                />
             </>
         ) : (
             <>
@@ -182,6 +166,9 @@ class ChoreList extends Component {
                 <Row>
                     <Col>
                         <Form>
+                            <br />
+                            <br />
+                            <br />
                             <h4>
                                 <b>Hey there,</b> {user.name.split(" ")[0]}
                                 <p className="text-body">
@@ -258,7 +245,7 @@ class ChoreList extends Component {
                     </Col>
                 {/* </Row>
                 <Row> */}
-                    <Col md={6}>
+                    <Col md={8}>
                         {chorelistEditor}
                     </Col>
                 </Row>
