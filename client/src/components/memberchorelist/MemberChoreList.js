@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import API from "../../utils/API";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
 // API calls
 //import filterDeleted from "../../utils/filterDeleted";
 //import API from "../../utils/API";
@@ -172,7 +173,9 @@ class MemberChoreList extends Component {
                                         data-id={displayList._id}
                                         className="align-items-center"
                                     >
-                                        {format(new Date(displayList.date),"MM/dd/yyyy")}
+                                        <Link to = {`chores/${this.state.householdMemberId}/${displayList._id}`}>
+                                            {format(new Date(displayList.date),"MM/dd/yyyy")}
+                                        </Link>
                                         {/* <Button
                                             variant="light"
                                             className="float-right text-danger" 
