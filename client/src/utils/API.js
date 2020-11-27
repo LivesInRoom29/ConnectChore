@@ -65,7 +65,7 @@ export default {
     },
     // delete a task from the tasks array in the chorelist
     deleteTaskFromChoreList: function(choreListId, taskId) {
-        return Axios.put(`/api/chore-list/deltetask/${choreListId}`, taskId)
+        return Axios.put(`/api/chore-lists/deletetask/${choreListId}`, {taskId: taskId})
     },
 
     // TASK CALLS - /api/tasks
