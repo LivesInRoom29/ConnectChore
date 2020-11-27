@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -29,6 +29,7 @@ import MemberChoreList from "./components/memberchorelist/MemberChoreList";
 import Template from "./components/Template";
 import ChoreListDemo from "./components/chorelist-demo/ChoreListDemo";
 import DropDownDemo from "./components/chorelist-demo/DropDownDemo";
+import ChoreView from "./components/choreview/ChoreView";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -39,7 +40,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-// Check for expired token
+  // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
@@ -66,14 +67,15 @@ class App extends Component {
               <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
               <PrivateRoute exact path="/addchorelist" component={ChoreList} />
               <PrivateRoute exact path="/addtasks" component={TaskForm} />
-              <PrivateRoute exact path="/taskdropdown" component={TaskDropDown} />             
+              <PrivateRoute exact path="/taskdropdown" component={TaskDropDown} />
               <PrivateRoute exact path="/memberchorelist" component={MemberChoreList} />
+              <PrivateRoute exact path="/chores/:userId/:listId" component={ChoreView} />
 
               {/* TEMPLATE ROUTES */}
               <PrivateRoute exact path="/template" component={Template} />
               <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
               <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
-              <PrivateRoute exact path ="/connectchoregame" component={GameBox} />
+              <PrivateRoute exact path="/connectchoregame" component={GameBox} />
             </Switch>
             <Footer />
           </div>
