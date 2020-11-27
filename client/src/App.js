@@ -14,7 +14,7 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import Dashboard from "./pages/Dashboard/Dashboard"; //New dahsboard page
+import dashboard from "./pages/dashboard/dashboard"; //New dahsboard page
 // import Profile from "./components/Profile/Profile";
 import Rewards from "./components/rewards/RewardsForm";
 //import Game from "./components/game/game";
@@ -61,7 +61,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/dashboard" component={dashboard} />
               <PrivateRoute exact path="/rewards" component={Rewards} />
               {/* <PrivateRoute exact path="/game" component={Game} /> */}
               <PrivateRoute
