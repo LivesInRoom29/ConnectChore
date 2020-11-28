@@ -1,0 +1,8 @@
+div.dropdown-row.form-row {
+  align-items: flex-end;
+}
+
+button#add-task-button.btn.btn-primary {
+  width: 100px;
+  margin-bottom: 15px;
+}

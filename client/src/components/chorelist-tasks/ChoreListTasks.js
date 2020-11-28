@@ -25,7 +25,7 @@ class ChoreListTasks extends Component {
     // is always linked to the button itself and not to the icon in the button
     const taskId = e.currentTarget.dataset.id;
     const currentCompletionStatus = e.currentTarget.value;
-    let newCompletionStatus;  
+    let newCompletionStatus;
 
     if (currentCompletionStatus === "false") {
       newCompletionStatus = true;
@@ -79,16 +79,16 @@ class ChoreListTasks extends Component {
       <>
       <Row>
         <Col xs="4" md="6">
-          <h5>Task</h5>
+          <h5 className="chorelistHeading">Task</h5>
         </Col>
         <Col xs="3" md="2">
-          <h5>Frequency</h5>
+          <h5 className="chorelistHeading">Frequency</h5>
         </Col>
         <Col xs="2" md="2">
-          <h5>Done?</h5>
+          <h5 className="chorelistHeading">Done?</h5>
         </Col>
         <Col xs="2" md="2">
-          <h5>Delete</h5>
+          <h5 className="chorelistHeading">Delete</h5>
         </Col>
       </Row>
       {/* if tasks exist map the chosen tasks here, otherwise return Null */}
