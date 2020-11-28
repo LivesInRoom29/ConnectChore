@@ -4,7 +4,7 @@ import { DROP_TILE, RESET_GAME, SET_WINNER } from "../actions/types";
 
 
 
-export const initial = {
+export const initialGameState = {
     current: "red", // can also be black
     board: [
         [], //col 1
@@ -21,7 +21,7 @@ export const initial = {
 };
 
 
-const reducer = produce((state = initial, action) => {
+const reducer = produce((state = initialGameState, action) => {
     
     switch (action.type) {
         case DROP_TILE: 
@@ -44,7 +44,7 @@ const reducer = produce((state = initial, action) => {
       
         break;
         case RESET_GAME:
-            state = initial;
+            state = initialGameState;
 
         break;
 

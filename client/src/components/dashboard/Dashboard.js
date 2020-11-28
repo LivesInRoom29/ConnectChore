@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Container, Col, Row } from "react-bootstrap";
-import "./Dashboard.css";
+
 import GameBox from "../game/GameBox";
+import "./Dashboard.css";
+//import GameBox from "../game/GameBox";
 
 class Dashboard extends Component {
     onLogoutClick = e => {
@@ -23,8 +25,9 @@ class Dashboard extends Component {
                     <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
                     <br />
                     <br />
-                    <GameBox/>
-                    {/* <Row>
+
+                    <GameBox />
+                    <Row>
                         <Col lg={true}><Link to="/addchorelist"><div className="module mid animate">
                             <h2><i class="fas fa-list-ol"></i><br />Create Chorelist</h2></div></Link></Col>
                         <Col lg={true}><Link to="/game"><div className="module mid animate">
@@ -35,7 +38,7 @@ class Dashboard extends Component {
                             <h2><i class="fas fa-trophy"></i><br />Add Rewards</h2></div></Link></Col>
                         <Col lg={true}><Link to="/addtasks"><div className="module mid animate">
                             <h2><i class="fas fa-check"></i><br />Add Tasks</h2></div></Link></Col>
-                    </Row> */}
+                    </Row>
                     <br />
                     <div className="dashboard-btn">
                         <Link
