@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import {connect} from "react-redux";
 // API calls
 import API from "../../utils/API";
-import { Button, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import GridCell from "./GridCell";
 
 import Form from "react-bootstrap/Form";
@@ -35,8 +36,9 @@ class GameBox extends Component {
   }
 
   createCells() {
-    return this.props.game.box.map((row, rowNum) => (
-      // <Container className="game-container">
+    console.log(this.props);
+    return this.props.game.board.map((row, rowNum) => (
+       <Container className="game-container">
       <div className="game-row" key={rowNum}>
         {row.map((cell, cellNum) => (
           <GridCell
@@ -47,7 +49,7 @@ class GameBox extends Component {
           />
         ))}
       </div>
-      // </Container>
+       </Container>
     ));
   }
 

@@ -13,7 +13,7 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import dashboard from "./components/dashboard/Dashboard";
+import Dashboard from "./components/Dashboard/Dashboard";
 import Rewards from "./components/rewards/RewardsForm";
 import Game from "./components/game/game";
 import Footer from "./components/footer/footer";
@@ -59,7 +59,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={dashboard} />
+              <PrivateRoute exact path="/Dashboard" component={Dashboard} />
               <PrivateRoute exact path="/rewards" component={Rewards} />
               <PrivateRoute exact path="/game" component={Game} />
               <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
