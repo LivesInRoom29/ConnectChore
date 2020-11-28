@@ -10,9 +10,8 @@ const passport = require("passport");
 
 // Matches with "/api/tasks"
 // get all tasks
-//add authentication with:
-// router.get("/", passport.authenticate("jwt", {session: false}),
-router.get("/",
+// Auth OK: router.get("/",
+router.get("/", passport.authenticate("jwt", {session: false}),
   async function(req, res) {
     try {
       const data = await taskController.findAll();
@@ -24,7 +23,8 @@ router.get("/",
 );
 
 // get all tasks by userId = /api/tasks
-router.get("/user/:id", async function(req, res) {
+// Auth OK: router.get("/user/:id", async function(req, res) {
+router.get("/user/:id", passport.authenticate("jwt", { session: false }), async function(req, res) {
   const id = req.params.id;
   try {
     const data = await taskController
@@ -37,7 +37,8 @@ router.get("/user/:id", async function(req, res) {
 
 // To create a new task
 // completion status is not included here - by default it's false
-router.post("/", async function(req, res) {
+// Auth OK: router.post("/", async function(req, res) {
+router.post("/", passport.authenticate("jwt", { session: false }), async function(req, res) {
   const { description, frequency, userId } = req.body;
 
   try {
@@ -58,7 +59,8 @@ router.post("/", async function(req, res) {
 
 // Matches with "/api/tasks/:id"
 // get one task by id
-router.get("/:id", async function(req, res) {
+// Auth OK: router.get("/:id", async function(req, res) {
+router.get("/:id", passport.authenticate("jwt", { session: false }), async function(req, res) {
   const id = req.params.id;
   try {
     const data = await taskController.findById(id);
@@ -71,7 +73,8 @@ router.get("/:id", async function(req, res) {
 // update a task by id
 // in req.body, can pass in updated description or frequency
 // Use this to "delete" as well - pass in {isDeleted: true}
-router.put("/:id", async function(req, res) {
+// Auth OK: router.put("/:id", async function(req, res) {
+router.put("/:id", passport.authenticate("jwt", { session: false }), async function(req, res) {
   const id = req.params.id;
   try {
     const data = await taskController.update({ _id: id }, req.body);
