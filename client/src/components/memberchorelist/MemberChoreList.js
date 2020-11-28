@@ -12,6 +12,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import API from "../../utils/API";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
+import { Accordion } from "react-bootstrap";
+import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
 // API calls
 //import filterDeleted from "../../utils/filterDeleted";
 //import API from "../../utils/API";
@@ -55,7 +57,7 @@ class MemberChoreList extends Component {
 
         var promisetwo = new Promise((resolve, reject) => {
             API.getChoreLists(user.id)
-            //console.log(choreList.id)
+                //console.log(choreList.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
         })
@@ -114,6 +116,7 @@ class MemberChoreList extends Component {
 
             //make chorelist here for each given householdmember, maybe a table?
             // or maybe a list most likely
+            <>
             <Container>
                 <Row>
                     <Col>
@@ -164,19 +167,33 @@ class MemberChoreList extends Component {
                 <Row>
                     <Col md={8}>
                         <h4>Display Chorelist for a given householdmember down here</h4>
-                        {/* Eventually filter down to non-deleted and map that array */}
-                        {this.state.filteredChoreLists.length ? (
-                            <ListGroup variant="flush">
-                                {this.state.filteredChoreLists.map(displayList => (
-                                    <ListGroup.Item
-                                        key={displayList._id}
-                                        data-id={displayList._id}
-                                        className="align-items-center"
-                                    >
-                                        <Link to = {`chores/${this.state.householdMemberId}/${displayList._id}`}>
-                                            {format(new Date(displayList.date),"MM/dd/yyyy")}
-                                        </Link>
-                                        {/* <Button
+                        <Accordion>
+                            {/* Eventually filter down to non-deleted and map that array */}
+                            {this.state.filteredChoreLists.length ? (
+                                <ListGroup variant="flush">
+                                    {this.state.filteredChoreLists.map((displayList,index) => (
+                                        <>
+                                        <Accordion.Toggle as={Button} variant="link" eventKey={index} >
+                                            <ListGroup.Item
+                                                key={displayList._id}
+                                                data-id={displayList._id}
+                                                className="align-items-center"
+                                                >
+                                            {/* <Link to={`chores/${this.state.householdMemberId}/${displayList._id}`}> */}
+                                                {format(new Date(displayList.date), "MM/dd/yyyy")}
+                                            {/* </Link> */}
+                                            </ListGroup.Item>
+                                            
+                                        </Accordion.Toggle>
+
+                                        <Accordion.Collapse eventKey={index}>
+                                            <ChoreListTasks
+                                                choreListToEdit={displayList._id}
+                                                />
+                                        
+                                        </Accordion.Collapse>
+
+                                            {/* <Button
                                             variant="light"
                                             className="float-right text-danger" 
                                             onClick={
@@ -185,22 +202,23 @@ class MemberChoreList extends Component {
                                                     { 
                                                         isDeleted: true
                                                     }
-                                                )
-                                                .then(res => console.log(res))
-                                                .catch(err => console.log(err))
-                                            }
-                                        >
-                                            <span >X</span>
-                                        </Button> */}
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
-                        ) : (
-                                <h3>No choreslist to display</h3>
-                            )}
+                                                    )
+                                                    .then(res => console.log(res))
+                                                    .catch(err => console.log(err))
+                                                }
+                                                >
+                                                <span >X</span>
+                                            </Button> */}
+                                    ))}
+                                </ListGroup>
+                            ) : (
+                                    <h3>No choreslist to display</h3>
+                                )}
+                        </Accordion>
                     </Col>
                 </Row>
             </Container>
+            </>
         );
     }
 }
@@ -218,10 +236,10 @@ export default connect(
 )(MemberChoreList);
 
 
-//display chorelist for a given household member
+{/* //display chorelist for a given household member
 
 //let users click on a household member that will display the chorelists for each one respectively
 //the user chooses householdmember and the choreslist related to that member will be displayed on screen
 
 //they should be able to view it.
-//dropdown list for the household members
+//dropdown list for the household members */}
