@@ -10,12 +10,12 @@ import { withRouter } from "react-router-dom";
 // import Form from 'react-bootstrap/Form';
 // import Button from 'react-bootstrap/Button';
 // import ListGroup from 'react-bootstrap/ListGroup';
-// import API from "../../utils/API";
+import API from "../../utils/API";
 // import { format } from "date-fns";
 // import { Link } from "react-router-dom";
-// API calls
-//import filterDeleted from "../../utils/filterDeleted";
-//import API from "../../utils/API";
+// // API calls
+// //components
+// import filterDeleted from "../../utils/filterChoices";
 
 class ChoreView extends Component {
     constructor(props) {
@@ -26,8 +26,9 @@ class ChoreView extends Component {
     }
     componentDidMount() {
         console.log(this.props);
+        
         //Make API Req same as before using USER ID => this.props.match.params.userId
-        //Filter results down to only have the result with the correct istId => this.props.match.params.listId
+        //Filter results down to only have the result with the correct listId => this.props.match.params.listId
         setTimeout(() => {
             this.setState({item: {}});
         }, 3000)
@@ -47,3 +48,7 @@ class ChoreView extends Component {
 
 
 export default withRouter(ChoreView);
+
+
+
+//make an api request to get the user id and then match it with 
