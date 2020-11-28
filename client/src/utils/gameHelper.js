@@ -11,6 +11,9 @@ export const createDefaultBoard = () => {
     return box;
 }
 
+
+
+
 // export const play = (x) => {
 //     if (!this.state.gameOver) {
 //       // Place piece on board

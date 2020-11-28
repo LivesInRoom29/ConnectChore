@@ -65,8 +65,9 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
   return {
-    sendTileDrop: (col, row) => dispatch(dropTile(col, row)),
+    sendTileDrop: (col, row, color) => dispatch(dropTile(col, row. color)),
   };
 };
 
 export default connect(stateToProps, dispatchToProps)(GridCell);
+ 

@@ -5,7 +5,7 @@ import { DROP_TILE, RESET_GAME, SET_PLAYER, SET_WINNER } from "../actions/types"
 
 
 export const initialGameState = {
-    current: "{}", // can also be black
+    current: {}, // can also be black
     board: [
         [], //col 1
         [], //col 2
@@ -48,6 +48,7 @@ const reducer = produce((state = initialGameState, action) => {
         return;
 
         case SET_PLAYER:
+            return state.current = action.payload;
             
 
         // case SET_WINNER:
