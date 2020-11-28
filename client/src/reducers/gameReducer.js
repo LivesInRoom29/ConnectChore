@@ -1,17 +1,9 @@
 import produce from 'immer';
+import {createDefaultBoard} from "../utils/gameHelper";
+import { DROP_TILE, RESET_GAME, SET_WINNER } from "../actions/types";
 
-const createDefaultBoard = () => {
-    const box = [];
-    for (let y = 5; y >= 0; y--) {
-      const row = [];
-      for (let x = 0; x < 7; x++) {
-        row.push({color: 'white'});
-    }
 
-      box.push(row);
-    }
-    return box;
-}
+
 export const initial = {
     current: "red", // can also be black
     board: [
@@ -24,12 +16,15 @@ export const initial = {
         [] //col 7
     ],
     clicks: 0,
+    winner: null,
     box: createDefaultBoard()
 };
 
 
 const reducer = produce((state = initial, action) => {
-    if (action.type === "DROP_TILE") {
+    
+    switch (action.type) {
+        case DROP_TILE: 
         console.log("dropping onto col" + action.payload);
         const {col, row, color} = action.payload;
         
@@ -46,9 +41,21 @@ const reducer = produce((state = initial, action) => {
         
         if (state.clicks % 2 !== 0 ) {state.box[dropToRow][col].color = 'yellow'}
         state.clicks++
-        return 
       
+        break;
+        case RESET_GAME:
+            state = initial;
+
+        break;
+
+        // case SET_WINNER:
+        //     let winner = state.winner,
+
+        // break;
+
     }
+
+    
     return state;
 });
 

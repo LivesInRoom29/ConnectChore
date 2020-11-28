@@ -19,6 +19,7 @@ class GridCell extends Component {
       householdMembers: [],
       board: [],
       gameOver: false,
+      winner: null,
       message: ''
     };
     
@@ -131,13 +132,12 @@ class GridCell extends Component {
 
   handleClick() {
     console.log(`clicked on columns ${this.props.x}`);
-
+    
     this.props.sendTileDrop(this.props.x, this.props.y);
 
     // loop through the board prop
-    this.checkAll = () => {
-      console.log("checked");
-    };
+    const winner = this.checkAll(this.props.board);
+    console.log(winner);
   }
 
   render() {

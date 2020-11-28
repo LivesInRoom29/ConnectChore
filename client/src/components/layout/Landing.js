@@ -1,27 +1,68 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import "./Landing.css";
+import "../../App.css";
 
 
 class Landing extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { color: "#fff" };
+  }
+
   render() {
     return (
-      <div className="container center-align" style={{ height: "75vh" }}>
-        <div className="row">
-          <div className="col s12 center-align">
-            <h4>
-              Gamify your household chores or to-do list
-            </h4>
-            <p className="flow-text grey-text text-darken-1">
-              because an orderly household is a happy household!
-            </p>
-            <br />
-            <Button variant="info" href="/register">Create Account</Button>
-            <br />
-            <br />
-            <Button variant="outline-info" href="/login">Log In</Button>
+      <div style={{ background: this.state.color }} id="main">
+        <div style={{ height: "90vh" }} className="landing-container">
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <div className="row">
+            <div className="col s12 center-align">
+              <h1>
+                <b>Chores just got a lot more fun!</b>
+              </h1>
+              <br />
+              <h5>
+                Simply create a list of household chores and assign tasks to family members. Add rewards for checking items off the to-do list and battle it out with a game of Connect Four!
+            </h5>
+              <br />
+              <div className="col s6">
+                <Link
+                  to="/register"
+                  style={{
+                    width: "140px",
+                    borderRadius: "30px",
+                    padding: "14px",
+                    backgroundColor: "#42b984",
+                    color: "white",
+                    letterSpacing: "1.5px"
+                  }}
+                  className="btn btn-large waves-effect waves-light hoverable accent-3"
+                >Sign Up</Link>
+              </div>
+              <div className="col s6">
+                <Link
+                  to="/login"
+                  style={{
+                    width: "140px",
+                    borderRadius: "30px",
+                    padding: "14px",
+                    backgroundColor: "#ffffff",
+                    color: "#42b984",
+                    border: "2px solid",
+                    letterSpacing: "1.5px"
+                  }}
+                  className="btn btn-large waves-effect waves-brown waves-ripple hoverable accent-3"
+                >
+                  Log In
+              </Link>
+              </div>
             </div>
+          </div>
         </div>
       </div>
 

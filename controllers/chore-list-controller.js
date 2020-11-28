@@ -21,5 +21,8 @@ module.exports = {
   },
   findByHouseholdMemberAndDate: function(householdMemberId, date) {
     return db.ChoreList.find({completedBy: householdMemberId, date: date});
+  },
+  updateTaskCompletionStatus: function(taskId, completionStatus) {
+    return db.ChoreList.findOneAndUpdate(taskId, completionStatus);
   }
 }
