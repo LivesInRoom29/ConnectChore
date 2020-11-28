@@ -7,7 +7,8 @@ import chorelistReducer from "./chorelistReducer";
 export default combineReducers({
   auth: authReducer,
   errors: errorReducer,
-  chorelist: chorelistReducer
+  chorelist: chorelistReducer,
+  game: gameReducer
 });
 
 

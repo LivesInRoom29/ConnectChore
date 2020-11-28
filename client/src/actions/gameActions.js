@@ -5,7 +5,7 @@ import { SET_WINNER } from "./types";
 export function dropTile(col, row, color) {
     return {
         type: DROP_TILE,
-        payload: col
+        payload: {col, row, color}
     }
 };
 

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 // API calls
 import API from "../../utils/API";
-import { Button, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import GridCell from "./GridCell";
 
 import Form from "react-bootstrap/Form";
 import { dropTile, resetGame } from "../../actions/gameActions";
+import {createDefaultBoard} from "../../utils/gameHelper";
 import "./game.css";
 
 class GameBox extends Component {
@@ -23,18 +25,21 @@ class GameBox extends Component {
       },
       householdMembers: [],
       board: [],
+      box: createDefaultBoard(),
       gameOver: false,
       message: "",
     };
     this.initGame = this.initGame.bind(this);
   }
 
+  
   initGame(dispatch) {
     console.log("init game")
     this.props.resetGame()
   }
 
   createCells() {
+    console.log("props" , this.props);
     return this.props.game.box.map((row, rowNum) => (
       // <Container className="game-container">
       <div className="game-row" key={rowNum}>
