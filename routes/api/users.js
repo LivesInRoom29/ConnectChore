@@ -8,7 +8,7 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
-const userController = require("../../controllers/user-controller");
+//const userController = require("../../controllers/user-controller");
 
 
 // @route POST api/users/register
@@ -83,6 +83,7 @@ router.post("/login", (req, res) => {
             res.json({
               success: true,
               token: "Bearer " + token
+              //token: "JWT " + token
             });
           }
         );
