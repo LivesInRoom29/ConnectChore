@@ -25,7 +25,7 @@ class ChoreListTasks extends Component {
     // is always linked to the button itself and not to the icon in the button
     const taskId = e.currentTarget.dataset.id;
     const currentCompletionStatus = e.currentTarget.value;
-    let newCompletionStatus;
+    let newCompletionStatus;  
 
     if (currentCompletionStatus === "false") {
       newCompletionStatus = true;
