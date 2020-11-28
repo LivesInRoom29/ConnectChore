@@ -22,6 +22,7 @@ import ChoreList from "./components/chorelist/ChoreList";
 import TaskForm from "./components/tasks/TaskForm";
 import GameBox from "./components/game/GameBox";
 import Timer from "./components/timer/Timer";
+import CircleTimer from "./components/timer/CircleTimer";
 import TaskDropDown from "./components/taskdropdown/TaskDropDown";
 
 // TEMPLATE component!
@@ -67,6 +68,7 @@ class App extends Component {
               <PrivateRoute exact path="/addchorelist" component={ChoreList} />
               <PrivateRoute exact path="/addtasks" component={TaskForm} />
               <PrivateRoute exact path="/timer" component={Timer} />
+              <PrivateRoute exact path="/circletimer" component={CircleTimer} />
               <PrivateRoute exact path="/taskdropdown" component={TaskDropDown} />
               
               {/* TEMPLATE ROUTES */}
