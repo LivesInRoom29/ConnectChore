@@ -29,7 +29,7 @@ class MemberChoreList extends Component {
             choreLists: [],
             choreListDate: "",
             choreListData: {},
-            filteredChoreLists: []
+            filteredChoreLists: [],
         }
         this.onClickFilter = this.onClickFilter.bind(this);
     }
@@ -116,119 +116,118 @@ class MemberChoreList extends Component {
 
             //make chorelist here for each given householdmember, maybe a table?
             // or maybe a list most likely
-            <>
-            <Container>
-                <Row>
-                    <Col>
-                        <Form>
-                            <h4>
-                                <b>Hey there,</b> {user.name.split(" ")[0]}
-                                <p className="text-body">
-                                    Pick a household member to display chorelist.
+                <Container>
+                    <Row>
+                        <Col>
+                            <Form>
+                                <h4>
+                                    <b>Hey there,</b> {user.name.split(" ")[0]}
+                                    <p className="text-body">
+                                        Pick a household member to display chorelist.
                                 </p>
-                            </h4>
-                            <Form.Row>
-                                <Form.Group as={Col} md="6" controlId="formHouseholdMember">
-                                    <Form.Label>Pick someone:</Form.Label>
-                                    <Form.Control
-                                        as="select"
-                                        name="householdMemberId"
-                                        value={this.state.householdMemberId}
-                                        // placeholder="Wash the dishes" 
-                                        onChange={this.handleInputChange}
-                                    >
-                                        {/* Map the household members to the drop-down */}
-                                        {
-                                            this.state.householdMembers.map(member => (
-                                                <option
-                                                    key={member._id}
-                                                    value={member._id}
-                                                >
-                                                    {member.name}
-                                                </option>
-                                            ))
-                                        }
+                                </h4>
+                                <Form.Row>
+                                    <Form.Group as={Col} md="6" controlId="formHouseholdMember">
+                                        <Form.Label>Pick someone:</Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            name="householdMemberId"
+                                            value={this.state.householdMemberId}
+                                            // placeholder="Wash the dishes" 
+                                            onChange={this.handleInputChange}
+                                        >
+                                            {/* Map the household members to the drop-down */}
+                                            {
+                                                this.state.householdMembers.map(member => (
+                                                    <option
+                                                        key={member._id}
+                                                        value={member._id}
+                                                    >
+                                                        {member.name}
+                                                    </option>
+                                                ))
+                                            }
 
-                                    </Form.Control>
-                                </Form.Group>
-                            </Form.Row>
-                            {/* button to display lists for each houesholdmember*/}
-                            <Button
-                                variant="primary"
-                                type="submit"
-                                onClick={this.onClickFilter}
-                            >
-                                Generate Chorelist
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Form.Row>
+                                {/* button to display lists for each houesholdmember*/}
+                                <Button
+                                    variant="primary"
+                                    type="submit"
+                                    onClick={this.onClickFilter}
+                                >
+                                    Generate Chorelist
                             </Button>
 
-                        </Form>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={8}>
-                        <h4>Display Chorelist for a given householdmember down here</h4>
-                        <Accordion>
-                            {/* Eventually filter down to non-deleted and map that array */}
-                            {this.state.filteredChoreLists.length ? (
-                                <ListGroup variant="flush">
-                                    {this.state.filteredChoreLists.map((displayList,index) => (
-                                        <>
-                                        <Accordion.Toggle as={Button} variant="link" eventKey={index} >
+                            </Form>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={8}>
+                            <h4>Display Chorelist for a given householdmember down here</h4>
+                            <Accordion>
+                                {/* Eventually filter down to non-deleted and map that array */}
+                                {this.state.filteredChoreLists.length ? (
+                                    <ListGroup variant="flush">
+                                        {this.state.filteredChoreLists.map((displayList, index) => (
+                                            <div key={displayList._id}>
+                                            <Accordion.Toggle as={Button} variant="link" eventKey={index} >
                                             <ListGroup.Item
-                                                key={displayList._id}
-                                                data-id={displayList._id}
-                                                className="align-items-center"
-                                                >
-                                            {/* <Link to={`chores/${this.state.householdMemberId}/${displayList._id}`}> */}
-                                                {format(new Date(displayList.date), "MM/dd/yyyy")}
-                                            {/* </Link> */}
-                                            </ListGroup.Item>
-                                            
-                                        </Accordion.Toggle>
+                                                        key={displayList._id}
+                                                        data-id={displayList._id}
+                                                        className="align-items-center"
+                                                    >
+                                                        {/* <Link to={`chores/${this.state.householdMemberId}/${displayList._id}`}> */}
+                                                        {format(new Date(displayList.date), "MM/dd/yyyy")}
+                                                        {/* </Link> */}
+                                                    </ListGroup.Item>
 
-                                        <Accordion.Collapse eventKey={index}>
-                                            <ChoreListTasks
-                                                choreListToEdit={displayList._id}
-                                                />
-                                        
-                                        </Accordion.Collapse>
+                                                </Accordion.Toggle>
 
-                                            {/* <Button
-                                            variant="light"
-                                            className="float-right text-danger" 
-                                            onClick={
-                                                () => API.deleteHouseholdMember(
-                                                    member._id,
-                                                    { 
-                                                        isDeleted: true
-                                                    }
-                                                    )
-                                                    .then(res => console.log(res))
-                                                    .catch(err => console.log(err))
-                                                }
-                                                >
-                                                <span >X</span>
-                                            </Button> */}
+                                                <Accordion.Collapse eventKey={index}>
+                                                    <ChoreListTasks
+                                                        choreListToEdit={displayList._id}
+                                                    />
+
+                                                </Accordion.Collapse>
+                                                </div>
+                                                
+                                            //     {/* <Button
+                                            // variant="light"
+                                            // className="float-right text-danger" 
+                                            // onClick={
+                                            //     () => API.deleteHouseholdMember(
+                                            //         member._id,
+                                            //         { 
+                                            //             isDeleted: true
+                                            //         }
+                                            //         )
+                                            //         .then(res => console.log(res))
+                                            //         .catch(err => console.log(err))
+                                            //     }
+                                            //     >
+                                            //     <span >X</span>
+                                            // </Button> */}
                                     ))}
-                                </ListGroup>
-                            ) : (
-                                    <h3>No choreslist to display</h3>
+                                            </ListGroup>
+                                        ) : (
+                                        <h3>No choreslist to display</h3>
                                 )}
                         </Accordion>
                     </Col>
                 </Row>
             </Container>
-            </>
         );
     }
 }
 
 MemberChoreList.propTypes = {
-    auth: PropTypes.object.isRequired
+                    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+                    auth: state.auth
 });
 
 export default connect(
@@ -236,10 +235,10 @@ export default connect(
 )(MemberChoreList);
 
 
-{/* //display chorelist for a given household member
+//{/* //display chorelist for a given household member
 
-//let users click on a household member that will display the chorelists for each one respectively
-//the user chooses householdmember and the choreslist related to that member will be displayed on screen
+// //let users click on a household member that will display the chorelists for each one respectively
+// //the user chooses householdmember and the choreslist related to that member will be displayed on screen
 
-//they should be able to view it.
-//dropdown list for the household members */}
+// //they should be able to view it.
+// //dropdown list for the household members */}
