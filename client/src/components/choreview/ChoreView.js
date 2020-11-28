@@ -11,11 +11,12 @@ import { withRouter } from "react-router-dom";
 // import Button from 'react-bootstrap/Button';
 // import ListGroup from 'react-bootstrap/ListGroup';
 import API from "../../utils/API";
+import Axios from "axios";
 // import { format } from "date-fns";
 // import { Link } from "react-router-dom";
 // // API calls
 // //components
-// import filterDeleted from "../../utils/filterChoices";
+//import filterChoices from "../../utils/filterChoices";
 
 class ChoreView extends Component {
     constructor(props) {
@@ -27,6 +28,21 @@ class ChoreView extends Component {
     componentDidMount() {
         console.log(this.props);
         
+        const { match: { params } } = this.props;
+       
+        //var promise = new Promise((resolve, reject) => {
+            API.getChoreLists(`/chores/:userId/${params.userId}`)
+            .then(({ data: user }) => {
+                console.log("user", user);
+    
+                this.setState(
+                    { 
+                        user
+                    }
+                 );
+            })
+
+        //})
         //Make API Req same as before using USER ID => this.props.match.params.userId
         //Filter results down to only have the result with the correct listId => this.props.match.params.listId
         setTimeout(() => {
@@ -49,6 +65,10 @@ class ChoreView extends Component {
 
 export default withRouter(ChoreView);
 
+ChoreView.propTypes = {
+    auth: PropTypes.object.isRequired
+};
 
-
-//make an api request to get the user id and then match it with 
+// const mapStateToProps = state => ({
+//     auth: state.auth
+// });

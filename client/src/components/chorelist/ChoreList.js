@@ -15,7 +15,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
 import TaskDropDown from "../taskdropdown/TaskDropDown";
-//import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
+import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
 import filterDeleted from "../../utils/filterDeleted";
 
 
