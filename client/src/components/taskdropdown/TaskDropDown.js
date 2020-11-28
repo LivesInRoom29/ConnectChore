@@ -11,18 +11,18 @@ import API from "../../utils/API";
 import { setTasksAction } from "../../actions/chorelistActions";
 import filterDeleted from "../../utils/filterDeleted";
 
+import "./taskDropDown.css";
+
 class TaskDropDown extends Component {
     constructor(props) {
         super(props)
         this.state = {
             choosetask: "",
             allTasks: [],
-            //chorelistTasks: [],
             description: "",
             auth: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
-        //this.handleChange = this.handleChange.bind(this);
     }
 
     //get all tasks saved by the user from the DB
@@ -84,23 +84,21 @@ class TaskDropDown extends Component {
 
     //drop down menu for tasklist
     render() {
-        const { user } = this.props.auth
         return (
             <Form>
                 <h4>
-                    <b>Hey there,</b> {user.name.split(" ")[0]}
                     <p className="text-body">
                         Add a task to your choreslist.
                     </p>
                 </h4>
-                <Form.Row>
-                    <Form.Group as={Col} md="6" controlId="formTask">
+                <Form.Row className="dropdown-row">
+                    <Form.Group as={Col} md="9" xs="8" controlId="formTask">
                         <Form.Label>Pick a task:</Form.Label>
                         <Form.Control
                             as="select"
                             name="choosetask"
                             value={this.state.choosetask}
-                            // placeholder="Wash the dishes"
+                            placeholder="Please add tasks first"
                             onChange={this.handleInputChange}
                         >
                             {/* Map the tasks to the drop-down */}
@@ -116,14 +114,16 @@ class TaskDropDown extends Component {
                             }
                         </Form.Control>
                     </Form.Group>
+                    <Button
+                        id="add-task-button"
+                        variant="primary"
+                        type="submit"
+                        onClick={this.addTaskClick}
+                    >
+                        Add Task
+                    </Button>
                 </Form.Row>
-                <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={this.addTaskClick}
-                >
-                    Add Task
-                </Button>
+
             </Form>
         )
     }
