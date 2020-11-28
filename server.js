@@ -5,10 +5,14 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 const passport = require("passport");
+const cors = require('cors');
 const users = require("./routes/api/users");
 // DB Config
 const db = require("./config/keys");
 const routes = require("./routes");
+
+// cors
+app.use(cors());
 
 // Bodyparser middleware
 app.use(
