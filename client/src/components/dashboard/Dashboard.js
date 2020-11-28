@@ -28,15 +28,15 @@ class Dashboard extends Component {
                     <GameBox />
                     {/* <Row>
                         <Col lg={true}><Link to="/addchorelist"><div className="module mid animate">
-                            <h2><i class="fas fa-list-ol"></i><br />Create Chorelist</h2></div></Link></Col>
+                            <h2><i className="fas fa-list-ol"></i><br />Create Chorelist</h2></div></Link></Col>
                         <Col lg={true}><Link to="/game"><div className="module mid animate">
-                            <h2><i class="fas fa-dice"></i><br />Play Game</h2></div></Link></Col>
+                            <h2><i className="fas fa-dice"></i><br />Play Game</h2></div></Link></Col>
                     </Row>
                     <Row>
                         <Col lg={true}><Link to="/rewards"><div className="module mid animate">
-                            <h2><i class="fas fa-trophy"></i><br />Add Rewards</h2></div></Link></Col>
+                            <h2><i className="fas fa-trophy"></i><br />Add Rewards</h2></div></Link></Col>
                         <Col lg={true}><Link to="/addtasks"><div className="module mid animate">
-                            <h2><i class="fas fa-check"></i><br />Add Tasks</h2></div></Link></Col>
+                            <h2><i className="fas fa-check"></i><br />Add Tasks</h2></div></Link></Col>
                     </Row>
                     <br /> */}
                     <div className="dashboard-btn">

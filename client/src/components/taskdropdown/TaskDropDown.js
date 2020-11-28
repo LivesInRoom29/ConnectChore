@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 
 import API from "../../utils/API";
 import { setTasksAction } from "../../actions/chorelistActions";
+import filterDeleted from "../../utils/filterDeleted";
 
 class TaskDropDown extends Component {
     constructor(props) {
@@ -35,10 +36,14 @@ class TaskDropDown extends Component {
         })
 
         promise.then(result => {
+            // filter the deleted tasks out of the data to store in state
+            const undeletedTasks = filterDeleted(result.data);
+            const firstTask = undeletedTasks[0] ? undeletedTasks[0]._id : "";
+
             this.setState(
                 {
                     allTasks: result.data,
-                    choosetask: result.data[0]._id
+                    choosetask: firstTask
                 }
             )
         });
@@ -65,16 +70,13 @@ class TaskDropDown extends Component {
         const { choosetask } = this.state;
 
         // Add task to the chorelist
-        await API.addTaskToChoreList(choreListId, choosetask)
+        await API.addTaskToChoreList(choreListId, choosetask);
 
         // listWithTasks will be the chorelist populated with all task data (not just reference Ids)
         try {
-            const listWithTasks = await API.getChoreListWithTasks(choreListId)
-
-            console.log("list of tasks: ", listWithTasks.data.tasks);
+            const listWithTasks = await API.getChoreListWithTasks(choreListId);
             // Store the array of tasks with all data in chorelistTasks state
             this.props.setTasks(listWithTasks.data.tasks);
-            console.log("state chorelistTasks array: ", this.props.tasks);
         } catch (err) {
             console.log(err);
         }
