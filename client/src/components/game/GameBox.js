@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import GridCell from "./GridCell";
 
 import Form from "react-bootstrap/Form";
-import { dropTile, resetGame } from "../../actions/gameActions";
+import { dropTile, resetGame, selectPlayer } from "../../actions/gameActions";
 import {createDefaultBoard} from "../../utils/gameHelper";
 import "./game.css";
 
@@ -24,7 +24,6 @@ class GameBox extends Component {
         color: "",
       },
       householdMembers: [],
-      board: [],
       box: createDefaultBoard(),
       gameOver: false,
       message: "",
@@ -113,6 +112,8 @@ class GameBox extends Component {
                 ))}
               </Form.Control>
             </Form.Group>
+            <br>
+            </br>
             <Form.Group controlId="formHouseholdMember">
               <Form.Label>Pick Player 2:</Form.Label>
               <Form.Control
