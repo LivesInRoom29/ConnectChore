@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 // api calls get/get, add/post, delete/put
 
-import Axios from "axios"
+import Axios from "axios";
 
 export default {
 
