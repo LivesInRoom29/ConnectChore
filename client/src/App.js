@@ -7,7 +7,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import store from "./store";
-import storeGame from "./storeGame";
+//import storeGame from "./storeGame";
 
 import Navbar from "./components/navbar/Navbar";
 import Landing from "./components/layout/Landing";
