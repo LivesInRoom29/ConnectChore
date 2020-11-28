@@ -78,11 +78,11 @@ export default {
     addTask: function(taskData) {
         return Axios.post(`/api/tasks/`, taskData);
     },
+
+    // soft-delete task
     deleteTask: function(taskId, taskData) {
-        return Axios.post(`/api/tasks/${taskId}`, taskData);
+        return Axios.put(`/api/tasks/${taskId}`, taskData);
     }
-
-
 
     // Rewards calls - /api/rewards/
 }
