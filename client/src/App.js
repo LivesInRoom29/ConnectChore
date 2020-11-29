@@ -25,11 +25,13 @@ import TaskDropDown from "./components/taskdropdown/TaskDropDown";
 import MemberChoreList from "./components/memberchorelist/MemberChoreList";
 
 // TEMPLATE component!
-// To access, log into the the app and go to: http://localhost:3000/template 
+// To access, log into the the app and go to: http://localhost:3000/template
 import Template from "./components/Template";
 import ChoreListDemo from "./components/chorelist-demo/ChoreListDemo";
 import DropDownDemo from "./components/chorelist-demo/DropDownDemo";
 import ChoreView from "./components/choreview/ChoreView";
+import DropdownGroup from "./components/dropdown-group/DropdownGroup";
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -76,6 +78,9 @@ class App extends Component {
               <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
               <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
               <PrivateRoute exact path="/connectchoregame" component={GameBox} />
+
+              <PrivateRoute exact path="/dropdowngroup" component={DropdownGroup} />
+
             </Switch>
             <Footer />
           </div>
