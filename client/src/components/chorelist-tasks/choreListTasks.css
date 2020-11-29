@@ -1,3 +1,11 @@
+
+
+/* Change text for the headings of the chore list (Task, Frequency, etc) */
+h5.chorelistHeading {
+  color: black;
+}
+
+/* set width of buttons in the task list */
 button.taskListButton {
   width: 40px;
 }
