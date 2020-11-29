@@ -9,14 +9,17 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Accordion } from "react-bootstrap";
 import API from "../../utils/API";
 import { format } from "date-fns";
 // import { Link } from "react-router-dom";
-import { Accordion } from "react-bootstrap";
+import { setTasksAction } from "../../actions/chorelistActions";
 import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
 // API calls
 //import filterDeleted from "../../utils/filterDeleted";
 //import API from "../../utils/API";
+
+import "../chorelist-tasks/choreListTasks.css"
 
 class MemberChoreList extends Component {
 
@@ -47,9 +50,10 @@ class MemberChoreList extends Component {
         })
 
         promise.then(res => {
+            const firstHouseholdMemberId = res.data[0] ? res.data[0]._id : "";
             this.setState(
                 {
-                    householdMemberId: res.data[0]._id,
+                    householdMemberId: firstHouseholdMemberId,
                     householdMembers: res.data
                 }
             )
@@ -173,7 +177,7 @@ class MemberChoreList extends Component {
                                                 <ListGroup.Item
                                                     data-id={displayList._id}
                                                     className="align-items-center"
-                                                    >
+                                                >
                                                     {format(new Date(displayList.date), "MM/dd/yyyy")}
                                                 </ListGroup.Item>
                                             </Accordion.Toggle>
@@ -204,8 +208,15 @@ MemberChoreList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    tasks: state.chorelist.tasks
 });
+
+const mapDispatchToProps = (dispatch, props) => (
+    {
+        setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
+    }
+)
 
 export default connect(
     mapStateToProps
