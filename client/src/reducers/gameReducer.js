@@ -1,11 +1,11 @@
 import produce from 'immer';
 import {createDefaultBoard} from "../utils/gameHelper";
-import { DROP_TILE, RESET_GAME, SET_WINNER } from "../actions/types";
+import { DROP_TILE, RESET_GAME, SET_PLAYER, SET_WINNER } from "../actions/types";
 
 
 
 export const initialGameState = {
-    current: "red", // can also be black
+    current: {}, // can also be black
     board: [
         [], //col 1
         [], //col 2
@@ -42,11 +42,14 @@ const reducer = produce((state = initialGameState, action) => {
         if (state.clicks % 2 !== 0 ) {state.box[dropToRow][col].color = 'yellow'}
         state.clicks++
       
-        break;
+        return;
         case RESET_GAME:
             state = initialGameState;
+        return;
 
-        break;
+        case SET_PLAYER:
+            return state.current = action.payload;
+            
 
         // case SET_WINNER:
         //     let winner = state.winner,

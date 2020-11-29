@@ -137,14 +137,11 @@ router.put("/tasks/:id", async function(req, res) {
 
 // To update a task in a chorelist to show it's been completed
 //matches with /api/chore-lists/completetask
-//in req.body need to pass in {taskId: ----} with id#
+//in req.body need to pass in {completionStatus: ----} with true or false
 router.put("/completetask/:taskId", async function(req, res) {
-  //const chorelistId = req.params.id;
-  console.log("RAN IT");
-  console.log("req.body", req.body);
   const taskId = req.params.taskId;
   const completionStatus = req.body.completionStatus;
-  console.log("taskID: ", taskId);
+
   try {
     const data = await choreListController.updateTaskCompletionStatus(
       {"tasks._id":  ObjectId(taskId)},
@@ -158,6 +155,23 @@ router.put("/completetask/:taskId", async function(req, res) {
 
 // to delete a task just from the chorelist
 // use $pull
+//in req.body need to pass in {taskId: ----} with id#
+router.put("/deletetask/:id", async function(req, res) {
+  const chorelistId = req.params.id;
+  const taskId = req.body.taskId;
+  console.log("Chorelist:", chorelistId);
+  console.log("task: ", taskId);
+
+  try {
+    const data = await choreListController.removeTask(
+      {_id: ObjectId(chorelistId)},
+      { $pull: {tasks: {_id: ObjectId(taskId)}}}
+    );
+    res.send(data);
+  } catch(err) {
+    res.status(503).end(err);
+  }
+});
 
 
 

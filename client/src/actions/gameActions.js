@@ -1,6 +1,5 @@
-import { DROP_TILE} from "./types";
-import { RESET_GAME } from "./types";
-import { SET_WINNER } from "./types";
+import { DROP_TILE, SET_PLAYER, RESET_GAME, SET_WINNER} from "./types";
+
 // when someones clicks on a column
 export function dropTile(col, row, color) {
     return {
@@ -15,8 +14,16 @@ export function resetGame() {
     }
 };
 
+export function setPlayer() {
+    return {
+        type: SET_PLAYER,
+        payload: {player, color}
+    }
+};
+
 export function setWinner() {
     return{
         type: SET_WINNER,
+        payload: {player, reward}
     }
 }
