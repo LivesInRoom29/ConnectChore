@@ -19,7 +19,6 @@ router.get("/", passport.authenticate("jwt", {session: false}),
 );
 
 // To create a new household-member
-// ron: 5fade7a55540120567a70300
 // Auth OK: router.post("/", async function(req, res) {
   router.post("/", passport.authenticate("jwt", { session: false }), async function(req, res) {
   const { name, userId } = req.body
