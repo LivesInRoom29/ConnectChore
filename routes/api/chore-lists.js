@@ -4,46 +4,36 @@ const choreListController = require("../../controllers/chore-list-controller");
 const passport = require("passport");
 ObjectId = require("mongodb").ObjectID;
 
-// for authenticating routes
-//require("../../config/passport")(passport);
-//const jwt = require("jsonwebtoken");
-// const AuthGuard = (req, res, next) => {
-//   if (req.user) return false;
-//   next();
-// }
-
-// Use PASSPORT to authenticate
-
 // Matches with "/api/chore-lists"
 // get all household-members
-//add authentication with:
-// router.get("/", passport.authenticate("jwt", {session: false}),
-router.get("/",
-  async function(req, res) {
-    try {
-      const data = await choreListController.findAll();
-      res.json(data);
-    } catch (err) {
-      res.status(503).json(err);
-    }
+//router.get("/",
+router.get("/", passport.authenticate("jwt", { session: false }),
+  async function (req, res) {
+      try {
+        const data = await choreListController.findAll();
+        res.json(data);
+      } catch (err) {
+        res.status(503).json(err);
+      }
   }
 );
 
-router.get("/user/:id",
-  async function(req, res) {
-    const id = req.params.id;
-    try {
+// Auth OK: router.get("/user/:id", async function (req, res) {
+router.get("/user/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
+  const id = req.params.id;
+  
+  try {
       const data = await choreListController.findByUserId(id);
-      res.json(data);
+        //res.json(data);
+        res.send(data);
     } catch (err) {
       res.status(503).json(err);
     }
-  }
-);
+  });
 
 // To create a new chore-list
 // completion status is not included here - by default it's false
-router.post("/", async function(req, res) {
+router.post("/", async function (req, res) {
   const { date, userId, completedBy, tasks, reward } = req.body
   //may have to do something with tasks here first
   //create array with the correct structure (array of _ids)
@@ -65,7 +55,7 @@ router.post("/", async function(req, res) {
 
 // Matches with "/api/chore-lists/:id"
 // get one chore list by id
-router.get("/:id", async function(req, res) {
+router.get("/:id", async function (req, res) {
   const id = req.params.id;
   try {
     const data = await choreListController.findById(id);
@@ -77,7 +67,7 @@ router.get("/:id", async function(req, res) {
 
 // Get the chorelist for a specific household member and date
 // the date can be passed in with format "yyyy-mm-dd"
-router.get("/householdmember/:id", async function(req, res) {
+router.get("/householdmember/:id", async function (req, res) {
   const householdMemberId = req.params.id;
   const cldate = new Date(req.body.date);
   try {
@@ -92,7 +82,7 @@ router.get("/householdmember/:id", async function(req, res) {
 });
 
 // Get chorelist by id populated with tasks
-router.get("/withtasks/:id", async function(req, res) {
+router.get("/withtasks/:id", async function (req, res) {
   const id = req.params.id;
   try {
     const data = await choreListController.findById(id).populate("tasks.task");
@@ -105,7 +95,7 @@ router.get("/withtasks/:id", async function(req, res) {
 // update a chore list by id
 // in req.body, can pass in updated date, completedBy (ref to household-member), tasks, reward, completionStatus
 // Use this to "delete" the chorelist as well - pass in {isDeleted: true}
-router.put("/:id", async function(req, res) {
+router.put("/:id", async function (req, res) {
   const id = req.params.id;
   try {
     const data = await choreListController.update({ _id: id }, req.body);
@@ -118,16 +108,18 @@ router.put("/:id", async function(req, res) {
 // Matches with "/api/chore-lists/tasks/:id"
 // to add tasks to the array
 // req should have { task: taskID }
-router.put("/tasks/:id", async function(req, res) {
+router.put("/tasks/:id", async function (req, res) {
   const id = req.params.id;
   try {
     const data = await choreListController.addTask(
-      {_id: id},
-      { $push: {
-        tasks: [
-          {task: req.body.task, completionStatus: false }
-        ]
-      }}
+      { _id: id },
+      {
+        $push: {
+          tasks: [
+            { task: req.body.task, completionStatus: false }
+          ]
+        }
+      }
     );
     res.send(data);
   } catch (err) {
@@ -138,14 +130,14 @@ router.put("/tasks/:id", async function(req, res) {
 // To update a task in a chorelist to show it's been completed
 //matches with /api/chore-lists/completetask
 //in req.body need to pass in {completionStatus: ----} with true or false
-router.put("/completetask/:taskId", async function(req, res) {
+router.put("/completetask/:taskId", async function (req, res) {
   const taskId = req.params.taskId;
   const completionStatus = req.body.completionStatus;
 
   try {
     const data = await choreListController.updateTaskCompletionStatus(
-      {"tasks._id":  ObjectId(taskId)},
-      { $set : {"tasks.$.completionStatus" : completionStatus}}
+      { "tasks._id": ObjectId(taskId) },
+      { $set: { "tasks.$.completionStatus": completionStatus } }
     );
     res.send(data);
   } catch (err) {
@@ -156,7 +148,7 @@ router.put("/completetask/:taskId", async function(req, res) {
 // to delete a task just from the chorelist
 // use $pull
 //in req.body need to pass in {taskId: ----} with id#
-router.put("/deletetask/:id", async function(req, res) {
+router.put("/deletetask/:id", async function (req, res) {
   const chorelistId = req.params.id;
   const taskId = req.body.taskId;
   console.log("Chorelist:", chorelistId);
@@ -164,11 +156,11 @@ router.put("/deletetask/:id", async function(req, res) {
 
   try {
     const data = await choreListController.removeTask(
-      {_id: ObjectId(chorelistId)},
-      { $pull: {tasks: {_id: ObjectId(taskId)}}}
+      { _id: ObjectId(chorelistId) },
+      { $pull: { tasks: { _id: ObjectId(taskId) } } }
     );
     res.send(data);
-  } catch(err) {
+  } catch (err) {
     res.status(503).end(err);
   }
 });
