@@ -2,11 +2,6 @@ const express = require("express");
 const router = express.Router();
 const taskController = require("../../controllers/task-controller");
 const passport = require("passport");
-// for authenticating routes
-//require("../../config/passport")(passport);
-//const jwt = require("jsonwebtoken");
-
-// Use PASSPORT to authenticate
 
 // Matches with "/api/tasks"
 // get all tasks
