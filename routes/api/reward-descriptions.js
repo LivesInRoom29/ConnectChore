@@ -5,7 +5,6 @@ const passport = require("passport");
 
 // Matches with "/api/reward-descriptions"
 // get all reward descriptions
-//add authentication with:
 // Auth OK: router.get("/",
 router.get("/", passport.authenticate("jwt", {session: false}),
   async function (req, res) {
@@ -52,7 +51,6 @@ router.post("/", passport.authenticate("jwt", {session: false}), async function 
 
 // Matches with "/api/reward-descriptions/user/:id"
 // get all rewards by userId
-// harry: 5fade384d5d3ef0279022322
 // Auth OK: router.get("/user/:id", async function (req, res) {
 router.get("/user/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
   const id = req.params.id;
