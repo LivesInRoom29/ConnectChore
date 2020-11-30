@@ -7,6 +7,7 @@ import GridCell from "./GridCell";
 
 import Form from "react-bootstrap/Form";
 import { dropTile, resetGame, setPlayer } from "../../actions/gameActions";
+//import {resetGame} from "../../actions/gameActions"
 import {createDefaultBoard} from "../../utils/gameHelper";
 import "./game.css";
 

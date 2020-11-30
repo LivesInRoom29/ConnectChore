@@ -8,22 +8,22 @@ export function dropTile(col, row, color) {
     }
 };
 
-export function resetGame() {
-    return {
-        type: RESET_GAME,
-    }
-};
+// export function resetGame() {
+//     return {
+//         type: RESET_GAME,
+//     }
+// };
 
-export function setPlayer() {
-    return {
-        type: SET_PLAYER,
-        payload: {player, color}
-    }
-};
+// export function setPlayer() {
+//     return {
+//         type: SET_PLAYER,
+//         payload: {player, color}
+//     }
+// };
 
-export function setWinner() {
-    return{
-        type: SET_WINNER,
-        payload: {player, reward}
-    }
-}
+// export function setWinner() {
+//     return{
+//         type: SET_WINNER,
+//         payload: {player, reward}
+//     }
+// }
