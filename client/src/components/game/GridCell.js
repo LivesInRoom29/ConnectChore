@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { dropTile } from "../../actions/gameActions";
+import { checkVertical, checkAll } from "../../utils/gameHelper";
 import "./game.css";
 
 class GridCell extends Component {
@@ -24,14 +25,31 @@ class GridCell extends Component {
     };
     
   }
+
+      
   handleClick() {
     console.log(`clicked on columns ${this.props.x}`);
     
     this.props.sendTileDrop(this.props.x, this.props.y);
 
-    // loop through the board prop
-    // const winner = this.checkAll(this.props.board);
-    // console.log(winner);
+
+     // Check status of board
+    let board = this.props.board;
+
+
+     
+
+     let result = checkAll(board);
+     if (result === this.state.player1) {
+       this.setState({ board, gameOver: true, message: 'Player 1 (red) wins!' });
+     } else if (result === this.state.player2) {
+       this.setState({ board, gameOver: true, message: 'Player 2 (yellow) wins!' });
+     } else {
+     this.setState({ message: 'Game over. Please start a new game.' });
+     }
+ 
+
+
   }
 
   render() {

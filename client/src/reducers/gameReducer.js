@@ -44,9 +44,8 @@ const reducer = produce((state = initialGameState, action) => {
       
         return;
         case RESET_GAME:
-            state = initialGameState;
-        return;
-
+            return state = initialGameState;
+       
         case SET_PLAYER:
             return state.current = action.payload;
             
@@ -56,10 +55,11 @@ const reducer = produce((state = initialGameState, action) => {
 
         // break;
 
+        default:
+            return state;
     }
 
     
-    return state;
 });
 
 export default reducer;

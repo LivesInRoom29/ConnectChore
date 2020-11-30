@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import GridCell from "./GridCell";
 
 import Form from "react-bootstrap/Form";
-import { dropTile, resetGame, setPlayer } from "../../actions/gameActions";
+import {  resetGame } from "../../actions/gameActions";
 import {createDefaultBoard} from "../../utils/gameHelper";
 import "./game.css";
 
@@ -28,14 +28,16 @@ class GameBox extends Component {
       gameOver: false,
       message: "",
     };
-    this.initGame = this.initGame.bind(this);
+    // this.initGame = this.initGame.bind(this);
   }
 
   
-  initGame(dispatch) {
-    console.log("init game")
-    this.props.resetGame()
-  }
+  // initGame() {
+    
+  //   console.log("init game", this.props.resetGame());
+    
+  //     // this.props.resetGame()
+  // }
 
   createCells() {
     console.log("props" , this.props);
@@ -61,7 +63,7 @@ class GameBox extends Component {
     const selectedPlayer = this.state.householdMembers.find((member) => {
       return event.target.value === member._id;
     });
-    selectedPlayer.color = "player1" === event.target.name ? "red" : "blue";
+    selectedPlayer.color = "player1" === event.target.name ? "red" : "yellow";
     this.setState({
       currentPlayer: selectedPlayer,
     });
@@ -90,7 +92,7 @@ class GameBox extends Component {
   render() {
     return (
       <div>
-        <Button onClick={() => {this.initGame()}} className="Start Game">
+        <Button onClick={() => {this.props.initGame()}} className="Start Game">
           New Game
         </Button>
         <Form>
@@ -146,9 +148,12 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-// const dispatchToProps = (dispatch) => {
-//   return {
-//     selectPlayer: (player, color) => dispatch(setPlayer(player, color)),
-//   };
-// };
-export default connect(mapStateToProps, { dropTile, resetGame })(GameBox);
+const dispatchToProps = (dispatch) => {
+  return {
+    initGame: () => dispatch(resetGame()),
+  };
+};
+
+export default connect(mapStateToProps, dispatchToProps)(GameBox);
+
+// 

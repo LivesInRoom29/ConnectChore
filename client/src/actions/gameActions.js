@@ -14,14 +14,14 @@ export function resetGame() {
     }
 };
 
-export function setPlayer() {
+export function setPlayer(player, color) {
     return {
         type: SET_PLAYER,
         payload: {player, color}
     }
 };
 
-export function setWinner() {
+export function setWinner(player, reward) {
     return{
         type: SET_WINNER,
         payload: {player, reward}
