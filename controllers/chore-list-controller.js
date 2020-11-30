@@ -14,7 +14,7 @@ module.exports = {
     return db.ChoreList.findOneAndUpdate(id, body);
   },
   addTask: function(id, taskId) {
-    return db.ChoreList.findOneAndUpdate(id, taskId, { new: true});
+    return db.ChoreList.findOneAndUpdate(id, taskId, { new: true });
   },
   findByUserId: function(userId) {
     return db.ChoreList.find({userId: userId});
@@ -23,6 +23,9 @@ module.exports = {
     return db.ChoreList.find({completedBy: householdMemberId, date: date});
   },
   updateTaskCompletionStatus: function(taskId, completionStatus) {
-    return db.ChoreList.findOneAndUpdate(taskId, completionStatus);
+    return db.ChoreList.findOneAndUpdate(taskId, completionStatus, { new: true });
+  },
+  removeTask: function(id, taskId) {
+    return db.ChoreList.findOneAndUpdate(id, taskId, { new: true });
   }
 }
