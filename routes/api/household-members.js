@@ -3,21 +3,11 @@ const router = express.Router();
 const hmController = require("../../controllers/household-members-controller");
 const userController = require("../../controllers/user-controller");
 const passport = require("passport");
-// for authenticating routes
-//require("../../config/passport")(passport);
-//const jwt = require("jsonwebtoken");
-// const AuthGuard = (req, res, next) => {
-//   if (req.user) return false;
-//   next();
-// }
-
-// Use PASSPORT to authenticate
 
 // Matches with "/api/household-members"
 // get all household-members
-//add authentication with:
-// router.get("/", passport.authenticate("jwt", {session: false}),
-router.get("/",
+// Auth OK: router.get("/", 
+router.get("/", passport.authenticate("jwt", {session: false}),
   async function(req, res) {
     try {
       const data = await hmController.findAll();
@@ -29,7 +19,8 @@ router.get("/",
 );
 
 // To create a new household-member
-router.post("/", async function(req, res) {
+// Auth OK: router.post("/", async function(req, res) {
+  router.post("/", passport.authenticate("jwt", { session: false }), async function(req, res) {
   const { name, userId } = req.body
   try {
     const data = await hmController.create({
@@ -48,8 +39,9 @@ router.post("/", async function(req, res) {
 });
 
 // Matches with "/api/household-members/:id"
-// get one household-member by id
-router.get("/:id", async function(req, res) {
+// get one household-member by id 
+// Auth OK: router.get("/:id", async function(req, res) {
+router.get("/:id", passport.authenticate("jwt", { session: false }), async function(req, res) {
   const id = req.params.id;
   try {
     const data = await hmController.findById(id);
@@ -61,11 +53,11 @@ router.get("/:id", async function(req, res) {
 
 // Matches with "/api/household-members/user/:id"
 // get all household members by userId
-router.get("/user/:id", async function(req, res) {
+// Auth OK: router.get("/user/:id", async function(req, res) {
+router.get("/user/:id", passport.authenticate("jwt", { session: false }), async function(req, res) {
   const id = req.params.id;
   try {
-    const data = await hmController
-  .findByUserId(id);
+    const data = await hmController.findByUserId(id);
     res.send(data);
   } catch (err) {
     res.status(503).end(err);
@@ -73,7 +65,8 @@ router.get("/user/:id", async function(req, res) {
 });
 
 // update a household member (by id)
-router.put("/:id", async function(req, res) {
+// Auth OK: router.put("/:id", async function(req, res) {
+  router.put("/:id", passport.authenticate("jwt", { session: false }), async function(req, res) {
   const id = req.params.id;
   try {
     const data = await hmController.update({ _id: id }, req.body);

@@ -12,6 +12,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
 import "../../App.css";
+// utils
+import filterDeleted from "../../utils/filterDeleted";
 
 class HouseholdMemberForm extends Component {
 
@@ -38,6 +40,17 @@ class HouseholdMemberForm extends Component {
                         householdMembers: res.data
                     }
                 ))
+            .then(res => {
+
+                //console.log(res)
+
+                const undeletedHouseholdMembers = filterDeleted(res.data)
+                
+                this.setState(
+                { 
+                    householdMembers: undeletedHouseholdMembers 
+                })
+            })
             .catch(err => console.log(err));
     }
 
@@ -60,10 +73,6 @@ class HouseholdMemberForm extends Component {
         //e.preventDefault();
 
         const { user } = this.props.auth;
-        console.log("user id");
-        console.log(user.id);
-        console.log("this state reward");
-        console.log(this.state.householdmember);
 
         const { householdmember } = this.state;
 
@@ -124,6 +133,7 @@ class HouseholdMemberForm extends Component {
                     <Col md={8}>
                         <h3>List of Household Members</h3>
                         {/* Eventually filter down to non-deleted and map that array */}
+                        <h2>Household Members</h2>
                         {this.state.householdMembers.length ? (
                             <ListGroup variant="flush">
                                 {this.state.householdMembers.map(member => (

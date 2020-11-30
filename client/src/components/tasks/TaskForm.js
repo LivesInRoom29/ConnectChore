@@ -12,6 +12,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
 import "../../App.css";
+// utils
+import filterDeleted from "../../utils/filterDeleted";
 
 class TaskForm extends Component {
 
@@ -33,14 +35,16 @@ class TaskForm extends Component {
         const { user } = this.props.auth
 
         API.getTasks(user.id)
-            .then(res => 
+            .then(res => {
                 //console.log(res)
+
+                const undeletedTasks = filterDeleted(res.data)
                 
                 this.setState(
                 { 
-                    tasks: res.data 
-                }
-            ))
+                    tasks: undeletedTasks 
+                })
+            })
             .catch(err => console.log(err));
     }
 
@@ -144,6 +148,7 @@ class TaskForm extends Component {
                         <h3>Household Tasks</h3>
                         View all of your added household tasks.
                         {/* Eventually filter down to non-deleted and map that array */}
+                        <h2>Household Tasks</h2>
                         {this.state.tasks.length ? (
                             <ListGroup variant="flush">
                                 {this.state.tasks.map(task => (

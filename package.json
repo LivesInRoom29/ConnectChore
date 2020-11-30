@@ -14,16 +14,17 @@
     "heroku-postbuild": "npm run build",
     "seed": "node scripts/seedDB.js"
   },
-  "author": "hilary ferraro",
+  "author": "Ahmed Sheikh, Andres Ramirez, Bremah Lwanga, Hilary Ferraro, Kayla Dunphe, Molly Kizer",
   "license": "MIT",
   "dependencies": {
-    "animate.css": "^4.1.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.13",
+    "animate.css": "^4.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
@@ -31,6 +32,7 @@
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.13",
+    "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "validator": "^13.1.17"
