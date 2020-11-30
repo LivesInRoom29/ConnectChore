@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 // api calls get/get, add/post, delete/put
 
-import Axios from "axios"
+import Axios from "axios";
 
 export default {
 
@@ -78,11 +78,11 @@ export default {
     addTask: function(taskData) {
         return Axios.post(`/api/tasks/`, taskData);
     },
+
+    // soft-delete task
     deleteTask: function(taskId, taskData) {
-        return Axios.post(`/api/tasks/${taskId}`, taskData);
+        return Axios.put(`/api/tasks/${taskId}`, taskData);
     }
-
-
 
     // Rewards calls - /api/rewards/
 }

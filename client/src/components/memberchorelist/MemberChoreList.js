@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,14 +11,16 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Accordion } from "react-bootstrap";
+// API calls
 import API from "../../utils/API";
+// Date formatting
 import { format } from "date-fns";
 // import { Link } from "react-router-dom";
 import { setTasksAction } from "../../actions/chorelistActions";
 import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
 // API calls
+
 //import filterDeleted from "../../utils/filterDeleted";
-//import API from "../../utils/API";
 
 import "../chorelist-tasks/choreListTasks.css"
 
@@ -32,7 +35,8 @@ class MemberChoreList extends Component {
             choreLists: [],
             choreListDate: "",
             choreListData: {},
-            filteredChoreLists: []
+            filteredChoreLists: [],
+            auth: {}
         }
         this.onClickFilter = this.onClickFilter.bind(this);
     }
@@ -43,11 +47,11 @@ class MemberChoreList extends Component {
         const { user, choreList } = this.props.auth;
         //const { choreList } = this.state;
 
-        var promise = new Promise((resolve, reject) => {
+        const promise = new Promise((resolve, reject) => {
             API.getHouseholdMembers(user.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
-        })
+        });
 
         promise.then(res => {
             const firstHouseholdMemberId = res.data[0] ? res.data[0]._id : "";
@@ -57,9 +61,10 @@ class MemberChoreList extends Component {
                     householdMembers: res.data
                 }
             )
-        })
+        });
 
-        var promisetwo = new Promise((resolve, reject) => {
+        const promisetwo = new Promise((resolve, reject) => {
+            const { user } = this.props.auth;
             API.getChoreLists(user.id)
                 //console.log(choreList.id)
                 .then(res => resolve(res))
@@ -101,10 +106,9 @@ class MemberChoreList extends Component {
 
     onClickFilter = (event) => {
         event.preventDefault();
-        console.log(this.state.householdMemberId);
-        console.log(this.state.choreLists);
+
         const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
-        console.log(filteredLists);
+
         this.setState(
             {
                 filteredChoreLists: filteredLists

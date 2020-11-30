@@ -11,6 +11,8 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
+// utils
+import filterDeleted from "../../utils/filterDeleted";
 
 class TaskForm extends Component {
 
@@ -32,14 +34,16 @@ class TaskForm extends Component {
         const { user } = this.props.auth
 
         API.getTasks(user.id)
-            .then(res => 
+            .then(res => {
                 //console.log(res)
+
+                const undeletedTasks = filterDeleted(res.data)
                 
                 this.setState(
                 { 
-                    tasks: res.data 
-                }
-            ))
+                    tasks: undeletedTasks 
+                })
+            })
             .catch(err => console.log(err));
     }
 
@@ -141,8 +145,6 @@ class TaskForm extends Component {
                 <Row>
                     <Col md={8}>
                         <h2>Household Tasks</h2>
-                        A list of the tasks will dynamically render here once the API call is built.
-                        {/* Eventually filter down to non-deleted and map that array */}
                         {this.state.tasks.length ? (
                             <ListGroup variant="flush">
                                 {this.state.tasks.map(task => (
