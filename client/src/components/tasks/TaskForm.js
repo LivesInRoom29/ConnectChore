@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
+import "../../App.css";
 
 class TaskForm extends Component {
 
@@ -86,26 +87,24 @@ class TaskForm extends Component {
 
         return (
             <Container>
+                            <br />
+                            <br />
+                            <br />
                 <Row>
                     <Col>
                         <Form>
-                            <h4>
-                                <b>Hey there,</b> {user.name.split(" ")[0]}
-                                <p className="text-body">
-                                    What type of tasks does your household need to accomplish? Add them here! <br />
-                                    <br />
-                                    A few examples could be: 
-                                </p>
+                            <div>
+                            <h3>Tasks</h3>
+                                <p>What type of tasks does your household need to accomplish? Add them here so you can assign them to a household member's chore list!</p>
+                                    <b>A few examples could be:</b>
                                     <ul>
                                         <li>★take out the trash</li>
                                         <li>★feed the dog</li>
                                         <li>★clean-up the playroom</li>
                                         <li>★vacuum the hallway</li>
                                     </ul>
+                                    </div>
                                     <br />
-                                <p>The possibilities are endless.<br />
-                                </p>
-                            </h4>
                             <Form.Row>
                                 <Form.Group as={Col} md="6" controlId="formDescription">
                                     <Form.Label>Add a task description:</Form.Label>
@@ -128,8 +127,7 @@ class TaskForm extends Component {
                                     />
                                 </Form.Group>
                             </Form.Row>
-                            <Button 
-                                variant="primary" 
+                            <Button className="btn btn-large waves-effect waves-green waves-ripple hoverable"
                                 type="submit"
                                 onClick={this.addTaskClick}
                             >
@@ -138,10 +136,13 @@ class TaskForm extends Component {
                         </Form>
                     </Col>
                 </Row>
+                <br />
+                <br />
+                <br />
                 <Row>
                     <Col md={8}>
-                        <h2>Household Tasks</h2>
-                        A list of the tasks will dynamically render here once the API call is built.
+                        <h3>Household Tasks</h3>
+                        View all of your added household tasks.
                         {/* Eventually filter down to non-deleted and map that array */}
                         {this.state.tasks.length ? (
                             <ListGroup variant="flush">
@@ -176,6 +177,9 @@ class TaskForm extends Component {
                         )}
                     </Col>
                 </Row>
+                <br />
+                <br />
+                <br />
             </Container>
         );
     }

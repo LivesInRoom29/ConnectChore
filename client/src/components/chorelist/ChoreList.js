@@ -17,6 +17,7 @@ import API from "../../utils/API";
 import TaskDropDown from "../taskdropdown/TaskDropDown";
 import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
 import filterDeleted from "../../utils/filterDeleted";
+import "../../App.css";
 
 
 class ChoreList extends Component {
@@ -163,21 +164,20 @@ class ChoreList extends Component {
 
         return (
             <Container>
+                            <br />
+                            <br />
+                            <br />
                 <Row>
                     <Col>
                         <Form>
-                            <br />
-                            <br />
-                            <br />
                             <h4>
-                                <b>Hey there,</b> {user.name.split(" ")[0]}
                                 <p className="text-body">
                                     Create a chorelist for the day! <br />
                                 </p>
                             </h4>
                             <Form.Row>
                                 <Form.Group as={Col} md="6" controlId="formHouseholdMember">
-                                    <Form.Label>Pick someone:</Form.Label>
+                                    <Form.Label>Pick a household member:</Form.Label>
                                     <Form.Control
                                         as="select"
                                         name="assignedto"
@@ -234,8 +234,7 @@ class ChoreList extends Component {
                                     </Form.Control>
                                 </Form.Group>
                             </Form.Row>
-                            <Button
-                                variant="primary"
+                            <Button className="btn btn-large waves-effect waves-green waves-ripple hoverable"
                                 type="submit"
                                 onClick={this.addChoreListClick}
                             >
@@ -249,6 +248,9 @@ class ChoreList extends Component {
                         {chorelistEditor}
                     </Col>
                 </Row>
+                <br />
+                <br />
+                <br />
             </Container>
         );
     }
