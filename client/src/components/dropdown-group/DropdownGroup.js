@@ -20,6 +20,8 @@ import DropdownChorelists from "./DropdownChorelists";
 //import API from "../../utils/API";
 
 import "../chorelist-tasks/choreListTasks.css"
+import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
+import TaskDropDown from "../taskdropdown/TaskDropDown";
 
 class DropdownGroup extends Component {
 
@@ -32,9 +34,10 @@ class DropdownGroup extends Component {
             choreListDate: "",
             choreListData: {},
             choreListToEdit: "",
-            filteredChoreLists: []
+            //filteredChoreLists: [],
+            showTasks: false
         }
-        this.onClickFilter = this.onClickFilter.bind(this);
+        this.onClickShowChorelist = this.onClickShowChorelist.bind(this);
     }
 
     // get household members from the DB
@@ -88,31 +91,35 @@ class DropdownGroup extends Component {
         event.preventDefault();
         this.setState(
             {
-                [event.target.name]: event.target.value
+                [event.target.name]: event.target.value,
+                showTasks: false
                 // household member id
                 // don't include ...this.state so the value changes when the drop-down changes
             }
         );
 
-        const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
-        console.log(filteredLists);
-        this.setState(
-            {
-                filteredChoreLists: filteredLists
-            }
-        )
+        // const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
+        // this.setState(
+        //     {
+        //         filteredChoreLists: filteredLists
+        //     }
+        // )
 
     };
 
-    onClickFilter = (event) => {
+    onClickShowChorelist = async (event) => {
         event.preventDefault();
-        console.log(this.state.householdMemberId);
-        console.log(this.state.choreLists);
-        const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
-        console.log(filteredLists);
+        //use the chorelist ID to get an array with all of the tasks
+        try {
+            const ListWithTasks = await API.getChoreListWithTasks(this.state.choreListToEdit);
+            this.props.setTasks(ListWithTasks.data.tasks);
+        } catch (err) {
+            console.log(err);
+        }
+        // change state for showTasks to true so that the chorelist tasks will display
         this.setState(
             {
-                filteredChoreLists: filteredLists
+                showTasks: true
             }
         )
     }
@@ -121,45 +128,70 @@ class DropdownGroup extends Component {
 
         const { user } = this.props.auth;
 
-        return (
-            <Container>
-                <Row>
-                    <Col>
-                        <Form>
-                            <h4>
-                                <b>Hey there,</b> {user.name.split(" ")[0]}
-                                <p className="text-body">
-                                    Pick a household member to display chorelist.
-                                </p>
-                            </h4>
-                            <Form.Row>
-                                <DropdownMembers
-                                    handleInputChange={this.handleInputChange}
-                                    householdMemberId={this.state.householdMemberId}
-                                    householdMembers={this.state.householdMembers}
-                                />
-                                <DropdownChorelists
-                                    handleInputChange={this.handleInputChange}
-                                    householdMemberId={this.state.householdMemberId}
-                                    choreListToEdit={this.state.choreListToEdit}
-                                    choreLists={this.state.choreLists}
-                                />
+        // if showTasks is true, render the TaskDropDown menu and the ChoreListTasks
+        // otherwise render "Choose a Chorelist"
+        const chorelistEditor = this.state.showTasks ? (
+            <>
+                <TaskDropDown
+                    choreListToEdit={this.state.choreListToEdit}
+                />
+                <br />
+                <ChoreListTasks
+                    choreListToEdit={this.state.choreListToEdit}
+                />
+            </>
+        ) : (
+                <>
+                    <h2>Choose a Chorelist</h2>
+                    {/* <h3>No chorelists to display!</h3> */}
+                </>
+            )
 
-                            </Form.Row>
-                            {/* button to display lists for each houesholdmember*/}
-                            <Button
-                                variant="primary"
-                                type="submit"
-                                onClick={this.onClickFilter}
-                            >
-                                Generate Chorelist
+
+        return (
+            <>
+                <Container>
+                    <Row>
+                        <Col>
+                            <Form>
+                                <h4>
+                                    <b>Hey there,</b> {user.name.split(" ")[0]}
+                                    <p className="text-body">
+                                        Pick a household member to display chorelist.
+                                </p>
+                                </h4>
+                                <Form.Row>
+                                    <DropdownMembers
+                                        handleInputChange={this.handleInputChange}
+                                        householdMemberId={this.state.householdMemberId}
+                                        householdMembers={this.state.householdMembers}
+                                    />
+                                    <DropdownChorelists
+                                        handleInputChange={this.handleInputChange}
+                                        householdMemberId={this.state.householdMemberId}
+                                        choreListToEdit={this.state.choreListToEdit}
+                                        choreLists={this.state.choreLists}
+                                    />
+
+                                </Form.Row>
+                                {/* button to display lists for each houesholdmember*/}
+                                <Button
+                                    variant="primary"
+                                    type="submit"
+                                    data-id={this.state.choreListToEdit}
+                                    onClick={this.onClickShowChorelist}
+                                >
+                                    Generate Chorelist
                             </Button>
 
-                        </Form>
-                    </Col>
-                </Row>
-
-            </Container>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+                <Container>
+                    {chorelistEditor}
+                </Container>
+            </>
         );
     }
 }
