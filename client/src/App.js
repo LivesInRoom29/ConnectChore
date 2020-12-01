@@ -25,7 +25,7 @@ import TaskDropDown from "./components/taskdropdown/TaskDropDown";
 import MemberChoreList from "./components/memberchorelist/MemberChoreList";
 
 // TEMPLATE component!
-// To access, log into the the app and go to: http://localhost:3000/template 
+// To access, log into the the app and go to: http://localhost:3000/template
 import Template from "./components/Template";
 import ChoreListDemo from "./components/chorelist-demo/ChoreListDemo";
 import DropDownDemo from "./components/chorelist-demo/DropDownDemo";
@@ -75,8 +75,8 @@ class App extends Component {
               <PrivateRoute exact path="/template" component={Template} />
               <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
               <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
-              <PrivateRoute exact path ="/connectchoregame" component={GameBox} />
-              
+              <PrivateRoute exact path="/connectchoregame" component={GameBox} />
+
             </Switch>
             <Footer />
           </div>

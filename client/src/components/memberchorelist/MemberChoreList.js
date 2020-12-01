@@ -10,12 +10,19 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Accordion } from "react-bootstrap";
 // API calls
 import API from "../../utils/API";
 // Date formatting
 import { format } from "date-fns";
+// import { Link } from "react-router-dom";
+import { setTasksAction } from "../../actions/chorelistActions";
+import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
+// API calls
 
 //import filterDeleted from "../../utils/filterDeleted";
+
+import "../chorelist-tasks/choreListTasks.css"
 
 class MemberChoreList extends Component {
 
@@ -47,9 +54,10 @@ class MemberChoreList extends Component {
         });
 
         promise.then(res => {
+            const firstHouseholdMemberId = res.data[0] ? res.data[0]._id : "";
             this.setState(
                 {
-                    householdMemberId: res.data[0]._id,
+                    householdMemberId: firstHouseholdMemberId,
                     householdMembers: res.data
                 }
             )
@@ -58,7 +66,7 @@ class MemberChoreList extends Component {
         const promisetwo = new Promise((resolve, reject) => {
             const { user } = this.props.auth;
             API.getChoreLists(user.id)
-            //console.log(choreList.id)
+                //console.log(choreList.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
         })
@@ -91,16 +99,16 @@ class MemberChoreList extends Component {
             {
                 [event.target.name]: event.target.value
                 // household member id
-                // don't include ...this.state so the value changes when the drop-down changes 
+                // don't include ...this.state so the value changes when the drop-down changes
             }
         );
     };
 
     onClickFilter = (event) => {
         event.preventDefault();
-        
+
         const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
-        
+
         this.setState(
             {
                 filteredChoreLists: filteredLists
@@ -113,9 +121,6 @@ class MemberChoreList extends Component {
         const { user } = this.props.auth;
 
         return (
-
-            //make chorelist here for each given householdmember, maybe a table?
-            // or maybe a list most likely
             <Container>
                 <Row>
                     <Col>
@@ -133,7 +138,7 @@ class MemberChoreList extends Component {
                                         as="select"
                                         name="householdMemberId"
                                         value={this.state.householdMemberId}
-                                        // placeholder="Wash the dishes" 
+                                        // placeholder="Wash the dishes"
                                         onChange={this.handleInputChange}
                                     >
                                         {/* Map the household members to the drop-down */}
@@ -166,40 +171,35 @@ class MemberChoreList extends Component {
                 <Row>
                     <Col md={8}>
                         <h4>Display Chorelist for a given householdmember down here</h4>
-                        {/* Eventually filter down to non-deleted and map that array */}
-                        {this.state.filteredChoreLists.length ? (
-                            <ListGroup variant="flush">
-                                {this.state.filteredChoreLists.map(displayList => (
-                                    <ListGroup.Item
-                                        key={displayList._id}
-                                        data-id={displayList._id}
-                                        className="align-items-center"
-                                    >
-                                        <Link to = {`chores/${this.state.householdMemberId}/${displayList._id}`}>
-                                            {format(new Date(displayList.date),"MM/dd/yyyy")}
-                                        </Link>
-                                        {/* <Button
-                                            variant="light"
-                                            className="float-right text-danger" 
-                                            onClick={
-                                                () => API.deleteHouseholdMember(
-                                                    member._id,
-                                                    { 
-                                                        isDeleted: true
-                                                    }
-                                                )
-                                                .then(res => console.log(res))
-                                                .catch(err => console.log(err))
-                                            }
-                                        >
-                                            <span >X</span>
-                                        </Button> */}
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
-                        ) : (
-                                <h3>No choreslist to display</h3>
-                            )}
+                        <Accordion>
+                            {/* Eventually filter down to non-deleted and map that array */}
+                            {this.state.filteredChoreLists.length ? (
+                                <ListGroup variant="flush">
+                                    {this.state.filteredChoreLists.map((displayList, index) => (
+                                        <div key={displayList._id}>
+                                            <Accordion.Toggle as={Button} variant="link" eventKey={index} >
+                                                <ListGroup.Item
+                                                    data-id={displayList._id}
+                                                    className="align-items-center"
+                                                >
+                                                    {format(new Date(displayList.date), "MM/dd/yyyy")}
+                                                </ListGroup.Item>
+                                            </Accordion.Toggle>
+
+                                            <Accordion.Collapse eventKey={index}>
+                                                <div>
+                                                    <ChoreListTasks
+                                                        choreListToEdit={displayList._id}
+                                                    />
+                                                </div>
+                                            </Accordion.Collapse>
+                                        </div>
+                                    ))}
+                                </ListGroup>
+                            ) : (
+                                    <h3>No choreslist to display</h3>
+                                )}
+                        </Accordion>
                     </Col>
                 </Row>
             </Container>
@@ -212,8 +212,15 @@ MemberChoreList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    tasks: state.chorelist.tasks
 });
+
+const mapDispatchToProps = (dispatch, props) => (
+    {
+        setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
+    }
+)
 
 export default connect(
     mapStateToProps

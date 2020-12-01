@@ -11,51 +11,45 @@ import { withRouter } from "react-router-dom";
 // import Button from 'react-bootstrap/Button';
 // import ListGroup from 'react-bootstrap/ListGroup';
 import API from "../../utils/API";
-import Axios from "axios";
-// import { format } from "date-fns";
+//import Axios from "axios";
 // import { Link } from "react-router-dom";
 // // API calls
 // //components
-//import filterChoices from "../../utils/filterChoices";
 
 class ChoreView extends Component {
     constructor(props) {
         super(props)
         this.state = {
             item: null,
+            choreLists: [],
+            householdMembers: []
         }
     }
     componentDidMount() {
         console.log(this.props);
-        
-        const { match: { params } } = this.props;
-       
-        //var promise = new Promise((resolve, reject) => {
-            API.getChoreLists(`/chores/:userId/${params.userId}`)
-            .then(({ data: user }) => {
-                console.log("user", user);
-    
-                this.setState(
-                    { 
-                        user
-                    }
-                 );
-            })
 
-        //})
+        const { match: { params } } = this.props;
+
+        API.getChoreListWithTasks(params.Id)
+            .then(({ data: user }) => {
+                console.log('user', user);
+
+                this.setState({ user });
+            });
+
         //Make API Req same as before using USER ID => this.props.match.params.userId
         //Filter results down to only have the result with the correct listId => this.props.match.params.listId
         setTimeout(() => {
-            this.setState({item: {}});
+            this.setState({ item: {} });
         }, 3000)
     }
 
     render() {
-        if(this.state.item === null) return <div>Loading....</div>
-        return(
+        if (this.state.item === null) return <div>Loading....</div>
+        return (
             <div>
-               
-                <p>Render Your data</p> 
+
+                <p>Render Your data</p>
             </div>
         )
     }
@@ -69,6 +63,3 @@ ChoreView.propTypes = {
     auth: PropTypes.object.isRequired
 };
 
-// const mapStateToProps = state => ({
-//     auth: state.auth
-// });
