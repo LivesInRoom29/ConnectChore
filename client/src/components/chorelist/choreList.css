@@ -1,0 +1,11 @@
+/* Add spacing below the right-hand/top column */
+div.addListCol {
+  margin-bottom: 30px;
+
+}
+
+/* Add spacing above the left-hand/top column */
+div.chorelist-editor {
+  margin-top: 60px;
+
+}

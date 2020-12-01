@@ -18,6 +18,7 @@ import TaskDropDown from "../taskdropdown/TaskDropDown";
 import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
 import filterDeleted from "../../utils/filterDeleted";
 
+import "./choreList.css";
 
 class ChoreList extends Component {
 
@@ -30,7 +31,6 @@ class ChoreList extends Component {
             choreLists: [],
             householdMembers: [],
             rewards: [],
-            chorelistTasks: [],
             choreListToEdit: "",
             choreListData: {},
             validateDisplay: false
@@ -126,7 +126,7 @@ class ChoreList extends Component {
         ).then(res => {
             this.setState({ choreListToEdit: res.data._id });
         })
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
     };
 
 
@@ -140,31 +140,28 @@ class ChoreList extends Component {
 
         const { user } = this.props.auth;
         const choreListID = this.state.choreListToEdit;
-        // const chorelistTasksArray = this.state.chorelistTasks;
 
         const chorelistEditor = choreListID ? (
             <>
                 <TaskDropDown
                     choreListToEdit={choreListID}
-                   // tasksArray={chorelistTasksArray}
                 />
                 <br />
                 <ChoreListTask
                     choreListToEdit={choreListID}
-                    // completionCheckboxChange={this.completionCheckboxChange}
                 />
             </>
         ) : (
-            <>
-                <h2>Your Chorelist</h2>
-                <h3>No chorelists to display!</h3>
-            </>
-        )
+                <>
+                    <h2>Your Chorelist</h2>
+                    <h3>No chorelists to display!</h3>
+                </>
+            )
 
         return (
             <Container>
                 <Row>
-                    <Col>
+                    <Col className="addListCol">
                         <Form>
                             <br />
                             <br />
@@ -177,12 +174,11 @@ class ChoreList extends Component {
                             </h4>
                             <Form.Row>
                                 <Form.Group as={Col} md="6" controlId="formHouseholdMember">
-                                    <Form.Label>Pick someone:</Form.Label>
+                                    <Form.Label>Pick a household member:</Form.Label>
                                     <Form.Control
                                         as="select"
                                         name="assignedto"
                                         value={this.state.assignedto}
-                                        // placeholder="Wash the dishes"
                                         onChange={this.handleInputChange}
                                     >
                                         {/* Map the household members to the drop-down */}
@@ -217,7 +213,6 @@ class ChoreList extends Component {
                                         as="select"
                                         name="reward"
                                         value={this.state.reward}
-                                        // placeholder="Wash the dishes"
                                         onChange={this.handleInputChange}
                                     >
                                         {/* Map the household members to the drop-down */}
@@ -243,9 +238,7 @@ class ChoreList extends Component {
                             </Button>
                         </Form>
                     </Col>
-                {/* </Row>
-                <Row> */}
-                    <Col md={8}>
+                    <Col className="chorelist-editor" md={8}>
                         {chorelistEditor}
                     </Col>
                 </Row>
