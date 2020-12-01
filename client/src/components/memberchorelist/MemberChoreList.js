@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Accordion } from "react-bootstrap";
 // API calls
 import API from "../../utils/API";
 // Date formatting
