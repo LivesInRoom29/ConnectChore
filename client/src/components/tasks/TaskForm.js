@@ -14,6 +14,7 @@ import API from "../../utils/API";
 import "../../App.css";
 // utils
 import filterDeleted from "../../utils/filterDeleted";
+import SubNav from "../layout/SubNav";
 
 class TaskForm extends Component {
 
@@ -90,6 +91,8 @@ class TaskForm extends Component {
         const { user } = this.props.auth;
 
         return (
+            <>
+            <SubNav />
             <Container>
                             <br />
                             <br />
@@ -148,7 +151,6 @@ class TaskForm extends Component {
                         <h3>Household Tasks</h3>
                         View all of your added household tasks.
                         {/* Eventually filter down to non-deleted and map that array */}
-                        <h2>Household Tasks</h2>
                         {this.state.tasks.length ? (
                             <ListGroup variant="flush">
                                 {this.state.tasks.map(task => (
@@ -172,7 +174,7 @@ class TaskForm extends Component {
                                                 .catch(err => console.log(err))
                                             }
                                         >
-                                            <span >X</span>
+                                            <span>X</span>
                                         </Button>
                                 </ListGroup.Item>
                                 ))}
@@ -186,6 +188,7 @@ class TaskForm extends Component {
                 <br />
                 <br />
             </Container>
+            </>
         );
     }
 }

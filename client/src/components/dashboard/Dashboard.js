@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Container, Col, Row } from "react-bootstrap";
 import "./Dashboard.css";
+import SubNav from "../layout/SubNav";
 
 class Dashboard extends Component {
     onLogoutClick = e => {
@@ -18,6 +19,7 @@ class Dashboard extends Component {
 
         return (
             <>
+                <SubNav />
                 <Container className="dashboard-container">
                     <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
                     <br />

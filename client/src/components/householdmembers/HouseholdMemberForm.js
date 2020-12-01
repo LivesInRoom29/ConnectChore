@@ -14,6 +14,7 @@ import API from "../../utils/API";
 import "../../App.css";
 // utils
 import filterDeleted from "../../utils/filterDeleted";
+import SubNav from "../layout/SubNav";
 
 class HouseholdMemberForm extends Component {
 
@@ -95,6 +96,8 @@ class HouseholdMemberForm extends Component {
         const { user } = this.props.auth;
 
         return (
+            <>
+            <SubNav />
             <Container>
                 <br />
                 <br />
@@ -172,6 +175,7 @@ class HouseholdMemberForm extends Component {
                 <br />
                 <br />
             </Container>
+            </>
         );
     }
 }

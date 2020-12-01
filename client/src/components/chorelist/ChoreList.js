@@ -18,8 +18,8 @@ import TaskDropDown from "../taskdropdown/TaskDropDown";
 import ChoreListTask from "../chorelist-tasks/ChoreListTasks";
 import filterDeleted from "../../utils/filterDeleted";
 import "../../App.css";
-
 import "./choreList.css";
+import SubNav from "../layout/SubNav";
 
 class ChoreList extends Component {
 
@@ -160,6 +160,8 @@ class ChoreList extends Component {
             )
 
         return (
+            <>
+            <SubNav />
             <Container>
                 <Row>
                     <Col className="addListCol">
@@ -245,6 +247,7 @@ class ChoreList extends Component {
                 <br />
                 <br />
             </Container>
+            </>
         );
     }
 }

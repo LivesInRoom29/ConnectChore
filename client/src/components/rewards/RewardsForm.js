@@ -15,6 +15,7 @@ import API from "../../utils/API";
 import filterDeleted from "../../utils/filterDeleted";
 // CSS
 import "../../App.css";
+import SubNav from "../layout/SubNav";
 
 class Rewards extends Component {
 
@@ -94,6 +95,8 @@ class Rewards extends Component {
         const { user } = this.props.auth;
 
         return (
+            <>
+            <SubNav />
             <Container>
                             <br />
                             <br />
@@ -188,6 +191,7 @@ class Rewards extends Component {
                 <br />
                 <br />
             </Container>
+            </>
         );
     }
 }
