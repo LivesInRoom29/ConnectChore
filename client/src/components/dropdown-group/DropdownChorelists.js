@@ -4,11 +4,6 @@ import { format } from "date-fns";
 // Bootstrap components
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-// API calls
-//import filterDeleted from "../../utils/filterDeleted";
-//import API from "../../utils/API";
-
-//import "../chorelist-tasks/choreListTasks.css"
 
 class DropdownChorelists extends Component {
 
@@ -21,7 +16,6 @@ class DropdownChorelists extends Component {
           as="select"
           name="choreListToEdit"
           value={this.props.choreListToEdit}
-          // placeholder="Wash the dishes"
           onChange={this.props.handleInputChange}
         >
           {/* Map the chorelists to the drop-down */}
