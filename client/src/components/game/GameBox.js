@@ -6,8 +6,7 @@ import { Button } from "react-bootstrap";
 import GridCell from "./GridCell";
 
 import Form from "react-bootstrap/Form";
-import { dropTile, resetGame, setPlayer } from "../../actions/gameActions";
-//import {resetGame} from "../../actions/gameActions"
+import {  resetGame } from "../../actions/gameActions";
 import {createDefaultBoard} from "../../utils/gameHelper";
 import "./game.css";
 
@@ -15,28 +14,24 @@ class GameBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      player1: {
-        color: "red",
-      },
-      player2: {
-        color: "yellow",
-      },
-      currentPlayer: {
-        color: "",
-      },
+      player1_id: "",
+      player2_id: {},
+      currentPlayer: {},
       householdMembers: [],
       box: createDefaultBoard(),
       gameOver: false,
       message: "",
     };
-    this.initGame = this.initGame.bind(this);
+    // this.initGame = this.initGame.bind(this);
   }
 
   
-  initGame(dispatch) {
-    console.log("init game")
-    this.props.resetGame()
-  }
+  // initGame() {
+    
+  //   console.log("init game", this.props.resetGame());
+    
+  //     // this.props.resetGame()
+  // }
 
   createCells() {
     console.log("props" , this.props);
@@ -56,17 +51,36 @@ class GameBox extends Component {
     ));
   }
 
-  selectPlayer = (event) => {
+  selectPlayer1 = (event) => {
     console.log(event.target.value);
     console.log(event.target.name);
-    const selectedPlayer = this.state.householdMembers.find((member) => {
+    const selectedPlayer1 = this.state.householdMembers.find((member) => {
       return event.target.value === member._id;
     });
-    selectedPlayer.color = "player1" === event.target.name ? "red" : "blue";
+    selectedPlayer1.color = "player1" === event.target.name ? "red" : "yellow";
     this.setState({
-      currentPlayer: selectedPlayer,
+      player1_id: selectedPlayer1,
     });
-    console.log(selectedPlayer);
+    // console.log("player is ", selectedPlayer1);
+  };
+
+  selectPlayer2 = (event) => {
+    console.log(event.target.value);
+    console.log(event.target.name);
+    let selectedPlayer2 = this.state.householdMembers.find((member) => {
+      return event.target.value === member._id;
+    });
+    // selectedPlayer2 = "player2._id" === event.target.name;
+    try {
+      this.setState({
+        player2_id: selectedPlayer2,
+      });
+    } catch {
+      console.error("error");
+    };
+    
+    console.log("player is ", selectedPlayer2);
+    console.log("player 2 is ", this.state.player2_id);
   };
 
   componentDidMount() {
@@ -82,16 +96,20 @@ class GameBox extends Component {
       this.setState({
         householdMembers: result.data,
       });
+      
+  console.log(this.state.householdMembers);
     });
 
-    console.log(this.props);
+    
+
+    console.log(this.state);
   }
 
 
   render() {
     return (
       <div>
-        <Button onClick={() => {this.initGame()}} className="Start Game">
+        <Button onClick={() => {this.props.initGame()}} className="Start Game">
           New Game
         </Button>
         <Form>
@@ -100,10 +118,10 @@ class GameBox extends Component {
               <Form.Label>Pick Player 1:</Form.Label>
               <Form.Control
                 as="select"
-                name="player1"
-                value={this.state.player1._id}
+                name="player1._id"
+                value={this.state.player1_id}
                 // placeholder="Wash the dishes"
-                onChange={this.selectPlayer}
+                onChange={this.selectPlayer1}
               >
                 {/* Map the household members to the drop-down */}
                 {this.state.householdMembers.map((member) => (
@@ -119,10 +137,10 @@ class GameBox extends Component {
               <Form.Label>Pick Player 2:</Form.Label>
               <Form.Control
                 as="select"
-                name="player2"
-                value={this.state.player2._id}
+                name="player2._id"
+                value={this.state.player2_id}
                 // placeholder="Wash the dishes"
-                onChange={this.selectPlayer}
+                onChange={this.selectPlayer2}
               >
                 {/* Map the household members to the drop-down */}
                 {this.state.householdMembers.map((member) => (
@@ -147,9 +165,12 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-// const dispatchToProps = (dispatch) => {
-//   return {
-//     selectPlayer: (player, color) => dispatch(setPlayer(player, color)),
-//   };
-// };
-export default connect(mapStateToProps, { dropTile, resetGame })(GameBox);
+const dispatchToProps = (dispatch) => {
+  return {
+    initGame: () => dispatch(resetGame()),
+  };
+};
+
+export default connect(mapStateToProps, dispatchToProps)(GameBox);
+
+// 

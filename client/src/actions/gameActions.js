@@ -14,16 +14,16 @@ export function dropTile(col, row, color) {
 //     }
 // };
 
-// export function setPlayer() {
-//     return {
-//         type: SET_PLAYER,
-//         payload: {player, color}
-//     }
-// };
+export function setPlayer(player, color) {
+    return {
+        type: SET_PLAYER,
+        payload: {player, color}
+    }
+};
 
-// export function setWinner() {
-//     return{
-//         type: SET_WINNER,
-//         payload: {player, reward}
-//     }
-// }
+export function setWinner(player, reward) {
+    return{
+        type: SET_WINNER,
+        payload: {player, reward}
+    }
+}
