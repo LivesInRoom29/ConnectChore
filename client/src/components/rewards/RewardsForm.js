@@ -11,6 +11,9 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
+// utils
+import filterDeleted from "../../utils/filterDeleted";
+// CSS
 import "../../App.css";
 
 class Rewards extends Component {
@@ -31,14 +34,15 @@ class Rewards extends Component {
         const { user } = this.props.auth
 
         API.getRewardDescriptions(user.id)
-            .then(res =>
+            .then(res => {
                 //console.log(res)
+                const undeletedRewards = filterDeleted(res.data);
 
                 this.setState(
                     {
-                        rewards: res.data
-                    }
-                ))
+                        rewards: undeletedRewards
+                    })
+                })
             .catch(err => console.log(err));
     }
 
