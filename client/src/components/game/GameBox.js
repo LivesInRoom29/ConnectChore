@@ -14,15 +14,9 @@ class GameBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      player1: {
-        color: "red",
-      },
-      player2: {
-        color: "yellow",
-      },
-      currentPlayer: {
-        color: "",
-      },
+      player1_id: "",
+      player2_id: {},
+      currentPlayer: {},
       householdMembers: [],
       box: createDefaultBoard(),
       gameOver: false,
@@ -57,17 +51,36 @@ class GameBox extends Component {
     ));
   }
 
-  selectPlayer = (event) => {
+  selectPlayer1 = (event) => {
     console.log(event.target.value);
     console.log(event.target.name);
-    const selectedPlayer = this.state.householdMembers.find((member) => {
+    const selectedPlayer1 = this.state.householdMembers.find((member) => {
       return event.target.value === member._id;
     });
-    selectedPlayer.color = "player1" === event.target.name ? "red" : "yellow";
+    selectedPlayer1.color = "player1" === event.target.name ? "red" : "yellow";
     this.setState({
-      currentPlayer: selectedPlayer,
+      player1_id: selectedPlayer1,
     });
-    console.log(selectedPlayer);
+    // console.log("player is ", selectedPlayer1);
+  };
+
+  selectPlayer2 = (event) => {
+    console.log(event.target.value);
+    console.log(event.target.name);
+    let selectedPlayer2 = this.state.householdMembers.find((member) => {
+      return event.target.value === member._id;
+    });
+    // selectedPlayer2 = "player2._id" === event.target.name;
+    try {
+      this.setState({
+        player2_id: selectedPlayer2,
+      });
+    } catch {
+      console.error("error");
+    };
+    
+    console.log("player is ", selectedPlayer2);
+    console.log("player 2 is ", this.state.player2_id);
   };
 
   componentDidMount() {
@@ -83,9 +96,13 @@ class GameBox extends Component {
       this.setState({
         householdMembers: result.data,
       });
+      
+  console.log(this.state.householdMembers);
     });
 
-    console.log(this.props);
+    
+
+    console.log(this.state);
   }
 
 
@@ -101,10 +118,10 @@ class GameBox extends Component {
               <Form.Label>Pick Player 1:</Form.Label>
               <Form.Control
                 as="select"
-                name="player1"
-                value={this.state.player1._id}
+                name="player1._id"
+                value={this.state.player1_id}
                 // placeholder="Wash the dishes"
-                onChange={this.selectPlayer}
+                onChange={this.selectPlayer1}
               >
                 {/* Map the household members to the drop-down */}
                 {this.state.householdMembers.map((member) => (
@@ -120,10 +137,10 @@ class GameBox extends Component {
               <Form.Label>Pick Player 2:</Form.Label>
               <Form.Control
                 as="select"
-                name="player2"
-                value={this.state.player2._id}
+                name="player2._id"
+                value={this.state.player2_id}
                 // placeholder="Wash the dishes"
-                onChange={this.selectPlayer}
+                onChange={this.selectPlayer2}
               >
                 {/* Map the household members to the drop-down */}
                 {this.state.householdMembers.map((member) => (
