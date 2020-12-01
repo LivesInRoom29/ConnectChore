@@ -15,6 +15,7 @@ import { Accordion } from "react-bootstrap";
 import API from "../../utils/API";
 // Date formatting
 import { format } from "date-fns";
+import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
 //import filterDeleted from "../../utils/filterDeleted";
 
 class MemberChoreList extends Component {
