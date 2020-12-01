@@ -19,6 +19,13 @@ class ChoreListTasks extends Component {
     }
   }
 
+  //need something here to prevent the chorelists previously in state from showing?
+  // maybe in parent component? Still need them to render when viewing tasks,
+  //just not when creating a new one.
+  // componentDidMount() {
+  //   this.props.setTasks([]);
+  // }
+
   handleCompletionStatusChange = async e => {
     const choreListId = this.props.choreListToEdit;
     //using e.currentTarget here instead of e.target so that the click event
