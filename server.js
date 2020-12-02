@@ -1,13 +1,18 @@
 const express = require("express");
 require("dotenv").config();
+const morgan = require('morgan');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 const passport = require("passport");
+const cors = require('cors');
 const users = require("./routes/api/users");
 // DB Config
 const db = require("./config/keys");
 const routes = require("./routes");
+
+// cors
+app.use(cors());
 
 // Bodyparser middleware
 app.use(
@@ -16,6 +21,9 @@ app.use(
     })
 );
 app.use(bodyParser.json());
+
+// morgan logs
+app.use(morgan('combined'));
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

@@ -11,7 +11,11 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
+// utils
+import filterDeleted from "../../utils/filterDeleted";
+// CSS
 import "../../App.css";
+import SubNav from "../layout/SubNav";
 
 class Rewards extends Component {
 
@@ -31,14 +35,15 @@ class Rewards extends Component {
         const { user } = this.props.auth
 
         API.getRewardDescriptions(user.id)
-            .then(res =>
+            .then(res => {
                 //console.log(res)
+                const undeletedRewards = filterDeleted(res.data);
 
                 this.setState(
                     {
-                        rewards: res.data
-                    }
-                ))
+                        rewards: undeletedRewards
+                    })
+                })
             .catch(err => console.log(err));
     }
 
@@ -90,22 +95,21 @@ class Rewards extends Component {
         const { user } = this.props.auth;
 
         return (
+            <>
+            <SubNav />
             <Container>
+                            <br />
+                            <br />
+                            <br />
                 <Row>
                     <Col>
                         <Form>
-                            <br />
-                            <br />
-                            <br />
-                            <h4>
-                                <b>Hey there,</b> {user.name.split(" ")[0]}!
-                                <p className="text-body">
+                            <div>
                                 <br />
-                                    Want to include some motivation to your household's day to day chores? <br />
-                                    Add potential rewards for a job well done! <br />
+                                    <h3>Want to include some motivation to your household's day to day chores? Add potential rewards for a job well done!</h3>
                                     <br />
-                                    A few examples could be:
-                                </p>
+                                    <br />
+                                    <b>A few examples could be:</b>
                                 <ul>
                                     <li>★pick-a-movie night</li>
                                     <li>★ice cream for breakfast</li>
@@ -113,9 +117,7 @@ class Rewards extends Component {
                                     <li>★stay up late for 30 extra minutes.</li>
                                 </ul>
                                 <br />
-                                <p>The possibilities are endless.<br />
-                                </p>
-                            </h4>
+                            </div>
                             <Form.Row>
                                 <Form.Group as={Col} md="6" controlId="formReward">
                                     <Form.Label>Add a reward:</Form.Label>
@@ -149,7 +151,7 @@ class Rewards extends Component {
                 <br />
                 <Row>
                     <Col md={8}>
-                        <h2>Household Rewards</h2>
+                        <h3>Household Rewards</h3>
                         <p>A list of the recently added rewards for completing chores.</p>
                         {/* Eventually filter down to non-deleted and map that array */}
                         {this.state.rewards.length ? (
@@ -189,6 +191,7 @@ class Rewards extends Component {
                 <br />
                 <br />
             </Container>
+            </>
         );
     }
 }

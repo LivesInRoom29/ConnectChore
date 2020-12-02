@@ -19,13 +19,20 @@ class ChoreListTasks extends Component {
     }
   }
 
+  //need something here to prevent the chorelists previously in state from showing?
+  // maybe in parent component? Still need them to render when viewing tasks,
+  //just not when creating a new one.
+  // componentDidMount() {
+  //   this.props.setTasks([]);
+  // }
+
   handleCompletionStatusChange = async e => {
     const choreListId = this.props.choreListToEdit;
     //using e.currentTarget here instead of e.target so that the click event
     // is always linked to the button itself and not to the icon in the button
     const taskId = e.currentTarget.dataset.id;
     const currentCompletionStatus = e.currentTarget.value;
-    let newCompletionStatus;  
+    let newCompletionStatus;
 
     if (currentCompletionStatus === "false") {
       newCompletionStatus = true;
@@ -79,16 +86,16 @@ class ChoreListTasks extends Component {
       <>
       <Row>
         <Col xs="4" md="6">
-          <h5>Task</h5>
+          <h5 className="chorelistHeading">Task</h5>
         </Col>
         <Col xs="3" md="2">
-          <h5>Frequency</h5>
+          <h5 className="chorelistHeading">Frequency</h5>
         </Col>
         <Col xs="2" md="2">
-          <h5>Done?</h5>
+          <h5 className="chorelistHeading">Done?</h5>
         </Col>
         <Col xs="2" md="2">
-          <h5>Delete</h5>
+          <h5 className="chorelistHeading">Delete</h5>
         </Col>
       </Row>
       {/* if tasks exist map the chosen tasks here, otherwise return Null */}

@@ -1,5 +1,5 @@
 .landing-container {
-    background: 
+    background:
     linear-gradient(
       rgba(0, 0, 0, 0.4),
       rgba(0, 0, 0, 0.4)
@@ -22,6 +22,13 @@ h5 {
 
 
 /* MEDIA QUERIES */
+@media(max-width: 992px) {
+  .landing-container {
+    padding: 0px 200px;
+    vertical-align: middle;
+}
+}
+
 @media(max-width: 768px) {
   .landing-container {
     padding: 0px 60px;
