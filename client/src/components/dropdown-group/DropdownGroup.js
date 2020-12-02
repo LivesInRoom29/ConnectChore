@@ -132,6 +132,9 @@ class DropdownGroup extends Component {
         // otherwise render "Choose a Chorelist"
         const chorelistEditor = this.state.showTasks ? (
             <>
+                <br />
+                <h4>View or Edit Choreslist</h4>
+                <p>Add new tasks, mark them as complete or delete them from the list.</p>
                 <TaskDropDown
                     choreListToEdit={this.state.choreListToEdit}
                 />
