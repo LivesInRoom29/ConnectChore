@@ -8,11 +8,11 @@ export function dropTile(col, row, color) {
     }
 };
 
-// export function resetGame() {
-//     return {
-//         type: RESET_GAME,
-//     }
-// };
+export function resetGame() {
+    return {
+        type: RESET_GAME,
+    }
+};
 
 export function setPlayer(player, color) {
     return {
