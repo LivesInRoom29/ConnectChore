@@ -38,10 +38,10 @@ class TaskForm extends Component {
                 //console.log(res)
 
                 const undeletedTasks = filterDeleted(res.data)
-                
+
                 this.setState(
-                { 
-                    tasks: undeletedTasks 
+                {
+                    tasks: undeletedTasks
                 })
             })
             .catch(err => console.log(err));
@@ -50,16 +50,16 @@ class TaskForm extends Component {
     // get the input values and add to state
     handleInputChange = event => {
         event.preventDefault();
-        
+
         this.setState(
-            { 
+            {
                 ...this.state,
                 [event.target.name]: event.target.value
                 // description and frequency
             }
         );
     };
-    
+
     // TEST: when clicking the ADD TASK, does the task successfully get added to tasks for the logged in user only?
     addTaskClick = e => {
         // leaving commented out to refresh the whole page for now
@@ -77,8 +77,14 @@ class TaskForm extends Component {
             }
         ).then( res => console.log(res))
         .catch(err => console.log(err));
-            
+
     };
+
+    // handleDelete = e => {
+
+    // }
+
+
 
     // RENDER TEST:
     // Clicking ADD TASK adds reward as expected to DB for the logged in user only?
@@ -98,7 +104,7 @@ class TaskForm extends Component {
                                 <p className="text-body">
                                     What type of tasks does your household need to accomplish? Add them here! <br />
                                     <br />
-                                    A few examples could be: 
+                                    A few examples could be:
                                 </p>
                                     <ul>
                                         <li>★take out the trash</li>
@@ -113,27 +119,27 @@ class TaskForm extends Component {
                             <Form.Row>
                                 <Form.Group as={Col} md="6" controlId="formDescription">
                                     <Form.Label>Add a task description:</Form.Label>
-                                    <Form.Control 
+                                    <Form.Control
                                         type="input"
                                         name="description"
                                         value={this.state.description}
-                                        placeholder="Wash the dishes" 
+                                        placeholder="Wash the dishes"
                                         onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
                                 <Form.Group as={Col} md="2" controlId="formFrequency">
                                     <Form.Label>Frequency per week:</Form.Label>
-                                    <Form.Control 
+                                    <Form.Control
                                         type="input"
                                         name="frequency"
                                         value={this.state.frequency}
-                                        placeholder="2" 
+                                        placeholder="2"
                                         onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
                             </Form.Row>
-                            <Button 
-                                variant="primary" 
+                            <Button
+                                variant="primary"
                                 type="submit"
                                 onClick={this.addTaskClick}
                             >
@@ -148,24 +154,29 @@ class TaskForm extends Component {
                         {this.state.tasks.length ? (
                             <ListGroup variant="flush">
                                 {this.state.tasks.map(task => (
-                                    <ListGroup.Item 
-                                        key={task._id} 
-                                        data-id={task._id} 
+                                    <ListGroup.Item
+                                        key={task._id}
+                                        data-id={task._id}
                                         className="align-items-center"
                                     >
-                                        {task.description} (frequency: {task.frequency || 0}) 
+                                        {task.description} (frequency: {task.frequency || 0})
                                         <Button
                                             variant="light"
-                                            className="float-right text-danger" 
+                                            className="float-right text-danger"
                                             onClick={
-                                                () => API.deleteTask(
+                                                () => {
+                                                    API.deleteTask(
                                                     task._id,
-                                                    { 
+                                                    {
                                                         isDeleted: true
                                                     }
                                                 )
-                                                .then(res => console.log(res))
+                                                .then(res => {
+                                                    console.log(res);
+                                                    window.location.reload();
+                                                })
                                                 .catch(err => console.log(err))
+                                                }
                                             }
                                         >
                                             <span >X</span>

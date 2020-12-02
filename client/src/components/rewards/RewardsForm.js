@@ -175,7 +175,10 @@ class Rewards extends Component {
                                                         isDeleted: true
                                                     }
                                                 )
-                                                    .then(res => console.log(res))
+                                                    .then(res => {
+                                                        console.log(res);
+                                                        window.location.reload();
+                                                    })
                                                     .catch(err => console.log(err))
                                             }
                                         >
