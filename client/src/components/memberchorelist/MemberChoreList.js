@@ -15,6 +15,7 @@ import { Accordion } from "react-bootstrap";
 import API from "../../utils/API";
 // Date formatting
 import { format } from "date-fns";
+import SubNav from "../layout/SubNav";
 // import { Link } from "react-router-dom";
 import { setTasksAction } from "../../actions/chorelistActions";
 import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
@@ -121,6 +122,11 @@ class MemberChoreList extends Component {
         const { user } = this.props.auth;
 
         return (
+
+            //make chorelist here for each given householdmember, maybe a table?
+            // or maybe a list most likely
+            <>
+            <SubNav />
             <Container>
                 <Row>
                     <Col>
@@ -203,6 +209,7 @@ class MemberChoreList extends Component {
                     </Col>
                 </Row>
             </Container>
+            </>
         );
     }
 }

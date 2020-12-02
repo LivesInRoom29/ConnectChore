@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Container, Col, Row } from "react-bootstrap";
 import "./Dashboard.css";
+import SubNav from "../layout/SubNav";
 
 class Dashboard extends Component {
     onLogoutClick = e => {
@@ -18,8 +19,11 @@ class Dashboard extends Component {
 
         return (
             <>
+                <SubNav />
                 <Container className="dashboard-container">
                     <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
+                    <br />
+                    <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for accomplishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
                     <br />
                     <br />
                     <Row>
