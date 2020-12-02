@@ -89,11 +89,11 @@ class TaskDropDown extends Component {
         <>
         <SubNav />
             <Form>
-                <h4>
+                {/* <h4>
                     <p className="text-body">
                         Add a task to your choreslist.
                     </p>
-                </h4>
+                </h4> */}
                 <Form.Row className="dropdown-row">
                     <Form.Group as={Col} md="9" xs="8" controlId="formTask">
                         <Form.Label>Pick a task:</Form.Label>

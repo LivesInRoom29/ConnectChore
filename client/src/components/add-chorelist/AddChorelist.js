@@ -25,6 +25,7 @@ class AddChorelist extends Component {
 
     const chorelistEditor = choreListID ? (
       <>
+        <h4>Add a task to your choreslist.</h4>
         <TaskDropDown
           choreListToEdit={choreListID}
         />
@@ -94,7 +95,7 @@ class AddChorelist extends Component {
                     as="select"
                     name="reward"
                     value={this.props.reward}
-                    onChange={this.handleInputChange}
+                    onChange={this.props.handleInputChange}
                   >
                     {/* Map the household members to the drop-down */}
                     {
