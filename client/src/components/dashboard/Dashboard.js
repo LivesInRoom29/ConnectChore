@@ -23,6 +23,8 @@ class Dashboard extends Component {
                 <Container className="dashboard-container">
                     <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
                     <br />
+                    <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for accomplishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
+                    <br />
                     <br />
                     <Row>
                         <Col lg={true}><Link to="/addchorelist"><div className="module mid animate">
