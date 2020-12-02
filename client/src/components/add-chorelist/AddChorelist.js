@@ -25,7 +25,7 @@ class AddChorelist extends Component {
 
     const chorelistEditor = choreListID ? (
       <>
-        <h4>Add a task to your choreslist.</h4>
+        <h4>Add tasks to your choreslist.</h4>
         <TaskDropDown
           choreListToEdit={choreListID}
         />
@@ -35,11 +35,8 @@ class AddChorelist extends Component {
         />
       </>
     ) : (
-        <>
-          <h2>Your Chorelist</h2>
           <h3>No chorelists to display!</h3>
-        </>
-      )
+    );
 
     return (
       <>
@@ -80,8 +77,9 @@ class AddChorelist extends Component {
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col} md="6" controlId="formDatePicker">
-                  <Form.Label className="mr-5">Select a date:</Form.Label>
+                  <Form.Label className="mr-5">Select a start date:</Form.Label>
                   <DatePicker
+                    utcOffset={0}
                     selected={this.props.startDate}
                     onChange={this.props.handleChange} //only when value has changed
                     dateFormat="MM/dd/yyyy"
@@ -121,6 +119,7 @@ class AddChorelist extends Component {
             </Form>
           </Col>
           <Col className="chorelist-editor" md={8}>
+            <h2>Your Chorelist</h2>
             {chorelistEditor}
           </Col>
         </Row>
