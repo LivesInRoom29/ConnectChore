@@ -27,7 +27,7 @@ p {
     letter-spacing: 1.5px;
   }
 
-.waves-effect.waves-green.waves-ripple:hover {
+.button-hove.waves-effect.waves-green.waves-ripple:hover {
     background-color: #42b984;
     color: #ffffff;
     width: 150px;    
@@ -36,6 +36,10 @@ p {
     border-radius: 30px;
     border: none;
     letter-spacing: 1.5px;
+  }
+
+  .button-hover:hover {
+    opacity: 0.5;
   }
 
   
