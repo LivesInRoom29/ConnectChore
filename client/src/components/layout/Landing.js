@@ -42,7 +42,7 @@ class Landing extends Component {
           </Row>
           {/* Buttons */}
           <Row>
-            <Col lg={12} className="d-flex justify-content-md-center mt-5">
+            <Col lg={12} className="d-flex justify-content-center mt-5 text-center">
               <br />
               <br />
               <Row>
@@ -57,7 +57,7 @@ class Landing extends Component {
                       color: "white",
                       letterSpacing: "1.5px"
                     }}
-                    className="btn btn-lg button-hover"
+                    className="btn btn-lg button-hover mb-5"
                   >Sign Up</Link>
                 </Col>
                 <Col lg={6}>
@@ -72,7 +72,7 @@ class Landing extends Component {
                       border: "2px solid",
                       letterSpacing: "1.5px"
                     }}
-                    className="btn btn-lg button-hover"
+                    className="btn btn-lg button-hover mb-5"
                   >Log In</Link>
                 </Col>
               </Row>
