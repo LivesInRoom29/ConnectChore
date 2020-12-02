@@ -111,9 +111,21 @@ class AddChorelist extends Component {
                 </Form.Group>
               </Form.Row>
               <Button
-                variant="primary"
+                // variant="primary"
                 type="submit"
                 onClick={this.props.addChoreListClick}
+                className="btn btn-lg button-hover"
+                            style={{
+                                width: "150px",
+                                height: "50px",
+                                borderRadius: "30px",
+                                fontSize: "15px",
+                                padding: "12px",
+                                backgroundColor: "#42b984",
+                                color: "white",
+                                border: "none",
+                                letterSpacing: "1.5px"
+                              }}
               >
                 Add list
                   </Button>

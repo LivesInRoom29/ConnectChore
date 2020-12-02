@@ -16,7 +16,17 @@ p {
 
 
 /* BUTTONS */
-.waves-effect.waves-green.waves-ripple {
+.button-hover:hover {
+  box-shadow: 0px 0px 7px 7px #cccccc;
+}
+
+.button-hover2:hover {
+  box-shadow: 0px 0px 7px 7px #cccccc;
+  background-color: white;
+}
+
+
+/* .waves-effect.waves-green.waves-ripple {
     background-color: #42b984;
     color: #ffffff;
     width: 150px;
@@ -36,7 +46,7 @@ p {
     border-radius: 30px;
     border: none;
     letter-spacing: 1.5px;
-  }
+  } */
 
   
 /* FOOTER */
@@ -48,7 +58,7 @@ p {
     text-align: center;
     height: 80px;
     width: 100%;
-    position: fixed;
+    position: sticky;
     bottom: 0;
 }
 

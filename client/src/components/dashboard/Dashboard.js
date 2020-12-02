@@ -48,16 +48,21 @@ class Dashboard extends Component {
                     <Row>
                         <Col><Link
                             to="/householdmembers"
-                            className="btn btn-large waves-effect waves-green waves-ripple hoverable"
+                            className="btn btn-lg button-hover"
                             style={{
                                 width: "200px",
-                                padding: "16px",
+                                height: "50px",
+                                borderRadius: "30px",
+                                padding: "12px",
+                                backgroundColor: "#42b984",
+                                color: "white",
                                 letterSpacing: "1.5px"
-                            }}
+                              }}
                         >Add Members</Link></Col>
                         <Col><button
                             style={{
                                 width: "150px",
+                                height: "50px",
                                 fontSize: "15px",
                                 borderRadius: "30px",
                                 border: "2px solid",
@@ -66,7 +71,7 @@ class Dashboard extends Component {
                                 letterSpacing: "1.5px"
                             }}
                             onClick={this.onLogoutClick}
-                            className="btn btn-large waves-effect waves-brown waves-ripple hoverable accent-3"
+                            className="btn btn-lg button-hover2"
                         >
                             Logout
                         </button></Col>

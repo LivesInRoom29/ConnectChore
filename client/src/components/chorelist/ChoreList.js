@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 // Bootstrap components
-import Container from 'react-bootstrap/Container';
+import { Container, Col, Row } from "react-bootstrap";
 // Date picker
 import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
@@ -166,7 +166,11 @@ class ChoreList extends Component {
 
         return (
             <>
+            <SubNav />
                 <Container>
+                    <br />
+                    <br />
+                    <br />
                     <ChoreListOptions
                         handleInputChange={this.handleInputChange}
                         option={this.state.listOption}
@@ -174,6 +178,9 @@ class ChoreList extends Component {
                 </Container>
                 <Container>
                     {this.renderChoreListOption()}
+                    <br />
+                    <br />
+                    <br />
                 </Container>
             </>
         );
