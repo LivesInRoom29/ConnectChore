@@ -12,8 +12,9 @@ import API from "../../utils/API";
 import ChoreListOptions from "../chorelist-options/ChoreListOptions";
 import DropdownGroup from "../dropdown-group/DropdownGroup";
 import filterDeleted from "../../utils/filterDeleted";
-
+import "../../App.css";
 import "./choreList.css";
+import SubNav from "../layout/SubNav";
 import AddChorelist from "../add-chorelist/AddChorelist";
 
 class ChoreList extends Component {

@@ -8,6 +8,15 @@ nav img {
 
 }
 
+.nav-wrapper {
+    background-color: #42b984;
+}
+
+#subnav {
+    height: 45px;
+}
+
+
 @media(max-width: 580px) {
     nav img {
         height: 45px;
