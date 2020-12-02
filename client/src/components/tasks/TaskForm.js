@@ -180,7 +180,7 @@ class TaskForm extends Component {
                                 ))}
                             </ListGroup>
                         ) : (
-                            <h3>No tasks to display!</h3>
+                            <h4><br />No tasks to display!</h4>
                         )}
                     </Col>
                 </Row>

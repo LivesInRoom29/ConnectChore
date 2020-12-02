@@ -1,9 +1,3 @@
-.dashboard-container {
-  margin-top: 75px;
-  padding: 0px 400px;
-  vertical-align: middle;
-}
-
 h3.dashboard {
   color: #00adef;
   font-size: 36px;
@@ -50,62 +44,3 @@ h3.dashboard {
   .fa-list-ol, .fa-trophy, .fa-check, .fa-dice {
     font-size: 50px;
   }
-
-
-  /* MEDIA QUERIES */
-@media(max-width: 768px) {
-  .module {
-    /* background: 
-      linear-gradient(
-        rgba(0, 0, 0, 0.4),
-        rgba(0, 0, 0, 0.4)
-      ),
-      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg); */
-    background-color: #00adef;
-    background-size: cover;
-    border-radius: 20px;
-    width: 100%;
-    height: 250px;
-    margin: 20px 100px 0px 0px;
-    position: relative;
-  }
-
-  .module:hover {
-    background-color: #08124B;
-}
-
-  .dashboard-btn {
-    text-align: center;
-  }
-}
-
-.animate:hover {
-  animation: pulse;
-  animation-duration: 1s;
-}
-
-@media(max-width: 580px) {
-  .module {
-    /* background: 
-      linear-gradient(
-        rgba(0, 0, 0, 0.4),
-        rgba(0, 0, 0, 0.4)
-      ),
-      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg); */
-    background-color: #00adef;
-    background-size: cover;
-    border-radius: 20px;
-    width: 100%;
-    height: 250px;
-    margin: 20px 100px 0px 0px;
-    position: relative;
-  }
-
-  .module:hover {
-    background-color: #08124B;
-}
-
-  .dashboard-btn {
-    text-align: center;
-  }
-}

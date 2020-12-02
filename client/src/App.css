@@ -44,23 +44,18 @@ p {
     background: #999999;
     color: #fff;
     font-family: Poppins, sans-serif;
+    font-size: 20px;
     text-align: center;
-    height: 75px;
+    height: 80px;
     width: 100%;
-    position: sticky;
+    position: fixed;
     bottom: 0;
-    /* flex: 1 1 auto; */
 }
 
-  h4 .footer-style {
+  div a {
     color: white;
   }
 
-  h4 .footer-style:hover {
-    color: teal; 
-    text-decoration: none;
-  }
-
-  h4 .footer-style:hover:visited {
-    color: teal; 
+  div a:hover:visited {
+    color: teal;
   }
