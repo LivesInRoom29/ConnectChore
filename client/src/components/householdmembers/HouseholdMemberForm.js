@@ -11,8 +11,10 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
+import "../../App.css";
 // utils
 import filterDeleted from "../../utils/filterDeleted";
+import SubNav from "../layout/SubNav";
 
 class HouseholdMemberForm extends Component {
 
@@ -31,6 +33,14 @@ class HouseholdMemberForm extends Component {
         const { user } = this.props.auth
 
         API.getHouseholdMembers(user.id)
+            .then(res =>
+                //console.log(res)
+
+                this.setState(
+                    {
+                        householdMembers: res.data
+                    }
+                ))
             .then(res => {
 
                 //console.log(res)
@@ -48,16 +58,16 @@ class HouseholdMemberForm extends Component {
     // get the input values and add to state
     handleInputChange = event => {
         event.preventDefault();
-        
+
         this.setState(
-            { 
+            {
                 ...this.state,
                 [event.target.name]: event.target.value
                 // hhm name
             }
         );
     };
-    
+
     // TEST: when clicking the ADD HOUSEHOLD MEMBER button, does the HHM successfully get added to householdmember for the logged in user only?
     addHouseholdMemberClick = e => {
         // leaving commented out to refresh the whole page for now
@@ -72,9 +82,9 @@ class HouseholdMemberForm extends Component {
                 name: householdmember,
                 userId: user.id
             }
-        ).then( res => console.log(res))
-        .catch(err => console.log(err));
-            
+        ).then(res => console.log(res))
+            .catch(err => console.log(err));
+
     };
 
     // RENDER TEST:
@@ -86,75 +96,86 @@ class HouseholdMemberForm extends Component {
         const { user } = this.props.auth;
 
         return (
+            <>
+            <SubNav />
             <Container>
+                <br />
+                <br />
+                <br />
+                <br />
                 <Row>
                     <Col>
                         <Form>
-                            <h4>
-                                <b>Hey there,</b> {user.name.split(" ")[0]}
-                                <p className="text-body">
-                                    Who can do the dirty work?
-                                </p>
-                            </h4>
+                            <h3>Manage Your Household Members</h3>
+                            <p>Once you've added household members, you'll be able to assign tasks and create a chore list for them.</p>
+                            <br />
                             <Form.Row>
                                 <Form.Group as={Col} md="6" controlId="formHouseholdMember">
-                                    <Form.Label>Add a household member:</Form.Label>
-                                    <Form.Control 
+                                    <Form.Label></Form.Label>
+                                    <Form.Control
                                         type="input"
                                         name="householdmember"
                                         value={this.state.householdmember}
-                                        placeholder="Enter a name here" 
+                                        placeholder="Enter a name here"
                                         onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
                             </Form.Row>
-                            <Button 
-                                variant="primary" 
+                            <Button className="btn btn-large waves-effect waves-green waves-ripple hoverable"
                                 type="submit"
-                                onClick={this.addHouseholdMemberClick}
-                            >
-                                Add household member
+                                onClick={this.addHouseholdMemberClick}>
+                                Add Member
                             </Button>
                         </Form>
                     </Col>
                 </Row>
+                <br />
+                <br />
+                <br />
                 <Row>
                     <Col md={8}>
+                        <h3>List of Household Members</h3>
+                        {/* Eventually filter down to non-deleted and map that array */}
                         <h2>Household Members</h2>
                         {this.state.householdMembers.length ? (
                             <ListGroup variant="flush">
                                 {this.state.householdMembers.map(member => (
-                                    <ListGroup.Item 
-                                        key={member._id} 
-                                        data-id={member._id} 
+                                    <ListGroup.Item
+                                        key={member._id}
+                                        data-id={member._id}
                                         className="align-items-center"
                                     >
                                         {member.name}
                                         <Button
                                             variant="light"
-                                            className="float-right text-danger" 
+                                            className="float-right text-danger"
                                             onClick={
                                                 () => API.deleteHouseholdMember(
                                                     member._id,
-                                                    { 
+                                                    {
                                                         isDeleted: true
                                                     }
                                                 )
-                                                .then(res => console.log(res))
-                                                .catch(err => console.log(err))
+                                                    .then(res => console.log(res))
+                                                    .catch(err => console.log(err))
                                             }
                                         >
                                             <span >X</span>
                                         </Button>
-                                </ListGroup.Item>
+                                    </ListGroup.Item>
                                 ))}
                             </ListGroup>
                         ) : (
-                            <h3>No household members to display!</h3>
-                        )}
+                                <h3>No household members to display!</h3>
+                            )}
                     </Col>
                 </Row>
+                <br />
+                <br />
+                <br />
+                <br />
             </Container>
+            </>
         );
     }
 }
