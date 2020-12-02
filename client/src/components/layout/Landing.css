@@ -17,12 +17,16 @@ h1 {
 
 h5 {
   color: #ffffff;
-  font-size: 24px;
+  font-size: 24px !important;
+}
+
+.button-hover:hover {
+  opacity: 0.5;
 }
 
 
 /* MEDIA QUERIES */
-@media(max-width: 992px) {
+/* @media(max-width: 992px) {
   .landing-container {
     padding: 0px 200px;
     vertical-align: middle;
@@ -41,4 +45,4 @@ h5 {
     padding: 0px 20px;
     vertical-align: middle;
 }
-}
+} */
