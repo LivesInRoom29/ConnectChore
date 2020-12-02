@@ -9,6 +9,7 @@ class DropdownChorelists extends Component {
 
   render() {
     const filteredChoreList = this.props.choreLists.filter(list => list.completedBy === this.props.householdMemberId);
+
     return (
       <Form.Group as={Col} md="6" controlId="formChorelists">
         <Form.Label>Pick a chorelist:</Form.Label>
@@ -20,15 +21,19 @@ class DropdownChorelists extends Component {
         >
           {/* Map the chorelists to the drop-down */}
           {
-              filteredChoreList.map(list => (
-              <option
-                key={list._id}
-                value={list._id}
-              >
-                {format(new Date(list.date), "MM/dd/yyyy")}
-              </option>
-            ))
-            }
+              filteredChoreList.map(list => {
+                console.log("list.date:", list.date);
+                console.log("newDate(list.date): ", format(new Date(list.date), "MM/dd/yyyy"));
+              return (
+                <option
+                  key={list._id}
+                  value={list._id}
+                >
+                  {format(new Date(list.date), "MM/dd/yyyy")}
+                </option>
+              )
+            })
+          }
         </Form.Control>
       </Form.Group>
     )
