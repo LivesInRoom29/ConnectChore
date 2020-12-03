@@ -118,10 +118,10 @@ class ChoreList extends Component {
     // this offsetDate should prevent the date saved being 1 day less than the date selected
     handleDateChange = event => {
         console.log("startdate before: ", this.state.startDate);
-        const offsetDate = new Date(event.getTime() - (event.getTimezoneOffset() * 60000));
+        //const offsetDate = new Date(event.getTime() - (event.getTimezoneOffset() * 60000));
         this.setState(
             {
-                startDate: offsetDate
+                startDate: event
             },
             () => {
                 console.log("startdate after: ", this.state.startDate);
