@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 // Bootstrap components
-import { Container, Col, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 // Date picker
 import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
