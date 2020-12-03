@@ -48,6 +48,20 @@ form, button {
   border-radius: 30px;
   font-size: 16px;
 }
+.button-hove.waves-effect.waves-green.waves-ripple:hover {
+    background-color: #42b984;
+    color: #ffffff;
+    width: 150px;    
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    border-radius: 30px;
+    border: none;
+    letter-spacing: 1.5px;
+  }
+
+  .button-hover:hover {
+    opacity: 0.5;
+  }
 
   
 /* FOOTER */
