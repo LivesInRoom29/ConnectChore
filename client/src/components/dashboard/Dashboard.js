@@ -7,6 +7,7 @@ import { Container, Col, Row } from "react-bootstrap";
 import "./Dashboard.css";
 import SubNav from "../layout/SubNav";
 import "../../App.css";
+import Clock from "./Clock";
 
 class Dashboard extends Component {
     onLogoutClick = e => {
@@ -29,7 +30,6 @@ class Dashboard extends Component {
                     <br />
                     <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
                     <br />
-                    <br />
                     <Row>
                         <Col><Link to="/addchorelist">
                             <div className="module mid animate">
@@ -38,6 +38,7 @@ class Dashboard extends Component {
                         <Col><Link to="/game"><div className="module mid animate">
                             <h2><i className="fas fa-dice"></i><br />Play Game</h2></div></Link></Col>
                     </Row>
+                    <br />
                     <Row>
                         <Col><Link to="/rewards"><div className="module mid animate">
                             <h2><i className="fas fa-trophy"></i><br />Add Rewards</h2></div></Link></Col>
@@ -45,28 +46,32 @@ class Dashboard extends Component {
                             <h2><i className="fas fa-check"></i><br />Add Tasks</h2></div></Link></Col>
                     </Row>
                     <br />
+                    <br />
                     <Row>
                         <Col><Link
                             to="/householdmembers"
                             className="btn btn-lg button-hover"
                             style={{
-                                width: "200px",
+                                width: "220px",
                                 height: "50px",
+                                fontSize: "15px",
+                                textTransform: "uppercase",
                                 borderRadius: "30px",
                                 padding: "12px",
                                 backgroundColor: "#42b984",
                                 color: "white",
                                 letterSpacing: "1.5px"
                               }}
-                        >Add Members</Link></Col>
-                        <Col><button
+                        ><i class="fas fa-plus"></i>&nbsp;Add Members</Link></Col>
+                        {/* <Col><button
                             style={{
                                 width: "150px",
                                 height: "50px",
                                 fontSize: "15px",
+                                textTransform: "uppercase",
                                 borderRadius: "30px",
                                 border: "2px solid",
-                                padding: "14px",
+                                padding: "12px",
                                 color: "#42b984",
                                 letterSpacing: "1.5px"
                             }}
@@ -74,7 +79,7 @@ class Dashboard extends Component {
                             className="btn btn-lg button-hover2"
                         >
                             Logout
-                        </button></Col>
+                        </button></Col> */}
                         <Col></Col>
                         <Col></Col>
                         <Col></Col>

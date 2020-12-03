@@ -5,13 +5,8 @@ h3.dashboard {
 }
 
 .module {
-    /* background: 
-      linear-gradient(
-        rgba(0, 0, 0, 0.4),
-        rgba(0, 0, 0, 0.4)); */
-      /* ),
-      url(https://images.pexels.com/photos/4239113/pexels-photo-4239113.jpeg); */
-    background-color: #00adef;
+    background: rgb(0,173,239);
+    background: radial-gradient(circle, rgba(0,173,239,1) 0%, rgba(8,18,75,1) 100%);
     background-size: cover;
     border-radius: 20px;
     width: 100%;
@@ -21,7 +16,7 @@ h3.dashboard {
   }
 
   .module:hover {
-      background-color: #08124B;
+      background: #08124B;
   }
   
   .mid h2 {
@@ -35,10 +30,6 @@ h3.dashboard {
     left: 50%;
     font-size: 2rem;
     transform: translate(-50%, -50%);
-  }
-
-  .waves-effect.waves-brown.waves-ripple:hover {
-    background-color: white;
   }
 
   .fa-list-ol, .fa-trophy, .fa-check, .fa-dice {
