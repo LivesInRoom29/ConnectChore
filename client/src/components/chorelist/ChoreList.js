@@ -6,8 +6,8 @@ import { setTasksAction } from "../../actions/chorelistActions";
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
 // Date picker
-import { format } from "date-fns";
 import formatISO from 'date-fns/formatISO';
+import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
@@ -119,6 +119,7 @@ class ChoreList extends Component {
     handleDateChange = event => {
         console.log("startdate before: ", this.state.startDate);
         //const offsetDate = new Date(event.getTime() + (event.getTimezoneOffset() * 60000));
+        //const offsetDate = new Date(event.getTime() - (event.getTimezoneOffset() * 60000));
         this.setState(
             {
                 startDate: event
