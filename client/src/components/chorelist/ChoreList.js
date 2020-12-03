@@ -7,6 +7,7 @@ import { setTasksAction } from "../../actions/chorelistActions";
 import Container from 'react-bootstrap/Container';
 // Date picker
 import { format } from "date-fns";
+import formatISO from 'date-fns/formatISO';
 import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
@@ -136,7 +137,8 @@ class ChoreList extends Component {
 
         this.props.setTasks([]);
 
-        let mainDate = format(this.state.startDate, "MM/dd/yyyy");
+        let mainDate = formatISO(new Date(this.state.startDate));
+        // let mainDate = format(this.state.startDate, "MM/dd/yyyy");
         const { user } = this.props.auth;
         const { assignedto, reward } = this.state;
 
