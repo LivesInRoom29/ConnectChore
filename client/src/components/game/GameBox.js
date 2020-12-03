@@ -1,60 +1,106 @@
-import React, { Component } from "react";
 import { connect } from "react-redux";
+import React, { Component } from "react";
 // API calls
 import API from "../../utils/API";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import GridCell from "./GridCell";
-
 import Form from "react-bootstrap/Form";
-import {  resetGame } from "../../actions/gameActions";
-// import {createDefaultBoard} from "../../utils/gameHelper";
-import filterDeleted from "../../utils/filterDeleted";
+import { dropTile } from "../../actions/gameActions";
 import "./game.css";
-import { createDefaultBoard } from "../../utils/gameHelper";
 
 class GameBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      player1: 1,
-      player1Id: "",
-      player2: 2,
-      player2Id: "",
-      currentPlayer: "",
-      board: [],
-      box: createDefaultBoard(),
+      player1: {
+        color: "red"
+      },
+      player2: {
+        color: "yellow"
+      },
+      currentPlayer: {
+        color: ""
+      },
       householdMembers: [],
-      startGame: false,
-      gameOver: false,
-      message: "",
     };
-    this.selectPlayer = this.selectPlayer.bind(this);
-    this.playGame = this.playGame.bind(this);
+    this.initGame = this.initGame.bind(this);
   }
 
-  
-  initGame() {
-
-    const box = [];
-    for (let y = 5; y >= 0; y--) {
-      const row = [];
-      for (let x = 0; x < 7; x++) {
-        row.push({
-          color: 'white'
-        });
-      }
-  
-      box.push(row);
-    }
-    
+  initGame(){
     this.setState({
-      box,
       currentPlayer: this.state.player1,
-      gameOver: false,
-      startGame: true,
-      message: ''
     });
+    
   }
+ 
+ 
+  createCells() {
+
+  
+    return this.props.game.box.map((row, rowNum) => (
+      // <Container className="game-container">
+      <div className="game-row" key={rowNum}>
+        {row.map((cell, cellNum) => (
+          <GridCell
+            color={cell.color}
+            x={cellNum}
+            y={rowNum}
+            key={`${cellNum}${rowNum}`}
+          />
+        ))}
+      </div>
+      // </Container>
+    ));
+    
+  }
+
+  selectPlayer = (event) => {
+    console.log(event.target.value);
+    console.log(event.target.name);
+    const selectedPlayer = this.state.householdMembers.find((member) => {
+      return event.target.value === member._id
+    });
+    selectedPlayer.color="player1" === event.target.name ? "red" : "blue";
+    this.setState({
+      currentPlayer:selectedPlayer
+    });
+    console.log( selectedPlayer);
+    // return this.state.currentPlayer === this.state.player1
+    //   ? this.state.player2
+    //   : this.state.player1;
+    
+  }
+
+ 
+  // handlePlayerChange = (event) => {
+  //   let currentPlayerColor= this.state.currentPlayer.color;
+  //   let p1Color = this.state.player1.color;
+  //   let p2Color = this.state.player2.color;
+   
+  //   if (currentPlayerColor !== undefined) {
+      
+  //   }
+   
+   
+  //   // return (this.state.currentPlayer === this.player1) ? this.state.player2: this.state.player1;
+    
+    
+  // };
+    
+ 
+
+  // get the input values and add to state
+  //   handlePlayerChange = event => {
+  //     event.preventDefault();
+
+  //     this.setState(
+  //         {
+  //             ...this.state,
+  //             [event.target.name]: event.target.value
+
+  //         }
+  //     );
+  // };
 
   componentDidMount() {
     const { user } = this.props.auth;
@@ -66,143 +112,25 @@ class GameBox extends Component {
     });
 
     promisetwo.then((result) => {
-      const undeletedHMs = filterDeleted(result.data);
-      const firstHouseholdMember = undeletedHMs[0] ? undeletedHMs[0]._id : "";
-
-      // set the householdMembers state to be the undeletedHMs and
-      // the assignedto state to be the first household member in that array
-      this.setState(
-          {
-
-              householdMembers: undeletedHMs,
-              player1Id: firstHouseholdMember,
-              player2Id: firstHouseholdMember,
-          }
-      )
-      
-  console.log(this.state.householdMembers);
+      this.setState({
+        householdMembers: result.data,
+      });
     });
 
-
-  };
-
-  togglePlayer() {
-    return this.state.currentPlayer === this.state.player1
-      ? this.state.player2
-      : this.state.player1;
-  };
-
-
-
-  playGame() {
-    if (!this.state.gameOver) {
-      // Place piece on board
-      let board = this.state.board;
-      for (let y = 5; y >= 0; y--) {
-        if (!board[y][x]) {
-          board[y][x] = this.state.currentPlayer;
-          break;
-        }
-      }
-
-      // Check status of board
-      let result = this.checkAll(board);
-      if (result === this.state.player1) {
-        this.setState({
-          board,
-          gameOver: true,
-          message: "Player 1 (red) wins!",
-        });
-      } else if (result === this.state.player2) {
-        this.setState({
-          board,
-          gameOver: true,
-          message: "Player 2 (yellow) wins!",
-        });
-      } else if (result === "draw") {
-        this.setState({
-          board,
-          gameOver: true,
-          message: "Draw game.",
-        });
-      } else {
-        this.setState({
-          board,
-          currentPlayer: this.togglePlayer(),
-        });
-      }
-    } else {
-      this.setState({
-        message: "Game over. Please start a new game.",
-      });
-    }
+    console.log(this.props);
   }
-
-  createCells() {
-
-    return this.props.game.box.map((row, rowNum) => (
-      //  <Container className="game-container">
-      <div className="game-row" key={rowNum}>
-        {row.map((cell, cellNum) => (
-          <GridCell
-            color={cell.color}
-            x={cellNum}
-            y={rowNum}
-            key={`${cellNum}${rowNum}`}
-          />
-        ))}
-      </div>
-      //  {/* </Container> */}
-    ));
-  }
-
-
-  selectPlayer(event) {
-    event.preventDefault();
-    console.log(event.target.value);
-    console.log(event.target.name);
-    // let selectedPlayer2 = this.state.householdMembers.find((member) => {
-    //   return event.target.value === member._id;
-    // });
-    // selectedPlayer2 = "player2._id" === event.target.name;
-    try {
-      this.setState({
-        [event.target.name]: event.target.value,
-      }, ()=> {
-        console.log("state 2 ", this.state.player2Id);
-        console.log("state 1", this.state.player1Id);
-      });
-      // console.log("state is ", this.state);
-      console.log("name is", event.target.name);
-      console.log("value is", event.target.value);
-    } catch {
-      console.error("error");
-    };
-    
-    
-    
-  };
-
-  
-
-  componentWillMount() {
-    this.initGame();
-  }
-
-  render() {
+  render() {  
     return (
       <div>
-        <Button onClick={this.playGame} className="Start Game">
-          New Game
-        </Button>
+        <Button onClick={this.initGame} className="Start Game">Start Game</Button>
         <Form>
           <Form.Row>
             <Form.Group controlId="formHouseholdMember">
               <Form.Label>Pick Player 1:</Form.Label>
               <Form.Control
                 as="select"
-                name="player1Id"
-                value={this.state.player1Id}
+                name="player1"
+                value={this.state.player1._id}
                 // placeholder="Wash the dishes"
                 onChange={this.selectPlayer}
               >
@@ -214,14 +142,12 @@ class GameBox extends Component {
                 ))}
               </Form.Control>
             </Form.Group>
-            <br>
-            </br>
             <Form.Group controlId="formHouseholdMember">
               <Form.Label>Pick Player 2:</Form.Label>
               <Form.Control
                 as="select"
-                name="player2Id"
-                value={this.state.player2Id}
+                name="player2"
+                value={this.state.player2._id}
                 // placeholder="Wash the dishes"
                 onChange={this.selectPlayer}
               >
@@ -235,10 +161,9 @@ class GameBox extends Component {
             </Form.Group>
           </Form.Row>
         </Form>
-        <div className="grid">
-          <div>{this.createCells()}</div>
-        </div>
-        <p>{this.state.message}</p>
+        <div className="grid">        
+        <div>{this.createCells()}</div>
+      </div>
       </div>
     );
   }
@@ -247,13 +172,4 @@ class GameBox extends Component {
 const mapStateToProps = (state) => {
   return state;
 };
-
-const dispatchToProps = (dispatch) => {
-  return {
-    initGame: () => dispatch(resetGame()),
-  };
-};
-
-export default connect(mapStateToProps, dispatchToProps)(GameBox);
-
-// 
+export default connect(mapStateToProps, { dropTile })(GameBox);
