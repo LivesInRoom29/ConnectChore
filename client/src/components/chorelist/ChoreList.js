@@ -112,6 +112,21 @@ class ChoreList extends Component {
         );
     };
 
+    //where event is the date selected from the date-picker
+    // this offsetDate should prevent the date saved being 1 day less than the date selected
+    handleDateChange = event => {
+        console.log("startdate before: ", this.state.startDate);
+        const offsetDate = new Date(event.getTime() - (event.getTimezoneOffset() * 60000));
+        this.setState(
+            {
+                startDate: offsetDate
+            },
+            () => {
+                console.log("startdate after: ", this.state.startDate);
+            }
+        )
+    };
+
     // in the AddChoreList component
     // this function is called when the Add Chorelist Button is clicked.
     // adds the new chorelist to the db and the _id to state
@@ -150,6 +165,7 @@ class ChoreList extends Component {
                     choreListToEdit={this.state.choreListToEdit}
                     handleChange={this.handleChange}
                     handleInputChange={this.handleInputChange}
+                    handleDateChange={this.handleDateChange}
                     addChoreListClick={this.addChoreListClick}
                 />
             )
