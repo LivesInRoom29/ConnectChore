@@ -5,7 +5,8 @@ import { DROP_TILE, RESET_GAME, SET_PLAYER, SET_WINNER } from "../actions/types"
 
 
 export const initialGameState = {
-    current: {}, // can also be black
+    player1: 1,
+    player2: 2,
     board: [
         [], //col 1
         [], //col 2

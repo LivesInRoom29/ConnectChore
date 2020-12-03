@@ -9,15 +9,6 @@ margin-top: 0;
 margin-bottom: -6px;
 };
 
-.cell.p1 {
-    background-color: black;
-    color: white;
-}
-
-.cell.p2 {
-    background-color: red;
-    color: black
-}
 
 /* .game-container{
     /* margin-top: 50px; */

@@ -75,7 +75,7 @@ class App extends Component {
               <PrivateRoute exact path="/template" component={Template} />
               <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
               <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
-              <PrivateRoute exact path="/connectchoregame" component={GameBox} />
+              <PrivateRoute exact path="/game" component={GameBox} />
 
             </Switch>
             <Footer />
