@@ -7,7 +7,6 @@ import { Container, Col, Row } from "react-bootstrap";
 import "./Dashboard.css";
 import SubNav from "../layout/SubNav";
 import "../../App.css";
-import Clock from "./Clock";
 
 class Dashboard extends Component {
     onLogoutClick = e => {
