@@ -96,7 +96,7 @@ class TaskDropDown extends Component {
                 </h4> */}
                 <Form.Row className="dropdown-row">
                     <Form.Group as={Col} md="9" xs="8" controlId="formTask">
-                        <Form.Label>Pick a task:</Form.Label>
+                        <Form.Label>Pick a task to add:</Form.Label>
                         <Form.Control
                             as="select"
                             name="choosetask"
