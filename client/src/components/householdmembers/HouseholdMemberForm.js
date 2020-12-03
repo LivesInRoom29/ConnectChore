@@ -181,15 +181,20 @@ class HouseholdMemberForm extends Component {
                                             className="align-items-center"
                                             style={{
                                                 backgroundColor: 'lightblue',
+                                                borderRadius: 8,
+                                                fontSize: '18px',
+                                                fontfamily: "Poppins",
                                             }}
                                         >
                                             {member.name}
                                             <Button
-                                                variant="light"
-                                                className="float-right text-danger"
-                                                //  style={{
-                                                //     hover: "blue"
-                                                //  }}
+                                                variant="danger"
+                                                className="float-right text-light"
+                                                style={{
+                                                    // backgroundColor: "grey",
+                                                    borderColor: "black",
+                                                    
+                                                }}
                                                 onClick={
                                                     () => API.deleteHouseholdMember(
                                                         member._id,
