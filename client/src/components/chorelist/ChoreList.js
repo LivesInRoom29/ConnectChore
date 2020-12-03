@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { setTasksAction } from "../../actions/chorelistActions";
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
 // Date picker
@@ -133,6 +134,8 @@ class ChoreList extends Component {
     addChoreListClick = (e) => {
         e.preventDefault();
 
+        this.props.setTasks([]);
+
         let mainDate = format(this.state.startDate, "MM/dd/yyyy");
         const { user } = this.props.auth;
         const { assignedto, reward } = this.state;
@@ -147,7 +150,7 @@ class ChoreList extends Component {
         ).then(res => {
             this.setState({ choreListToEdit: res.data._id });
         })
-            .catch(err => console.log(err));
+        .catch(err => console.log(err));
     };
 
     // when page loads, this will return null as this.state.listOption will be ""
@@ -171,7 +174,7 @@ class ChoreList extends Component {
             )
         } else if (this.state.listOption === "view") {
             return (
-                <DropdownGroup/>
+                <DropdownGroup />
             )
         } else {
             return null
@@ -201,9 +204,17 @@ ChoreList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    tasks: state.chorelist.tasks
 });
 
+const mapDispatchToProps = (dispatch, props) => (
+    {
+        setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
+    }
+)
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(ChoreList);
