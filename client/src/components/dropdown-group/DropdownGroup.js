@@ -151,15 +151,18 @@ class DropdownGroup extends Component {
         return (
             <>
                 <Container>
+                    <br />
+                    <br />
+                    <br />
                     <Row>
                         <Col>
                             <Form>
                                 <h4>
-                                    <b>Hey there,</b> {user.name.split(" ")[0]}
                                     <p className="text-body">
-                                        Pick a household member to display chorelist.
+                                        Pick a household member to display a chorelist.
                                 </p>
                                 </h4>
+                                <br />
                                 <Form.Row>
                                     <DropdownMembers
                                         handleInputChange={this.handleInputChange}
@@ -174,9 +177,21 @@ class DropdownGroup extends Component {
                                     />
 
                                 </Form.Row>
+                                <br />
                                 {/* button to display lists for each houesholdmember*/}
-                                <Button
-                                    variant="primary"
+                                <Button className="btn btn-lg button-hover"
+                                style={{
+                                width: "250px",
+                                height: "50px",
+                                fontSize: "15px",
+                                textTransform: "uppercase",
+                                borderRadius: "30px",
+                                border: "none",
+                                padding: "12px",
+                                backgroundColor: "#42b984",
+                                color: "white",
+                                letterSpacing: "1.5px"
+                              }}
                                     type="submit"
                                     data-id={this.state.choreListToEdit}
                                     onClick={this.onClickShowChorelist}
@@ -189,7 +204,13 @@ class DropdownGroup extends Component {
                     </Row>
                 </Container>
                 <Container>
+                <br />
+                <br />
+                <br />
                     {chorelistEditor}
+                    <br />
+                    <br />
+                    <br />
                 </Container>
             </>
         );

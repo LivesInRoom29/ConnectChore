@@ -6,6 +6,7 @@ import { logoutUser } from "../../actions/authActions";
 import { Container, Col, Row } from "react-bootstrap";
 import "./Dashboard.css";
 import SubNav from "../layout/SubNav";
+import "../../App.css";
 
 class Dashboard extends Component {
     onLogoutClick = e => {
@@ -20,93 +21,72 @@ class Dashboard extends Component {
         return (
             <>
                 <SubNav />
-                <Container className="dashboard-container">
+                <Container>
+                <br />
+                <br />
+                <br />
                     <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
                     <br />
-                    <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for accomplishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
-                    <br />
+                    <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
                     <br />
                     <Row>
-                        <Col lg={true}><Link to="/addchorelist"><div className="module mid animate">
-                            <h2><i className="fas fa-list-ol"></i><br />Create Chorelist</h2></div></Link></Col>
-                        <Col lg={true}><Link to="/game"><div className="module mid animate">
+                        <Col><Link to="/addchorelist">
+                            <div className="module mid animate">
+                                <h2><i className="fas fa-list-ol"></i><br />Create Chorelist</h2>
+                            </div></Link></Col>
+                        <Col><Link to="/game"><div className="module mid animate">
                             <h2><i className="fas fa-dice"></i><br />Play Game</h2></div></Link></Col>
                     </Row>
+                    <br />
                     <Row>
-                        <Col lg={true}><Link to="/rewards"><div className="module mid animate">
+                        <Col><Link to="/rewards"><div className="module mid animate">
                             <h2><i className="fas fa-trophy"></i><br />Add Rewards</h2></div></Link></Col>
-                        <Col lg={true}><Link to="/addtasks"><div className="module mid animate">
+                        <Col><Link to="/addtasks"><div className="module mid animate">
                             <h2><i className="fas fa-check"></i><br />Add Tasks</h2></div></Link></Col>
                     </Row>
                     <br />
-                    <div className="dashboard-btn">
-                        <Link
+                    <br />
+                    <Row>
+                        <Col><Link
                             to="/householdmembers"
+                            className="btn btn-lg button-hover"
                             style={{
-                                width: "250px",
+                                width: "220px",
+                                height: "50px",
                                 fontSize: "15px",
+                                textTransform: "uppercase",
                                 borderRadius: "30px",
-                                padding: "14px",
+                                padding: "12px",
                                 backgroundColor: "#42b984",
                                 color: "white",
                                 letterSpacing: "1.5px"
-                            }}
-                            className="btn btn-large waves-effect waves-light hoverable accent-3"
-                        >Add Family Member</Link>
-                        &nbsp; &nbsp;
-                        <button
+                              }}
+                        ><i class="fas fa-plus"></i>&nbsp;Add Members</Link></Col>
+                        {/* <Col><button
                             style={{
                                 width: "150px",
+                                height: "50px",
                                 fontSize: "15px",
+                                textTransform: "uppercase",
                                 borderRadius: "30px",
                                 border: "2px solid",
-                                padding: "14px",
+                                padding: "12px",
                                 color: "#42b984",
                                 letterSpacing: "1.5px"
                             }}
                             onClick={this.onLogoutClick}
-                            className="btn btn-large waves-effect waves-brown waves-ripple hoverable accent-3"
+                            className="btn btn-lg button-hover2"
                         >
                             Logout
-                        </button>
-                    </div>
+                        </button></Col> */}
+                        <Col></Col>
+                        <Col></Col>
+                        <Col></Col>
+                    </Row>
+                <br />
+                <br />
+                <br />
                 </Container>
-                <br />
-                <br />
-                <br />
-                <br />
-
-
-
-
-
-                {/* <Container className="dashboard-container">
-                    <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
-                    <br />
-                    <br />
-                    <div style={{ height: "75vh" }}>
-                        <div className="row">
-                            <div className="col s12 center-align">
-                                <div><Link to="/addchorelist"><div className="module mid">
-                                    <h2><i class="fas fa-list-ol"></i><br />Create Chorelist</h2></div></Link></div>
-                                <div><Link to="/game"><div className="module mid">
-                                    <h2><i class="fas fa-dice"></i><br />Play Game</h2></div></Link></div>
-                                <div className="row">
-                                    <div className="col s12 center-align">
-                                        <div><Link to="/addchorelist"><div className="module mid">
-                                            <h2><i class="fas fa-list-ol"></i><br />Create Chorelist</h2></div></Link></div>
-                                        <div><Link to="/game"><div className="module mid">
-                                            <h2><i class="fas fa-dice"></i><br />Play Game</h2></div></Link></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                </Container> */}
             </>
         );
     }
