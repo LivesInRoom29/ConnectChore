@@ -1,0 +1,37 @@
+.cell{
+border: 1px solid black;
+border-radius: 50%;  
+display: inline-block;
+padding: 30px;
+font: monospace;
+cursor: pointer;
+margin-top: 0;
+margin-bottom: -6px;
+};
+
+.cell.p1 {
+    background-color: black;
+    color: white;
+}
+
+.cell.p2 {
+    background-color: red;
+    color: black
+}
+
+/* .game-container{
+    /* margin-top: 50px; */
+    /* margin-bottom: 50px; */
+ */
+
+ .game-row:last-child{
+
+    margin-top: -50px;
+}
+
+.grid{
+    border: black;
+    background: #17ca7f;
+    width: fit-content;
+    margin: auto;
+}
