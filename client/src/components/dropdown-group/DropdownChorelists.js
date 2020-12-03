@@ -26,6 +26,7 @@ class DropdownChorelists extends Component {
                 console.log("list.date:", list.date);
                 console.log("newDate(list.date): ", format(new Date(list.date), "MM/dd/yyyy"));
                 console.log("parseISO ", parseISO(list.date) );
+                console.log("parseISO ", format(parseISO(list.date), "MM/dd/yyyy"));
               return (
                 <option
                   key={list._id}
