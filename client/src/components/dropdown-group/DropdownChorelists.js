@@ -1,5 +1,6 @@
 // Need for React and Redux
 import React, { Component } from "react";
+import parseISO from 'date-fns/parseISO';
 import { format } from "date-fns";
 // Bootstrap components
 import Col from 'react-bootstrap/Col';
@@ -22,8 +23,10 @@ class DropdownChorelists extends Component {
           {/* Map the chorelists to the drop-down */}
           {
               filteredChoreList.map(list => {
+                
                 console.log("list.date:", list.date);
                 console.log("newDate(list.date): ", format(new Date(list.date), "MM/dd/yyyy"));
+                console.log("parseISO ", format(parseISO(list.date), "MM/dd/yyyy"));
               return (
                 <option
                   key={list._id}
