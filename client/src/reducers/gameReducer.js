@@ -1,6 +1,6 @@
 import produce from 'immer';
 import {createDefaultBoard} from "../utils/gameHelper";
-import { DROP_TILE, RESET_GAME, SET_PLAYER, SET_WINNER } from "../actions/types";
+import { DROP_TILE, RESET_GAME, SET_PLAYER, } from "../actions/types";
 
 
 
