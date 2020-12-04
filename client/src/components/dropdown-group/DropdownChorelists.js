@@ -8,6 +8,10 @@ import Form from 'react-bootstrap/Form';
 
 class DropdownChorelists extends Component {
 
+  renderRewards = (id) => {
+    
+  }
+
   render() {
     const filteredChoreList = this.props.choreLists.filter(list => list.completedBy === this.props.householdMemberId);
 
@@ -32,7 +36,7 @@ class DropdownChorelists extends Component {
                   key={list._id}
                   value={list._id}
                 >
-                  {format(parseISO(list.date), "MM/dd/yyyy")}
+                  {format(parseISO(list.date), "MM/dd/yyyy")} {list.reward}
                 </option>
               )
             })

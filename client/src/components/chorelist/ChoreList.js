@@ -30,7 +30,8 @@ class ChoreList extends Component {
             reward: "",
             choreLists: [],
             householdMembers: [],
-            rewards: [],
+            allRewards: [],
+            undeletedRewards: [],
             choreListToEdit: "",
             choreListData: {},
             validateDisplay: false
@@ -65,7 +66,8 @@ class ChoreList extends Component {
             // the reward state to be the id for the first reward in that array
             this.setState(
                 {
-                    rewards: undeletedRewards,
+                    allRewards: result.data,
+                    undeletedRewards: undeletedRewards,
                     reward: firstReward
                 }
             )
@@ -167,7 +169,8 @@ class ChoreList extends Component {
                     startDate={this.state.startDate}
                     householdMembers={this.state.householdMembers}
                     reward={this.state.reward}
-                    rewards={this.state.rewards}
+                    rewards={this.state.allRewards}
+                    undeletedRewards={this.state.undeletedRewards}
                     choreListToEdit={this.state.choreListToEdit}
                     handleChange={this.handleChange}
                     handleInputChange={this.handleInputChange}
