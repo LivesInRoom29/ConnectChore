@@ -34,14 +34,6 @@ class HouseholdMemberForm extends Component {
         const { user } = this.props.auth
 
         API.getHouseholdMembers(user.id)
-            .then(res =>
-                //console.log(res)
-
-                this.setState(
-                    {
-                        householdMembers: res.data
-                    }
-                ))
             .then(res => {
 
                 //console.log(res)
@@ -93,8 +85,6 @@ class HouseholdMemberForm extends Component {
     // Clicking the X box successfully removes the hhm entry for the logged in user only?
 
     render() {
-
-        const { user } = this.props.auth;
 
         return (
             <>
@@ -157,7 +147,6 @@ class HouseholdMemberForm extends Component {
                             }}
                         >
                             <h3>Household Members</h3>
-                            {/* Eventually filter down to non-deleted and map that array */}
                             {this.state.householdMembers.length ? (
                                 <ListGroup variant="flush">
                                     {this.state.householdMembers.map(member => (
@@ -188,7 +177,10 @@ class HouseholdMemberForm extends Component {
                                                             isDeleted: true
                                                         }
                                                     )
-                                                        .then(res => console.log(res))
+                                                        .then(res => {
+                                                            console.log(res)
+                                                            window.location.reload();
+                                                        })
                                                         .catch(err => console.log(err))
                                                 }
                                             >
