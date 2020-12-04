@@ -79,7 +79,6 @@ class AddChorelist extends Component {
                 <Form.Group as={Col} md="6" controlId="formDatePicker">
                   <Form.Label className="mr-5">Select a start date:</Form.Label>
                   <DatePicker
-                    utcOffset={0}
                     selected={this.props.startDate}
                     onChange={this.props.handleDateChange} //only when value has changed
                     dateFormat="MM/dd/yyyy"
