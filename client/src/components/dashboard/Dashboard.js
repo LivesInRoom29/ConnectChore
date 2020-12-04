@@ -63,7 +63,7 @@ class Dashboard extends Component {
                                 color: "white",
                                 letterSpacing: "1.5px"
                               }}
-                        ><i class="fas fa-plus"></i>&nbsp;Add Members</Link></Col>
+                        ><i className="fas fa-plus"></i>&nbsp;Add Members</Link></Col>
                         {/* <Col><button
                             style={{
                                 width: "150px",
