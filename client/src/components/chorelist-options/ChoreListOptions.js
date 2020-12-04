@@ -2,10 +2,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+// Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+// Local CSS
 import "../../App.css";
 
 class ChoreListOptions extends Component {

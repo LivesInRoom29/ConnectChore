@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { Container, Col, Row } from "react-bootstrap";
-import "./Dashboard.css";
 import SubNav from "../layout/SubNav";
+// Bootstrap
+import { Container, Col, Row } from "react-bootstrap";
+// Local CSS
+import "./Dashboard.css";
 import "../../App.css";
 
 class Dashboard extends Component {

@@ -3,13 +3,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setTasksAction } from "../../actions/chorelistActions";
+// Bootstrap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
-import "./choreListTasks.css";
+// API Calls
 import API from "../../utils/API";
+// Local CSS
+import "./choreListTasks.css";
 
 class ChoreListTasks extends Component {
   constructor(props) {

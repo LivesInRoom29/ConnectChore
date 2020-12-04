@@ -19,30 +19,3 @@ h5 {
   color: #ffffff;
   font-size: 24px !important;
 }
-
-/* .button-hover:hover {
-  opacity: 0.5;
-} */
-
-
-/* MEDIA QUERIES */
-/* @media(max-width: 992px) {
-  .landing-container {
-    padding: 0px 200px;
-    vertical-align: middle;
-}
-}
-
-@media(max-width: 768px) {
-  .landing-container {
-    padding: 0px 60px;
-    vertical-align: middle;
-}
-}
-
-@media(max-width: 580px) {
-  .landing-container {
-    padding: 0px 20px;
-    vertical-align: middle;
-}
-} */
