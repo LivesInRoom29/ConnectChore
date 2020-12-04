@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import parseISO from 'date-fns/parseISO';
 import { format } from "date-fns";
+//import API from "../../utils/API";
 // Bootstrap components
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -13,18 +14,36 @@ class DropdownChorelists extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        chorelistWithRewards: []
+      chorelistWithRewards: []
     }
   }
 
-  // get the chorelists for the user populated with rewards data.
-  componentDidMount() {
-    console.log("chorelists: ", this.props.choreLists);
-  }
+  // In development: get the chorelists for the user populated with rewards data.
+  // this is just sample code right now.
+  // componentDidMount() {
+  //   const { user } = this.props.auth;
+  //   console.log("chorelists: ", this.props.choreLists);
 
-  renderRewards = (id) => {
-    const rewards = this.props.allRewards;
-  }
+  //   var promise = new Promise((resolve, reject) => {
+  //     API.getHouseholdMembers(user.id)
+  //       .then(res => resolve(res))
+  //       .catch(err => reject(Error("API failed")));
+  //   })
+
+  //   promise.then(res => {
+  //     const firstHouseholdMemberId = res.data[0] ? res.data[0]._id : "";
+  //     this.setState(
+  //       {
+  //         householdMemberId: firstHouseholdMemberId,
+  //         householdMembers: res.data
+  //       }
+  //     )
+  //   })
+  // }
+
+  // renderRewards = (id) => {
+  //   const rewards = this.props.allRewards;
+  // }
 
   render() {
     const filteredChoreList = this.props.choreLists.filter(list => list.completedBy === this.props.householdMemberId);
@@ -40,17 +59,13 @@ class DropdownChorelists extends Component {
         >
           {/* Map the chorelists to the drop-down */}
           {
-              filteredChoreList.map(list => {
-
-                console.log("list.date:", list.date);
-                console.log("newDate(list.date): ", format(new Date(list.date), "MM/dd/yyyy"));
-                console.log("parseISO ", format(parseISO(list.date), "MM/dd/yyyy"));
+            filteredChoreList.map(list => {
               return (
                 <option
                   key={list._id}
                   value={list._id}
                 >
-                  {format(parseISO(list.date), "MM/dd/yyyy")} {list.reward}
+                  {format(parseISO(list.date), "MM/dd/yyyy")}
                 </option>
               )
             })
