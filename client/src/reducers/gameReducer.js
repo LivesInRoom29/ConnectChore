@@ -5,7 +5,8 @@ import { DROP_TILE, RESET_GAME, SET_PLAYER, SET_WINNER } from "../actions/types"
 
 
 export const initialGameState = {
-    current: {}, // can also be black
+    player1: 1,
+    player2: 2,
     board: [
         [], //col 1
         [], //col 2
@@ -26,7 +27,7 @@ const reducer = produce((state = initialGameState, action) => {
     switch (action.type) {
         case DROP_TILE: 
         console.log("dropping onto col" + action.payload);
-        const {col, row, color} = action.payload;
+        const {col} = action.payload;
         
         let dropToRow = state.box.length-1;
         state.box.some((currentRow, index) => {

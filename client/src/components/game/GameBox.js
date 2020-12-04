@@ -6,54 +6,70 @@ import { Button } from "react-bootstrap";
 import GridCell from "./GridCell";
 
 import Form from "react-bootstrap/Form";
-import {  resetGame } from "../../actions/gameActions";
+import { resetGame } from "../../actions/gameActions";
 // import {createDefaultBoard} from "../../utils/gameHelper";
 import filterDeleted from "../../utils/filterDeleted";
 import "./game.css";
-import { createDefaultBoard } from "../../utils/gameHelper";
+// import { each } from "immer/dist/internal";
+// import {
+//   createDefaultBoard,
+//   checkVertical,
+//   checkHorizontal,
+//   checkDiagonalLeft,
+//   checkDiagonalRight,
+//   checkAll,
+// } from "../../utils/gameHelper";
 
 class GameBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
       player1: 1,
-      player1Id: "",
       player2: 2,
+      player1Id: "",
       player2Id: "",
       currentPlayer: "",
-      board: [],
-      box: createDefaultBoard(),
       householdMembers: [],
+      board: [],
       startGame: false,
       gameOver: false,
       message: "",
     };
     this.selectPlayer = this.selectPlayer.bind(this);
     this.playGame = this.playGame.bind(this);
+    this.initGame = this.initGame.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  
+  handleClick() {
+    this.playGame();
+  }
   initGame() {
+    // const box = [];
+    // for (let y = 5; y >= 0; y--) {
+    //   const row = [];
+    //   for (let x = 0; x < 7; x++) {
+    //     row.push({
+    //       color: "white",
+    //     });
+    //   }
 
-    const box = [];
-    for (let y = 5; y >= 0; y--) {
-      const row = [];
-      for (let x = 0; x < 7; x++) {
-        row.push({
-          color: 'white'
-        });
+    //   box.push(row);
+    // }
+    // console.log("box is ", box);
+    // console.log("current player ", this.state.player1);
+    this.props.initGame();
+    this.setState(
+      {
+        currentPlayer: this.state.player1,
+        gameOver: false,
+        startGame: true,
+        message: "",
+      },
+      () => {
+        console.log("state is", this.state);
       }
-  
-      box.push(row);
-    }
-    
-    this.setState({
-      box,
-      currentPlayer: this.state.player1,
-      gameOver: false,
-      startGame: true,
-      message: ''
-    });
+    );
   }
 
   componentDidMount() {
@@ -71,44 +87,40 @@ class GameBox extends Component {
 
       // set the householdMembers state to be the undeletedHMs and
       // the assignedto state to be the first household member in that array
-      this.setState(
-          {
+      this.setState({
+        householdMembers: undeletedHMs,
+        player1Id: firstHouseholdMember,
+        player2Id: firstHouseholdMember,
+      });
 
-              householdMembers: undeletedHMs,
-              player1Id: firstHouseholdMember,
-              player2Id: firstHouseholdMember,
-          }
-      )
-      
-  console.log(this.state.householdMembers);
+      console.log(this.state.householdMembers);
     });
-
-
-  };
+  }
 
   togglePlayer() {
-    return this.state.currentPlayer === this.state.player1
-      ? this.state.player2
-      : this.state.player1;
-  };
+    return this.state.currentPlayer === this.props.player1
+      ? this.props.player2
+      : this.props.player1;
+  }
 
-
-
-  playGame() {
+  playGame(x) {
     if (!this.state.gameOver) {
       // Place piece on board
-      let board = this.state.board;
-      for (let y = 5; y >= 0; y--)
-      for(let x = 5; x >= 0; x++)
-       {
+      let board = this.props.game.box;
+
+      for (let y = 5; y >= 0; y--) {
         if (!board[y][x]) {
           board[y][x] = this.state.currentPlayer;
           break;
         }
       }
 
+      console.log("current player", this.state.currentPlayer);
+
       // Check status of board
       let result = this.checkAll(board);
+      console.log("result is", result);
+      console.log("board is...", board);
       if (result === this.state.player1) {
         this.setState({
           board,
@@ -120,12 +132,6 @@ class GameBox extends Component {
           board,
           gameOver: true,
           message: "Player 2 (yellow) wins!",
-        });
-      } else if (result === "draw") {
-        this.setState({
-          board,
-          gameOver: true,
-          message: "Draw game.",
         });
       } else {
         this.setState({
@@ -140,24 +146,140 @@ class GameBox extends Component {
     }
   }
 
-  createCells() {
+  checkVertical = (board) => {
+    let winner = null;
+    const column = board[0].reduce(
+      (obj, col, index) => {
+        obj.red = 0;
+        obj.yellow = 0;
+        board.forEach((row) => {
+          obj[row[index].color] += 1;
+          if (obj.red > 3) {
+            winner = 1;
+            console.log("vertical winner", winner);
+          } else if (obj.yellow > 3) {
+            winner = 2;
+            console.log("vertical winner", winner);
+          }
+        });
+        return obj;
+      },
+      { red: 0, yellow: 0 }
+    );
+    return winner;
+  };
 
-    return this.props.game.box.map((row, rowNum) => (
-      // <Container className="game-container">
-      <div className="game-row" key={rowNum}>
-        {row.map((cell, cellNum) => (
-          <GridCell
-            color={cell.color}
-            x={cellNum}
-            y={rowNum}
-            key={`${cellNum}${rowNum}`}
-          />
-        ))}
-      </div>
-      // </Container>
-    ));
+  checkHorizontal = (board) => {
+    let winner = null;
+    board.reduce(
+      (obj, row) => {
+        obj.red = 0;
+        obj.yellow = 0;
+        row.forEach((cell) => {
+          obj[cell.color] += 1;
+          if (obj.red > 3) {
+            winner = 1;
+            console.log("horizontal winner", winner);
+          } else if (obj.yellow > 3) {
+            winner = 2;
+            console.log("horizontal winner", winner);
+          }
+        });
+        return obj;
+      },
+      { red: 0, yellow: 0 }
+    );
+    return winner;
+  };
+
+  // checkDiagonalRight = (board) => {
+   
+  //   for (let y = 3; y < 6; y++) {
+      
+  //     for (let x = 0; x < 4; x++) {
+  //       for (let y = 5; y >= 0; y--) {
+  //         if (!board[y][x]) {
+  //           board[y][x] = this.state.currentPlayer;
+  //           break;
+  //         } 
+  //       if (board[y][x]) {
+  //         if (
+  //           board[y][x] === board[y - 1][x + 1] &&
+  //           board[y][x] === board[y - 2][x + 2] &&
+  //           board[y][x] === board[y - 3][x + 3]
+  //         ) {
+  //           return board[y][x];
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  //   let winner = 0;
+  //   const obj = { red: 0, yellow: 0 };
+  //   board.forEach((row, rowIndex) => {
+  //     if (rowIndex < board.length) {
+  //       row.forEach((cell, cellIndex) => {
+  //         if (cellIndex < row.length) {
+  //           const nextRow = board[rowIndex] + 1;
+  //           const nextCell = nextRow[rowIndex] - 2;
+  //           console.log("next row ", nextRow);
+  //           console.log("next cell ", nextCell);
+  //           obj[nextCell.color] += 1;
+  //           if (obj.red > 3) {
+  //             winner = 1;
+  //             console.log("diag winner", winner);
+  //           } else if (obj.yellow > 3) {
+  //             winner = 2;
+  //             console.log("diag winner", winner);
+  //           }
+  //         }
+  //       });
+  //     }
+  //   });
+  //   return winner;
+  // };
+
+  checkAll(board) {
+    return (
+      this.checkVertical(board) ||
+      // this.checkDiagonalRight(board) ||
+      // this.checkDiagonalLeft(board) ||
+      this.checkHorizontal(board)
+    );
   }
 
+  
+
+  createCells() {
+    console.log("start game", this.state.startGame);
+
+    if (this.state.startGame) {
+      return this.props.game.box.map((row, rowNum) => (
+        // <Container className="game-container">
+        <div className="game-row" key={rowNum}>
+          {row.map((cell, cellNum) => (
+            <GridCell
+              color={cell.color}
+              x={cellNum}
+              y={rowNum}
+              key={`${cellNum}${rowNum}`}
+              currentPlayer={this.state.currentPlayer}
+              gameOver={this.state.gameOver}
+              startGame={this.state.startGame}
+              message={this.state.message}
+              playGame={this.playGame}
+              togglePlayer={this.togglePlayer}
+              handleClick={this.handleClick}
+            />
+          ))}
+        </div>
+        // </Container>
+      ));
+    } else {
+      return null;
+    }
+  }
 
   selectPlayer(event) {
     event.preventDefault();
@@ -168,33 +290,35 @@ class GameBox extends Component {
     // });
     // selectedPlayer2 = "player2._id" === event.target.name;
     try {
-      this.setState({
-        [event.target.name]: event.target.value,
-      }, ()=> {
-        console.log("state 2 ", this.state.player2Id);
-        console.log("state 1", this.state.player1Id);
-      });
+      this.setState(
+        {
+          [event.target.name]: event.target.value,
+        },
+        () => {
+          console.log("state 2 ", this.state.player2Id);
+          console.log("state 1", this.state.player1Id);
+        }
+      );
       // console.log("state is ", this.state);
       console.log("name is", event.target.name);
       console.log("value is", event.target.value);
     } catch {
       console.error("error");
-    };
-    
-    
-    
-  };
-
-  
-
-  componentWillMount() {
-    this.initGame();
+    }
   }
 
+  // componentWillMount() {
+  //   this.initGame();
+  // }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.game.box !== this.props.game.box) {
+  //     this.playGame();
+  //   }
+  // }
   render() {
     return (
       <div>
-        <Button onClick={this.playGame} className="Start Game">
+        <Button onClick={this.initGame} className="Start Game">
           New Game
         </Button>
         <Form>
@@ -216,8 +340,7 @@ class GameBox extends Component {
                 ))}
               </Form.Control>
             </Form.Group>
-            <br>
-            </br>
+            <br></br>
             <Form.Group controlId="formHouseholdMember">
               <Form.Label>Pick Player 2:</Form.Label>
               <Form.Control
@@ -258,4 +381,4 @@ const dispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, dispatchToProps)(GameBox);
 
-// 
+//

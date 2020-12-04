@@ -1,39 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { dropTile } from "../../actions/gameActions";
-import { checkVertical, checkHorizontal, checkDiagonalLeft, checkDiagonalRight, checkAll } from "../../utils/gameHelper";
 import "./game.css";
 
 class GridCell extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      player1: 1,
-      player2: 2,
-      currentPlayer: "",
-      householdMembers: [],
-      board: [],
-      gameOver: false,
-      message: "",
+      winner: "",
     };
-
-    // this.playGame = this.playGame.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
-
- 
-  
-
-
-  handleClick() {
-    console.log(`clicked on columns ${this.props.x}`);
-
+  clickHandler() {
     this.props.sendTileDrop(this.props.x, this.props.y);
-
-  //   checkAll(board) {
-  //   return this.checkVertical(board) || this.checkDiagonalRight(board) || this.checkDiagonalLeft(board) || this.checkHorizontal(board) || this.checkDraw(board);
-  // }
+    this.props.handleClick();
   }
+
 
   render() {
     const board = this.props.board;
@@ -48,13 +31,16 @@ class GridCell extends Component {
         classes += "p1";
       }
     }
+
+    // console.log("x is", x);
+    // console.log("y s", y);
     return (
       <div
         className={classes}
         style={{
           backgroundColor: this.props.color,
         }}
-        onClick={() => this.handleClick()}
+        onClick={this.clickHandler}
       ></div>
     );
   }
@@ -68,7 +54,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
   return {
-    sendTileDrop: (col, row, color) => dispatch(dropTile(col, row.color)),
+    sendTileDrop: (col, row, color) => dispatch(dropTile(col, row, color)),
   };
 };
 

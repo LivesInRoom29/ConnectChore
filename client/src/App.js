@@ -15,7 +15,7 @@ import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Rewards from "./components/rewards/RewardsForm";
-import Game from "./components/game/game";
+// import Game from "./components/game/game";
 import Footer from "./components/footer/footer";
 import HouseholdMemberForm from "./components/householdmembers/HouseholdMemberForm";
 import ChoreList from "./components/chorelist/ChoreList";
@@ -63,7 +63,7 @@ class App extends Component {
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/rewards" component={Rewards} />
-              <PrivateRoute exact path="/game" component={Game} />
+              <PrivateRoute exact path="/game" component={GameBox} />
               <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
               <PrivateRoute exact path="/addchorelist" component={ChoreList} />
               <PrivateRoute exact path="/addtasks" component={TaskForm} />
@@ -75,8 +75,8 @@ class App extends Component {
               <PrivateRoute exact path="/template" component={Template} />
               <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
               <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
-              <PrivateRoute exact path ="/connectchoregame" component={GameBox} />
-              
+              {/* <PrivateRoute exact path="/game" component={GameBox} /> */}
+
             </Switch>
             <Footer />
           </div>
