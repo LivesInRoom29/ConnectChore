@@ -15,7 +15,7 @@
 ## User Stories
 
 AS A parent 
-I WANT a list of chores for my child. This will teach them to be responsible and earn rewards.
+I WANT a list of chores for my child. This will teach them to be responsible and earn rewards for every chore that is complete.
 
 AS A child
 I WANT a set list of tasks/chores. I want to be rewarded for the chores/tasks that I complete.
