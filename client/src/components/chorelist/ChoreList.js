@@ -169,7 +169,7 @@ class ChoreList extends Component {
                     startDate={this.state.startDate}
                     householdMembers={this.state.householdMembers}
                     reward={this.state.reward}
-                    rewards={this.state.allRewards}
+                    allRewards={this.state.allRewards}
                     undeletedRewards={this.state.undeletedRewards}
                     choreListToEdit={this.state.choreListToEdit}
                     handleChange={this.handleChange}
@@ -180,7 +180,9 @@ class ChoreList extends Component {
             )
         } else if (this.state.listOption === "view") {
             return (
-                <DropdownGroup />
+                <DropdownGroup
+                    allRewards={this.state.allRewards}
+                />
             )
         } else {
             return null
