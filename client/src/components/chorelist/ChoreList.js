@@ -7,7 +7,6 @@ import { setTasksAction } from "../../actions/chorelistActions";
 import Container from 'react-bootstrap/Container';
 // Date picker
 import formatISO from 'date-fns/formatISO';
-import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
@@ -16,7 +15,6 @@ import DropdownGroup from "../dropdown-group/DropdownGroup";
 import filterDeleted from "../../utils/filterDeleted";
 import "../../App.css";
 import "./choreList.css";
-import SubNav from "../layout/SubNav";
 import AddChorelist from "../add-chorelist/AddChorelist";
 
 class ChoreList extends Component {
@@ -92,8 +90,12 @@ class ChoreList extends Component {
                 {
                     householdMembers: undeletedHMs,
                     assignedto: firstHouseholdMember
+                },
+                () => {
+                    console.log("householdmember state: ", this.state.householdMembers);
                 }
             )
+
         });
     }
 
@@ -116,20 +118,13 @@ class ChoreList extends Component {
         );
     };
 
-    //where event is the date selected from the date-picker
-    // this offsetDate should prevent the date saved being 1 day less than the date selected
+
     handleDateChange = event => {
-        console.log("startdate before: ", this.state.startDate);
-        //const offsetDate = new Date(event.getTime() + (event.getTimezoneOffset() * 60000));
-        //const offsetDate = new Date(event.getTime() - (event.getTimezoneOffset() * 60000));
         this.setState(
             {
                 startDate: event
-            },
-            // () => {
-            //     console.log("startdate after: ", this.state.startDate);
-            // }
-        )
+            }
+        );
     };
 
     // in the AddChoreList component
@@ -155,7 +150,7 @@ class ChoreList extends Component {
         ).then(res => {
             this.setState({ choreListToEdit: res.data._id });
         })
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
     };
 
     // when page loads, this will return null as this.state.listOption will be ""
@@ -182,6 +177,8 @@ class ChoreList extends Component {
             return (
                 <DropdownGroup
                     allRewards={this.state.allRewards}
+                    assignedto={this.state.assignedto}
+                    householdMembers={this.state.householdMembers}
                 />
             )
         } else {
