@@ -29,7 +29,7 @@ import MemberChoreList from "./components/memberchorelist/MemberChoreList";
 import Template from "./components/Template";
 import ChoreListDemo from "./components/chorelist-demo/ChoreListDemo";
 import DropDownDemo from "./components/chorelist-demo/DropDownDemo";
-import ChoreView from "./components/choreview/ChoreView";
+//import ChoreView from "./components/choreview/ChoreView";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -69,7 +69,7 @@ class App extends Component {
               <PrivateRoute exact path="/addtasks" component={TaskForm} />
               <PrivateRoute exact path="/taskdropdown" component={TaskDropDown} />
               <PrivateRoute exact path="/memberchorelist" component={MemberChoreList} />
-              <PrivateRoute exact path="/chores/:userId/:listId" component={ChoreView} />
+              {/* <PrivateRoute exact path="/chores/:userId/:listId" component={ChoreView} /> */}
 
               {/* TEMPLATE ROUTES */}
               <PrivateRoute exact path="/template" component={Template} />

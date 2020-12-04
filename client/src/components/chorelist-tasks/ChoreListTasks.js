@@ -103,10 +103,10 @@ class ChoreListTasks extends Component {
       </Row>
       {/* if tasks exist map the chosen tasks here, otherwise return Null */}
       {tasks.length ?
-        tasks.map((task) => {
+        tasks.map((task, index) => {
           const { description, frequency } = task.task;
           return (
-            <Row key={task._id}>
+            <Row key={index}>
               <Col xs="4" md="6">
                 <p>{description}</p>
               </Col>
