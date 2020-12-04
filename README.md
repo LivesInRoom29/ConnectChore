@@ -2,6 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # ConnectChore Application
 ## Table of Contents
+* [User Stories](#user-stores)
 * [Description](#description)
 * [Technologies](#technologies)
 * [Future Enhancements](#future-enhancements)
