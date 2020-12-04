@@ -1,24 +1,62 @@
+/* LOGO */
+nav img {
+    height: 50px;
+    padding: 5px;
+}
+
+
+/* NAVBAR */
 nav {
     background-color: #42b984;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
 }
 
-nav img {
-    height: 60px;
-    padding: 5px;
 
+/* SUBNAV */
+#navdesign {
+    text-decoration: none;
+    color: white;
+    padding: 2.5px;
 }
 
-.nav-wrapper {
+#navdesigndd {
+    text-decoration: none;
+    color: white;
+}
+
+#navdesign:hover {
+    text-decoration: none;
+    color: navy;
+    font-size: 20px;
+}
+
+#navdesigndd:hover {
+    text-decoration: none;
+    color: navy;
+    font-size: 20px;
+}
+
+.navbar-nav {
+    text-align: right;
+}
+
+.fa-user, #navbarDropdown {
+    color: white;
+    font-size: 18px;
+}
+
+.fa-user:hover, #navbarDropdown:hover {
+    color: navy;
+    font-size: 20px;
+}
+
+.navbar .dropdown-menu {
+    background-color: #42b984;
+    border: none;
+    text-align: right;
+}
+
+.navbar .dropdown-menu .dropdown-item {
     background-color: #42b984;
 }
-
-#subnav {
-    height: 45px;
-}
-
-
-@media(max-width: 580px) {
-    nav img {
-        height: 45px;
-    }
-  }

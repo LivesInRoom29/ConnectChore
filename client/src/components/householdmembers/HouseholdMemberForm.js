@@ -11,10 +11,11 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
-import "../../App.css";
 // utils
 import filterDeleted from "../../utils/filterDeleted";
 import SubNav from "../layout/SubNav";
+// Local CSS
+import "../../App.css";
 
 class HouseholdMemberForm extends Component {
 
@@ -92,28 +93,13 @@ class HouseholdMemberForm extends Component {
                     <br />
                     <br />
                     <br />
-                    <br />
                     <Row>
-                        <Col
-                        // style={{
-                        //     display: "flex",
-                        //     justifyContent: "center",
-                        //     alignItems: "center",
-
-                        // }}
-                        >
-                                
+                        <Col>
                             <Form>
                                 <h3>Manage Your Household Members</h3>
                                 <p>Once you've added household members, you'll be able to assign tasks and create a chore list for them.</p>
                                 <br />
-                                <Form.Row
-                                    // style={{
-                                    //     display: "flex",
-                                    //     justifyContent: "center",
-                                    //     alignItems: "center"
-                                    // }}
-                                >
+                                <Form.Row>
                                     <Form.Group as={Col} md="6" controlId="formHouseholdMember"
                                         style={{
                                             display: "flex",
@@ -132,14 +118,21 @@ class HouseholdMemberForm extends Component {
                                     </Form.Group>
                                 </Form.Row>
                                 <Button className="btn btn-lg button-hover"
-                                    // style={{
-                                    //     display: "flex",
-                                    //     justifyContent: "center",
-                                    //     alignItems: "center"
-                                    // }}
+                                    style={{
+                                        width: "220px",
+                                        height: "50px",
+                                        fontSize: "15px",
+                                        textTransform: "uppercase",
+                                        borderRadius: "30px",
+                                        border: "none",
+                                        padding: "12px",
+                                        backgroundColor: "#42b984",
+                                        color: "white",
+                                        letterSpacing: "1.5px"
+                                    }}
                                     type="submit"
                                     onClick={this.addHouseholdMemberClick}>
-                                    Add Member
+                                    <i class="fas fa-plus"></i>&nbsp;Add Member
                             </Button>
                             </Form>
                         </Col>
@@ -147,13 +140,7 @@ class HouseholdMemberForm extends Component {
                     <br />
                     <br />
                     <br />
-                    <Row
-                        // style={{
-                        //     display: "flex",
-                        //     justifyContent: "center",
-                        //     alignItems: "center"
-                        // }}
-                    >
+                    <Row>
                         <Col md={8}
                             style={{
                                 borderColor: "lightblue"
@@ -181,7 +168,7 @@ class HouseholdMemberForm extends Component {
                                                 style={{
                                                     // backgroundColor: "grey",
                                                     borderColor: "black",
-                                                    
+
                                                 }}
                                                 onClick={
                                                     () => API.deleteHouseholdMember(
@@ -203,11 +190,10 @@ class HouseholdMemberForm extends Component {
                                     ))}
                                 </ListGroup>
                             ) : (
-                                    <h3>No household members to display!</h3>
+                                    <h4><br />No household members to display!</h4>
                                 )}
                         </Col>
                     </Row>
-                    <br />
                     <br />
                     <br />
                     <br />

@@ -12,7 +12,6 @@ import { setTasksAction } from "../../actions/chorelistActions";
 import filterDeleted from "../../utils/filterDeleted";
 
 import "./taskDropDown.css";
-import SubNav from "../layout/SubNav";
 
 class TaskDropDown extends Component {
     constructor(props) {
@@ -87,7 +86,6 @@ class TaskDropDown extends Component {
     render() {
         return (
         <>
-        <SubNav />
             <Form>
                 <h4>
                     <p className="text-body">
