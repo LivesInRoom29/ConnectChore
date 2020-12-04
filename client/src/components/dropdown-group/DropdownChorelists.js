@@ -48,9 +48,6 @@ class DropdownChorelists extends Component {
 
   render() {
     const filteredChoreList = this.props.choreLists.filter(list => list.completedBy === this.props.householdMemberId);
-    console.log("render chorelist:", this.props.choreLists);
-    console.log("filtered chorelist: ", filteredChoreList);
-    console.log("member id:", this.props.householdMemberId);
     return (
       <Form.Group as={Col} md="6" controlId="formChorelists">
         <Form.Label>Pick a chorelist:</Form.Label>

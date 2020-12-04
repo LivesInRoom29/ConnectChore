@@ -66,13 +66,11 @@ class DropdownGroup extends Component {
 
         var promisetwo = new Promise((resolve, reject) => {
             API.getChoreLists(user.id)
-                //console.log(choreList.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
         })
 
         promisetwo.then(res => {
-            //console.log(res);
             const allChoreLists = res.data;
             const filteredLists = allChoreLists.filter(list => list.completedBy === this.props.assignedTo);
             const firstChoreList = filteredLists[0] ? filteredLists[0]._id : ""
@@ -88,7 +86,6 @@ class DropdownGroup extends Component {
 
     // get the input values and add to state
     handleInputChange = event => {
-        console.log("event:", event.target);
         event.preventDefault();
         this.setState(
             {
