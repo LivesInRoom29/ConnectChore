@@ -94,7 +94,7 @@ class AddChorelist extends Component {
                     as="select"
                     name="reward"
                     value={this.props.reward}
-                    onChange={this.handleInputChange}
+                    onChange={this.props.handleInputChange}
                   >
                     {/* Map the household members to the drop-down */}
                     {
