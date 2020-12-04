@@ -9,19 +9,14 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import API from "../../utils/API";
-// import { format } from "date-fns";
-// import { Link } from "react-router-dom";
 import { setTasksAction } from "../../actions/chorelistActions";
+// Components
 import DropdownMembers from "./DropdownMembers";
 import DropdownChorelists from "./DropdownChorelists";
-
-// API calls
-//import filterDeleted from "../../utils/filterDeleted";
-//import API from "../../utils/API";
-
-import "../chorelist-tasks/choreListTasks.css"
 import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
 import TaskDropDown from "../taskdropdown/TaskDropDown";
+
+import "../chorelist-tasks/choreListTasks.css"
 
 class DropdownGroup extends Component {
 
@@ -44,23 +39,6 @@ class DropdownGroup extends Component {
     // TEST: will be passing the user.id and the choreList.id to the API call to successfully get us the chorelists data
     componentDidMount() {
         const { user } = this.props.auth;
-        //const { choreList } = this.state;
-
-        var promise = new Promise((resolve, reject) => {
-            API.getHouseholdMembers(user.id)
-                .then(res => resolve(res))
-                .catch(err => reject(Error("API failed")));
-        })
-
-        promise.then(res => {
-            const firstHouseholdMemberId = res.data[0] ? res.data[0]._id : "";
-            this.setState(
-                {
-                    householdMemberId: firstHouseholdMemberId,
-                    householdMembers: res.data
-                }
-            )
-        })
 
         var promisetwo = new Promise((resolve, reject) => {
             API.getChoreLists(user.id)
@@ -76,9 +54,7 @@ class DropdownGroup extends Component {
             const firstChoreList = filteredLists[0] ? filteredLists[0]._id : ""
             this.setState(
                 {
-                    //choreListId: res.data[0]._id,
                     choreLists: res.data,
-                    //filteredChoreLists: filteredLists,
                     choreListToEdit: firstChoreList
                 }
             )
@@ -93,17 +69,9 @@ class DropdownGroup extends Component {
             {
                 [event.target.name]: event.target.value,
                 showTasks: false
-                // household member id
                 // don't include ...this.state so the value changes when the drop-down changes
             }
         );
-
-        // const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
-        // this.setState(
-        //     {
-        //         filteredChoreLists: filteredLists
-        //     }
-        // )
 
     };
 
@@ -166,8 +134,8 @@ class DropdownGroup extends Component {
                                 <Form.Row>
                                     <DropdownMembers
                                         handleInputChange={this.handleInputChange}
-                                        householdMemberId={this.state.householdMemberId}
-                                        householdMembers={this.state.householdMembers}
+                                        householdMemberId={this.props.assignedTo}
+                                        householdMembers={this.props.householdMembers}
                                     />
                                     <DropdownChorelists
                                         handleInputChange={this.handleInputChange}
