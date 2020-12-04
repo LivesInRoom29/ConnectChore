@@ -98,7 +98,9 @@ class GameBox extends Component {
     if (!this.state.gameOver) {
       // Place piece on board
       let board = this.state.board;
-      for (let y = 5; y >= 0; y--) {
+      for (let y = 5; y >= 0; y--)
+      for(let x = 5; x >= 0; x++)
+       {
         if (!board[y][x]) {
           board[y][x] = this.state.currentPlayer;
           break;
