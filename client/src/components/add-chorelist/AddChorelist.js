@@ -97,7 +97,7 @@ class AddChorelist extends Component {
                   >
                     {/* Map the household members to the drop-down */}
                     {
-                      this.props.rewards.map(reward => (
+                      this.props.undeletedRewards.map(reward => (
                         <option
                           key={reward._id}
                           value={reward._id}
