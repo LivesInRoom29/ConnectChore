@@ -141,7 +141,7 @@ class HouseholdMemberForm extends Component {
                                         />
                                     </Form.Group>
                                 </Form.Row>
-                                <Button className="btn btn-large waves-effect waves-green waves-ripple hoverable"
+                                <Button className="btn btn-lg button-hover"
                                     // style={{
                                     //     display: "flex",
                                     //     justifyContent: "center",
