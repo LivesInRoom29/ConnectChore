@@ -1,5 +1,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # ConnectChore Application
 ## Table of Contents
 * [Description](#description)
@@ -10,6 +11,22 @@
 * [References](#references)
 * [License](#license)
 * [Screenshots](#screenshots)
+
+## User Stories
+
+AS A parent 
+I WANT a list of chores for my child. This will teach them to be responsible and earn rewards.
+
+AS A child
+I WANT a set list of tasks/chores. I want to be rewarded for the chores/tasks that I complete.
+
+AS A Roommate
+I WANT a list of household tasks to share. I want myself and the people under the same roof to have a peaceful coexistence.
+
+AS A Spouse
+I WANT clear delineation of responsibilities. In other words, I want to be able to know who does what so that there is no conflict.
+
+
 
 ## Description
 Many people in this world have to coexist with one another. There are many chores around the house that have to get done so everybody is happy. You may have to mow the lawn, clean the toilet, make dinner or do laundry. After doing all these chores, you may want to be rewarded, right? 
