@@ -1,5 +1,7 @@
 // Need for React and Redux
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import parseISO from 'date-fns/parseISO';
 import { format } from "date-fns";
 // Bootstrap components
@@ -8,8 +10,20 @@ import Form from 'react-bootstrap/Form';
 
 class DropdownChorelists extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+        chorelistWithRewards: []
+    }
+  }
+
+  // get the chorelists for the user populated with rewards data.
+  componentDidMount() {
+    console.log("chorelists: ", this.props.choreLists);
+  }
+
   renderRewards = (id) => {
-    
+    const rewards = this.props.allRewards;
   }
 
   render() {
@@ -47,4 +61,14 @@ class DropdownChorelists extends Component {
   }
 }
 
-export default DropdownChorelists;
+DropdownChorelists.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(
+  mapStateToProps,
+)(DropdownChorelists);

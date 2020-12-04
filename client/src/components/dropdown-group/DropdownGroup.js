@@ -174,6 +174,7 @@ class DropdownGroup extends Component {
                                         householdMemberId={this.state.householdMemberId}
                                         choreListToEdit={this.state.choreListToEdit}
                                         choreLists={this.state.choreLists}
+                                        rewards={this.props.undeletedRewards}
                                     />
 
                                 </Form.Row>
