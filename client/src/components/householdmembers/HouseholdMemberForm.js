@@ -132,7 +132,7 @@ class HouseholdMemberForm extends Component {
                                     }}
                                     type="submit"
                                     onClick={this.addHouseholdMemberClick}>
-                                    <i class="fas fa-plus"></i>&nbsp;Add Member
+                                    <i className="fas fa-plus"></i>&nbsp;Add Member
                             </Button>
                             </Form>
                         </Col>
