@@ -27,7 +27,8 @@ class ChoreListOptions extends Component {
         <Col lg={12} className="d-flex justify-content-center text-center">
           <Row>
           <Col lg={5}>
-          <Button className="btn btn-lg button-hover2"
+          <Button 
+          className="btn btn-lg button-hover2"
             style={{
               width: "300px",
               height: "50px",
@@ -43,7 +44,6 @@ class ChoreListOptions extends Component {
             type="button"
             name="listOption"
             value="create"
-            className=""
             onClick={this.props.handleInputChange}
           >
             Create A New Chore List
@@ -51,7 +51,8 @@ class ChoreListOptions extends Component {
           </Col>
           <Col lg={2}><br/></Col>
           <Col lg={5}>
-          <Button className="btn btn-lg button-hover2"
+          <Button 
+          className="btn btn-lg button-hover2"
           style={{
             width: "300px",
             height: "50px",
@@ -67,7 +68,6 @@ class ChoreListOptions extends Component {
             type="button"
             name="listOption"
             value="view"
-            className=""
             onClick={this.props.handleInputChange}
           >
             View Existing Chore Lists
