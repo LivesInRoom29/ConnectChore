@@ -1,33 +1,62 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 import "./Navbar.css";
+import Logo from "../layout/connectchore.png";
 
 class SubNav extends Component {
-  render() {
-    return (
-  //   <nav>
-  //   <div class="nav-wrapper center">
-  //     <ul id="nav-mobile" className="brand-logo center">
-  //       <li><Link to="/addtasks">Tasks</Link></li>
-  //       <li><Link to="/addchorelist">Chores</Link></li>
-  //       <li><Link to="/rewards">Rewards</Link></li>
-  //       <li><Link to="/game">Game</Link></li>
-  //     </ul>
-  //   </div>
-  // </nav>
+  onLogoutClick = e => {
+    e.preventDefault();
 
-  <nav id="subnav">
-  <div className="nav-content brand-logo center">
-    <ul className="tabs tabs-transparent">
-      <li className="tab"><Link to="/addtasks">Tasks</Link></li>
-      <li className="tab"><Link to="/addchorelist">Chores</Link></li>
-      <li className="tab"><Link to="/rewards">Rewards</Link></li>
-      <li className="tab"><Link to="/game">Game</Link></li>
-    </ul>
-  </div>
-</nav>
+    this.props.logoutUser();
+  };
+
+  render() {
+    const { user } = this.props.auth;
+
+    return (
+
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <div className="navbar-brand"><Link to="/dashboard" className="brand-logo center"><img src={Logo} alt="Connect Chore Logo" /></Link></div>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav ml-auto">
+            <div className="nav-link design"><Link to="/addtasks" id="navdesign">Tasks</Link></div>
+            <div className="nav-link"><Link to="/addchorelist" id="navdesign">Chores</Link></div>
+            <div className="nav-link"><Link to="/rewards" id="navdesign">Rewards</Link></div>
+            <div className="nav-link"><Link to="/game" id="navdesign">Game</Link></div>
+            <div className="nav-item dropdown">
+              <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i className="fas fa-user"></i>
+              </div>
+              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <div className="dropdown-item"><Link to="/dashboard" id="navdesigndd">Dashboard</Link></div>
+                <div class="dropdown-item" id="navdesigndd" onClick={this.onLogoutClick}>Logout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
     );
   }
 }
 
-export default SubNav;
+
+SubNav.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(SubNav);

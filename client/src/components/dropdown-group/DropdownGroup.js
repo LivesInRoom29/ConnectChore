@@ -2,20 +2,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// Bootstrap components
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import API from "../../utils/API";
 // import { format } from "date-fns";
 // import { Link } from "react-router-dom";
 import { setTasksAction } from "../../actions/chorelistActions";
 import DropdownMembers from "./DropdownMembers";
 import DropdownChorelists from "./DropdownChorelists";
-
-// API calls
+// Bootstrap
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+// API Calls
+import API from "../../utils/API";
 //import filterDeleted from "../../utils/filterDeleted";
 //import API from "../../utils/API";
 
@@ -151,15 +150,18 @@ class DropdownGroup extends Component {
         return (
             <>
                 <Container>
+                    <br />
+                    <br />
+                    <br />
                     <Row>
                         <Col>
                             <Form>
                                 <h4>
-                                    <b>Hey there,</b> {user.name.split(" ")[0]}
                                     <p className="text-body">
-                                        Pick a household member to display chorelist.
+                                        Pick a household member to display a chorelist.
                                 </p>
                                 </h4>
+                                <br />
                                 <Form.Row>
                                     <DropdownMembers
                                         handleInputChange={this.handleInputChange}
@@ -174,9 +176,21 @@ class DropdownGroup extends Component {
                                     />
 
                                 </Form.Row>
+                                <br />
                                 {/* button to display lists for each houesholdmember*/}
-                                <Button
-                                    variant="primary"
+                                <Button className="btn btn-lg button-hover"
+                                    style={{
+                                        width: "250px",
+                                        height: "50px",
+                                        fontSize: "15px",
+                                        textTransform: "uppercase",
+                                        borderRadius: "30px",
+                                        border: "none",
+                                        padding: "12px",
+                                        backgroundColor: "#42b984",
+                                        color: "white",
+                                        letterSpacing: "1.5px"
+                                    }}
                                     type="submit"
                                     data-id={this.state.choreListToEdit}
                                     onClick={this.onClickShowChorelist}
@@ -189,7 +203,13 @@ class DropdownGroup extends Component {
                     </Row>
                 </Container>
                 <Container>
+                    <br />
+                    <br />
+                    <br />
                     {chorelistEditor}
+                    <br />
+                    <br />
+                    <br />
                 </Container>
             </>
         );
