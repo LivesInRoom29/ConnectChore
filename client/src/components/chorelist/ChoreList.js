@@ -3,19 +3,21 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setTasksAction } from "../../actions/chorelistActions";
+import ChoreListOptions from "../chorelist-options/ChoreListOptions";
+import DropdownGroup from "../dropdown-group/DropdownGroup";
+import AddChorelist from "../add-chorelist/AddChorelist";
+import SubNav from "../layout/SubNav";
 // Bootstrap components
-import Container from 'react-bootstrap/Container';
+import { Container } from "react-bootstrap";
 // Date picker
 import formatISO from 'date-fns/formatISO';
 import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
-import ChoreListOptions from "../chorelist-options/ChoreListOptions";
-import DropdownGroup from "../dropdown-group/DropdownGroup";
 import filterDeleted from "../../utils/filterDeleted";
+// Local CSS
 import "../../App.css";
 import "./choreList.css";
-import AddChorelist from "../add-chorelist/AddChorelist";
 
 class ChoreList extends Component {
 
@@ -188,7 +190,11 @@ class ChoreList extends Component {
 
         return (
             <>
+            <SubNav />
                 <Container>
+                    <br />
+                    <br />
+                    <br />
                     <ChoreListOptions
                         handleInputChange={this.handleInputChange}
                         option={this.state.listOption}
@@ -196,6 +202,9 @@ class ChoreList extends Component {
                 </Container>
                 <Container>
                     {this.renderChoreListOption()}
+                    <br />
+                    <br />
+                    <br />
                 </Container>
             </>
         );

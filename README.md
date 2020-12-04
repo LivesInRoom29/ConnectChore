@@ -1,6 +1,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-# ConnectFour Application
+# ConnectChore Application
 ## Table of Contents
 * [Description](#description)
 * [Technologies](#technologies)
@@ -14,14 +14,14 @@
 ## Description
 Many people in this world have to coexist with one another. There are many chores around the house that have to get done so everybody is happy. You may have to mow the lawn, clean the toilet, make dinner or do laundry. After doing all these chores, you may want to be rewarded, right? 
 
-Users can securely login into the application using a social media account or an email address and password. 
+Users can securely login into the application using an email address and password.
 
 Once in the app, users can:
 - Add family members and weekly tasks
 - Create chorelists for each member and assign specific tasks and rewards for accomplishing them
-- Family members/roommates also can play a game of Connect Four to win the ultimate prize
+- Family members/roommates also can play a game of ConnectChore to win the ultimate prize
 
-Livelink: https://connectchore.herokuapp.com/login
+Live link: https://connectchore.herokuapp.com
 
 ## Technologies
 

@@ -2,14 +2,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+// Bootstrap
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+// Local CSS
+import "../../App.css";
 
 class ChoreListOptions extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        auth: {}
+      auth: {}
     }
   }
 
@@ -17,28 +22,61 @@ class ChoreListOptions extends Component {
 
     return (
       <>
+      <Container>
         <Row>
-          <Button
-            variant="outline-success"
+        <Col lg={12} className="d-flex justify-content-center text-center">
+          <Row>
+          <Col lg={5}>
+          <Button 
+          className="btn btn-lg button-hover2"
+            style={{
+              width: "300px",
+              height: "50px",
+              fontSize: "15px",
+              textTransform: "uppercase",
+              borderRadius: "30px",
+              border: "2px solid",
+              padding: "12px",
+              backgroundColor: "#ffffff",
+              color: "#42b984",
+              letterSpacing: "1.5px"
+          }}
             type="button"
             name="listOption"
             value="create"
-            className=""
             onClick={this.props.handleInputChange}
           >
             Create A New Chore List
           </Button>
-          <Button
-            variant="outline-success"
+          </Col>
+          <Col lg={2}><br/></Col>
+          <Col lg={5}>
+          <Button 
+          className="btn btn-lg button-hover2"
+          style={{
+            width: "300px",
+            height: "50px",
+            fontSize: "15px",
+            textTransform: "uppercase",
+            borderRadius: "30px",
+            border: "2px solid",
+            padding: "12px",
+            backgroundColor: "#ffffff",
+            color: "#42b984",
+            letterSpacing: "1.5px"
+        }}
             type="button"
             name="listOption"
             value="view"
-            className=""
             onClick={this.props.handleInputChange}
           >
             View Existing Chore Lists
           </Button>
+          </Col>
+          </Row>
+          </Col>
         </Row>
+        </Container>
       </>
     )
   }

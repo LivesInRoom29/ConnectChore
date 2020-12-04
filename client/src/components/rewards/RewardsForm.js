@@ -43,7 +43,7 @@ class Rewards extends Component {
                     {
                         rewards: undeletedRewards
                     })
-                })
+            })
             .catch(err => console.log(err));
     }
 
@@ -96,104 +96,113 @@ class Rewards extends Component {
 
         return (
             <>
-            <SubNav />
-            <Container>
-                            <br />
-                            <br />
-                            <br />
-                <Row>
-                    <Col>
-                        <Form>
-                            <div>
-                                <br />
-                                    <h3>Want to include some motivation to your household's day to day chores? Add potential rewards for a job well done!</h3>
+                <SubNav />
+                <Container>
+                    <br />
+                    <br />
+                    <Row>
+                        <Col>
+                            <Form>
+                                <div>
                                     <br />
+                                    <h3>Rewards</h3>
+                                    <p>Want to include some motivation to your household's day to day chores? Add potential rewards for a job well done!</p>
                                     <br />
-                                    <b>A few examples could be:</b>
-                                <ul>
-                                    <li>★pick-a-movie night</li>
-                                    <li>★ice cream for breakfast</li>
-                                    <li>★buy a new book</li>
-                                    <li>★stay up late for 30 extra minutes.</li>
-                                </ul>
+                                    <p><b>A few examples could be:</b>
+                                        <ul>
+                                            <li>★pick-a-movie night</li>
+                                            <li>★ice cream for breakfast</li>
+                                            <li>★buy a new book</li>
+                                            <li>★stay up late for 30 extra minutes</li>
+                                        </ul></p>
+                                    <br />
+                                </div>
+                                <Form.Row>
+                                    <Form.Group as={Col} lg="6" controlId="formReward">
+                                        <Form.Label>Add a reward:</Form.Label>
+                                        <Form.Control
+                                            type="input"
+                                            name="reward"
+                                            value={this.state.reward}
+                                            placeholder="Ice Cream"
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group as={Col} lg="2" controlId="formValue">
+                                        <Form.Label className="form-label">Points value:</Form.Label>
+                                        <Form.Control className="form-control"
+                                            type="input"
+                                            name="pointvalue"
+                                            value={this.state.pointvalue}
+                                            placeholder="10"
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </Form.Group>
+                                </Form.Row>
                                 <br />
-                            </div>
-                            <Form.Row>
-                                <Form.Group as={Col} md="6" controlId="formReward">
-                                    <Form.Label>Add a reward:</Form.Label>
-                                    <Form.Control
-                                        type="input"
-                                        name="reward"
-                                        value={this.state.reward}
-                                        placeholder="Ice Cream"
-                                        onChange={this.handleInputChange}
-                                    />
-                                </Form.Group>
-                                <Form.Group as={Col} md="2" controlId="formValue">
-                                    <Form.Label>Include a points value:</Form.Label>
-                                    <Form.Control
-                                        type="input"
-                                        name="pointvalue"
-                                        value={this.state.pointvalue}
-                                        placeholder="10"
-                                        onChange={this.handleInputChange}
-                                    />
-                                </Form.Group>
-                            </Form.Row>
+                                <Button style={{
+                                    width: "150px",
+                                    height: "50px",
+                                    fontSize: "15px",
+                                    textTransform: "uppercase",
+                                    borderRadius: "30px",
+                                    border: "none",
+                                    padding: "12px",
+                                    backgroundColor: "#42b984",
+                                    color: "#ffffff",
+                                    letterSpacing: "1.5px"
+                                }}
+                                    className="btn btn-lg button-hover2"
+                                    type="submit"
+                                    onClick={this.addRewardClick}>Add reward</Button>
+                            </Form>
+                        </Col>
+                    </Row>
+                    <br />
+                    <br />
+                    <Row>
+                        <Col md={8}>
                             <br />
-                            <Button className="btn btn-large waves-effect waves-green waves-ripple hoverable"
-                                type="submit"
-                                onClick={this.addRewardClick}>Add reward</Button>
-                        </Form>
-                    </Col>
-                </Row>
-                <br />
-                <br />
-                <Row>
-                    <Col md={8}>
-                        <h3>Household Rewards</h3>
-                        <p>A list of the recently added rewards for completing chores.</p>
-                        {/* Eventually filter down to non-deleted and map that array */}
-                        {this.state.rewards.length ? (
-                            <ListGroup variant="flush">
-                                {this.state.rewards.map(reward => (
-                                    <ListGroup.Item
-                                        key={reward._id}
-                                        data-id={reward._id}
-                                        className="align-items-center"
-                                    >
-                                        {reward.description} (points: {reward.value || 0})
-                                        <Button
-                                            variant="light"
-                                            className="float-right text-danger"
-                                            onClick={
-                                                () => API.deleteRewardDescription(
-                                                    reward._id,
-                                                    {
-                                                        isDeleted: true
-                                                    }
-                                                )
-                                                    .then(res => {
-                                                        console.log(res);
-                                                        window.location.reload();
-                                                    })
-                                                    .catch(err => console.log(err))
-                                            }
+                            <h3>Household Rewards</h3>
+                            <p>A list of the recently added rewards for completing chores.</p>
+                            {/* Eventually filter down to non-deleted and map that array */}
+                            {this.state.rewards.length ? (
+                                <ListGroup variant="flush">
+                                    {this.state.rewards.map(reward => (
+                                        <ListGroup.Item
+                                            key={reward._id}
+                                            data-id={reward._id}
+                                            className="align-items-center"
                                         >
-                                            <span >X</span>
-                                        </Button>
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
-                        ) : (
-                                <h3>No rewards to display!</h3>
-                            )}
-                    </Col>
-                </Row>
-                <br />
-                <br />
-                <br />
-            </Container>
+                                            {reward.description} (points: {reward.value || 0})
+                                            <Button
+                                                variant="light"
+                                                className="float-right text-danger"
+                                                onClick={
+                                                    () => API.deleteRewardDescription(
+                                                        reward._id,
+                                                        {
+                                                            isDeleted: true
+                                                        }
+                                                    )
+                                                        .then(res => console.log(res))
+                                                        .catch(err => console.log(err))
+                                                }
+                                            >
+                                                <span>X</span>
+                                            </Button>
+                                        </ListGroup.Item>
+                                    ))}
+                                </ListGroup>
+                            ) : (
+                                    <h4><br />No rewards to display!</h4>
+                                )}
+                        </Col>
+                    </Row>
+                    <br />
+                    <br />
+                    <br />
+                </Container>
             </>
         );
     }
