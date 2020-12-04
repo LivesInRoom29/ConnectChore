@@ -41,20 +41,23 @@ class GameBox extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  handleClick() {
+    this.playGame();
+  }
   initGame() {
-    const box = [];
-    for (let y = 5; y >= 0; y--) {
-      const row = [];
-      for (let x = 0; x < 7; x++) {
-        row.push({
-          color: "white",
-        });
-      }
+    // const box = [];
+    // for (let y = 5; y >= 0; y--) {
+    //   const row = [];
+    //   for (let x = 0; x < 7; x++) {
+    //     row.push({
+    //       color: "white",
+    //     });
+    //   }
 
-      box.push(row);
-    }
-    console.log("box is ", box);
-    console.log("current player ", this.state.player1);
+    //   box.push(row);
+    // }
+    // console.log("box is ", box);
+    // console.log("current player ", this.state.player1);
     this.props.initGame();
     this.setState(
       {
@@ -100,18 +103,17 @@ class GameBox extends Component {
       : this.props.player1;
   }
 
-  playGame() {
+  playGame(x) {
     if (!this.state.gameOver) {
       // Place piece on board
       let board = this.props.game.box;
-      // for (let y = 5; y >= 0; y--) {
-      //   if (!board[y][x]) {
-      //     board[y][x] = this.state.currentPlayer;
-      //     break;
-      //   }
-      // }
 
-      // console.log("board is ", board[y][x]);
+      for (let y = 5; y >= 0; y--) {
+        if (!board[y][x]) {
+          board[y][x] = this.state.currentPlayer;
+          break;
+        }
+      }
 
       console.log("current player", this.state.currentPlayer);
 
@@ -145,10 +147,8 @@ class GameBox extends Component {
   }
 
   checkVertical = (board) => {
-    let counter = 0;
     let winner = null;
-    let columnCount = board[0].length;
-    const columns = board[0].reduce(
+    const column = board[0].reduce(
       (obj, col, index) => {
         obj.red = 0;
         obj.yellow = 0;
@@ -192,46 +192,64 @@ class GameBox extends Component {
     return winner;
   };
 
-  checkDiagonalRight = (board) => {
-    let winner = 0;
-    const obj = { red: 0, yellow: 0 };
-    board.forEach((row, rowIndex) => {
-      if (rowIndex < board.length) {
-        row.forEach((cell, cellIndex) => {
-          if (cellIndex < row.length) {
-            const nextRow = board[rowIndex] + 1;
-            const nextCell = nextRow[rowIndex] - 2;
-            console.log("next row ", nextRow);
-            console.log("next cell ", nextCell);
-            obj[nextCell.color] += 1;
-            if (obj.red > 3) {
-              winner = 1;
-              console.log("diag winner", winner);
-            } else if (obj.yellow > 3) {
-              winner = 2;
-              console.log("diag winner", winner);
-            }
-          }
-        });
-      }
-    });
-    return winner;
-  };
+  // checkDiagonalRight = (board) => {
+   
+  //   for (let y = 3; y < 6; y++) {
+      
+  //     for (let x = 0; x < 4; x++) {
+  //       for (let y = 5; y >= 0; y--) {
+  //         if (!board[y][x]) {
+  //           board[y][x] = this.state.currentPlayer;
+  //           break;
+  //         } 
+  //       if (board[y][x]) {
+  //         if (
+  //           board[y][x] === board[y - 1][x + 1] &&
+  //           board[y][x] === board[y - 2][x + 2] &&
+  //           board[y][x] === board[y - 3][x + 3]
+  //         ) {
+  //           return board[y][x];
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
-
+  //   let winner = 0;
+  //   const obj = { red: 0, yellow: 0 };
+  //   board.forEach((row, rowIndex) => {
+  //     if (rowIndex < board.length) {
+  //       row.forEach((cell, cellIndex) => {
+  //         if (cellIndex < row.length) {
+  //           const nextRow = board[rowIndex] + 1;
+  //           const nextCell = nextRow[rowIndex] - 2;
+  //           console.log("next row ", nextRow);
+  //           console.log("next cell ", nextCell);
+  //           obj[nextCell.color] += 1;
+  //           if (obj.red > 3) {
+  //             winner = 1;
+  //             console.log("diag winner", winner);
+  //           } else if (obj.yellow > 3) {
+  //             winner = 2;
+  //             console.log("diag winner", winner);
+  //           }
+  //         }
+  //       });
+  //     }
+  //   });
+  //   return winner;
+  // };
 
   checkAll(board) {
     return (
       this.checkVertical(board) ||
-      this.checkDiagonalRight(board) ||
+      // this.checkDiagonalRight(board) ||
       // this.checkDiagonalLeft(board) ||
       this.checkHorizontal(board)
     );
   }
 
-  handleClick() {
-    // this.playGame();
-  }
+  
 
   createCells() {
     console.log("start game", this.state.startGame);
@@ -292,11 +310,11 @@ class GameBox extends Component {
   // componentWillMount() {
   //   this.initGame();
   // }
-  componentDidUpdate(prevProps) {
-    if (prevProps.game.box !== this.props.game.box) {
-      this.playGame();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.game.box !== this.props.game.box) {
+  //     this.playGame();
+  //   }
+  // }
   render() {
     return (
       <div>

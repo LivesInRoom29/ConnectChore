@@ -31,6 +31,9 @@ class GridCell extends Component {
         classes += "p1";
       }
     }
+
+    // console.log("x is", x);
+    // console.log("y s", y);
     return (
       <div
         className={classes}
@@ -51,7 +54,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
   return {
-    sendTileDrop: (col, row, color) => dispatch(dropTile(col, row.color)),
+    sendTileDrop: (col, row, color) => dispatch(dropTile(col, row, color)),
   };
 };
 
