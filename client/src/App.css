@@ -36,6 +36,9 @@ p {
     border-radius: 30px;
     border: none;
     letter-spacing: 1.5px;
+    display: "flex";
+    /* justify-content: "center",
+    align-items: "center" */
   }
 
   
