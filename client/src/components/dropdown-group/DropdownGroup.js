@@ -15,6 +15,8 @@ import DropdownMembers from "./DropdownMembers";
 import DropdownChorelists from "./DropdownChorelists";
 import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
 import TaskDropDown from "../taskdropdown/TaskDropDown";
+import filterDeleted from "../../utils/filterDeleted";
+
 
 import "../chorelist-tasks/choreListTasks.css"
 
@@ -40,6 +42,28 @@ class DropdownGroup extends Component {
     componentDidMount() {
         const { user } = this.props.auth;
 
+        var promise = new Promise((resolve, reject) => {
+            API.getHouseholdMembers(user.id)
+                .then(res => resolve(res))
+                .catch(err => reject(Error("API failed")));
+        })
+
+        promise.then(result => {
+            // filter the deleted household members out of the data to store in state
+            const undeletedHMs = filterDeleted(result.data);
+            const firstHouseholdMember = undeletedHMs[0] ? undeletedHMs[0]._id : "";
+
+            // set the householdMembers state to be the undeletedHMs and
+            // the householdMemberId state to be the first household member in that array
+            this.setState(
+                {
+                    householdMembers: undeletedHMs,
+                    householdMemberId: firstHouseholdMember
+                }
+            )
+
+        });
+
         var promisetwo = new Promise((resolve, reject) => {
             API.getChoreLists(user.id)
                 //console.log(choreList.id)
@@ -50,7 +74,7 @@ class DropdownGroup extends Component {
         promisetwo.then(res => {
             //console.log(res);
             const allChoreLists = res.data;
-            const filteredLists = allChoreLists.filter(list => list.completedBy === this.state.householdMemberId);
+            const filteredLists = allChoreLists.filter(list => list.completedBy === this.props.assignedTo);
             const firstChoreList = filteredLists[0] ? filteredLists[0]._id : ""
             this.setState(
                 {
@@ -64,6 +88,7 @@ class DropdownGroup extends Component {
 
     // get the input values and add to state
     handleInputChange = event => {
+        console.log("event:", event.target);
         event.preventDefault();
         this.setState(
             {
@@ -134,8 +159,8 @@ class DropdownGroup extends Component {
                                 <Form.Row>
                                     <DropdownMembers
                                         handleInputChange={this.handleInputChange}
-                                        householdMemberId={this.props.assignedTo}
-                                        householdMembers={this.props.householdMembers}
+                                        householdMemberId={this.state.householdMemberId}
+                                        householdMembers={this.state.householdMembers}
                                     />
                                     <DropdownChorelists
                                         handleInputChange={this.handleInputChange}

@@ -1,10 +1,10 @@
 // Need for React and Redux
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+// import PropTypes from "prop-types";
+// import { connect } from "react-redux";
 import parseISO from 'date-fns/parseISO';
 import { format } from "date-fns";
-//import API from "../../utils/API";
+// import API from "../../utils/API";
 // Bootstrap components
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -14,7 +14,8 @@ class DropdownChorelists extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      chorelistWithRewards: []
+      chorelistWithRewards: [],
+
     }
   }
 
@@ -47,7 +48,9 @@ class DropdownChorelists extends Component {
 
   render() {
     const filteredChoreList = this.props.choreLists.filter(list => list.completedBy === this.props.householdMemberId);
-
+    console.log("render chorelist:", this.props.choreLists);
+    console.log("filtered chorelist: ", filteredChoreList);
+    console.log("member id:", this.props.householdMemberId);
     return (
       <Form.Group as={Col} md="6" controlId="formChorelists">
         <Form.Label>Pick a chorelist:</Form.Label>
@@ -76,14 +79,16 @@ class DropdownChorelists extends Component {
   }
 }
 
-DropdownChorelists.propTypes = {
-  auth: PropTypes.object.isRequired
-};
+// DropdownChorelists.propTypes = {
+//   auth: PropTypes.object.isRequired
+// };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-});
+// const mapStateToProps = state => ({
+//   auth: state.auth,
+// });
 
-export default connect(
-  mapStateToProps,
-)(DropdownChorelists);
+// export default connect(
+//   mapStateToProps,
+// )(DropdownChorelists);
+
+export default DropdownChorelists;

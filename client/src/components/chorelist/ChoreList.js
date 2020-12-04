@@ -177,8 +177,6 @@ class ChoreList extends Component {
             return (
                 <DropdownGroup
                     allRewards={this.state.allRewards}
-                    assignedto={this.state.assignedto}
-                    householdMembers={this.state.householdMembers}
                 />
             )
         } else {
