@@ -29,8 +29,8 @@ class Dashboard extends Component {
                     <br />
                     <br />
 
-                    <GameBox />
-                    {/* <Row>
+                   
+                    <Row>
                         <Col lg={true}><Link to="/addchorelist"><div className="module mid animate">
                             <h2><i className="fas fa-list-ol"></i><br />Create Chorelist</h2></div></Link></Col>
                         <Col lg={true}><Link to="/game"><div className="module mid animate">
@@ -42,7 +42,7 @@ class Dashboard extends Component {
                         <Col lg={true}><Link to="/addtasks"><div className="module mid animate">
                             <h2><i className="fas fa-check"></i><br />Add Tasks</h2></div></Link></Col>
                     </Row>
-                    <br /> */}
+                    <br />
                     <div className="dashboard-btn">
                         <Link
                             to="/householdmembers"
