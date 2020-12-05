@@ -2,7 +2,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # ConnectChore Application
 ## Table of Contents
-* [User Stories](#user-stores)
 * [Description](#description)
 * [Technologies](#technologies)
 * [User Stories](#user-stories)
@@ -58,13 +57,13 @@ I WANT a list of household tasks to share. I want myself and the people under th
 AS A Spouse
 I WANT clear delineation of responsibilities. In other words, I want to be able to know who does what so that there is no conflict.
 ## Future Enhancements
--Multiple logged in users per household
+- Multiple logged in users per household
 
--Display history of tasks and rewards
+- Display history of tasks and rewards
 
--Reminders for chore list items
+- Reminders for chore list items
 
--Monetize/points-based individual chores towards an expensive reward
+- Monetize/points-based individual chores towards an expensive reward
 
 ## Contributors
 
