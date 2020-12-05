@@ -92,9 +92,6 @@ class ChoreList extends Component {
                 {
                     householdMembers: undeletedHMs,
                     assignedto: firstHouseholdMember
-                },
-                () => {
-                    console.log("householdmember state: ", this.state.householdMembers);
                 }
             )
 
