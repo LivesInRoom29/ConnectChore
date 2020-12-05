@@ -108,12 +108,12 @@ class GameBox extends Component {
       // Place piece on board
       let board = this.props.game.box;
 
-      for (let y = 5; y >= 0; y--) {
-        if (!board[y][x]) {
-          board[y][x] = this.state.currentPlayer;
-          break;
-        }
-      }
+      // for (let y = 5; y >= 0; y--) {
+      //   if (!board[y][x]) {
+      //     board[y][x] = this.state.currentPlayer;
+      //     break;
+      //   }
+      // }
 
       console.log("current player", this.state.currentPlayer);
 
