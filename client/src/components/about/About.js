@@ -51,8 +51,8 @@ const About = () => {
                             <br />
                             {/* ['sm', 'md', 'lg', 'xl'].map((breakpoint, idx) => ( */}
                             <ListGroup variant="flush">
-                                <ListGroup.Item><a rel="nonreferrer" href="https://github.com/ARam2142"><p style={{color: "black"}}>Andres Ramirez</p></a></ListGroup.Item>
                                 <ListGroup.Item><a rel="nonreferrer" href="https://github.com/ASheikh-io"><p style={{color: "black"}}>Ahmed Sheikh</p></a></ListGroup.Item>
+                                <ListGroup.Item><a rel="nonreferrer" href="https://github.com/ARam2142"><p style={{color: "black"}}>Andres Ramirez</p></a></ListGroup.Item>
                                 <ListGroup.Item><a rel="nonreferrer" href="https://github.com/Bremah-mvp"><p style={{color: "black"}}>Bremah Lwanga</p></a></ListGroup.Item>
                                 <ListGroup.Item><a rel="nonreferrer" href="https://github.com/hilbug"><p style={{color: "black"}}>Hilary Ferraro</p></a></ListGroup.Item>
                                 <ListGroup.Item><a rel="nonreferrer" href="https://github.com/kdunphe"><p style={{color: "black"}}>Kayla Dunphe</p></a></ListGroup.Item>
