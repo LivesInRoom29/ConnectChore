@@ -14,6 +14,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import About from "./components/about/About";
 import Rewards from "./components/rewards/RewardsForm";
 import Game from "./components/game/game";
 import Footer from "./components/footer/footer";
@@ -67,6 +68,7 @@ class App extends Component {
               <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
               <PrivateRoute exact path="/addchorelist" component={ChoreList} />
               <PrivateRoute exact path="/addtasks" component={TaskForm} />
+              <PrivateRoute exact Path="/about" component={About} />
               <PrivateRoute exact path="/taskdropdown" component={TaskDropDown} />
               <PrivateRoute exact path="/memberchorelist" component={MemberChoreList} />
               <PrivateRoute exact path="/chores/:userId/:listId" component={ChoreView} />
