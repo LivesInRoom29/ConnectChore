@@ -1,22 +1,16 @@
-// Need for React and Redux
+// Need for React
 import React from "react";
-//import PropTypes from "prop-types";
-//import { connect } from "react-redux";
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-// import Card from "react-bootstrap/Card"
-//import CardGroup from "react-bootstrap/CardGroup";
-//import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 // CSS
 import "../../App.css";
 import SubNav from "../layout/SubNav";
 
 const About = () => {
-    //const { user } = this.props.auth;
 
     return (
         <>
@@ -47,9 +41,7 @@ const About = () => {
                     <Col>
                         <div>
                             <h3 style={{ textAlign: "center" }}>Contributors</h3>
-                            {/* <p style={{textAlign: "center"}}>The Devolpers that made this possible</p> */}
                             <br />
-                            {/* ['sm', 'md', 'lg', 'xl'].map((breakpoint, idx) => ( */}
                             <ListGroup variant="flush">
                                 <ListGroup.Item><a rel="nonreferrer" href="https://github.com/ASheikh-io"><p style={{color: "black"}}>Ahmed Sheikh</p></a></ListGroup.Item>
                                 <ListGroup.Item><a rel="nonreferrer" href="https://github.com/ARam2142"><p style={{color: "black"}}>Andres Ramirez</p></a></ListGroup.Item>
@@ -58,7 +50,6 @@ const About = () => {
                                 <ListGroup.Item><a rel="nonreferrer" href="https://github.com/kdunphe"><p style={{color: "black"}}>Kayla Dunphe</p></a></ListGroup.Item>
                                 <ListGroup.Item><a rel="nonreferrer" href="https://github.com/LivesInRoom29"><p style={{color: "black"}}>Molly Kizer</p></a></ListGroup.Item>
                             </ListGroup>
-                            {/* )); */}
                         </div>
 
                         <br />
