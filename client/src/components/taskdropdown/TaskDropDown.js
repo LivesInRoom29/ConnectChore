@@ -19,6 +19,7 @@ class TaskDropDown extends Component {
         this.state = {
             choosetask: "",
             allTasks: [],
+            filteredTasks: [],
             description: "",
             auth: {}
         }
@@ -43,7 +44,8 @@ class TaskDropDown extends Component {
             this.setState(
                 {
                     allTasks: result.data,
-                    choosetask: firstTask
+                    choosetask: firstTask,
+                    filteredTasks: undeletedTasks
                 }
             )
         });
@@ -104,7 +106,7 @@ class TaskDropDown extends Component {
                         >
                             {/* Map the tasks to the drop-down */}
                             {
-                                this.state.allTasks.map(task => (
+                                this.state.filteredTasks.map(task => (
                                     <option
                                         key={task._id}
                                         value={task._id}
