@@ -98,7 +98,7 @@ class Dashboard extends Component {
                         <Col md={2}></Col>
                         <Col md={4}><Link to="/rewards"><div className="module mid animate">
                             <h2><i className="fas fa-trophy dashboard-icons"></i><br />Add Rewards</h2></div></Link><br /></Col>
-                        <Col md={4}><Link to="/addtasks"><div className="module mid animate">
+                        <Col md={4}><Link to="/tasks"><div className="module mid animate">
                             <h2 name="tasks"><i className="fas fa-check dashboard-icons"></i><br />Add Tasks</h2></div></Link></Col>
                         <Col md={2}></Col>
                     </Row>
