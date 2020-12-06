@@ -29,11 +29,7 @@ class Dashboard extends Component {
                     <br />
                     <br />
 
-<<<<<<< HEAD
-                    <GameBox />
-=======
                    
->>>>>>> f31a63cf9c6824785d9b195c9461e79aed391c27
                     <Row>
                         <Col lg={true}><Link to="/addchorelist"><div className="module mid animate">
                             <h2><i className="fas fa-list-ol"></i><br />Create Chorelist</h2></div></Link></Col>

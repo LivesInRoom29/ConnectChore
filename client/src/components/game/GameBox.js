@@ -45,19 +45,19 @@ class GameBox extends Component {
     this.playGame();
   }
   initGame() {
-    // const box = [];
-    // for (let y = 5; y >= 0; y--) {
-    //   const row = [];
-    //   for (let x = 0; x < 7; x++) {
-    //     row.push({
-    //       color: "white",
-    //     });
-    //   }
+    const box = [];
+    for (let y = 5; y >= 0; y--) {
+      const row = [];
+      for (let x = 0; x < 7; x++) {
+        row.push({
+          color: "white",
+        });
+      }
 
-    //   box.push(row);
-    // }
-    // console.log("box is ", box);
-    // console.log("current player ", this.state.player1);
+      box.push(row);
+    }
+    console.log("box is ", box);
+    console.log("current player ", this.state.player1);
     this.props.initGame();
     this.setState(
       {
@@ -108,12 +108,12 @@ class GameBox extends Component {
       // Place piece on board
       let board = this.props.game.box;
 
-      for (let y = 5; y >= 0; y--) {
-        if (!board[y][x]) {
-          board[y][x] = this.state.currentPlayer;
-          break;
-        }
-      }
+      // for (let y = 5; y >= 0; y--) {
+      //   if (!board[y][x]) {
+      //     board[y][x] = this.state.currentPlayer;
+      //     break;
+      //   }
+      // }
 
       console.log("current player", this.state.currentPlayer);
 
@@ -310,11 +310,11 @@ class GameBox extends Component {
   // componentWillMount() {
   //   this.initGame();
   // }
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.game.box !== this.props.game.box) {
-  //     this.playGame();
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (prevProps.game.box !== this.props.game.box) {
+      this.playGame();
+    }
+  }
   render() {
     return (
       <div>
