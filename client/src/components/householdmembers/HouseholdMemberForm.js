@@ -156,7 +156,7 @@ class HouseholdMemberForm extends Component {
                                         <ListGroup.Item
                                             key={member._id}
                                             data-id={member._id}
-                                            className="align-items-center"
+                                            className="align-items-center mt-1"
                                             style={{
                                                 background: "#00adef",
                                                 color: "#ffffff",
@@ -169,10 +169,6 @@ class HouseholdMemberForm extends Component {
                                             <Button
                                                 variant="danger"
                                                 className="float-right text-light"
-                                                // style={{
-                                                //     backgroundColor: "transparent",
-                                                //     border: "none",
-                                                // }}
                                                 onClick={
                                                     () => API.deleteHouseholdMember(
                                                         member._id,
