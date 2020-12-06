@@ -61,6 +61,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact Path="/about" component={About} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/rewards" component={Rewards} />
@@ -68,7 +69,6 @@ class App extends Component {
               <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
               <PrivateRoute exact path="/addchorelist" component={ChoreList} />
               <PrivateRoute exact path="/addtasks" component={TaskForm} />
-              <PrivateRoute exact Path="/about" component={About} />
               <PrivateRoute exact path="/taskdropdown" component={TaskDropDown} />
               <PrivateRoute exact path="/memberchorelist" component={MemberChoreList} />
               {/* <PrivateRoute exact path="/chores/:userId/:listId" component={ChoreView} /> */}
