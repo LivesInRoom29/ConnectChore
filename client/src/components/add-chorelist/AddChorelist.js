@@ -20,7 +20,7 @@ class AddChorelist extends Component {
 
   render() {
 
-    // const { user } = this.props.auth;
+    //const { user } = this.props.auth;
     const choreListID = this.props.choreListToEdit;
 
     const chorelistEditor = choreListID ? (
