@@ -11,11 +11,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  font-size: 18px;
+  font-size: 18px!important;
 }
 
 h3 {
   color: #00adef;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
 }
 
 
