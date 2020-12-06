@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import SubNav from "../layout/SubNav";
+import DateTime from "../dateandtime/DateandTime";
 // Bootstrap
 import { Container, Col, Row } from "react-bootstrap";
 
@@ -32,6 +33,8 @@ class Dashboard extends Component {
                     <Col md={2}></Col>
                     <Col md={8}>
                     <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
+                    <br />
+                    <DateTime />
                     <br />
                     <p className="dashboard">Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
                     </Col>
