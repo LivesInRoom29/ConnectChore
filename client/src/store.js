@@ -1,12 +1,16 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
+import { initialGameState } from "./reducers/gameReducer";
 import { initialChorelistState } from "./reducers/chorelistReducer";
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 const initialState = {
-    chorelist: initialChorelistState
+    chorelist: initialChorelistState,
+    game: initialGameState
 };
+
+
 const middleware = [thunk];
 
 const store = createStore(

@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import gameReducer from "./gameReducer";
 import authReducer from "./authReducers";
 import errorReducer from "./errorReducers";
 import chorelistReducer from "./chorelistReducer";
@@ -6,7 +7,8 @@ import chorelistReducer from "./chorelistReducer";
 export default combineReducers({
   auth: authReducer,
   errors: errorReducer,
-  chorelist: chorelistReducer
+  chorelist: chorelistReducer,
+  game: gameReducer
 });
 
 
