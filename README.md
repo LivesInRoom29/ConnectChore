@@ -4,12 +4,14 @@
 ## Table of Contents
 * [Description](#description)
 * [Technologies](#technologies)
+* [User Stories](#user-stories)
 * [Future Enhancements](#future-enhancements)
 * [Contributors](#contributors)
 * [Questions & Collaboration](#questions-&-collaboration)
 * [References](#references)
 * [License](#license)
 * [Screenshots](#screenshots)
+
 
 ## Description
 Many people in this world have to coexist with one another. There are many chores around the house that have to get done so everybody is happy. You may have to mow the lawn, clean the toilet, make dinner or do laundry. After doing all these chores, you may want to be rewarded, right? 
@@ -41,11 +43,27 @@ Live link: https://connectchore.herokuapp.com
 | React-redux      |               |                    |                |
 | Redux-thunk      |               |                    |                |
 
+## User Stories
+
+AS A parent 
+I WANT a list of chores for my child. This will teach them to be responsible and earn rewards for every chore that is complete.
+
+AS A child
+I WANT a set list of tasks/chores. I want to be rewarded for the chores/tasks that I complete.
+
+AS A Roommate
+I WANT a list of household tasks to share. I want myself and the people under the same roof to have a peaceful coexistence.
+
+AS A Spouse
+I WANT clear delineation of responsibilities. In other words, I want to be able to know who does what so that there is no conflict.
 ## Future Enhancements
--Multiple logged in users per household
--Display history of tasks and rewards
--Reminders for chore list items
--Monetize/points-based individual chores towards an expensive reward
+- Multiple logged in users per household
+
+- Display history of tasks and rewards
+
+- Reminders for chore list items
+
+- Monetize/points-based individual chores towards an expensive reward
 
 ## Contributors
 

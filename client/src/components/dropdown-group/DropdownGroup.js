@@ -7,6 +7,9 @@ import { connect } from "react-redux";
 import { setTasksAction } from "../../actions/chorelistActions";
 import DropdownMembers from "./DropdownMembers";
 import DropdownChorelists from "./DropdownChorelists";
+import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
+import TaskDropDown from "../taskdropdown/TaskDropDown";
+import filterDeleted from "../../utils/filterDeleted";
 // Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -15,12 +18,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // API Calls
 import API from "../../utils/API";
-//import filterDeleted from "../../utils/filterDeleted";
-//import API from "../../utils/API";
 
 import "../chorelist-tasks/choreListTasks.css"
-import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
-import TaskDropDown from "../taskdropdown/TaskDropDown";
 
 class DropdownGroup extends Component {
 
@@ -43,7 +42,6 @@ class DropdownGroup extends Component {
     // TEST: will be passing the user.id and the choreList.id to the API call to successfully get us the chorelists data
     componentDidMount() {
         const { user } = this.props.auth;
-        //const { choreList } = this.state;
 
         var promise = new Promise((resolve, reject) => {
             API.getHouseholdMembers(user.id)
@@ -51,33 +49,35 @@ class DropdownGroup extends Component {
                 .catch(err => reject(Error("API failed")));
         })
 
-        promise.then(res => {
-            const firstHouseholdMemberId = res.data[0] ? res.data[0]._id : "";
+        promise.then(result => {
+            // filter the deleted household members out of the data to store in state
+            const undeletedHMs = filterDeleted(result.data);
+            const firstHouseholdMember = undeletedHMs[0] ? undeletedHMs[0]._id : "";
+
+            // set the householdMembers state to be the undeletedHMs and
+            // the householdMemberId state to be the first household member in that array
             this.setState(
                 {
-                    householdMemberId: firstHouseholdMemberId,
-                    householdMembers: res.data
+                    householdMembers: undeletedHMs,
+                    householdMemberId: firstHouseholdMember
                 }
             )
-        })
+
+        });
 
         var promisetwo = new Promise((resolve, reject) => {
             API.getChoreLists(user.id)
-                //console.log(choreList.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
         })
 
         promisetwo.then(res => {
-            //console.log(res);
             const allChoreLists = res.data;
-            const filteredLists = allChoreLists.filter(list => list.completedBy === this.state.householdMemberId);
+            const filteredLists = allChoreLists.filter(list => list.completedBy === this.props.assignedTo);
             const firstChoreList = filteredLists[0] ? filteredLists[0]._id : ""
             this.setState(
                 {
-                    //choreListId: res.data[0]._id,
                     choreLists: res.data,
-                    //filteredChoreLists: filteredLists,
                     choreListToEdit: firstChoreList
                 }
             )
@@ -92,17 +92,9 @@ class DropdownGroup extends Component {
             {
                 [event.target.name]: event.target.value,
                 showTasks: false
-                // household member id
                 // don't include ...this.state so the value changes when the drop-down changes
             }
         );
-
-        // const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
-        // this.setState(
-        //     {
-        //         filteredChoreLists: filteredLists
-        //     }
-        // )
 
     };
 
@@ -131,6 +123,9 @@ class DropdownGroup extends Component {
         // otherwise render "Choose a Chorelist"
         const chorelistEditor = this.state.showTasks ? (
             <>
+                <br />
+                <h4>View or Edit Choreslist</h4>
+                <p>Add new tasks, mark them as complete or delete them from the list.</p>
                 <TaskDropDown
                     choreListToEdit={this.state.choreListToEdit}
                 />
@@ -173,6 +168,7 @@ class DropdownGroup extends Component {
                                         householdMemberId={this.state.householdMemberId}
                                         choreListToEdit={this.state.choreListToEdit}
                                         choreLists={this.state.choreLists}
+                                        rewards={this.props.undeletedRewards}
                                     />
 
                                 </Form.Row>

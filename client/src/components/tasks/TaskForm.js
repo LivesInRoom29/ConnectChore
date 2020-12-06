@@ -44,7 +44,8 @@ class TaskForm extends Component {
                 this.setState(
                     {
                         tasks: undeletedTasks
-                    })
+                    }
+                )
             })
             .catch(err => console.log(err));
     }
@@ -81,6 +82,12 @@ class TaskForm extends Component {
             .catch(err => console.log(err));
 
     };
+
+    // handleDelete = e => {
+
+    // }
+
+
 
     // RENDER TEST:
     // Clicking ADD TASK adds reward as expected to DB for the logged in user only?

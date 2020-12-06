@@ -6,6 +6,7 @@ import { logoutUser } from "../../actions/authActions";
 import SubNav from "../layout/SubNav";
 // Bootstrap
 import { Container, Col, Row } from "react-bootstrap";
+
 // Local CSS
 import "./Dashboard.css";
 import "../../App.css";
@@ -40,6 +41,8 @@ class Dashboard extends Component {
                     <br />
                     <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p> */}
                     <br />
+
+
                     <Row>
                         <Col md={2}></Col>
                         <Col md={4}><Link to="/addchorelist">
@@ -76,7 +79,7 @@ class Dashboard extends Component {
                                 backgroundColor: "#42b984",
                                 color: "white",
                                 letterSpacing: "1.5px"
-                              }}
+                            }}
                         ><i className="fas fa-plus"></i>&nbsp;Add Members</Link></Col>
                         {/* <Col><button
                             style={{
@@ -97,9 +100,9 @@ class Dashboard extends Component {
                         </button></Col> */}
                         <Col md={8}></Col>
                     </Row>
-                <br />
-                <br />
-                <br />
+                    <br />
+                    <br />
+                    <br />
                 </Container>
             </>
         );
