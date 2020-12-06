@@ -89,8 +89,9 @@ router.get("/householdmember/:id", passport.authenticate("jwt", { session: false
 });
 
 // Get chorelist by id populated with tasks
-// Auth OK: router.get("/withtasks/:id", async function (req, res) {
-router.get("/withtasks/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
+// Auth OK:
+router.get("/withtasks/:id", async function (req, res) {
+//router.get("/withtasks/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
   const id = req.params.id;
 
   try {
@@ -108,7 +109,9 @@ router.get("/withreward/:id", async function (req, res) {
   const id = req.params.id;
 
   try {
-    const data = await choreListController.findById(id).populate("reward.rewardDescriptionId");
+    const data = await choreListController.findById(id)
+      .populate("reward.rewardDescriptionId")
+      .populate("reward.rewardDescriptionId.description");
     res.send(data);
   } catch (err) {
     res.status(503).end(err);
