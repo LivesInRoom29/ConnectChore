@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+// Local Components
+import BackToDashboard from "../back-to-dashboard/BackToDashboard";
 // API calls
 import API from "../../utils/API";
 // utils
@@ -95,6 +97,7 @@ class HouseholdMemberForm extends Component {
                     <br />
                     <Row>
                         <Col>
+                            <BackToDashboard />
                             <Form>
                                 <h3>Manage Your Household Members</h3>
                                 <p>Once you've added household members, you'll be able to assign tasks and create a chore list for them.</p>
