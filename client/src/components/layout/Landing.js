@@ -100,7 +100,7 @@ class Landing extends Component {
               <h2>Why ConnectChore?</h2>
             </div></Col>
             <Col md={5}><div className="mid2 animate">
-              <div className="about animate"><br />A clean and organized home is a happy home! We all know that chores can feel never-ending.. there's always dishes to wash, playrooms to tidy, and laundry to fold. ConnectChore will help you organize your household's to-do list all in one place and you can even add rewards to make checking items off the list even sweeter!</div></div></Col>
+              <div className="about animate"><br />A clean and organized home is a happy home! We all know that chores can feel never-ending. There's always dishes to wash, playrooms to tidy, and laundry to fold. ConnectChore will help you organize your household's to-do list all in one place and you can add rewards to make checking items off the list even sweeter!</div></div></Col>
             <Col md={1}></Col>
           </Row>
           <br />
