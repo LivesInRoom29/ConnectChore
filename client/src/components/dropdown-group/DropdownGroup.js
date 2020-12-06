@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link, animateScroll as scroll } from "react-scroll";
 // import { format } from "date-fns";
 // import { Link } from "react-router-dom";
 import { setTasksAction } from "../../actions/chorelistActions";
@@ -73,7 +74,7 @@ class DropdownGroup extends Component {
 
         promisetwo.then(res => {
             const allChoreLists = res.data;
-            const filteredLists = allChoreLists.filter(list => list.completedBy === this.props.assignedTo);
+            const filteredLists = allChoreLists.filter(list => list.completedBy === this.state.householdMemberId);
             const firstChoreList = filteredLists[0] ? filteredLists[0]._id : ""
             this.setState(
                 {
@@ -122,7 +123,7 @@ class DropdownGroup extends Component {
         // if showTasks is true, render the TaskDropDown menu and the ChoreListTasks
         // otherwise render "Choose a Chorelist"
         const chorelistEditor = this.state.showTasks ? (
-            <>
+            <div name="taskList">
                 <br />
                 <h4>View or Edit Chore List</h4>
                 <p>Add new tasks, mark them as complete, or delete them from the list.</p>
@@ -133,7 +134,7 @@ class DropdownGroup extends Component {
                 <ChoreListTasks
                     choreListToEdit={this.state.choreListToEdit}
                 />
-            </>
+            </div>
         ) : (
                 <>
                     <h2>Choose a Chore List</h2>
@@ -141,6 +142,39 @@ class DropdownGroup extends Component {
                 </>
             )
 
+        // if showTasks is true, render the button for users to jump to task list
+        // otherwise return null
+        const showJumpToTaskBtn = this.state.showTasks ? (
+            <Button className="btn btn-lg button-hover"
+                style={{
+                    width: "250px",
+                    height: "50px",
+                    fontSize: "15px",
+                    textTransform: "uppercase",
+                    borderRadius: "30px",
+                    border: "none",
+                    padding: "12px",
+                    backgroundColor: "#42b984",
+                    color: "white",
+                    letterSpacing: "1.5px",
+                    marginLeft: "25px"
+                }}
+            >
+                <Link
+                    // className="jump-to-tasks"
+                    activeClass="active"
+                    to="taskList"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={500}
+                >
+                    Jump to Task List
+                </Link>
+            </Button>
+        ) : (
+            null
+        )
 
         return (
             <>
@@ -191,9 +225,9 @@ class DropdownGroup extends Component {
                                     data-id={this.state.choreListToEdit}
                                     onClick={this.onClickShowChorelist}
                                 >
-                                    Generate Chore List
-                            </Button>
-
+                                    Generate Chorelist
+                                </Button>
+                                {showJumpToTaskBtn}
                             </Form>
                         </Col>
                     </Row>

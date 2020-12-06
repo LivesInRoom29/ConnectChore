@@ -22,7 +22,7 @@ router.get("/", passport.authenticate("jwt", { session: false }),
 // Auth OK: router.get("/user/:id", async function (req, res) {
 router.get("/user/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
   const id = req.params.id;
-  
+
   try {
       const data = await choreListController.findByUserId(id);
         //res.json(data);

@@ -95,7 +95,7 @@ class TaskForm extends Component {
 
     render() {
 
-        const { user } = this.props.auth;
+        //const { user } = this.props.auth;
 
         return (
             <>
@@ -192,7 +192,10 @@ class TaskForm extends Component {
                                                             isDeleted: true
                                                         }
                                                     )
-                                                        .then(res => console.log(res))
+                                                        .then(res => {
+                                                            console.log(res);
+                                                            window.location.reload();
+                                                        })
                                                         .catch(err => console.log(err))
                                                 }
                                             >

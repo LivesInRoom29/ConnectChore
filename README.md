@@ -7,7 +7,7 @@
 * [User Stories](#user-stories)
 * [Future Enhancements](#future-enhancements)
 * [Contributors](#contributors)
-* [Questions & Collaboration](#questions-&-collaboration)
+* [Questions and Collaboration](#questions-and-collaboration)
 * [References](#references)
 * [License](#license)
 * [Screenshots](#screenshots)
@@ -23,23 +23,25 @@ Once in the app, users can:
 - Create chorelists for each member and assign specific tasks and rewards for accomplishing them
 - Family members/roommates also can play a game of ConnectChore to win the ultimate prize
 
-Live link: https://connectchore.herokuapp.com
+Check out ConnectChore today! https://connectchore.herokuapp.com
 
 ## Technologies
 
 |        Front-End |      Back-End |          Dev-Tools | Authentication |
-|-----------------:|--------------:|-------------------:|---------------:|
+|:-----------------|:--------------|:-------------------|:---------------|
 |      Animate.css |         Axios |           Balsamiq |       Bcryptis |
 |        Bootstrap |          Cors |              Canva |    Body-Parser |
 |         Date-fns |       Express |       Concurrently |       is-empty |
 | Font-Awesome     | Heroku        | Dotenv             | Jsonwebtoken   |
 | Google Fonts     | MongoDB Atlas | Google G Suite     | Passport       |
 | Immer            | Mongoose      | Nodemon            | Passport-jwt   |
-| React            | Morgan        | Postman            | Validator      |
-| React-bootstrap  |               | redux-devtools-ext |                |
-| React-datepicker |               | ension             |                |
-| React-router-dom |               | Trello             |                |
-| Redux            |               | VSCode             |                |
+| jQuery           | Morgan        | Postman            | Validator      |
+| React            |               | redux-devtools-extension|           |
+| React-bootstrap  |               | Trello             |                |
+| React-datepicker |               | VSCode             |                |
+| React-router-dom |               |                    |                |
+| React-scroll     |               |                    |                |
+| Redux            |               |                    |                |
 | React-redux      |               |                    |                |
 | Redux-thunk      |               |                    |                |
 
@@ -67,20 +69,28 @@ I WANT clear delineation of responsibilities. In other words, I want to be able 
 
 ## Contributors
 
-- [Hilary Ferraro](https://github.com/hilbug)
+- [Ahmed Sheikh](https://github.com/ASheikh-io)
 - [Andres Ramirez](https://github.com/ARam2142)
+- [Bremah Lwanga](https://github.com/Bremah-mvp)
+- [Hilary Ferraro](https://github.com/hilbug)
 - [Kayla Dunphe](https://github.com/kdunphe)
 - [Molly Kizer](https://github.com/LivesInRoom29)
-- [Bremah Lwanga](https://github.com/Bremah-mvp)
-- [Ahmed Sheikh](https://github.com/ASheikh-io)
 
-## Questions & Collaboration
+
+## Questions and Collaboration
 If you have questions, suggestions, or experience any bugs in the application, please submit an issue in the GitHub repository. 
 
 If you would like to contribute to this project, please fork the repository and then create a pull request for your changes.
 
 ## References
 - Many thanks to our TA team Bobby Hoffman and Mike Fearnley for their assistance.
+- User Authentication Source
+   - [Build a Login/Auth App with the MERN Stack — Part 1 (Backend)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669)
+   - [Build a Login/Auth App with the MERN Stack — Part 2 (Frontend & Redux Setup)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-2-frontend-6eac4e38ee82)
+   - [Build a Login/Auth App with the MERN Stack — Part 3 (Linking Redux with React Components)](https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-components-88190f8db718)
+- Game Logic
+   - [Game winner logic](https://github.com/miki995/connect-four/blob/master/src/help%5Bers/winner/Winner.helper.js)
+   - [Board Set-up](https://www.youtube.com/watch?v=b0O3i4AyoE0&ab_channel=LukeSegars)
 
 ## License
 
