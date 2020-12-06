@@ -432,6 +432,10 @@ class GameBox extends Component {
             </div>
             <p>{this.state.message}</p>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
         </Container>
       </>
     );
