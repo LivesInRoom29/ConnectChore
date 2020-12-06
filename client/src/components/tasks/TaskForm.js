@@ -196,7 +196,7 @@ class TaskForm extends Component {
                                                         .catch(err => console.log(err))
                                                 }
                                             >
-                                                <span><i class="fas fa-times"></i></span>
+                                                <span><i className="fas fa-times"></i></span>
                                             </Button>
                                         </ListGroup.Item>
                                     ))}
