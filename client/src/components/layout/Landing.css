@@ -21,9 +21,19 @@ h1 {
   color: #ffffff;
 }
 
+h3.landing {
+  color: #ffffff !important;
+  text-align: center;
+  font-size: 22px !important;
+}
+
 h5 {
   color: #ffffff;
   font-size: 24px !important;
+}
+
+.aboutCC:hover {
+  color: #ffffff !important;
 }
 
 .module2 {
@@ -58,7 +68,7 @@ h5 {
   position: absolute;
   top: 50%;
   left: 50%;
-  font-size: 50px;
+  font-size: 40px;
   transform: translate(-50%, -50%);
 }
 

@@ -1,12 +1,10 @@
 .dashboard-container {
   background:
-  /* linear-gradient(
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0.3)
-  ), */
-  /* url("https://image.freepik.com/free-photo/rustic-wood-panel_53876-16245.jpg"); */
-  url("https://images.pexels.com/photos/3773570/pexels-photo-3773570.png");
-  /* url("https://images.pexels.com/photos/373548/pexels-photo-373548.jpeg"); */
+  linear-gradient(
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4)
+  ),
+  url("https://images.pexels.com/photos/373548/pexels-photo-373548.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   vertical-align: middle;
@@ -19,9 +17,10 @@ p.dashboard {
 }
 
 h3.dashboard {
-  color: #00adef;
+  color: #ffffff !important;
   font-size: 36px;
   text-align: center;
+  font-weight: 900;
 }
 
 .module {
@@ -62,6 +61,6 @@ h3.dashboard {
     text-align: center;
     color: #ffffff;
     font-weight: 900;
-    font-size: 16px;
+    font-size: 18px;
     font-family: 'Poppins', sans-serif;
   }

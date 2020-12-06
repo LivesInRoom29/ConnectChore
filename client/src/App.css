@@ -16,7 +16,8 @@ p {
 }
 
 h3 {
-  color: #00adef;
+  color: #00adef !important;
+  text-align: left;
 }
 
 ul {

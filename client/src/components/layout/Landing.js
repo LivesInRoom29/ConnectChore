@@ -117,6 +117,11 @@ class Landing extends Component {
           </Row>
           <br />
           <br />
+          <Row>
+            <Col lg={12} className="d-flex justify-content-center mt-5 text-center"><h3 className="landing">Learn more about <Link to="/about" className="aboutCC">ConnectChore.</Link></h3></Col>
+          </Row>
+          <br />
+          <br />
           <br />
           <br />
           <br />
