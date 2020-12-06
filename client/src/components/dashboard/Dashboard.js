@@ -44,7 +44,9 @@ class Dashboard extends Component {
                             style={{
                                 color: "#08124B", 
                                 textDecoration: "underline",
-                                cursor: "pointer"
+                                cursor: "pointer",
+                                textShadow: "1px 1px 2px white",
+                                fontWeight: "bold"
                             }}>
                                 <ScrollLink 
                                     activeClass="active" 
@@ -61,7 +63,9 @@ class Dashboard extends Component {
                             style={{
                                 color: "#08124B", 
                                 textDecoration: "underline",
-                                cursor: "pointer"
+                                cursor: "pointer",
+                                textShadow: "1px 1px 2px white",
+                                fontWeight: "bold"
                             }}>
                             <ScrollLink 
                                 activeClass="active" 
