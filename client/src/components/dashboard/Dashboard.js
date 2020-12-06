@@ -39,11 +39,12 @@ class Dashboard extends Component {
                     <br />
                     <DateTime />
                     <br />
-                    <p className="dashboard">Get started by 
-                        <Link 
+                    <p className="dashboard">Get started by&nbsp;
+                        <span 
                             style={{
                                 color: "#08124B", 
-                                textDecoration: "underline"
+                                textDecoration: "underline",
+                                cursor: "pointer"
                             }}>
                                 <ScrollLink 
                                     activeClass="active" 
@@ -54,12 +55,13 @@ class Dashboard extends Component {
                                     duration={500}
                                 >adding your household members
                                 </ScrollLink>
-                        </Link> 
+                        </span> 
                         &nbsp;and&nbsp;
-                        <Link 
+                        <span 
                             style={{
                                 color: "#08124B", 
-                                textDecoration: "underline"
+                                textDecoration: "underline",
+                                cursor: "pointer"
                             }}>
                             <ScrollLink 
                                 activeClass="active" 
@@ -70,7 +72,7 @@ class Dashboard extends Component {
                                 duration={500}
                             >your weekly household tasks.
                             </ScrollLink>
-                        </Link>
+                        </span>
                     <br />
                     Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! They  can battle it out with a game of ConnectChore to win the ultimate reward!</p>
                     </Col>
