@@ -22,7 +22,7 @@ router.get("/", passport.authenticate("jwt", { session: false }),
 // Auth OK: router.get("/user/:id", async function (req, res) {
 router.get("/user/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
   const id = req.params.id;
-  
+
   try {
       const data = await choreListController.findByUserId(id);
         //res.json(data);
@@ -89,8 +89,9 @@ router.get("/householdmember/:id", passport.authenticate("jwt", { session: false
 });
 
 // Get chorelist by id populated with tasks
-// Auth OK: router.get("/withtasks/:id", async function (req, res) {
-router.get("/withtasks/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
+// Auth OK:
+router.get("/withtasks/:id", async function (req, res) {
+//router.get("/withtasks/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
   const id = req.params.id;
 
   try {
