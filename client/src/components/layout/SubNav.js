@@ -25,8 +25,8 @@ class SubNav extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav ml-auto">
-            <div className="nav-link design"><Link to="/addtasks" id="navdesign">Tasks</Link></div>
-            <div className="nav-link"><Link to="/addchorelist" id="navdesign">Chores</Link></div>
+            <div className="nav-link design"><Link to="/tasks" id="navdesign">Tasks</Link></div>
+            <div className="nav-link"><Link to="/chorelist" id="navdesign">Chores</Link></div>
             <div className="nav-link"><Link to="/rewards" id="navdesign">Rewards</Link></div>
             <div className="nav-link"><Link to="/game" id="navdesign">Game</Link></div>
             <div className="nav-item dropdown">
