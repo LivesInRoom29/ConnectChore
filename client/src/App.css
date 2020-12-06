@@ -12,6 +12,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   font-size: 18px!important;
+  font-family: 'Poppins', sans-serif;
 }
 
 h3 {
@@ -51,8 +52,12 @@ form, button {
 }
 
 #formValue, #formReward, #formDescription, #formFrequency {
-  border-radius: 30px;
+  /* border-radius: 30px; */
   font-size: 16px;
+}
+
+.list-group {
+  font-family: 'Poppins', sans-serif;
 }
 
   
