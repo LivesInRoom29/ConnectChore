@@ -146,105 +146,154 @@ class GameBox extends Component {
     }
   }
 
-  checkVertical = (board) => {
-    let winner = null;
-    const column = board[0].reduce(
-      (obj, col, index) => {
-        obj.red = 0;
-        obj.yellow = 0;
-        board.forEach((row) => {
-          obj[row[index].color] += 1;
-          if (obj.red > 3) {
-            winner = 1;
-            console.log("vertical winner", winner);
-          } else if (obj.yellow > 3) {
-            winner = 2;
-            console.log("vertical winner", winner);
-          }
-        });
-        return obj;
-      },
-      { red: 0, yellow: 0 }
-    );
-    return winner;
-  };
+  checkLine = (a, b, c, d) => {
+    const firstNotNull = a.color !== "white";
+    const secondEqual = b.color == a.color;
+    const thirdEqual = c.color == a.color;
+    const fourthEqual = d.color == a.color;
+    
+    // console.log("a b c d", a, b, c, d );
+    // console.log("check 1", firstNotNull, "check 2", secondEqual, "check 3", thirdEqual, "check 4", fourthEqual);
+    return firstNotNull && secondEqual && thirdEqual && fourthEqual;
+
+    
+  } 
 
   checkHorizontal = (board) => {
     let winner = null;
-    board.reduce(
-      (obj, row) => {
-        obj.red = 0;
-        obj.yellow = 0;
-        row.forEach((cell) => {
-          obj[cell.color] += 1;
-          if (obj.red > 3) {
+
+    const rows = board.length;
+    const [column] = board;
+    const columns = column.length;
+    
+
+    for (let row = 0; row < rows; row++) {
+      for (let column = 0; column < columns - 3; column++) {
+        // console.log(`row ${row} column ${column}`, board[row][column]);
+        if (this.checkLine(
+          board[row][column],
+          board[row][column + 1],
+          board[row][column + 2],
+          board[row][column + 3])
+        ) {
+          // console.log("horizontal check", board[row][column]);
+          if (
+            board[row][column].color === "red" 
+          ) {
             winner = 1;
-            console.log("horizontal winner", winner);
-          } else if (obj.yellow > 3) {
+          } else {
             winner = 2;
-            console.log("horizontal winner", winner);
           }
-        });
-        return obj;
-      },
-      { red: 0, yellow: 0 }
-    );
-    return winner;
+          return winner;
+          
+        }
+      }
+    }
+
   };
 
-  // checkDiagonalRight = (board) => {
-   
-  //   for (let y = 3; y < 6; y++) {
-      
-  //     for (let x = 0; x < 4; x++) {
-  //       for (let y = 5; y >= 0; y--) {
-  //         if (!board[y][x]) {
-  //           board[y][x] = this.state.currentPlayer;
-  //           break;
-  //         } 
-  //       if (board[y][x]) {
-  //         if (
-  //           board[y][x] === board[y - 1][x + 1] &&
-  //           board[y][x] === board[y - 2][x + 2] &&
-  //           board[y][x] === board[y - 3][x + 3]
-  //         ) {
-  //           return board[y][x];
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  
+  checkVertical = (board) => {
+    let winner = null;
 
-  //   let winner = 0;
-  //   const obj = { red: 0, yellow: 0 };
-  //   board.forEach((row, rowIndex) => {
-  //     if (rowIndex < board.length) {
-  //       row.forEach((cell, cellIndex) => {
-  //         if (cellIndex < row.length) {
-  //           const nextRow = board[rowIndex] + 1;
-  //           const nextCell = nextRow[rowIndex] - 2;
-  //           console.log("next row ", nextRow);
-  //           console.log("next cell ", nextCell);
-  //           obj[nextCell.color] += 1;
-  //           if (obj.red > 3) {
-  //             winner = 1;
-  //             console.log("diag winner", winner);
-  //           } else if (obj.yellow > 3) {
-  //             winner = 2;
-  //             console.log("diag winner", winner);
-  //           }
-  //         }
-  //       });
-  //     }
-  //   });
-  //   return winner;
-  // };
+    const rows = board.length;
+    const [column] = board;
+    const columns = column.length;
+    
 
+    for (let column = 0; column < columns; column++) {
+      for (let row = 0; row < rows - 3; row++) {
+        // console.log(`row ${row} column ${column}`, board[row][column]);
+        if (this.checkLine(
+          board[row][column],
+          board[row + 1][column],
+          board[row + 2][column],
+          board[row + 3][column])
+        ) {
+          // console.log("verticle check", board[row][column]);
+          if (
+            board[row][column].color === "red" 
+          ) {
+            winner = 1;
+          } else {
+            winner = 2;
+          }
+          return winner;
+          
+        }
+      }
+    }
+
+  };
+  checkDiagonalRight = (board) => {
+    let winner = null;
+
+    const rows = board.length;
+    const [column] = board;
+    const columns = column.length;
+    
+
+    for (let row = 3; row < rows ; row++) {
+      for (let column = 0; column < columns - 3; column++) {
+        // console.log(`row ${row} column ${column}`, board[row][column]);
+        if (this.checkLine(
+          board[row][column],
+          board[row - 1][column + 1],
+          board[row - 2][column + 2],
+          board[row - 3 ][column + 3])
+        ) {
+          // console.log("horizontal check", board[row][column]);
+          if (
+            board[row][column].color === "red" 
+          ) {
+            winner = 1;
+          } else {
+            winner = 2;
+          }
+          return winner;
+          
+        }
+      }
+    }
+
+  };
+  checkDiagonalLeft = (board) => {
+    let winner = null;
+
+    const rows = board.length;
+    const [column] = board;
+    const columns = column.length;
+    
+
+    for (let row = 3; row < rows; row++) {
+      for (let column = 3; column < columns; column++) {
+        console.log(`row ${row} column ${column}`, board[row][column]);
+        if (this.checkLine(
+          board[row][column],
+          board[row - 1][column - 1],
+          board[row - 2][column - 2],
+          board[row - 3][column - 3])
+        ) {
+          console.log("diag left check", board[row][column]);
+          if (
+            board[row][column].color === "red" 
+          ) {
+            winner = 1;
+          } else {
+            winner = 2;
+          }
+          return winner;
+          
+        }
+      }
+    }
+
+  };
   checkAll(board) {
     return (
       this.checkVertical(board) ||
-      // this.checkDiagonalRight(board) ||
-      // this.checkDiagonalLeft(board) ||
+      this.checkDiagonalRight(board) ||
+      this.checkDiagonalLeft(board) ||
       this.checkHorizontal(board)
     );
   }
@@ -310,11 +359,11 @@ class GameBox extends Component {
   // componentWillMount() {
   //   this.initGame();
   // }
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.game.box !== this.props.game.box) {
-  //     this.playGame();
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (prevProps.game.box !== this.props.game.box) {
+      this.playGame();
+    }
+  }
   render() {
     return (
       <div>

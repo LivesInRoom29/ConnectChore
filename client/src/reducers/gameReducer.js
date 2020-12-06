@@ -37,7 +37,7 @@ const reducer = produce((state = initialGameState, action) => {
             }
             return false;
         }) 
-        console.log(dropToRow);
+        console.log("drop to row", dropToRow);
         state.box[dropToRow][col].color = 'red';
         
         if (state.clicks % 2 !== 0 ) {state.box[dropToRow][col].color = 'yellow'}
