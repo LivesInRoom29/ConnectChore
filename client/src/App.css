@@ -59,6 +59,8 @@ form, button {
 
 .list-group {
   font-family: 'Poppins', sans-serif;
+  text-align: left;
+  padding: 10px 0px !important;
 }
 
   

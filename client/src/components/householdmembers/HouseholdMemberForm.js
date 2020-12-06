@@ -153,23 +153,12 @@ class HouseholdMemberForm extends Component {
                                         <ListGroup.Item
                                             key={member._id}
                                             data-id={member._id}
-                                            className="align-items-center"
-                                            style={{
-                                                background: "#00adef",
-                                                color: "#ffffff",
-                                                borderRadius: "8px",
-                                                fontSize: "18px",
-                                                fontfamily: "Poppins",
-                                            }}
+                                            className="align-items-center list-group"
                                         >
                                             {member.name}
                                             <Button
-                                                variant="danger"
-                                                className="float-right text-light"
-                                                // style={{
-                                                //     backgroundColor: "transparent",
-                                                //     border: "none",
-                                                // }}
+                                                variant="light"
+                                                className="float-right text-danger"
                                                 onClick={
                                                     () => API.deleteHouseholdMember(
                                                         member._id,
@@ -194,6 +183,10 @@ class HouseholdMemberForm extends Component {
                                 )}
                         </Col>
                     </Row>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     <br />
                     <br />
                     <br />
