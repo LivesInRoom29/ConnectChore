@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import * as Scroll from 'react-scroll';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import SubNav from "../layout/SubNav";
 import DateTime from "../dateandtime/DateandTime";
 // Bootstrap
-import { Container, Col, Row } from "react-bootstrap";
-
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 // Local CSS
 import "./Dashboard.css";
 import "../../App.css";
@@ -21,6 +23,7 @@ class Dashboard extends Component {
 
     render() {
         const { user } = this.props.auth;
+        let ScrollLink = Scroll.Link;
 
         return (
             <>
@@ -36,16 +39,46 @@ class Dashboard extends Component {
                     <br />
                     <DateTime />
                     <br />
-                    <p className="dashboard">Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
+                    <p className="dashboard">Get started by&nbsp;
+                        <span 
+                            style={{
+                                color: "#08124B", 
+                                textDecoration: "underline",
+                                cursor: "pointer"
+                            }}>
+                                <ScrollLink 
+                                    activeClass="active" 
+                                    to="householdmembers" 
+                                    spy={true} 
+                                    smooth={true} 
+                                    offset={0} 
+                                    duration={500}
+                                >adding your household members
+                                </ScrollLink>
+                        </span> 
+                        &nbsp;and&nbsp;
+                        <span 
+                            style={{
+                                color: "#08124B", 
+                                textDecoration: "underline",
+                                cursor: "pointer"
+                            }}>
+                            <ScrollLink 
+                                activeClass="active" 
+                                to="tasks" 
+                                spy={true} 
+                                smooth={true} 
+                                offset={0} 
+                                duration={500}
+                            >your weekly household tasks.
+                            </ScrollLink>
+                        </span>
+                    <br />
+                    Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! They  can battle it out with a game of ConnectChore to win the ultimate reward!</p>
                     </Col>
                     <Col md={2}></Col>
                 </Row>
-                    {/* <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
                     <br />
-                    <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p> */}
-                    <br />
-
-
                     <Row>
                         <Col md={2}></Col>
                         <Col md={4}><Link to="/addchorelist">
@@ -62,7 +95,7 @@ class Dashboard extends Component {
                         <Col md={4}><Link to="/rewards"><div className="module mid animate">
                             <h2><i className="fas fa-trophy dashboard-icons"></i><br />Add Rewards</h2></div></Link><br /></Col>
                         <Col md={4}><Link to="/addtasks"><div className="module mid animate">
-                            <h2><i className="fas fa-check dashboard-icons"></i><br />Add Tasks</h2></div></Link></Col>
+                            <h2 name="tasks"><i className="fas fa-check dashboard-icons"></i><br />Add Tasks</h2></div></Link></Col>
                         <Col md={2}></Col>
                     </Row>
                     <br />
@@ -72,6 +105,7 @@ class Dashboard extends Component {
                         <Col md={2}><Link
                             to="/householdmembers"
                             className="btn btn-lg button-hover"
+                            name="householdmembers"
                             style={{
                                 width: "220px",
                                 height: "50px",
@@ -84,23 +118,6 @@ class Dashboard extends Component {
                                 letterSpacing: "1.5px"
                             }}
                         ><i className="fas fa-plus"></i>&nbsp;Add Members</Link></Col>
-                        {/* <Col><button
-                            style={{
-                                width: "150px",
-                                height: "50px",
-                                fontSize: "15px",
-                                textTransform: "uppercase",
-                                borderRadius: "30px",
-                                border: "2px solid",
-                                padding: "12px",
-                                color: "#42b984",
-                                letterSpacing: "1.5px"
-                            }}
-                            onClick={this.onLogoutClick}
-                            className="btn btn-lg button-hover2"
-                        >
-                            Logout
-                        </button></Col> */}
                         <Col md={8}></Col>
                     </Row>
                     <br />
