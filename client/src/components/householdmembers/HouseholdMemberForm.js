@@ -38,8 +38,6 @@ class HouseholdMemberForm extends Component {
         API.getHouseholdMembers(user.id)
             .then(res => {
 
-                //console.log(res)
-
                 const undeletedHouseholdMembers = filterDeleted(res.data)
 
                 this.setState(
