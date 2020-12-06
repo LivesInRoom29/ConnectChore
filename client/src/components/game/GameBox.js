@@ -11,7 +11,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { resetGame } from "../../actions/gameActions";
-// import {createDefaultBoard} from "../../utils/gameHelper";
+ //import {createDefaultBoard} from "../../utils/gameHelper";
 import filterDeleted from "../../utils/filterDeleted";
 import "./game.css";
 // import { each } from "immer/dist/internal";
