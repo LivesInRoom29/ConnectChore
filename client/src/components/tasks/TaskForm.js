@@ -111,13 +111,13 @@ class TaskForm extends Component {
                                     <h3>Tasks</h3>
                                     <p>What type of tasks does your household need to accomplish? Add them here so you can assign them to a household member's chore list!</p>
                                     <br />
-                                    <p><b>A few examples could be:</b>
-                                        <ul>
-                                            <li>★take out the trash</li>
-                                            <li>★feed the dog</li>
-                                            <li>★clean-up the playroom</li>
-                                            <li>★vacuum the hallway</li>
-                                        </ul></p>
+                                    <p><b>A few examples could be:</b></p>
+                                    <ul>
+                                        <li>★take out the trash</li>
+                                        <li>★feed the dog</li>
+                                        <li>★clean-up the playroom</li>
+                                        <li>★vacuum the hallway</li>
+                                    </ul>
                                 </div>
                                 <br />
                                 <Form.Row>
@@ -192,7 +192,10 @@ class TaskForm extends Component {
                                                             isDeleted: true
                                                         }
                                                     )
-                                                        .then(res => console.log(res))
+                                                        .then(res => {
+                                                            console.log(res);
+                                                            window.location.reload();
+                                                        })
                                                         .catch(err => console.log(err))
                                                 }
                                             >
