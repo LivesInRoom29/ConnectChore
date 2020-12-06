@@ -6,6 +6,7 @@ import { logoutUser } from "../../actions/authActions";
 import SubNav from "../layout/SubNav";
 // Bootstrap
 import { Container, Col, Row } from "react-bootstrap";
+
 // Local CSS
 import "./Dashboard.css";
 import "../../App.css";
@@ -24,13 +25,15 @@ class Dashboard extends Component {
             <>
                 <SubNav />
                 <Container>
-                <br />
-                <br />
-                <br />
+                    <br />
+                    <br />
+                    <br />
                     <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
                     <br />
                     <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
                     <br />
+
+
                     <Row>
                         <Col><Link to="/addchorelist">
                             <div className="module mid animate">
@@ -62,7 +65,7 @@ class Dashboard extends Component {
                                 backgroundColor: "#42b984",
                                 color: "white",
                                 letterSpacing: "1.5px"
-                              }}
+                            }}
                         ><i className="fas fa-plus"></i>&nbsp;Add Members</Link></Col>
                         {/* <Col><button
                             style={{
@@ -85,9 +88,9 @@ class Dashboard extends Component {
                         <Col></Col>
                         <Col></Col>
                     </Row>
-                <br />
-                <br />
-                <br />
+                    <br />
+                    <br />
+                    <br />
                 </Container>
             </>
         );

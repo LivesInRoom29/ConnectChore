@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { setTasksAction } from "../../actions/chorelistActions";
 import ChoreListOptions from "../chorelist-options/ChoreListOptions";
 import DropdownGroup from "../dropdown-group/DropdownGroup";
 import AddChorelist from "../add-chorelist/AddChorelist";
@@ -9,7 +10,7 @@ import SubNav from "../layout/SubNav";
 // Bootstrap components
 import { Container } from "react-bootstrap";
 // Date picker
-import { format } from "date-fns";
+import formatISO from 'date-fns/formatISO';
 import "react-datepicker/dist/react-datepicker.css";
 // API calls
 import API from "../../utils/API";
@@ -29,7 +30,8 @@ class ChoreList extends Component {
             reward: "",
             choreLists: [],
             householdMembers: [],
-            rewards: [],
+            allRewards: [],
+            undeletedRewards: [],
             choreListToEdit: "",
             choreListData: {},
             validateDisplay: false
@@ -64,7 +66,8 @@ class ChoreList extends Component {
             // the reward state to be the id for the first reward in that array
             this.setState(
                 {
-                    rewards: undeletedRewards,
+                    allRewards: result.data,
+                    undeletedRewards: undeletedRewards,
                     reward: firstReward
                 }
             )
@@ -91,6 +94,7 @@ class ChoreList extends Component {
                     assignedto: firstHouseholdMember
                 }
             )
+
         });
     }
 
@@ -113,13 +117,25 @@ class ChoreList extends Component {
         );
     };
 
+
+    handleDateChange = event => {
+        this.setState(
+            {
+                startDate: event
+            }
+        );
+    };
+
     // in the AddChoreList component
     // this function is called when the Add Chorelist Button is clicked.
     // adds the new chorelist to the db and the _id to state
     addChoreListClick = (e) => {
         e.preventDefault();
 
-        let mainDate = format(this.state.startDate, "MM/dd/yyyy");
+        this.props.setTasks([]);
+
+        let mainDate = formatISO(new Date(this.state.startDate));
+        // let mainDate = format(this.state.startDate, "MM/dd/yyyy");
         const { user } = this.props.auth;
         const { assignedto, reward } = this.state;
 
@@ -147,16 +163,20 @@ class ChoreList extends Component {
                     startDate={this.state.startDate}
                     householdMembers={this.state.householdMembers}
                     reward={this.state.reward}
-                    rewards={this.state.rewards}
+                    allRewards={this.state.allRewards}
+                    undeletedRewards={this.state.undeletedRewards}
                     choreListToEdit={this.state.choreListToEdit}
                     handleChange={this.handleChange}
                     handleInputChange={this.handleInputChange}
+                    handleDateChange={this.handleDateChange}
                     addChoreListClick={this.addChoreListClick}
                 />
             )
         } else if (this.state.listOption === "view") {
             return (
-                <DropdownGroup/>
+                <DropdownGroup
+                    allRewards={this.state.allRewards}
+                />
             )
         } else {
             return null
@@ -193,9 +213,17 @@ ChoreList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    tasks: state.chorelist.tasks
 });
 
+const mapDispatchToProps = (dispatch, props) => (
+    {
+        setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
+    }
+)
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(ChoreList);
