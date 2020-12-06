@@ -32,7 +32,7 @@ class Landing extends Component {
                 <b>Chores just got a lot more fun!</b>
               </h1>
               <h5 className="text-center">
-                Create a list of household chores and assign tasks to family members.
+                Create a list of household chores and assign tasks to household members.
                 <br />
                 Add rewards for checking items off the to-do list.
                 <br />
