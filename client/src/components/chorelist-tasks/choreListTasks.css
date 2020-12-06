@@ -1,8 +1,9 @@
 
 
 /* Change text for the headings of the chore list (Task, Frequency, etc) */
-h5.chorelistHeading {
-  color: black;
+h6.chorelistHeading {
+  color: #00adef;
+  font-size: 20px;
 }
 
 /* set width of buttons in the task list */

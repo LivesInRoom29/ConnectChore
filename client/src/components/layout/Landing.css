@@ -7,15 +7,99 @@
     url("https://images.pexels.com/photos/373548/pexels-photo-373548.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
-    /* padding: 0px 400px; */
     vertical-align: middle;
+}
+
+.landing-container2 {
+  background: rgb(0,173,239);
+  background: radial-gradient(circle, rgba(0,173,239,1) 0%, rgba(8,18,75,1) 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 h1 {
   color: #ffffff;
 }
 
+h3.landing {
+  color: #ffffff !important;
+  text-align: center;
+  font-size: 22px !important;
+}
+
 h5 {
   color: #ffffff;
   font-size: 24px !important;
+}
+
+.aboutCC:hover {
+  color: #ffffff !important;
+}
+
+.module2 {
+    background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4)
+  ),
+  url("./assets/playroom.png");
+  background-size: cover;
+  border-radius: 20px;
+  width: 100%;
+  height: 275px;
+  margin: 10 0 0 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.module2:hover {
+    animation: pulse;
+    animation-duration: 0.5s;
+}
+
+.mid2 h2 {
+  font-weight: 900;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 40px;
+  transform: translate(-50%, -50%);
+}
+
+.about {
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+}
+
+.about:hover {
+  animation: pulse;
+  animation-duration: 0.5s;
+}
+
+.info {
+  color: white;
+  text-align: center;
+}
+
+.info h2 {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.info:hover {
+  animation: fadeIn;
+  animation-duration: 1.5s;
+}
+
+.landing-icons {
+  color: white;
+  text-align: center;
+  font-size: 50px;
 }

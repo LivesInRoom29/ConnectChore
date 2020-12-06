@@ -52,7 +52,7 @@ class DropdownChorelists extends Component {
 
     return (
       <Form.Group as={Col} md="6" controlId="formChorelists">
-        <Form.Label>Pick a chorelist:</Form.Label>
+        <Form.Label>Pick a chore list:</Form.Label>
         <Form.Control
           as="select"
           name="choreListToEdit"

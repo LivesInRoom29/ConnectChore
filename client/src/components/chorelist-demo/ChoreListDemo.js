@@ -153,7 +153,7 @@ class ChoreListDemo extends Component {
                                                 .catch(err => console.log(err))
                                             }
                                         >
-                                            <span >X</span>
+                                            <span><i className="fas fa-times"></i></span>
                                         </Button>
                                 </ListGroup.Item>
                                 ))}
