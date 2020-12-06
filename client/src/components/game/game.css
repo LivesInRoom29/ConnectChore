@@ -12,7 +12,7 @@ table {
   border-spacing: 0px 0px;
 }
 
-/* .button {
+ .button {
   background-color: #303030;
   color: #50c8ff;
   height: 30px;
@@ -29,13 +29,13 @@ table {
   transition: background-color 0.5s, color 0.5s;
 } */
 
-/* .button:hover {
+ .button:hover {
   background-color: #50c8ff;
   color: #303030;
   transition: background-color 0.5s, color 0.5s;
 } */
 
-/* /* .cell {
+ .cell {
   height: 70px;
   width: 70px;
   background-color: #1990ff;
@@ -45,7 +45,7 @@ table {
   align-items: center;
   cursor: pointer;
 } */
-/* 
+
 .circle {
   height: 15px;
   width: 15px;
