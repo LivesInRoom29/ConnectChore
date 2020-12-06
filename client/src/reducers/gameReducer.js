@@ -1,6 +1,6 @@
 import produce from 'immer';
 import {createDefaultBoard} from "../utils/gameHelper";
-import { DROP_TILE, RESET_GAME, SET_PLAYER, SET_WINNER } from "../actions/types";
+import { DROP_TILE, RESET_GAME, SET_PLAYER } from "../actions/types";
 
 
 
@@ -17,7 +17,6 @@ export const initialGameState = {
         [] //col 7
     ],
     clicks: 0,
-    winner: null,
     box: createDefaultBoard()
 };
 
@@ -51,10 +50,6 @@ const reducer = produce((state = initialGameState, action) => {
             return state.current = action.payload;
             
 
-        // case SET_WINNER:
-        //     let winner = state.winner,
-
-        // break;
 
         default:
             return state;

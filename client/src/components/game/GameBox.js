@@ -34,6 +34,7 @@ class GameBox extends Component {
       startGame: false,
       gameOver: false,
       message: "",
+      winner: null,
     };
     this.selectPlayer = this.selectPlayer.bind(this);
     this.playGame = this.playGame.bind(this);
@@ -108,13 +109,6 @@ class GameBox extends Component {
       // Place piece on board
       let board = this.props.game.box;
 
-      // for (let y = 5; y >= 0; y--) {
-      //   if (!board[y][x]) {
-      //     board[y][x] = this.state.currentPlayer;
-      //     break;
-      //   }
-      // }
-
       console.log("current player", this.state.currentPlayer);
 
       // Check status of board
@@ -125,12 +119,14 @@ class GameBox extends Component {
         this.setState({
           board,
           gameOver: true,
+          winner: this.state.player1,
           message: "Player 1 (red) wins!",
         });
       } else if (result === this.state.player2) {
         this.setState({
           board,
           gameOver: true,
+          winner: this.state.player2,
           message: "Player 2 (yellow) wins!",
         });
       } else {
@@ -141,6 +137,7 @@ class GameBox extends Component {
       }
     } else {
       this.setState({
+        gameOver: true,
         message: "Game over. Please start a new game.",
       });
     }

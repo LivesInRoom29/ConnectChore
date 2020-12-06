@@ -13,8 +13,12 @@ class GridCell extends Component {
   }
 
   clickHandler() {
+    if (this.props.gameOver) {
+      this.props.handleClick();
+      return
+    }
     this.props.sendTileDrop(this.props.x, this.props.y);
-    this.props.handleClick();
+    
   }
 
 
