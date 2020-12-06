@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 // api calls get/get, add/post, delete/put
 
-import Axios from "axios"
+import Axios from "axios";
 
 export default {
 
@@ -34,9 +34,8 @@ export default {
         return Axios.put(`/api/household-members/${houseHoldMemberId}`, houseHoldMemberData);
     },
 
-    // NOT TESTED YET
+    // NOT TESTED YET -- most are now.
     // CHORELIST CALLS - /api/chore-lists
-
     // get Chore List details by choreListId -- ADD THIS TO CONTROLLER
     getChoreLists: function(userid) {
         return Axios.get(`/api/chore-lists/user/${userid}`);
@@ -60,9 +59,14 @@ export default {
     addTaskToChoreList: function(choreListId, taskId) {
         return Axios.put(`/api/chore-lists/tasks/${choreListId}`, {task: taskId});
     },
-    // deleteTaskFromChoreList: function(choreListId, taskIndex) {
-    //     return Axios.put(`/api/chore-list/${choreListId}`, )
-    // },
+    //change completion status of a task in the chorelist
+    updateTaskCompletion: function(taskId, completionStatus) {
+        return Axios.put(`/api/chore-lists/completetask/${taskId}`, {completionStatus: completionStatus});
+    },
+    // delete a task from the tasks array in the chorelist
+    deleteTaskFromChoreList: function(choreListId, taskId) {
+        return Axios.put(`/api/chore-lists/deletetask/${choreListId}`, {taskId: taskId})
+    },
 
     // TASK CALLS - /api/tasks
     // get tasks
@@ -74,11 +78,11 @@ export default {
     addTask: function(taskData) {
         return Axios.post(`/api/tasks/`, taskData);
     },
+
+    // soft-delete task
     deleteTask: function(taskId, taskData) {
-        return Axios.post(`/api/tasks/${taskId}`, taskData);
+        return Axios.put(`/api/tasks/${taskId}`, taskData);
     }
-
-
 
     // Rewards calls - /api/rewards/
 }

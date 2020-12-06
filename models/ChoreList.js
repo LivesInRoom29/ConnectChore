@@ -35,7 +35,7 @@ const choreListSchema = new Schema({
   },
   isDeleted: {
     type: Boolean,
-    deafult: false
+    default: false
   }
 });
 

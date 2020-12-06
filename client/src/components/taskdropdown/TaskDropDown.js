@@ -9,6 +9,9 @@ import Col from 'react-bootstrap/Col';
 
 import API from "../../utils/API";
 import { setTasksAction } from "../../actions/chorelistActions";
+import filterDeleted from "../../utils/filterDeleted";
+
+import "./taskDropDown.css";
 
 class TaskDropDown extends Component {
     constructor(props) {
@@ -16,12 +19,11 @@ class TaskDropDown extends Component {
         this.state = {
             choosetask: "",
             allTasks: [],
-            //chorelistTasks: [],
+            filteredTasks: [],
             description: "",
             auth: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
-        //this.handleChange = this.handleChange.bind(this);
     }
 
     //get all tasks saved by the user from the DB
@@ -35,10 +37,15 @@ class TaskDropDown extends Component {
         })
 
         promise.then(result => {
+            // filter the deleted tasks out of the data to store in state
+            const undeletedTasks = filterDeleted(result.data);
+            const firstTask = undeletedTasks[0] ? undeletedTasks[0]._id : "";
+
             this.setState(
                 {
                     allTasks: result.data,
-                    choosetask: result.data[0]._id
+                    choosetask: firstTask,
+                    filteredTasks: undeletedTasks
                 }
             )
         });
@@ -65,16 +72,13 @@ class TaskDropDown extends Component {
         const { choosetask } = this.state;
 
         // Add task to the chorelist
-        await API.addTaskToChoreList(choreListId, choosetask)
+        await API.addTaskToChoreList(choreListId, choosetask);
 
         // listWithTasks will be the chorelist populated with all task data (not just reference Ids)
         try {
-            const listWithTasks = await API.getChoreListWithTasks(choreListId)
-
-            console.log("list of tasks: ", listWithTasks.data.tasks);
+            const listWithTasks = await API.getChoreListWithTasks(choreListId);
             // Store the array of tasks with all data in chorelistTasks state
             this.props.setTasks(listWithTasks.data.tasks);
-            console.log("state chorelistTasks array: ", this.props.tasks);
         } catch (err) {
             console.log(err);
         }
@@ -82,28 +86,27 @@ class TaskDropDown extends Component {
 
     //drop down menu for tasklist
     render() {
-        const { user } = this.props.auth
         return (
+        <>
             <Form>
-                <h4>
-                    <b>Hey there,</b> {user.name.split(" ")[0]}
+                {/* <h4>
                     <p className="text-body">
                         Add a task to your choreslist.
                     </p>
-                </h4>
-                <Form.Row>
-                    <Form.Group as={Col} md="6" controlId="formTask">
-                        <Form.Label>Pick a task:</Form.Label>
+                </h4> */}
+                <Form.Row className="dropdown-row">
+                    <Form.Group as={Col} md="9" xs="8" controlId="formTask">
+                        <Form.Label>Pick a task to add:</Form.Label>
                         <Form.Control
                             as="select"
                             name="choosetask"
                             value={this.state.choosetask}
-                            // placeholder="Wash the dishes"
+                            placeholder="Please add tasks first"
                             onChange={this.handleInputChange}
                         >
                             {/* Map the tasks to the drop-down */}
                             {
-                                this.state.allTasks.map(task => (
+                                this.state.filteredTasks.map(task => (
                                     <option
                                         key={task._id}
                                         value={task._id}
@@ -114,15 +117,18 @@ class TaskDropDown extends Component {
                             }
                         </Form.Control>
                     </Form.Group>
+                    <Button
+                        id="add-task-button"
+                        variant="primary"
+                        type="submit"
+                        onClick={this.addTaskClick}
+                    >
+                        Add Task
+                    </Button>
                 </Form.Row>
-                <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={this.addTaskClick}
-                >
-                    Add Task
-                </Button>
+
             </Form>
+            </>
         )
     }
 }

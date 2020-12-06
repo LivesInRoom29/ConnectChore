@@ -3,13 +3,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setTasksAction } from "../../actions/chorelistActions";
+// Bootstrap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
+// API Calls
+import API from "../../utils/API";
+// Local CSS
 import "./choreListTasks.css";
-
 
 class ChoreListTasks extends Component {
   constructor(props) {
@@ -19,19 +22,55 @@ class ChoreListTasks extends Component {
     }
   }
 
-  handleCompletionStatusChange = e => {
-    const currentCompletionStatus = e.target.value;
+  //need something here to prevent the chorelists previously in state from showing?
+  // maybe in parent component? Still need them to render when viewing tasks,
+  //just not when creating a new one.
+  // componentDidMount() {
+  //   this.props.setTasks([]);
+  // }
 
+  handleCompletionStatusChange = async e => {
     const choreListId = this.props.choreListToEdit;
+    //using e.currentTarget here instead of e.target so that the click event
+    // is always linked to the button itself and not to the icon in the button
+    const taskId = e.currentTarget.dataset.id;
+    const currentCompletionStatus = e.currentTarget.value;
+    let newCompletionStatus;
 
-    
+    if (currentCompletionStatus === "false") {
+      newCompletionStatus = true;
+    } else {
+      newCompletionStatus = false;
+    }
 
+    //update the completion of the status in the chorelist (not populated with task data)
+    await API.updateTaskCompletion(taskId, newCompletionStatus);
+
+    try {
+      const newListWithTasks = await API.getChoreListWithTasks(choreListId);
+      this.props.setTasks(newListWithTasks.data.tasks);
+    } catch (err) {
+        console.log(err);
+    }
   };
 
-  handleDeleteTask = e => {
-    const deletionStatus = e.target.value;
-
+  handleDeleteTask = async e => {
     const choreListId = this.props.choreListToEdit;
+
+    //using e.currentTarget here instead of e.target so that the click event
+    // is always linked to the button itself and not to the icon in the button
+    const taskId = e.currentTarget.dataset.id;
+    console.log("task id: ", taskId)
+
+    await API.deleteTaskFromChoreList(choreListId, taskId);
+
+    try {
+      const newListWithTasks = await API.getChoreListWithTasks(choreListId);
+      console.log("new list: ", newListWithTasks);
+      this.props.setTasks(newListWithTasks.data.tasks);
+    } catch (err) {
+        console.log(err);
+    }
 
   };
 
@@ -50,24 +89,24 @@ class ChoreListTasks extends Component {
       <>
       <Row>
         <Col xs="4" md="6">
-          <h5>Task</h5>
+          <h5 className="chorelistHeading">Task</h5>
         </Col>
         <Col xs="3" md="2">
-          <h5>Frequency</h5>
+          <h5 className="chorelistHeading">Frequency</h5>
         </Col>
         <Col xs="2" md="2">
-          <h5>Done?</h5>
+          <h5 className="chorelistHeading">Done?</h5>
         </Col>
         <Col xs="2" md="2">
-          <h5>Delete</h5>
+          <h5 className="chorelistHeading">Delete</h5>
         </Col>
       </Row>
-      {/* if tasks exist map the chosen tasks here. */}
+      {/* if tasks exist map the chosen tasks here, otherwise return Null */}
       {tasks.length ?
-        tasks.map((task) => {
-          const { _id, description, frequency, isDeleted } = task.task;
+        tasks.map((task, index) => {
+          const { description, frequency } = task.task;
           return (
-            <Row key={_id}>
+            <Row key={index}>
               <Col xs="4" md="6">
                 <p>{description}</p>
               </Col>
@@ -79,6 +118,7 @@ class ChoreListTasks extends Component {
                   variant="outline-success"
                   type="button"
                   value={task.completionStatus}
+                  data-id={task._id}
                   className="taskListButton"
                   onClick={this.handleCompletionStatusChange}
                 >
@@ -89,7 +129,7 @@ class ChoreListTasks extends Component {
                 <Button
                   variant="outline-danger"
                   type="button"
-                  value={isDeleted}
+                  data-id={task._id}
                   className="taskListButton"
                   onClick={this.handleDeleteTask}
                 >

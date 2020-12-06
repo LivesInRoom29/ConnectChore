@@ -11,6 +11,11 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 // API calls
 import API from "../../utils/API";
+// utils
+import filterDeleted from "../../utils/filterDeleted";
+import SubNav from "../layout/SubNav";
+// Local CSS
+import "../../App.css";
 
 class HouseholdMemberForm extends Component {
 
@@ -29,40 +34,39 @@ class HouseholdMemberForm extends Component {
         const { user } = this.props.auth
 
         API.getHouseholdMembers(user.id)
-            .then(res => 
+            .then(res => {
+
                 //console.log(res)
-                
+
+                const undeletedHouseholdMembers = filterDeleted(res.data)
+
                 this.setState(
-                { 
-                    householdMembers: res.data 
-                }
-            ))
+                    {
+                        householdMembers: undeletedHouseholdMembers
+                    })
+            })
             .catch(err => console.log(err));
     }
 
     // get the input values and add to state
     handleInputChange = event => {
         event.preventDefault();
-        
+
         this.setState(
-            { 
+            {
                 ...this.state,
                 [event.target.name]: event.target.value
                 // hhm name
             }
         );
     };
-    
+
     // TEST: when clicking the ADD HOUSEHOLD MEMBER button, does the HHM successfully get added to householdmember for the logged in user only?
     addHouseholdMemberClick = e => {
         // leaving commented out to refresh the whole page for now
         //e.preventDefault();
 
         const { user } = this.props.auth;
-        console.log("user id");
-        console.log(user.id);
-        console.log("this state reward");
-        console.log(this.state.householdmember);
 
         const { householdmember } = this.state;
 
@@ -71,9 +75,9 @@ class HouseholdMemberForm extends Component {
                 name: householdmember,
                 userId: user.id
             }
-        ).then( res => console.log(res))
-        .catch(err => console.log(err));
-            
+        ).then(res => console.log(res))
+            .catch(err => console.log(err));
+
     };
 
     // RENDER TEST:
@@ -82,79 +86,119 @@ class HouseholdMemberForm extends Component {
 
     render() {
 
-        const { user } = this.props.auth;
-
         return (
-            <Container>
-                <Row>
-                    <Col>
-                        <Form>
-                            <h4>
-                                <b>Hey there,</b> {user.name.split(" ")[0]}
-                                <p className="text-body">
-                                    Who can do the dirty work?
-                                </p>
-                            </h4>
-                            <Form.Row>
-                                <Form.Group as={Col} md="6" controlId="formHouseholdMember">
-                                    <Form.Label>Add a household member:</Form.Label>
-                                    <Form.Control 
-                                        type="input"
-                                        name="householdmember"
-                                        value={this.state.householdmember}
-                                        placeholder="Enter a name here" 
-                                        onChange={this.handleInputChange}
-                                    />
-                                </Form.Group>
-                            </Form.Row>
-                            <Button 
-                                variant="primary" 
-                                type="submit"
-                                onClick={this.addHouseholdMemberClick}
-                            >
-                                Add household member
-                            </Button>
-                        </Form>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={8}>
-                        <h2>Household Members</h2>
-                        {/* Eventually filter down to non-deleted and map that array */}
-                        {this.state.householdMembers.length ? (
-                            <ListGroup variant="flush">
-                                {this.state.householdMembers.map(member => (
-                                    <ListGroup.Item 
-                                        key={member._id} 
-                                        data-id={member._id} 
-                                        className="align-items-center"
+            <>
+                <SubNav />
+                <Container>
+                    <br />
+                    <br />
+                    <br />
+                    <Row>
+                        <Col>
+                            <Form>
+                                <h3>Manage Your Household Members</h3>
+                                <p>Once you've added household members, you'll be able to assign tasks and create a chore list for them.</p>
+                                <br />
+                                <Form.Row>
+                                    <Form.Group as={Col} md="6" controlId="formHouseholdMember"
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center"
+                                        }}
                                     >
-                                        {member.name}
-                                        <Button
-                                            variant="light"
-                                            className="float-right text-danger" 
-                                            onClick={
-                                                () => API.deleteHouseholdMember(
-                                                    member._id,
-                                                    { 
-                                                        isDeleted: true
-                                                    }
-                                                )
-                                                .then(res => console.log(res))
-                                                .catch(err => console.log(err))
-                                            }
+                                        <Form.Label></Form.Label>
+                                        <Form.Control
+                                            type="input"
+                                            name="householdmember"
+                                            value={this.state.householdmember}
+                                            placeholder="Enter a name here"
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </Form.Group>
+                                </Form.Row>
+                                <Button className="btn btn-lg button-hover"
+                                    style={{
+                                        width: "220px",
+                                        height: "50px",
+                                        fontSize: "15px",
+                                        textTransform: "uppercase",
+                                        borderRadius: "30px",
+                                        border: "none",
+                                        padding: "12px",
+                                        backgroundColor: "#42b984",
+                                        color: "white",
+                                        letterSpacing: "1.5px"
+                                    }}
+                                    type="submit"
+                                    onClick={this.addHouseholdMemberClick}>
+                                    <i className="fas fa-plus"></i>&nbsp;Add Member
+                            </Button>
+                            </Form>
+                        </Col>
+                    </Row>
+                    <br />
+                    <br />
+                    <br />
+                    <Row>
+                        <Col md={8}
+                            style={{
+                                borderColor: "lightblue"
+                            }}
+                        >
+                            <h3>Household Members</h3>
+                            {this.state.householdMembers.length ? (
+                                <ListGroup variant="flush">
+                                    {this.state.householdMembers.map(member => (
+                                        <ListGroup.Item
+                                            key={member._id}
+                                            data-id={member._id}
+                                            className="align-items-center"
+                                            style={{
+                                                backgroundColor: 'lightblue',
+                                                borderRadius: 8,
+                                                fontSize: '18px',
+                                                fontfamily: "Poppins",
+                                            }}
                                         >
-                                            <span >X</span>
-                                        </Button>
-                                </ListGroup.Item>
-                                ))}
-                            </ListGroup>
-                        ) : (
-                            <h3>No household members to display!</h3>
-                        )}
-                    </Col>
-                </Row>
-            </Container>
+                                            {member.name}
+                                            <Button
+                                                variant="danger"
+                                                className="float-right text-light"
+                                                style={{
+                                                    // backgroundColor: "grey",
+                                                    borderColor: "black",
+
+                                                }}
+                                                onClick={
+                                                    () => API.deleteHouseholdMember(
+                                                        member._id,
+                                                        {
+                                                            isDeleted: true
+                                                        }
+                                                    )
+                                                        .then(res => {
+                                                            console.log(res)
+                                                            window.location.reload();
+                                                        })
+                                                        .catch(err => console.log(err))
+                                                }
+                                            >
+                                                <span >X</span>
+                                            </Button>
+                                        </ListGroup.Item>
+                                    ))}
+                                </ListGroup>
+                            ) : (
+                                    <h4><br />No household members to display!</h4>
+                                )}
+                        </Col>
+                    </Row>
+                    <br />
+                    <br />
+                    <br />
+                </Container>
+            </>
         );
     }
 }

@@ -1,10 +1,15 @@
-import React from "react";
-import "./footer.css";
+import React, { Component } from "react";
+import "../../App.css";
 
-const Footer = () => (
-  <footer>
-    <h4>ConnectChore <a href="https://github.com/LivesInRoom29/ConnectChore" target="_blank" rel="noreferrer"><i className="fab fa-github"></i></a></h4>
-  </footer>
-);
+class Footer extends Component {
+  render() {
+    return (
+      <footer>
+        <br />
+        <div>ConnectChore <a href="https://github.com/LivesInRoom29/ConnectChore" target="_blank" rel="noreferrer"><i className="fab fa-github"></i></a></div>
+      </footer>
+    );
+  }
+}
 
 export default Footer;
