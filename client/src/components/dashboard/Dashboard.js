@@ -23,33 +23,47 @@ class Dashboard extends Component {
         return (
             <>
                 <SubNav />
-                <Container>
+                <Container fluid className="dashboard-container">
                 <br />
                 <br />
                 <br />
+                <Row>
+                    <Col md={2}></Col>
+                    <Col md={8}>
                     <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
                     <br />
-                    <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
+                    <p className="dashboard">Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p>
+                    </Col>
+                    <Col md={2}></Col>
+                </Row>
+                    {/* <h3 className="dashboard">Hey there, {user.name.split(" ")[0]}!</h3>
+                    <br />
+                    <p>Get started by adding your family members and your weekly household tasks. Once you've added tasks, create chore lists for each member and assign specific tasks and rewards for finishing them! Family members can battle it out with a game of Connect Four to win the ultimate reward!</p> */}
                     <br />
                     <Row>
-                        <Col><Link to="/addchorelist">
+                        <Col md={2}></Col>
+                        <Col md={4}><Link to="/addchorelist">
                             <div className="module mid animate">
-                                <h2><i className="fas fa-list-ol"></i><br />Create Chorelist</h2>
-                            </div></Link></Col>
-                        <Col><Link to="/game"><div className="module mid animate">
-                            <h2><i className="fas fa-dice"></i><br />Play Game</h2></div></Link></Col>
+                                <h2><i className="fas fa-list-ol dashboard-icons"></i><br />Create Chorelist</h2>
+                            </div></Link><br /></Col>
+                        <Col md={4}><Link to="/game"><div className="module mid animate">
+                            <h2><i className="fas fa-dice dashboard-icons"></i><br />Play Game</h2></div></Link></Col>
+                            <Col md={2}></Col>
                     </Row>
                     <br />
                     <Row>
-                        <Col><Link to="/rewards"><div className="module mid animate">
-                            <h2><i className="fas fa-trophy"></i><br />Add Rewards</h2></div></Link></Col>
-                        <Col><Link to="/addtasks"><div className="module mid animate">
-                            <h2><i className="fas fa-check"></i><br />Add Tasks</h2></div></Link></Col>
+                        <Col md={2}></Col>
+                        <Col md={4}><Link to="/rewards"><div className="module mid animate">
+                            <h2><i className="fas fa-trophy dashboard-icons"></i><br />Add Rewards</h2></div></Link><br /></Col>
+                        <Col md={4}><Link to="/addtasks"><div className="module mid animate">
+                            <h2><i className="fas fa-check dashboard-icons"></i><br />Add Tasks</h2></div></Link></Col>
+                        <Col md={2}></Col>
                     </Row>
                     <br />
                     <br />
                     <Row>
-                        <Col><Link
+                        <Col md={2}></Col>
+                        <Col md={2}><Link
                             to="/householdmembers"
                             className="btn btn-lg button-hover"
                             style={{
@@ -81,9 +95,7 @@ class Dashboard extends Component {
                         >
                             Logout
                         </button></Col> */}
-                        <Col></Col>
-                        <Col></Col>
-                        <Col></Col>
+                        <Col md={8}></Col>
                     </Row>
                 <br />
                 <br />
