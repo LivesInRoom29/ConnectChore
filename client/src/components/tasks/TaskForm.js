@@ -109,15 +109,15 @@ class TaskForm extends Component {
                                 <div>
                                     <br />
                                     <h3>Tasks</h3>
-                                    <p>What type of tasks does your household need to accomplish? Add them here so you can assign them to a household member's chore list!</p>
+                                    <p>What type of tasks does your household need to accomplish? <br /> Add them here so you can assign them to a household member's chore list!</p>
                                     <br />
-                                    <p><b>A few examples could be:</b></p>
-                                    <ul>
-                                        <li>★take out the trash</li>
-                                        <li>★feed the dog</li>
-                                        <li>★clean-up the playroom</li>
-                                        <li>★vacuum the hallway</li>
-                                    </ul>
+                                    <div><b>A few examples could be:</b></div>
+                                        <ul>
+                                            <li>★take out the trash</li>
+                                            <li>★feed the dog</li>
+                                            <li>★clean-up the playroom</li>
+                                            <li>★vacuum the hallway</li>
+                                        </ul>
                                 </div>
                                 <br />
                                 <Form.Row>
@@ -171,7 +171,7 @@ class TaskForm extends Component {
                         <Col md={8}>
                             <br />
                             <h3>Household Tasks</h3>
-                        View all of your added household tasks.
+                        <p>View all of your added household tasks.</p>
                         {/* Eventually filter down to non-deleted and map that array */}
                             {this.state.tasks.length ? (
                                 <ListGroup variant="flush">
@@ -179,7 +179,7 @@ class TaskForm extends Component {
                                         <ListGroup.Item
                                             key={task._id}
                                             data-id={task._id}
-                                            className="align-items-center"
+                                            className="align-items-center list-group"
                                         >
                                             {task.description} (frequency: {task.frequency || 0})
                                             <Button
@@ -199,7 +199,7 @@ class TaskForm extends Component {
                                                         .catch(err => console.log(err))
                                                 }
                                             >
-                                                <span>X</span>
+                                                <span><i className="fas fa-times"></i></span>
                                             </Button>
                                         </ListGroup.Item>
                                     ))}
