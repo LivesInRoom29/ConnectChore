@@ -51,10 +51,11 @@ const About = () => {
                                 <li id="listitemdd"><a id="listitemh" href="https://github.com/LivesInRoom29">Molly Kizer</a></li>
                             </ul>
                         </div>
-                        <br/>
-                        <br />
                     </Col>
                 </Row>
+                <br />
+                <br />
+                <br />
             </Container>
         </>
     );
