@@ -168,7 +168,7 @@ class ChoreList extends Component {
         return (
             <>
             <SubNav />
-                <Container>
+                <Container style={{ height: "100vh" }}>
                     <br />
                     <br />
                     <br />
