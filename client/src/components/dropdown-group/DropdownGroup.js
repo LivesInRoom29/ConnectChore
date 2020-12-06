@@ -101,7 +101,6 @@ class DropdownGroup extends Component {
 
     onClickShowChorelist = async (event) => {
         event.preventDefault();
-        console.log(this.state.choreListToEdit);
         //use the chorelist ID to get an array with all of the tasks
         try {
             const ListWithTasks = await API.getChoreListWithTasks(this.state.choreListToEdit);
