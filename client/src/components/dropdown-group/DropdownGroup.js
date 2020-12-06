@@ -142,6 +142,39 @@ class DropdownGroup extends Component {
                 </>
             )
 
+        // if showTasks is true, render the button for users to jump to task list
+        // otherwise return null
+        const showJumpToTaskBtn = this.state.showTasks ? (
+            <Button className="btn btn-lg button-hover"
+                style={{
+                    width: "250px",
+                    height: "50px",
+                    fontSize: "15px",
+                    textTransform: "uppercase",
+                    borderRadius: "30px",
+                    border: "none",
+                    padding: "12px",
+                    backgroundColor: "#42b984",
+                    color: "white",
+                    letterSpacing: "1.5px",
+                    marginLeft: "25px"
+                }}
+            >
+                <Link
+                    // className="jump-to-tasks"
+                    activeClass="active"
+                    to="taskList"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={500}
+                >
+                    Jump to Task List
+                </Link>
+            </Button>
+        ) : (
+            null
+        )
 
         return (
             <>
@@ -194,33 +227,7 @@ class DropdownGroup extends Component {
                                 >
                                     Generate Chorelist
                                 </Button>
-                                <Button className="btn btn-lg button-hover"
-                                    style={{
-                                        width: "250px",
-                                        height: "50px",
-                                        fontSize: "15px",
-                                        textTransform: "uppercase",
-                                        borderRadius: "30px",
-                                        border: "none",
-                                        padding: "12px",
-                                        backgroundColor: "#42b984",
-                                        color: "white",
-                                        letterSpacing: "1.5px",
-                                        marginLeft: "25px"
-                                    }}
-                                >
-                                    <Link
-                                        // className="jump-to-tasks"
-                                        activeClass="active"
-                                        to="taskList"
-                                        spy={true}
-                                        smooth={true}
-                                        offset={0}
-                                        duration={500}
-                                    >
-                                        Jump to Task List
-                                    </Link>
-                                </Button>
+                                {showJumpToTaskBtn}
                             </Form>
                         </Col>
                     </Row>
