@@ -4,6 +4,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+// Bootstrap
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+// Local CSS
 import "./auth.css";
 
 class Login extends Component {
@@ -53,79 +60,89 @@ class Login extends Component {
 
     render() {
         const { errors } = this.state;
+
         return (
-            <div style={{ height: "90vh" }} className="auth-container">
-                <div>
+            <Container fluid style={{ height: "90vh" }} className="auth-container">
+                <Row className="justify-content-center">
                     <br />
                     <br />
                     <br />
-                    <div className="col s8 loginform animation">
-                        <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i> Back to Home</Link>
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                    <Col md={5}>
+                        {/* Login Form */}
+                        <Form
+                            noValidate
+                            onSubmit={this.onSubmit}
+                            className="loginform animation mt-5"
+                        >
+                            <Link to="/" className="btn button-hover text-dark">
+                                <i className="fas fa-arrow-left"></i> Back to Home</Link>
                             <br />
-                            <h4 className="auth">Welcome Back!</h4>
-                            <p className="grey-text text-darken-1">
-                                Don't have an account? <Link to="/register">Register</Link>
+                            <h4 className="auth mt-2">Welcome Back!</h4>
+                            <p className="text-body">
+                                Don't have an account? <Link to="/register" className=" button-hover text-muted">Register</Link>
                             </p>
-                        </div>
-                        <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.email}
-                                    error={errors.email}
-                                    id="email"
-                                    type="email"
-                                    className={classnames("", {
-                                        invalid: errors.email || errors.emailnotfound
-                                    })}
-                                />
-                                <label htmlFor="email">Email</label>
-                                <span className="red-text">
-                                    {errors.email}
-                                    {errors.emailnotfound}
-                                </span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password}
-                                    error={errors.password}
-                                    id="password"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password || errors.passwordincorrect
-                                    })}
-                                />
-                                <label htmlFor="password">Password</label>
-                                <span className="red-text">
-                                    {errors.password}
-                                    {errors.passwordincorrect}
-                                </span>
-                            </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                <br />
-                                <button
-                                    style={{
-                                        width: "150px",
-                                        fontSize: "15px",
-                                        borderRadius: "30px",
-                                        backgroundColor: "#42b984",
-                                        padding: "14px",
-                                        color: "#fff",
-                                        letterSpacing: "1.5px"
-                                    }}
-                                    type="submit"
-                                    className="btn btn-large waves-effect waves-brown waves-ripple hoverable accent-3"
-                                >
-                                    Login
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                            <Form.Group as={Row} controlId="loginForm.email">
+                                <Form.Label column sm={2}>Email</Form.Label>
+                                <Col sm={10}>
+                                    <Form.Control 
+                                        type="email" 
+                                        placeholder="name@example.com" 
+                                        // Previous
+                                        onChange={this.onChange}
+                                        value={this.state.email}
+                                        error={errors.email}
+                                        id="email"
+                                        className={classnames("", {
+                                            invalid: errors.email || errors.emailnotfound
+                                        })}
+                                    />
+                                    <span className="text-danger">
+                                        {errors.email}
+                                        {errors.emailnotfound}
+                                    </span>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row} controlId="loginForm.password">
+                                <Form.Label column sm={2}>Password</Form.Label>
+                                <Col sm={10}>
+                                    <Form.Control 
+                                        type="password" 
+                                        placeholder="enter password" 
+                                        // Previous
+                                        onChange={this.onChange}
+                                        value={this.state.password}
+                                        error={errors.password}
+                                        id="password"
+                                        className={classnames("", {
+                                            invalid: errors.password || errors.passwordincorrect
+                                        })}
+                                    />
+                                    <span className="text-danger">
+                                        {errors.password}
+                                        {errors.passwordincorrect}
+                                    </span>
+                                </Col>
+                            </Form.Group>
+                            <br />
+                            <Button
+                                style={{
+                                    width: "150px",
+                                    fontSize: "15px",
+                                    borderRadius: "30px",
+                                    backgroundColor: "#42b984",
+                                    padding: "14px",
+                                    color: "#fff",
+                                    letterSpacing: "1.5px"
+                                }}
+                                type="submit"
+                                className="btn btn-lg button-hover"
+                            >
+                                Login
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }

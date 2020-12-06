@@ -3,13 +3,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setTasksAction } from "../../actions/chorelistActions";
+// Bootstrap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
-import "./choreListTasks.css";
+// API Calls
 import API from "../../utils/API";
+// Local CSS
+import "./choreListTasks.css";
 
 class ChoreListTasks extends Component {
   constructor(props) {
@@ -100,10 +103,10 @@ class ChoreListTasks extends Component {
       </Row>
       {/* if tasks exist map the chosen tasks here, otherwise return Null */}
       {tasks.length ?
-        tasks.map((task) => {
+        tasks.map((task, index) => {
           const { description, frequency } = task.task;
           return (
-            <Row key={task._id}>
+            <Row key={index}>
               <Col xs="4" md="6">
                 <p>{description}</p>
               </Col>
