@@ -14,7 +14,6 @@ class SubNav extends Component {
   };
 
   render() {
-    const { user } = this.props.auth;
 
     return (
 
@@ -35,7 +34,7 @@ class SubNav extends Component {
               </div>
               <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <div className="dropdown-item"><Link to="/dashboard" id="navdesigndd">Dashboard</Link></div>
-                <div className="dropdown-item"><Link to="/householdmembers" id="navdesigndd">Manage Family</Link></div>
+                <div className="dropdown-item"><Link to="/householdmembers" id="navdesigndd">Manage Household</Link></div>
                 <div className="dropdown-item" id="navdesigndd" onClick={this.onLogoutClick}>Logout</div>
               </div>
             </div>
