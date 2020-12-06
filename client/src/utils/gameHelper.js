@@ -12,27 +12,3 @@ export const createDefaultBoard = () => {
   }
   return box;
 };
-
-// export const play = (x) => {
-//     if (!this.state.gameOver) {
-//       // Place piece on board
-//       let board = this.state.board;
-//       for (let y = 5; y >= 0; y--) {
-//         if (!board[y][x]) {
-//           board[y][x] = this.state.currentPlayer;
-//           break;
-//         }
-//       }
-
-
-
-//       export const checkAll = (board) => {
-//         return (
-//           checkVertical(board)
-//         );
-//       };
-//     }
-
-//     // this.checkHorizontal(board),
-//     // this.checkDiagonalLeft(board),
-//     // this.checkDiagonalRight(board)

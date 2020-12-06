@@ -4,7 +4,6 @@ export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const DROP_TILE = 'DROP_TILE';
 export const RESET_GAME = 'RESET_GAME';
 export const SET_PLAYER = 'SET_PLAYER';
-export const SET_WINNER = 'SET_WINNER';
 
 
 

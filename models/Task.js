@@ -28,7 +28,7 @@ const taskSchema = new Schema({
   // },
   isDeleted: {
     type: Boolean,
-    deafult: false
+    default: false
   }
 });
 

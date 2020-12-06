@@ -21,9 +21,9 @@ export function setPlayer(player, color) {
     }
 };
 
-export function setWinner(player, reward) {
-    return{
-        type: SET_WINNER,
-        payload: {player, reward}
-    }
-}
+// export function setWinner(player, reward) {
+//     return{
+//         type: SET_WINNER,
+//         payload: {player, reward}
+//     }
+// }

@@ -25,6 +25,7 @@ class AddChorelist extends Component {
 
     const chorelistEditor = choreListID ? (
       <>
+        <h4>Add tasks to your choreslist.</h4>
         <TaskDropDown
           choreListToEdit={choreListID}
         />
@@ -34,11 +35,8 @@ class AddChorelist extends Component {
         />
       </>
     ) : (
-        <>
-          <h2>Your Chorelist</h2>
           <h3>No chorelists to display!</h3>
-        </>
-      )
+    );
 
     return (
       <>
@@ -49,14 +47,14 @@ class AddChorelist extends Component {
               <br />
               <br />
               <h4>
-                <b>Hey there,</b> {user.name.split(" ")[0]}
                 <p className="text-body">
-                  Create a chorelist for the day! <br />
+                  Create a chorelist for the day!
                 </p>
               </h4>
+              <br />
               <Form.Row>
-                <Form.Group as={Col} md="6" controlId="formHouseholdMember">
-                  <Form.Label>Pick a household member:</Form.Label>
+                <Form.Group as={Col} lg="6" controlId="formHouseholdMember">
+                  <Form.Label>Pick someone:</Form.Label>
                   <Form.Control
                     as="select"
                     name="assignedto"
@@ -78,11 +76,11 @@ class AddChorelist extends Component {
                 </Form.Group>
               </Form.Row>
               <Form.Row>
-                <Form.Group as={Col} md="6" controlId="formDatePicker">
+                <Form.Group as={Col} lg="6" controlId="formDatePicker">
                   <Form.Label className="mr-5">Select a date:</Form.Label>
                   <DatePicker
                     selected={this.props.startDate}
-                    onChange={this.props.handleChange} //only when value has changed
+                    onChange={this.props.handleDateChange} //only when value has changed
                     dateFormat="MM/dd/yyyy"
                   />
                 </Form.Group>
@@ -94,11 +92,11 @@ class AddChorelist extends Component {
                     as="select"
                     name="reward"
                     value={this.props.reward}
-                    onChange={this.handleInputChange}
+                    onChange={this.props.handleInputChange}
                   >
                     {/* Map the household members to the drop-down */}
                     {
-                      this.props.rewards.map(reward => (
+                      this.props.undeletedRewards.map(reward => (
                         <option
                           key={reward._id}
                           value={reward._id}
@@ -110,16 +108,30 @@ class AddChorelist extends Component {
                   </Form.Control>
                 </Form.Group>
               </Form.Row>
+              <br />
               <Button
-                variant="primary"
                 type="submit"
                 onClick={this.props.addChoreListClick}
+                className="btn btn-lg button-hover"
+                            style={{
+                                width: "150px",
+                                height: "50px",
+                                borderRadius: "30px",
+                                fontSize: "15px",
+                                textTransform: "uppercase",
+                                padding: "12px",
+                                backgroundColor: "#42b984",
+                                color: "white",
+                                border: "none",
+                                letterSpacing: "1.5px"
+                              }}
               >
-                Add list
+                Add List
                   </Button>
             </Form>
           </Col>
-          <Col className="chorelist-editor" md={8}>
+          <Col className="chorelist-editor" md={6}>
+            <h2>Your Chorelist</h2>
             {chorelistEditor}
           </Col>
         </Row>
