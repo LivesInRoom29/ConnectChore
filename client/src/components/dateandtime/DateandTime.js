@@ -2,7 +2,7 @@ import  React, { useState , useEffect } from 'react'
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
 // Local CSS
-import "../dashboard/Dashboard.css";
+import "../Dashboard/Dashboard.css";
 import "../../App.css";
 
 
