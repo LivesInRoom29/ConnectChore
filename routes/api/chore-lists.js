@@ -89,9 +89,8 @@ router.get("/householdmember/:id", passport.authenticate("jwt", { session: false
 });
 
 // Get chorelist by id populated with tasks
-// Auth OK:
-router.get("/withtasks/:id", async function (req, res) {
-//router.get("/withtasks/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
+// Auth OK: router.get("/withtasks/:id", async function (req, res) {
+router.get("/withtasks/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
   const id = req.params.id;
 
   try {
