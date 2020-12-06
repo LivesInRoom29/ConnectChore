@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+// Local Components
+import BackToDashboard from "../back-to-dashboard/BackToDashboard";
 // API calls
 import API from "../../utils/API";
 // utils
@@ -36,7 +38,6 @@ class Rewards extends Component {
 
         API.getRewardDescriptions(user.id)
             .then(res => {
-                //console.log(res)
                 const undeletedRewards = filterDeleted(res.data);
 
                 this.setState(
@@ -66,12 +67,6 @@ class Rewards extends Component {
         //e.preventDefault();
 
         const { user } = this.props.auth;
-        console.log("user id");
-        console.log(user.id);
-        console.log("this state reward");
-        console.log(this.state.reward);
-        console.log("this state pointvalue");
-        console.log(this.state.pointvalue);
 
         const { reward, pointvalue } = this.state;
 
@@ -92,19 +87,18 @@ class Rewards extends Component {
 
     render() {
 
-        const { user } = this.props.auth;
-
         return (
             <>
                 <SubNav />
                 <Container>
                     <br />
                     <br />
+                    <br />
                     <Row>
                         <Col>
+                            <BackToDashboard />
                             <Form>
                                 <div>
-                                    <br />
                                     <h3>Rewards</h3>
                                     <p>Want to include some motivation to your household's day to day chores? Add potential rewards for a job well done!</p>
                                     <br />
@@ -161,7 +155,7 @@ class Rewards extends Component {
                     <br />
                     <br />
                     <Row>
-                        <Col md={8}>
+                        <Col md={6}>
                             <br />
                             <h3>Household Rewards</h3>
                             <p>A list of the recently added rewards for completing chores.</p>
@@ -172,7 +166,7 @@ class Rewards extends Component {
                                         <ListGroup.Item
                                             key={reward._id}
                                             data-id={reward._id}
-                                            className="align-items-center"
+                                            className="align-items-center list-group"
                                         >
                                             {reward.description} (points: {reward.value || 0})
                                             <Button
@@ -202,6 +196,9 @@ class Rewards extends Component {
                                 )}
                         </Col>
                     </Row>
+                    <br />
+                    <br />
+                    <br />
                     <br />
                     <br />
                     <br />

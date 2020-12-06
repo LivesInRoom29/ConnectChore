@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+// Local Components
+import BackToDashboard from "../back-to-dashboard/BackToDashboard";
 // API calls
 import API from "../../utils/API";
 import "../../App.css";
@@ -37,7 +39,6 @@ class TaskForm extends Component {
 
         API.getTasks(user.id)
             .then(res => {
-                //console.log(res)
 
                 const undeletedTasks = filterDeleted(res.data)
 
@@ -83,19 +84,11 @@ class TaskForm extends Component {
 
     };
 
-    // handleDelete = e => {
-
-    // }
-
-
-
     // RENDER TEST:
     // Clicking ADD TASK adds reward as expected to DB for the logged in user only?
     // Clicking the X box successuflly removes the task entry for the logged in user only?
 
     render() {
-
-        //const { user } = this.props.auth;
 
         return (
             <>
@@ -103,11 +96,12 @@ class TaskForm extends Component {
                 <Container>
                     <br />
                     <br />
+                    <br />
                     <Row>
                         <Col>
+                            <BackToDashboard />
                             <Form>
                                 <div>
-                                    <br />
                                     <h3>Tasks</h3>
                                     <p>What type of tasks does your household need to accomplish? <br /> Add them here so you can assign them to a household member's chore list!</p>
                                     <br />
@@ -168,7 +162,7 @@ class TaskForm extends Component {
                     <br />
                     <br />
                     <Row>
-                        <Col md={8}>
+                        <Col md={6}>
                             <br />
                             <h3>Household Tasks</h3>
                         <p>View all of your added household tasks.</p>
@@ -209,6 +203,9 @@ class TaskForm extends Component {
                                 )}
                         </Col>
                     </Row>
+                    <br />
+                    <br />
+                    <br />
                     <br />
                     <br />
                     <br />

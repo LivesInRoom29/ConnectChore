@@ -14,7 +14,6 @@ class SubNav extends Component {
   };
 
   render() {
-    const { user } = this.props.auth;
 
     return (
 
@@ -25,8 +24,8 @@ class SubNav extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav ml-auto">
-            <div className="nav-link design"><Link to="/addtasks" id="navdesign">Tasks</Link></div>
-            <div className="nav-link"><Link to="/addchorelist" id="navdesign">Chores</Link></div>
+            <div className="nav-link design"><Link to="/tasks" id="navdesign">Tasks</Link></div>
+            <div className="nav-link"><Link to="/chorelist" id="navdesign">Chores</Link></div>
             <div className="nav-link"><Link to="/rewards" id="navdesign">Rewards</Link></div>
             <div className="nav-link"><Link to="/game" id="navdesign">Game</Link></div>
             <div className="nav-item dropdown">
@@ -35,7 +34,7 @@ class SubNav extends Component {
               </div>
               <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <div className="dropdown-item"><Link to="/dashboard" id="navdesigndd">Dashboard</Link></div>
-                <div className="dropdown-item"><Link to="/householdmembers" id="navdesigndd">Manage Family</Link></div>
+                <div className="dropdown-item"><Link to="/householdmembers" id="navdesigndd">Manage Household</Link></div>
                 <div className="dropdown-item" id="navdesigndd" onClick={this.onLogoutClick}>Logout</div>
               </div>
             </div>
