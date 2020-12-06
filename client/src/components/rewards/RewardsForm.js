@@ -155,7 +155,7 @@ class Rewards extends Component {
                     <br />
                     <br />
                     <Row>
-                        <Col md={8}>
+                        <Col md={6}>
                             <br />
                             <h3>Household Rewards</h3>
                             <p>A list of the recently added rewards for completing chores.</p>
@@ -166,7 +166,7 @@ class Rewards extends Component {
                                         <ListGroup.Item
                                             key={reward._id}
                                             data-id={reward._id}
-                                            className="align-items-center"
+                                            className="align-items-center list-group"
                                         >
                                             {reward.description} (points: {reward.value || 0})
                                             <Button
@@ -196,6 +196,9 @@ class Rewards extends Component {
                                 )}
                         </Col>
                     </Row>
+                    <br />
+                    <br />
+                    <br />
                     <br />
                     <br />
                     <br />

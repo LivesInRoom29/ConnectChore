@@ -81,7 +81,7 @@ class Dashboard extends Component {
                     <br />
                     <Row>
                         <Col md={2}></Col>
-                        <Col md={4}><Link to="/addchorelist">
+                        <Col md={4}><Link to="/chorelist">
                             <div className="module mid animate">
                                 <h2><i className="fas fa-list-ol dashboard-icons"></i><br />Create Chorelist</h2>
                             </div></Link><br /></Col>

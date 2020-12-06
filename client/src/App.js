@@ -55,7 +55,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router className="content">
           <div className="App">
             {/* <Navbar /> */}
             <Route exact path="/" component={Landing} />
@@ -66,8 +66,8 @@ class App extends Component {
               <PrivateRoute exact path="/rewards" component={Rewards} />
               <PrivateRoute exact path="/game" component={GameBox} />
               <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
-              <PrivateRoute exact path="/addchorelist" component={ChoreList} />
-              <PrivateRoute exact path="/addtasks" component={TaskForm} />
+              <PrivateRoute exact path="/chorelist" component={ChoreList} />
+              <PrivateRoute exact path="/tasks" component={TaskForm} />
               <PrivateRoute exact path="/taskdropdown" component={TaskDropDown} />
               <PrivateRoute exact path="/memberchorelist" component={MemberChoreList} />
               {/* <PrivateRoute exact path="/chores/:userId/:listId" component={ChoreView} /> */}
@@ -79,7 +79,7 @@ class App extends Component {
               {/* <PrivateRoute exact path="/game" component={GameBox} /> */}
 
             </Switch>
-            <Footer />
+            <Footer className="footer" />
           </div>
         </Router>
       </Provider>

@@ -2,9 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link, animateScroll as scroll } from "react-scroll";
-// import { format } from "date-fns";
-// import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 import { setTasksAction } from "../../actions/chorelistActions";
 import DropdownMembers from "./DropdownMembers";
 import DropdownChorelists from "./DropdownChorelists";
@@ -33,7 +31,6 @@ class DropdownGroup extends Component {
             choreListDate: "",
             choreListData: {},
             choreListToEdit: "",
-            //filteredChoreLists: [],
             showTasks: false
         }
         this.onClickShowChorelist = this.onClickShowChorelist.bind(this);
@@ -66,8 +63,9 @@ class DropdownGroup extends Component {
 
         });
 
+        // Get all the chorelists for the user populated with the rewards
         var promisetwo = new Promise((resolve, reject) => {
-            API.getChoreLists(user.id)
+            API.getChoreListsWithRewards(user.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
         })
@@ -75,7 +73,9 @@ class DropdownGroup extends Component {
         promisetwo.then(res => {
             const allChoreLists = res.data;
             const filteredLists = allChoreLists.filter(list => list.completedBy === this.state.householdMemberId);
-            const firstChoreList = filteredLists[0] ? filteredLists[0]._id : ""
+            const firstChoreList = filteredLists[0] ? filteredLists[0]._id : "";
+            // Set state for chorelists as the chorelists populated with the rewards
+            // set the chorelist to edit to be the first chorelist in the array
             this.setState(
                 {
                     choreLists: res.data,
@@ -118,7 +118,7 @@ class DropdownGroup extends Component {
 
     render() {
 
-        const { user } = this.props.auth;
+        //const { user } = this.props.auth;
 
         // if showTasks is true, render the TaskDropDown menu and the ChoreListTasks
         // otherwise render "Choose a Chorelist"

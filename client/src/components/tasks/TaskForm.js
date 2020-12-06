@@ -162,7 +162,7 @@ class TaskForm extends Component {
                     <br />
                     <br />
                     <Row>
-                        <Col md={8}>
+                        <Col md={6}>
                             <br />
                             <h3>Household Tasks</h3>
                         <p>View all of your added household tasks.</p>
@@ -203,6 +203,9 @@ class TaskForm extends Component {
                                 )}
                         </Col>
                     </Row>
+                    <br />
+                    <br />
+                    <br />
                     <br />
                     <br />
                     <br />
