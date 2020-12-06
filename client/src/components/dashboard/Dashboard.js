@@ -106,6 +106,10 @@ class Dashboard extends Component {
                     <br />
                     <br />
                     <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </Container>
             </>
         );

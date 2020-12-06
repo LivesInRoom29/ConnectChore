@@ -55,7 +55,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router className="content">
           <div className="App">
             {/* <Navbar /> */}
             <Route exact path="/" component={Landing} />
@@ -79,7 +79,7 @@ class App extends Component {
               {/* <PrivateRoute exact path="/game" component={GameBox} /> */}
 
             </Switch>
-            <Footer />
+            <Footer className="footer" />
           </div>
         </Router>
       </Provider>
