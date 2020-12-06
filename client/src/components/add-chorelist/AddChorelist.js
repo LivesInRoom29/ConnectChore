@@ -25,7 +25,7 @@ class AddChorelist extends Component {
 
     const chorelistEditor = choreListID ? (
       <>
-        <h4>Add tasks to your choreslist.</h4>
+        {/* <h4>Add tasks to your chore list.</h4> */}
         <TaskDropDown
           choreListToEdit={choreListID}
         />
@@ -35,7 +35,7 @@ class AddChorelist extends Component {
         />
       </>
     ) : (
-          <h3>No chorelists to display!</h3>
+          <h4>No chore lists to display!</h4>
     );
 
     return (
@@ -48,7 +48,7 @@ class AddChorelist extends Component {
               <br />
               <h4>
                 <p className="text-body">
-                  Create a chorelist for the day!
+                  Create a chore list for the day!
                 </p>
               </h4>
               <br />
@@ -86,7 +86,7 @@ class AddChorelist extends Component {
                 </Form.Group>
               </Form.Row>
               <Form.Row>
-                <Form.Group as={Col} md="6" controlId="formReward">
+                <Form.Group as={Col} lg="6" controlId="formReward">
                   <Form.Label>Pick a reward:</Form.Label>
                   <Form.Control
                     as="select"
@@ -130,8 +130,8 @@ class AddChorelist extends Component {
                   </Button>
             </Form>
           </Col>
-          <Col className="chorelist-editor" md={6}>
-            <h2>Your Chorelist</h2>
+          <Col className="chorelist-editor" lg={6}>
+            <h2>Your Chore List</h2>
             {chorelistEditor}
           </Col>
         </Row>

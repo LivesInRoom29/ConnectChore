@@ -124,8 +124,8 @@ class DropdownGroup extends Component {
         const chorelistEditor = this.state.showTasks ? (
             <>
                 <br />
-                <h4>View or Edit Choreslist</h4>
-                <p>Add new tasks, mark them as complete or delete them from the list.</p>
+                <h4>View or Edit Chore List</h4>
+                <p>Add new tasks, mark them as complete, or delete them from the list.</p>
                 <TaskDropDown
                     choreListToEdit={this.state.choreListToEdit}
                 />
@@ -136,7 +136,7 @@ class DropdownGroup extends Component {
             </>
         ) : (
                 <>
-                    <h2>Choose a Chorelist</h2>
+                    <h2>Choose a Chore List</h2>
                     {/* <h3>No chorelists to display!</h3> */}
                 </>
             )
@@ -153,7 +153,7 @@ class DropdownGroup extends Component {
                             <Form>
                                 <h4>
                                     <p className="text-body">
-                                        Pick a household member to display a chorelist.
+                                        Pick a household member to display a chore list.
                                 </p>
                                 </h4>
                                 <br />
@@ -191,7 +191,7 @@ class DropdownGroup extends Component {
                                     data-id={this.state.choreListToEdit}
                                     onClick={this.onClickShowChorelist}
                                 >
-                                    Generate Chorelist
+                                    Generate Chore List
                             </Button>
 
                             </Form>

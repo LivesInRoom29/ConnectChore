@@ -87,47 +87,60 @@ class TaskDropDown extends Component {
     //drop down menu for tasklist
     render() {
         return (
-        <>
-            <Form>
-                {/* <h4>
+            <>
+                <Form>
+                    {/* <h4>
                     <p className="text-body">
                         Add a task to your choreslist.
                     </p>
                 </h4> */}
-                <Form.Row className="dropdown-row">
-                    <Form.Group as={Col} md="9" xs="8" controlId="formTask">
-                        <Form.Label>Pick a task to add:</Form.Label>
-                        <Form.Control
-                            as="select"
-                            name="choosetask"
-                            value={this.state.choosetask}
-                            placeholder="Please add tasks first"
-                            onChange={this.handleInputChange}
+                    <Form.Row className="dropdown-row">
+                        <Form.Group as={Col} md="9" xs="8" controlId="formTask">
+                            <Form.Label>Pick a task to add:</Form.Label>
+                            <Form.Control
+                                as="select"
+                                name="choosetask"
+                                value={this.state.choosetask}
+                                placeholder="Please add tasks first"
+                                onChange={this.handleInputChange}
+                            >
+                                {/* Map the tasks to the drop-down */}
+                                {
+                                    this.state.filteredTasks.map(task => (
+                                        <option
+                                            key={task._id}
+                                            value={task._id}
+                                        >
+                                            {task.description}
+                                        </option>
+                                    ))
+                                }
+                            </Form.Control>
+                        </Form.Group>
+                        <Button
+                            style={{
+                                width: "125px",
+                                height: "40px",
+                                fontSize: "15px",
+                                textTransform: "uppercase",
+                                borderRadius: "30px",
+                                border: "none",
+                                padding: "8px",
+                                backgroundColor: "#42b984",
+                                color: "white",
+                                letterSpacing: "1.5px"
+                            }}
+                            className="btn btn-lg button-hover"
+                            id="add-task-button"
+                            variant="primary"
+                            type="submit"
+                            onClick={this.addTaskClick}
                         >
-                            {/* Map the tasks to the drop-down */}
-                            {
-                                this.state.filteredTasks.map(task => (
-                                    <option
-                                        key={task._id}
-                                        value={task._id}
-                                    >
-                                        {task.description}
-                                    </option>
-                                ))
-                            }
-                        </Form.Control>
-                    </Form.Group>
-                    <Button
-                        id="add-task-button"
-                        variant="primary"
-                        type="submit"
-                        onClick={this.addTaskClick}
-                    >
-                        Add Task
+                            Add Task
                     </Button>
-                </Form.Row>
+                    </Form.Row>
 
-            </Form>
+                </Form>
             </>
         )
     }
