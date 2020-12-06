@@ -141,7 +141,7 @@ class HouseholdMemberForm extends Component {
                     <br />
                     <br />
                     <Row>
-                        <Col md={8}
+                        <Col md={6}
                             style={{
                                 borderColor: "lightblue"
                             }}
@@ -155,9 +155,10 @@ class HouseholdMemberForm extends Component {
                                             data-id={member._id}
                                             className="align-items-center"
                                             style={{
-                                                backgroundColor: 'lightblue',
-                                                borderRadius: 8,
-                                                fontSize: '18px',
+                                                background: "#00adef",
+                                                color: "#ffffff",
+                                                borderRadius: "8px",
+                                                fontSize: "18px",
                                                 fontfamily: "Poppins",
                                             }}
                                         >
@@ -165,11 +166,10 @@ class HouseholdMemberForm extends Component {
                                             <Button
                                                 variant="danger"
                                                 className="float-right text-light"
-                                                style={{
-                                                    // backgroundColor: "grey",
-                                                    borderColor: "black",
-
-                                                }}
+                                                // style={{
+                                                //     backgroundColor: "transparent",
+                                                //     border: "none",
+                                                // }}
                                                 onClick={
                                                     () => API.deleteHouseholdMember(
                                                         member._id,
@@ -184,7 +184,7 @@ class HouseholdMemberForm extends Component {
                                                         .catch(err => console.log(err))
                                                 }
                                             >
-                                                <span >X</span>
+                                                <span><i className="fas fa-times"></i></span>
                                             </Button>
                                         </ListGroup.Item>
                                     ))}

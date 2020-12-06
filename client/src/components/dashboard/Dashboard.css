@@ -1,7 +1,26 @@
+.dashboard-container {
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4)
+  ),
+  url("https://images.pexels.com/photos/373548/pexels-photo-373548.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+
+p.dashboard {
+  font-size: 18px;
+  text-align: center;
+  color: white;
+}
+
 h3.dashboard {
-  color: #00adef;
+  color: #ffffff !important;
   font-size: 36px;
   text-align: center;
+  font-weight: 900;
 }
 
 .module {
@@ -17,6 +36,8 @@ h3.dashboard {
 
   .module:hover {
       background: #08124B;
+      animation: pulse;
+      animation-duration: 0.5s;
   }
   
   .mid h2 {
@@ -32,6 +53,14 @@ h3.dashboard {
     transform: translate(-50%, -50%);
   }
 
-  .fa-list-ol, .fa-trophy, .fa-check, .fa-dice {
+  .dashboard-icons {
     font-size: 50px;
+  }
+
+  .dateandtime {
+    text-align: center;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
   }

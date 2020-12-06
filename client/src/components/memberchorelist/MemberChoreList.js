@@ -203,7 +203,7 @@ class MemberChoreList extends Component {
                                     ))}
                                 </ListGroup>
                             ) : (
-                                    <h3>No choreslist to display</h3>
+                                    <h3>No chore list to display</h3>
                                 )}
                         </Accordion>
                     </Col>

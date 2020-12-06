@@ -108,13 +108,13 @@ class Rewards extends Component {
                                     <h3>Rewards</h3>
                                     <p>Want to include some motivation to your household's day to day chores? Add potential rewards for a job well done!</p>
                                     <br />
-                                    <p><b>A few examples could be:</b>
+                                    <div><b>A few examples could be:</b></div>
                                         <ul>
                                             <li>★pick-a-movie night</li>
                                             <li>★ice cream for breakfast</li>
                                             <li>★buy a new book</li>
                                             <li>★stay up late for 30 extra minutes</li>
-                                        </ul></p>
+                                        </ul>
                                     <br />
                                 </div>
                                 <Form.Row>
@@ -192,7 +192,7 @@ class Rewards extends Component {
                                                         .catch(err => console.log(err))
                                                 }
                                             >
-                                                <span>X</span>
+                                                <span><i className="fas fa-times"></i></span>
                                             </Button>
                                         </ListGroup.Item>
                                     ))}
