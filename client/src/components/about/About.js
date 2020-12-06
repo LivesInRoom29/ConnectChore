@@ -5,9 +5,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import ListGroup from 'react-bootstrap/ListGroup';
 // CSS
 import "../../App.css";
+import "./About.css";
 import SubNav from "../layout/SubNav";
 
 const About = () => {
@@ -39,19 +39,19 @@ const About = () => {
                 </Row>
                 <Row>
                     <Col>
-                        <div>
-                            <h3 style={{ textAlign: "center" }}>Contributors</h3>
+                        <h3 style={{ textAlign: "center" }}>Contributors</h3>
+                        <div className="p-1 mb-2 bg-secondary text-white" >
                             <br />
-                            <ListGroup variant="flush">
-                                <ListGroup.Item><a rel="nonreferrer" href="https://github.com/ASheikh-io"><p style={{color: "black"}}>Ahmed Sheikh</p></a></ListGroup.Item>
-                                <ListGroup.Item><a rel="nonreferrer" href="https://github.com/ARam2142"><p style={{color: "black"}}>Andres Ramirez</p></a></ListGroup.Item>
-                                <ListGroup.Item><a rel="nonreferrer" href="https://github.com/Bremah-mvp"><p style={{color: "black"}}>Bremah Lwanga</p></a></ListGroup.Item>
-                                <ListGroup.Item><a rel="nonreferrer" href="https://github.com/hilbug"><p style={{color: "black"}}>Hilary Ferraro</p></a></ListGroup.Item>
-                                <ListGroup.Item><a rel="nonreferrer" href="https://github.com/kdunphe"><p style={{color: "black"}}>Kayla Dunphe</p></a></ListGroup.Item>
-                                <ListGroup.Item><a rel="nonreferrer" href="https://github.com/LivesInRoom29"><p style={{color: "black"}}>Molly Kizer</p></a></ListGroup.Item>
-                            </ListGroup>
+                            <ul className="namelist">
+                                <li id="listitemdd"><a id="listitemh" href="https://github.com/ASheikh-io">Ahmed Sheikh</a></li>
+                                <li id="listitemdd"><a id="listitemh" href="https://github.com/ARam2142">Andres Ramirez</a></li>
+                                <li id="listitemdd"><a id="listitemh" href="https://github.com/Bremah-mvp">Bremah Lwanga</a></li>
+                                <li id="listitemdd"><a id="listitemh" href="https://github.com/hilbug">Hilary Ferraro</a></li>
+                                <li id="listitemdd"><a id="listitemh" href="https://github.com/kdunphe">Kayla Dunphe</a></li>
+                                <li id="listitemdd"><a id="listitemh" href="https://github.com/LivesInRoom29">Molly Kizer</a></li>
+                            </ul>
                         </div>
-
+                        <br/>
                         <br />
                     </Col>
                 </Row>
