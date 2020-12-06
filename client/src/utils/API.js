@@ -48,6 +48,10 @@ export default {
     getChoreListWithTasks: function(choreListId) {
         return Axios.get(`/api/chore-lists/withtasks/${choreListId}`);
     },
+    //get all chorelists for the user populated with rewards
+    getChoreListsWithRewards : function(userId) {
+        return Axios.get(`/api/chore-lists/withrewards/${userId}`);
+    },
     // add a chorelist
     addChoreList: function(choreListData) {
         return Axios.post(`/api/chore-lists/`, choreListData);
