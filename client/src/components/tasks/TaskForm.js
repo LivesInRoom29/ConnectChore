@@ -102,7 +102,7 @@ class TaskForm extends Component {
                                 <div>
                                     <br />
                                     <h3>Tasks</h3>
-                                    <p>What type of tasks does your household need to accomplish? Add them here so you can assign them to a household member's chore list!</p>
+                                    <p>What type of tasks does your household need to accomplish? <br /> Add them here so you can assign them to a household member's chore list!</p>
                                     <br />
                                     <p><b>A few examples could be:</b>
                                         <ul>
@@ -189,7 +189,7 @@ class TaskForm extends Component {
                                                         .catch(err => console.log(err))
                                                 }
                                             >
-                                                <span>X</span>
+                                                <span><i class="fas fa-times"></i></span>
                                             </Button>
                                         </ListGroup.Item>
                                     ))}
