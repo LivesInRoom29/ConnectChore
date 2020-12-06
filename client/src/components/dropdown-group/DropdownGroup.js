@@ -74,7 +74,7 @@ class DropdownGroup extends Component {
 
         promisetwo.then(res => {
             const allChoreLists = res.data;
-            const filteredLists = allChoreLists.filter(list => list.completedBy === this.props.assignedTo);
+            const filteredLists = allChoreLists.filter(list => list.completedBy === this.state.householdMemberId);
             const firstChoreList = filteredLists[0] ? filteredLists[0]._id : ""
             this.setState(
                 {
