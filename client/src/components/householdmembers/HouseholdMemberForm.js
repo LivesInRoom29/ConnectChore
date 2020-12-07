@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+// Local Components
+import BackToDashboard from "../back-to-dashboard/BackToDashboard";
 // API calls
 import API from "../../utils/API";
 // utils
@@ -35,8 +37,6 @@ class HouseholdMemberForm extends Component {
 
         API.getHouseholdMembers(user.id)
             .then(res => {
-
-                //console.log(res)
 
                 const undeletedHouseholdMembers = filterDeleted(res.data)
 
@@ -95,6 +95,7 @@ class HouseholdMemberForm extends Component {
                     <br />
                     <Row>
                         <Col>
+                            <BackToDashboard />
                             <Form>
                                 <h3>Manage Your Household Members</h3>
                                 <p>Once you've added household members, you'll be able to assign tasks and create a chore list for them.</p>
@@ -141,7 +142,7 @@ class HouseholdMemberForm extends Component {
                     <br />
                     <br />
                     <Row>
-                        <Col md={8}
+                        <Col md={6}
                             style={{
                                 borderColor: "lightblue"
                             }}
@@ -153,23 +154,12 @@ class HouseholdMemberForm extends Component {
                                         <ListGroup.Item
                                             key={member._id}
                                             data-id={member._id}
-                                            className="align-items-center"
-                                            style={{
-                                                backgroundColor: 'lightblue',
-                                                borderRadius: 8,
-                                                fontSize: '18px',
-                                                fontfamily: "Poppins",
-                                            }}
+                                            className="align-items-center list-group mt-1"
                                         >
                                             {member.name}
                                             <Button
-                                                variant="danger"
-                                                className="float-right text-light"
-                                                style={{
-                                                    // backgroundColor: "grey",
-                                                    borderColor: "black",
-
-                                                }}
+                                                variant="light"
+                                                className="float-right text-danger"
                                                 onClick={
                                                     () => API.deleteHouseholdMember(
                                                         member._id,
@@ -184,7 +174,7 @@ class HouseholdMemberForm extends Component {
                                                         .catch(err => console.log(err))
                                                 }
                                             >
-                                                <span >X</span>
+                                                <span><i className="fas fa-times"></i></span>
                                             </Button>
                                         </ListGroup.Item>
                                     ))}
@@ -194,6 +184,10 @@ class HouseholdMemberForm extends Component {
                                 )}
                         </Col>
                     </Row>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     <br />
                     <br />
                     <br />

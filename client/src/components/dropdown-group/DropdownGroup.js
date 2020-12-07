@@ -2,8 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// import { format } from "date-fns";
-// import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 import { setTasksAction } from "../../actions/chorelistActions";
 import DropdownMembers from "./DropdownMembers";
 import DropdownChorelists from "./DropdownChorelists";
@@ -32,7 +31,6 @@ class DropdownGroup extends Component {
             choreListDate: "",
             choreListData: {},
             choreListToEdit: "",
-            //filteredChoreLists: [],
             showTasks: false
         }
         this.onClickShowChorelist = this.onClickShowChorelist.bind(this);
@@ -65,23 +63,26 @@ class DropdownGroup extends Component {
 
         });
 
+        // Get all the chorelists for the user populated with the rewards
         var promisetwo = new Promise((resolve, reject) => {
-            API.getChoreLists(user.id)
+            API.getChoreListsWithRewards(user.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
-        })
+        });
 
         promisetwo.then(res => {
             const allChoreLists = res.data;
-            const filteredLists = allChoreLists.filter(list => list.completedBy === this.props.assignedTo);
-            const firstChoreList = filteredLists[0] ? filteredLists[0]._id : ""
+            const filteredLists = allChoreLists.filter(list => list.completedBy === this.state.householdMemberId);
+            const firstChoreList = filteredLists[0] ? filteredLists[0]._id : "";
+            // Set state for chorelists as the chorelists populated with the rewards
+            // set the chorelist to edit to be the first chorelist in the array
             this.setState(
                 {
                     choreLists: res.data,
                     choreListToEdit: firstChoreList
                 }
             )
-        })
+        });
 
     }
 
@@ -95,8 +96,31 @@ class DropdownGroup extends Component {
                 // don't include ...this.state so the value changes when the drop-down changes
             }
         );
-
     };
+
+    // Specific function for handling the change in the household member dropdown so that it changes the
+    // choreListToEdit in state.
+    handleMemberChange = event => {
+        event.preventDefault();
+        this.setState(
+            {
+                [event.target.name]: event.target.value,
+                showTasks: false
+                // don't include ...this.state so the value changes when the drop-down changes
+            },
+            () => {
+                const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
+                const firstChoreList = filteredLists[0] ? filteredLists[0]._id : "";
+
+                // set the chorelist to edit to be the first chorelist in the array
+                this.setState(
+                    {
+                        choreListToEdit: firstChoreList
+                    }
+                )
+            }
+        );
+    }
 
     onClickShowChorelist = async (event) => {
         event.preventDefault();
@@ -117,15 +141,15 @@ class DropdownGroup extends Component {
 
     render() {
 
-        const { user } = this.props.auth;
+        //const { user } = this.props.auth;
 
         // if showTasks is true, render the TaskDropDown menu and the ChoreListTasks
         // otherwise render "Choose a Chorelist"
         const chorelistEditor = this.state.showTasks ? (
-            <>
+            <div name="taskList">
                 <br />
-                <h4>View or Edit Choreslist</h4>
-                <p>Add new tasks, mark them as complete or delete them from the list.</p>
+                <h4>View or Edit Chore List</h4>
+                <p>Add new tasks, mark them as complete, or delete them from the list.</p>
                 <TaskDropDown
                     choreListToEdit={this.state.choreListToEdit}
                 />
@@ -133,14 +157,47 @@ class DropdownGroup extends Component {
                 <ChoreListTasks
                     choreListToEdit={this.state.choreListToEdit}
                 />
-            </>
+            </div>
         ) : (
                 <>
-                    <h2>Choose a Chorelist</h2>
+                    <h2>Choose a Chore List</h2>
                     {/* <h3>No chorelists to display!</h3> */}
                 </>
             )
 
+        // if showTasks is true, render the button for users to jump to task list
+        // otherwise return null
+        const showJumpToTaskBtn = this.state.showTasks ? (
+            <Button className="btn btn-lg button-hover"
+                style={{
+                    width: "250px",
+                    height: "50px",
+                    fontSize: "15px",
+                    textTransform: "uppercase",
+                    borderRadius: "30px",
+                    border: "none",
+                    padding: "12px",
+                    backgroundColor: "#42b984",
+                    color: "white",
+                    letterSpacing: "1.5px",
+                    marginLeft: "25px"
+                }}
+            >
+                <Link
+                    // className="jump-to-tasks"
+                    activeClass="active"
+                    to="taskList"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={500}
+                >
+                    Jump to Task List
+                </Link>
+            </Button>
+        ) : (
+            null
+        )
 
         return (
             <>
@@ -153,13 +210,13 @@ class DropdownGroup extends Component {
                             <Form>
                                 <h4>
                                     <p className="text-body">
-                                        Pick a household member to display a chorelist.
+                                        Pick a household member to display a chore list.
                                 </p>
                                 </h4>
                                 <br />
                                 <Form.Row>
                                     <DropdownMembers
-                                        handleInputChange={this.handleInputChange}
+                                        handleInputChange={this.handleMemberChange}
                                         householdMemberId={this.state.householdMemberId}
                                         householdMembers={this.state.householdMembers}
                                     />
@@ -192,8 +249,8 @@ class DropdownGroup extends Component {
                                     onClick={this.onClickShowChorelist}
                                 >
                                     Generate Chorelist
-                            </Button>
-
+                                </Button>
+                                {showJumpToTaskBtn}
                             </Form>
                         </Col>
                     </Row>

@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 // API calls
 import API from "../../utils/API";
+// Bootstrap
+import Container from 'react-bootstrap/Container';
 import { Button } from "react-bootstrap";
 import GridCell from "./GridCell";
-
+import SubNav from "../layout/SubNav";
 import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { resetGame } from "../../actions/gameActions";
 // import {createDefaultBoard} from "../../utils/gameHelper";
 import filterDeleted from "../../utils/filterDeleted";
@@ -148,13 +152,13 @@ class GameBox extends Component {
     const secondEqual = b.color == a.color;
     const thirdEqual = c.color == a.color;
     const fourthEqual = d.color == a.color;
-    
+
     // console.log("a b c d", a, b, c, d );
     // console.log("check 1", firstNotNull, "check 2", secondEqual, "check 3", thirdEqual, "check 4", fourthEqual);
     return firstNotNull && secondEqual && thirdEqual && fourthEqual;
 
-    
-  } 
+
+  }
 
   checkHorizontal = (board) => {
     let winner = null;
@@ -162,7 +166,7 @@ class GameBox extends Component {
     const rows = board.length;
     const [column] = board;
     const columns = column.length;
-    
+
 
     for (let row = 0; row < rows; row++) {
       for (let column = 0; column < columns - 3; column++) {
@@ -175,28 +179,28 @@ class GameBox extends Component {
         ) {
           // console.log("horizontal check", board[row][column]);
           if (
-            board[row][column].color === "red" 
+            board[row][column].color === "red"
           ) {
             winner = 1;
           } else {
             winner = 2;
           }
           return winner;
-          
+
         }
       }
     }
 
   };
 
-  
+
   checkVertical = (board) => {
     let winner = null;
 
     const rows = board.length;
     const [column] = board;
     const columns = column.length;
-    
+
 
     for (let column = 0; column < columns; column++) {
       for (let row = 0; row < rows - 3; row++) {
@@ -209,14 +213,14 @@ class GameBox extends Component {
         ) {
           // console.log("verticle check", board[row][column]);
           if (
-            board[row][column].color === "red" 
+            board[row][column].color === "red"
           ) {
             winner = 1;
           } else {
             winner = 2;
           }
           return winner;
-          
+
         }
       }
     }
@@ -228,27 +232,27 @@ class GameBox extends Component {
     const rows = board.length;
     const [column] = board;
     const columns = column.length;
-    
 
-    for (let row = 3; row < rows ; row++) {
+
+    for (let row = 3; row < rows; row++) {
       for (let column = 0; column < columns - 3; column++) {
         // console.log(`row ${row} column ${column}`, board[row][column]);
         if (this.checkLine(
           board[row][column],
           board[row - 1][column + 1],
           board[row - 2][column + 2],
-          board[row - 3 ][column + 3])
+          board[row - 3][column + 3])
         ) {
           // console.log("horizontal check", board[row][column]);
           if (
-            board[row][column].color === "red" 
+            board[row][column].color === "red"
           ) {
             winner = 1;
           } else {
             winner = 2;
           }
           return winner;
-          
+
         }
       }
     }
@@ -260,7 +264,7 @@ class GameBox extends Component {
     const rows = board.length;
     const [column] = board;
     const columns = column.length;
-    
+
 
     for (let row = 3; row < rows; row++) {
       for (let column = 3; column < columns; column++) {
@@ -273,14 +277,14 @@ class GameBox extends Component {
         ) {
           console.log("diag left check", board[row][column]);
           if (
-            board[row][column].color === "red" 
+            board[row][column].color === "red"
           ) {
             winner = 1;
           } else {
             winner = 2;
           }
           return winner;
-          
+
         }
       }
     }
@@ -295,7 +299,7 @@ class GameBox extends Component {
     );
   }
 
-  
+
 
   createCells() {
     console.log("start game", this.state.startGame);
@@ -363,54 +367,77 @@ class GameBox extends Component {
   }
   render() {
     return (
-      <div>
-        <Button onClick={this.initGame} className="Start Game">
-          New Game
-        </Button>
-        <Form>
-          <Form.Row>
-            <Form.Group controlId="formHouseholdMember">
-              <Form.Label>Pick Player 1:</Form.Label>
-              <Form.Control
-                as="select"
-                name="player1Id"
-                value={this.state.player1Id}
-                // placeholder="Wash the dishes"
-                onChange={this.selectPlayer}
-              >
-                {/* Map the household members to the drop-down */}
-                {this.state.householdMembers.map((member) => (
-                  <option key={member._id} value={member._id}>
-                    {member.name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-            <br></br>
-            <Form.Group controlId="formHouseholdMember">
-              <Form.Label>Pick Player 2:</Form.Label>
-              <Form.Control
-                as="select"
-                name="player2Id"
-                value={this.state.player2Id}
-                // placeholder="Wash the dishes"
-                onChange={this.selectPlayer}
-              >
-                {/* Map the household members to the drop-down */}
-                {this.state.householdMembers.map((member) => (
-                  <option key={member._id} value={member._id}>
-                    {member.name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-          </Form.Row>
-        </Form>
-        <div className="grid">
-          <div>{this.createCells()}</div>
-        </div>
-        <p>{this.state.message}</p>
-      </div>
+      <>
+        <SubNav />
+        <Container fluid style={{ height: "100%" }}>
+          <div>
+            <br />
+            <br />
+            <Button onClick={this.initGame} className="Start Game"
+              style={{
+                width: "200px",
+                height: "50px",
+                fontSize: "15px",
+                textTransform: "uppercase",
+                borderRadius: "30px",
+                border: "none",
+                padding: "12px",
+                backgroundColor: "#00adef",
+                color: "white",
+                letterSpacing: "1.5px"
+              }}
+              className="btn btn-lg button-hover mb-3">
+              New Game</Button>
+            <Form>
+              <Form.Row>
+                <Form.Group as={Col} md="2" controlId="formHouseholdMember">
+                  <Form.Label>Player 1:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="player1Id"
+                    value={this.state.player1Id}
+                    // placeholder="Wash the dishes"
+                    onChange={this.selectPlayer}
+                  >
+                    {/* Map the household members to the drop-down */}
+                    {this.state.householdMembers.map((member) => (
+                      <option key={member._id} value={member._id}>
+                        {member.name}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group as={Col} md="2" controlId="formHouseholdMember">
+                  <Form.Label>Player 2:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="player2Id"
+                    value={this.state.player2Id}
+                    // placeholder="Wash the dishes"
+                    onChange={this.selectPlayer}
+                  >
+                    {/* Map the household members to the drop-down */}
+                    {this.state.householdMembers.map((member) => (
+                      <option key={member._id} value={member._id}>
+                        {member.name}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+              </Form.Row>
+            </Form>
+            <br />
+            <div className="grid">
+              <div>{this.createCells()}</div>
+            </div>
+            <p>{this.state.message}</p>
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+        </Container>
+      </>
     );
   }
 }

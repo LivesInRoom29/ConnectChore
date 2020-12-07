@@ -1,7 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-body, p {
+html, body, p {
     font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+  height: 100vh;
 }
 
 
@@ -11,11 +25,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  font-size: 18px;
+  font-size: 18px!important;
+  font-family: 'Poppins', sans-serif;
 }
 
 h3 {
-  color: #00adef;
+  color: #00adef !important;
+  text-align: left;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
 }
 
 
@@ -45,8 +67,13 @@ form, button {
 }
 
 #formValue, #formReward, #formDescription, #formFrequency {
-  border-radius: 30px;
   font-size: 16px;
+}
+
+.list-group {
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+  padding: 10px 0px !important;
 }
 
   
@@ -57,10 +84,16 @@ form, button {
     font-family: Poppins, sans-serif;
     font-size: 20px;
     text-align: center;
-    height: 80px;
+    height: 50px;
     width: 100%;
-    position: sticky;
+    position: fixed;
     bottom: 0;
+    left: 0;
+    padding: 12px;
+}
+
+.footer {
+  flex-shrink: 0;
 }
 
   div a {

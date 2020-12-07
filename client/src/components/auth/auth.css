@@ -1,8 +1,12 @@
 .auth-container {
-    padding: 0px 525px 0px 525px;
-    vertical-align: middle;
-    background: rgb(201,244,255);
-    background: radial-gradient(circle, rgba(201,244,255,1) 0%, rgba(0,204,255,1) 100%);
+    /* background: rgb(201,244,255);
+    background: radial-gradient(circle, rgba(201,244,255,1) 0%, rgba(0,204,255,1) 100%); */
+    background: rgb(8,18,75);
+    background: radial-gradient(circle, rgba(8,18,75,1) 0%, rgba(0,173,239,1) 100%);
+}
+
+p {
+    font-size: 14px;
 }
 
 .loginform{
@@ -22,16 +26,20 @@ h4.auth {
     animation-duration: 1s;
 }
 
-/* MEDIA QUERIES */
-@media(max-width: 768px) {
-    .auth-container {
-        padding: 0px 60px;
-        vertical-align: middle;
+#email, #name, #password, #password2 {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1.5px solid #000000;
+}
+
+#email:focus, #name:focus, #password:focus, #password2:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid #42b984;
+    transition: .2s all ease;
     }
-  }
-@media(max-width: 580px) {
-    .auth-container {
-        padding: 0px 20px;
-        vertical-align: middle;
-    }
-  }
+
+#email:focus::placeholder, #name:focus::placeholder, #password:focus::placeholder, #password2:focus::placeholder {
+    opacity: 0;
+}

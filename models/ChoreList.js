@@ -31,7 +31,7 @@ const choreListSchema = new Schema({
   },
   reward: {
     type: Schema.Types.ObjectId,
-    ref: "Reward"
+    ref: "RewardDescription"
   },
   isDeleted: {
     type: Boolean,

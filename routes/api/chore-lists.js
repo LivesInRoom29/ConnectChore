@@ -22,7 +22,7 @@ router.get("/", passport.authenticate("jwt", { session: false }),
 // Auth OK: router.get("/user/:id", async function (req, res) {
 router.get("/user/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
   const id = req.params.id;
-  
+
   try {
       const data = await choreListController.findByUserId(id);
         //res.json(data);
@@ -37,8 +37,6 @@ router.get("/user/:id", passport.authenticate("jwt", { session: false }), async 
 // Auth OK: router.post("/", async function (req, res) {
 router.post("/", passport.authenticate("jwt", { session: false }), async function (req, res) {
   const { date, userId, completedBy, tasks, reward } = req.body
-  // may have to do something with tasks here first
-  // create array with the correct structure (array of _ids)
   // tasks - an array of objects each a task _id and completion status(false by default)
   // if you don't pass in tasks, it will be an empty array; then you can add tasks later (see route below for adding tasks)
 
@@ -70,6 +68,7 @@ router.get("/:id", passport.authenticate("jwt", { session: false }), async funct
   }
 });
 
+// (Didn't end up using this)
 // Get the chorelist for a specific household member and date
 // the date can be passed in with format "MM/dd/yyyy"
 // Auth OK: router.get("/householdmember/:id", async function (req, res) {
@@ -99,7 +98,35 @@ router.get("/withtasks/:id", passport.authenticate("jwt", { session: false }), a
   } catch (err) {
     res.status(503).end(err);
   }
-})
+});
+
+// Get all chorelists by user id populated with reward
+// Auth OK: router.get("/withrewards/:id", async function (req, res) {
+router.get("/withrewards/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
+    const id = req.params.id;
+
+    try {
+      const data = await choreListController.findByUserId(id).populate("reward");
+      res.send(data);
+    } catch (err) {
+      res.status(503).end(err);
+    }
+  });
+
+// Didn't end up using this, but it works.
+// Get chorelist by id populated with reward
+// Auth OK: router.get("/withreward/:id", async function (req, res) {
+// router.get("/withtasks/:id", passport.authenticate("jwt", { session: false }), async function (req, res) {
+//   const id = req.params.id;
+
+//   try {
+//     const data = await choreListController.findById(id)
+//       .populate("reward")
+//     res.send(data);
+//   } catch (err) {
+//     res.status(503).end(err);
+//   }
+// });
 
 // update a chore list by id
 // in req.body, can pass in updated date, completedBy (ref to household-member), tasks, reward, completionStatus

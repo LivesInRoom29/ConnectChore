@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import NavBar from "../layout/Navbar";
 // Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -62,6 +63,7 @@ class Register extends Component {
         const { errors } = this.state;
         return (
             <>
+                <NavBar />
                 <Container fluid style={{ height: "110vh" }} className="auth-container">
                     <Row className="justify-content-center">
                         <br />
@@ -74,20 +76,22 @@ class Register extends Component {
                                 onSubmit={this.onSubmit}
                                 className="loginform animation mt-5"
                             >
-                                <Link to="/" className="btn button-hover text-dark">
-                                <i className="fas fa-arrow-left"></i> Back to Home</Link>
+                                <Link to="/" className="text-dark">
+                                    <i className="fas fa-arrow-left"></i> Back to Home</Link>
+                                <br />
                                 <br />
                                 <h4 className="auth mt-2">Create An Account</h4>
                                 <p className="text-body">
-                                    Already have an account? <Link to="/login" className=" button-hover text-muted">Log in</Link>
+                                    Already have an account? <Link to="/login" className="text-muted">Log In</Link>
                                 </p>
+                                <br />
                                 {/* Form Group Name */}
                                 <Form.Group as={Row} controlId="registerForm.name">
-                                    <Form.Label column sm={2}>Name</Form.Label>
-                                    <Col sm={10}>
-                                        <Form.Control 
-                                            type="text" 
-                                            placeholder="enter first and last name" 
+                                    <Form.Label column sm={12}></Form.Label>
+                                    <Col sm={12}>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Name"
                                             // Previous
                                             onChange={this.onChange}
                                             value={this.state.name}
@@ -102,11 +106,11 @@ class Register extends Component {
                                 </Form.Group>
                                 {/* Form Group Email */}
                                 <Form.Group as={Row} controlId="registerForm.email">
-                                    <Form.Label column sm={2}>Email</Form.Label>
-                                    <Col sm={10}>
-                                        <Form.Control 
-                                            type="email" 
-                                            placeholder="name@example.com" 
+                                    <Form.Label column sm={12}></Form.Label>
+                                    <Col sm={12}>
+                                        <Form.Control
+                                            type="email"
+                                            placeholder="Email"
                                             // Previous
                                             onChange={this.onChange}
                                             value={this.state.email}
@@ -121,11 +125,11 @@ class Register extends Component {
                                 </Form.Group>
                                 {/* Form Group Password */}
                                 <Form.Group as={Row} controlId="registerForm.password">
-                                    <Form.Label column sm={2}>Password</Form.Label>
-                                    <Col sm={10}>
-                                        <Form.Control 
+                                    <Form.Label column sm={12}></Form.Label>
+                                    <Col sm={12}>
+                                        <Form.Control
                                             type="password"
-                                            placeholder="enter password" 
+                                            placeholder="Password"
                                             // Previous
                                             onChange={this.onChange}
                                             value={this.state.password}
@@ -140,11 +144,11 @@ class Register extends Component {
                                 </Form.Group>
                                 {/* Form Group Password Confirm */}
                                 <Form.Group as={Row} controlId="registerForm.password2">
-                                    <Form.Label column sm={2}>Confirm password</Form.Label>
-                                    <Col sm={10}>
-                                        <Form.Control 
-                                            type="password" 
-                                            placeholder="re-enter password" 
+                                    <Form.Label column sm={12}></Form.Label>
+                                    <Col sm={12}>
+                                        <Form.Control
+                                            type="password"
+                                            placeholder="Confirm Password"
                                             // Previous
                                             onChange={this.onChange}
                                             value={this.state.password2}
@@ -161,17 +165,20 @@ class Register extends Component {
                                 <Button
                                     style={{
                                         width: "150px",
+                                        height: "50px",
                                         fontSize: "15px",
+                                        textTransform: "uppercase",
                                         borderRadius: "30px",
+                                        border: "none",
+                                        padding: "12px",
                                         backgroundColor: "#42b984",
-                                        padding: "14px",
-                                        color: "#fff",
+                                        color: "white",
                                         letterSpacing: "1.5px"
                                     }}
                                     type="submit"
                                     className="btn btn-lg button-hover"
-                                    >
-                                        Sign up
+                                >
+                                    Sign up
                                 </Button>
                             </Form>
                         </Col>
