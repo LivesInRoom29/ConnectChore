@@ -34,7 +34,6 @@ class SubNav extends Component {
                 <i className="fas fa-user"></i>
               </div>
               <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <div className="dropdown-item"><Link to="/about" id="navdesigndd">About</Link></div>
                 <div className="dropdown-item"><Link to="/dashboard" id="navdesigndd">Dashboard</Link></div>
                 <div className="dropdown-item" id="navdesigndd" onClick={this.onLogoutClick}>Logout</div>
               </div>
