@@ -25,12 +25,19 @@ const About = () => {
                                 <br />
                                 <h3 style={{ textAlign: "center" }}>About Us</h3>
                                 <hr></hr>
-                                <p>ConnectChore is utilized as a way to help users keep track of and organize chores that need to be done in the household.
-                                In exchange for the completion of chores, household members may earn prizes. We talked about making a "reward" application or something related to earning rewards.
-                                We came up with the idea of combining rewards with tasks. From there we decided to create an application
-                                specifically for completing chores. The idea was simple; users are assigned chores and if they are completed on time they will be rewarded.
-                                Since there are so many applications related to chores, we had to create an application different from the rest. We needed to include a feature that
-                                would be fun and competetive so that users can win a prize. We landed on using Connect Four as our game, thus coining the name, ConnectChore.
+                                <p>ConnectChore helps households keep track of and organize chores to be done. In exchange for the completion of chores, household members may earn prizes. 
+                                <br />
+                                <br />
+                                It’s no secret that an orderly household means a happy household. Organizing chores with an element of gamification and a rewards-based system will help make menial tasks more fun. Plus, there is a psychology angle to this as well: 
+                                <ul>
+                                    <li>★Kids will learn real-world skills</li>
+                                    <li>★Instills a sense of responsibility and ownership</li>
+                                    <li>★Greater happiness, self-esteem, and confidence</li>
+                                    <li>★And so much more! <a href="https://www.psychologytoday.com/us/blog/going-beyond-intelligence/201908/children-chores-and-happy-productivity#:~:text=In%20a%20large%20study%2C%20researchers,Psychological%20adjustment%20and%20career%20success." target="_blank" rel="noreferrer">(source)</a></li>
+                                </ul>
+                                <br />
+                                We wanted to create an app that incentivized individuals to get the job done. The idea was straight-forward: users are assigned chores and if they are completed on time, they will be rewarded.
+                                Since there other applications related to chores, we created an application different from the rest. To add a fun and competitive spin, we integrated a game based on ConnectFour™️, thus coining the name ConnectChore. We hope you and your household enjoy it!
                                 </p>
                             </div>
                             <br />
