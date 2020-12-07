@@ -116,9 +116,9 @@ class GameBox extends Component {
 
   checkLine = (a, b, c, d) => {
     const firstNotNull = a.color !== "white";
-    const secondEqual = b.color == a.color;
-    const thirdEqual = c.color == a.color;
-    const fourthEqual = d.color == a.color;
+    const secondEqual = b.color === a.color;
+    const thirdEqual = c.color === a.color;
+    const fourthEqual = d.color === a.color;
 
      return firstNotNull && secondEqual && thirdEqual && fourthEqual;
   };
@@ -326,7 +326,6 @@ class GameBox extends Component {
                   letterSpacing: "1.5px",
                   textAlign: "center",
                 }}
-                className="btn btn-lg button-hover mb-3"
               >
                 New Game
               </Button>
