@@ -8,13 +8,13 @@ import Form from 'react-bootstrap/Form';
 // CSS
 import "../../App.css";
 import "./About.css";
-import SubNav from "../layout/SubNav";
+import Navbar from "../layout/Navbar";
 
 const About = () => {
 
     return (
         <>
-            <SubNav />
+            <Navbar />
             <Container>
                 <br />
                 <br />
