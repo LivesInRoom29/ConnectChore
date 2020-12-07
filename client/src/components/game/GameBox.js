@@ -371,9 +371,10 @@ class GameBox extends Component {
         <SubNav />
         <Container fluid style={{ height: "100%" }}>
           <div>
+          
             <br />
             <br />
-            <Button onClick={this.initGame} className="Start Game"
+            <center><Button onClick={this.initGame} className="Start Game"
               style={{
                 width: "200px",
                 height: "50px",
@@ -384,14 +385,18 @@ class GameBox extends Component {
                 padding: "12px",
                 backgroundColor: "#00adef",
                 color: "white",
-                letterSpacing: "1.5px"
+                letterSpacing: "1.5px",
+                
               }}
               className="btn btn-lg button-hover mb-3">
-              New Game</Button>
-            <Form>
+              New Game</Button></center>
+              
+           <Form>
+             
               <Form.Row>
                 <Form.Group as={Col} md="2" controlId="formHouseholdMember">
                   <Form.Label>Player 1:</Form.Label>
+                
                   <Form.Control
                     as="select"
                     name="player1Id"
@@ -406,6 +411,7 @@ class GameBox extends Component {
                       </option>
                     ))}
                   </Form.Control>
+                  
                 </Form.Group>
                 <Form.Group as={Col} md="2" controlId="formHouseholdMember">
                   <Form.Label>Player 2:</Form.Label>
@@ -424,15 +430,20 @@ class GameBox extends Component {
                     ))}
                   </Form.Control>
                 </Form.Group>
+                
               </Form.Row>
+           
             </Form>
+            </div>
+           
             <br />
             <div className="grid">
               <div>{this.createCells()}</div>
             </div>
             <p>{this.state.message}</p>
-          </div>
+          
         </Container>
+        
       </>
     );
   }
