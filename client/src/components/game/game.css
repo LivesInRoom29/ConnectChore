@@ -1,6 +1,6 @@
-body {
+/* body {
   font-family: "Lucida Sans Unicode";
-}
+} */
 
 h1 {
   text-align: center;
@@ -12,7 +12,7 @@ table {
   border-spacing: 0px 0px;
 }
 
-.button {
+/* .button {
   background-color: #303030;
   color: #50c8ff;
   height: 30px;
@@ -27,13 +27,13 @@ table {
   align-items: center;
   cursor: pointer;
   transition: background-color 0.5s, color 0.5s;
-}
+} */
 
-.button:hover {
+/* .button:hover {
   background-color: #50c8ff;
   color: #303030;
   transition: background-color 0.5s, color 0.5s;
-}
+} */
 
 .cell {
   height: 70px;
@@ -100,7 +100,7 @@ table {
   border-radius: 50%;
   display: inline-block;
   padding: 30px;
-  font: monospace;
+  /* font: monospace; */
   cursor: pointer;
   margin-top: 0;
   margin-bottom: -6px;
@@ -117,7 +117,7 @@ table {
 
 .grid {
   border: black;
-  background: #17ca7f;
+  background: #42b984;
   width: fit-content;
   margin: auto;
 }

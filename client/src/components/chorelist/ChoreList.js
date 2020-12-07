@@ -187,22 +187,22 @@ class ChoreList extends Component {
 
         return (
             <>
-            <SubNav />
-                <Container>
-                    <br />
-                    <br />
-                    <br />
-                    <ChoreListOptions
-                        handleInputChange={this.handleInputChange}
-                        option={this.state.listOption}
-                    />
-                </Container>
-                <Container>
-                    {this.renderChoreListOption()}
-                    <br />
-                    <br />
-                    <br />
-                </Container>
+                <SubNav />
+                    <Container>
+                        <br />
+                        <br />
+                        <br />
+                        <ChoreListOptions
+                            handleInputChange={this.handleInputChange}
+                            option={this.state.listOption}
+                        />
+                    </Container>
+                    <Container>
+                        {this.renderChoreListOption()}
+                        <br />
+                        <br />
+                        <br />
+                    </Container>
             </>
         );
     }

@@ -5,7 +5,6 @@ class Footer extends Component {
   render() {
     return (
       <footer>
-        <br />
         <div>ConnectChore <a href="https://github.com/LivesInRoom29/ConnectChore" target="_blank" rel="noreferrer"><i className="fab fa-github"></i></a></div>
       </footer>
     );

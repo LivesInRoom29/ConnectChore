@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -45,7 +44,7 @@ class MemberChoreList extends Component {
     // get household members from the DB
     // TEST: will be passing the user.id and the choreList.id to the API call to successfully get us the chorelists data
     componentDidMount() {
-        const { user, choreList } = this.props.auth;
+        const { user } = this.props.auth;
         //const { choreList } = this.state;
 
         const promise = new Promise((resolve, reject) => {
@@ -67,16 +66,13 @@ class MemberChoreList extends Component {
         const promisetwo = new Promise((resolve, reject) => {
             const { user } = this.props.auth;
             API.getChoreLists(user.id)
-                //console.log(choreList.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
         })
 
         promisetwo.then(res => {
-            //console.log(res);
             this.setState(
                 {
-                    //choreListId: res.data[0]._id,
                     choreLists: res.data
                 }
             )
@@ -203,7 +199,7 @@ class MemberChoreList extends Component {
                                     ))}
                                 </ListGroup>
                             ) : (
-                                    <h3>No choreslist to display</h3>
+                                    <h3>No chore list to display</h3>
                                 )}
                         </Accordion>
                     </Col>
