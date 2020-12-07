@@ -7,6 +7,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+// Local Components
+import BackToDashboard from "../back-to-dashboard/BackToDashboard";
 // Local CSS
 import "../../App.css";
 
@@ -75,6 +77,9 @@ class ChoreListOptions extends Component {
           </Col>
           </Row>
           </Col>
+        </Row>
+        <Row className="d-flex justify-content-center text-center mt-2">
+          <BackToDashboard />
         </Row>
         </Container>
       </>
