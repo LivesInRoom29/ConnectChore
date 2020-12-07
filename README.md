@@ -1,3 +1,4 @@
+![CC-Logo](./client/public/assets/CC-Logo.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # ConnectChore Application
@@ -58,13 +59,11 @@ I WANT a list of household tasks to share. I want myself and the people under th
 
 AS A Spouse
 I WANT clear delineation of responsibilities. In other words, I want to be able to know who does what so that there is no conflict.
+
 ## Future Enhancements
 - Multiple logged in users per household
-
 - Display history of tasks and rewards
-
 - Reminders for chore list items
-
 - Monetize/points-based individual chores towards an expensive reward
 
 ## Contributors
@@ -89,8 +88,8 @@ If you would like to contribute to this project, please fork the repository and 
    - [Build a Login/Auth App with the MERN Stack — Part 2 (Frontend & Redux Setup)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-2-frontend-6eac4e38ee82)
    - [Build a Login/Auth App with the MERN Stack — Part 3 (Linking Redux with React Components)](https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-components-88190f8db718)
 - Game Logic
-   - [Game winner logic](https://github.com/miki995/connect-four/blob/master/src/help%5Bers/winner/Winner.helper.js)
-   - [Board Set-up](https://www.youtube.com/watch?v=b0O3i4AyoE0&ab_channel=LukeSegars)
+   - [Game Winner Logic](https://github.com/miki995/connect-four/blob/master/src/help%5Bers/winner/Winner.helper.js)
+   - [Board Set-Up](https://www.youtube.com/watch?v=b0O3i4AyoE0&ab_channel=LukeSegars)
 
 ## License
 
@@ -98,8 +97,6 @@ This repository is licensed under the MIT License.
 
 ## ScreenShots
 
-![Screen Shot 2020-12-02 at 11 06 57 PM](https://user-images.githubusercontent.com/65634748/100963123-b4cd9000-34f3-11eb-909d-537a1e852675.png)
-![Screen Shot 2020-12-02 at 11 07 13 PM](https://user-images.githubusercontent.com/65634748/100963124-b5febd00-34f3-11eb-91ad-4b82670ce8a1.png)
-![Screen Shot 2020-12-02 at 11 07 23 PM](https://user-images.githubusercontent.com/65634748/100963126-b5febd00-34f3-11eb-95de-992f26ae64c7.png)
-![Screen Shot 2020-12-02 at 11 07 32 PM](https://user-images.githubusercontent.com/65634748/100963127-b5febd00-34f3-11eb-95d8-40eb04f14859.png)
-![Screen Shot 2020-12-02 at 11 07 40 PM](https://user-images.githubusercontent.com/65634748/100963128-b6975380-34f3-11eb-8159-827acef093ce.png)
+![CC1](./client/public/assets/CC1.png)
+![CC2](./client/public/assets/CC2.png)
+![CC4](./client/public/assets/CC4.png)
