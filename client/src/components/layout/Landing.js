@@ -32,7 +32,7 @@ class Landing extends Component {
                 <b>Chores just got a lot more fun!</b>
               </h1>
               <h5 className="text-center">
-                Create a list of household chores and assign tasks to family members.
+                Create a list of household chores and assign tasks to household members.
                 <br />
                 Add rewards for checking items off the to-do list.
                 <br />
@@ -100,7 +100,7 @@ class Landing extends Component {
               <h2>Why ConnectChore?</h2>
             </div></Col>
             <Col md={5}><div className="mid2 animate">
-              <div className="about animate"><br />A clean and organized home is a happy home! We all know that chores can feel never-ending.. there's always dishes to wash, playrooms to tidy, and laundry to fold. ConnectChore will help you organize your family's to-do list all in one place and you can even add rewards to make checking items off the list even sweeter!</div></div></Col>
+              <div className="about animate"><br />A clean and organized home is a happy home! We all know that chores can feel never-ending. There's always dishes to wash, playrooms to tidy, and laundry to fold. ConnectChore will help you organize your household's to-do list all in one place and you can add rewards to make checking items off the list even sweeter!</div></div></Col>
             <Col md={1}></Col>
           </Row>
           <br />
@@ -111,15 +111,15 @@ class Landing extends Component {
             <Col md={2}></Col>
             <Col md={2}><div className="info"><h2><i className="fas fa-check landing-icons animate"></i><br />Add Tasks</h2><p>Add tasks like laundry, dishes, make bed, feed dog, etc.</p><br /><br /></div></Col>
             <Col md={2}><div className="info"><h2 className="icons"><i className="fas fa-list-ol landing-icons animate"></i><br />Create Chorelists</h2><p>Make a list specific to each household member.</p><br /><br /></div></Col>
-            <Col md={2}><div className="info"><h2 className="icons"><i className="fas fa-trophy landing-icons animate"></i><br />Add Rewards</h2><p>Make chores more fun with rewards your family will love!</p><br /><br /></div></Col>
+            <Col md={2}><div className="info"><h2 className="icons"><i className="fas fa-trophy landing-icons animate"></i><br />Add Rewards</h2><p>Make chores fun with rewards everyone will love!</p><br /><br /></div></Col>
             <Col md={2}><div className="info"><h2 className="icons"><i className="fas fa-dice landing-icons animate"></i><br />Play Game</h2><p>A friendly competition to win the ultimate reward!</p></div></Col>
             <Col md={2}></Col>
           </Row>
           <br />
           <br />
-          <Row>
+          {/* <Row>
             <Col lg={12} className="d-flex justify-content-center mt-5 text-center"><h3 className="landing">Learn more about <Link to="/about" className="aboutCC">ConnectChore.</Link></h3></Col>
-          </Row>
+          </Row> */}
           <br />
           <br />
           <br />

@@ -60,13 +60,12 @@ class ChoreListTasks extends Component {
     //using e.currentTarget here instead of e.target so that the click event
     // is always linked to the button itself and not to the icon in the button
     const taskId = e.currentTarget.dataset.id;
-    console.log("task id: ", taskId)
 
     await API.deleteTaskFromChoreList(choreListId, taskId);
 
     try {
       const newListWithTasks = await API.getChoreListWithTasks(choreListId);
-      console.log("new list: ", newListWithTasks);
+      
       this.props.setTasks(newListWithTasks.data.tasks);
     } catch (err) {
       console.log(err);
