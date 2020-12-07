@@ -71,7 +71,6 @@ class GameBox extends Component {
         player2Id: firstHouseholdMember,
       });
 
-      console.log(this.state.householdMembers);
     });
   }
 
@@ -84,11 +83,7 @@ class GameBox extends Component {
   playGame(x) {
     if (!this.state.gameOver) {
      
-      let board = this.props.game.box;
-
-      console.log("current player", this.state.currentPlayer);
-
-      
+      let board = this.props.game.box;     
       let result = this.checkAll(board);
  
       if (result === this.state.player1) {
@@ -121,9 +116,9 @@ class GameBox extends Component {
 
   checkLine = (a, b, c, d) => {
     const firstNotNull = a.color !== "white";
-    const secondEqual = b.color == a.color;
-    const thirdEqual = c.color == a.color;
-    const fourthEqual = d.color == a.color;
+    const secondEqual = b.color === a.color;
+    const thirdEqual = c.color === a.color;
+    const fourthEqual = d.color === a.color;
 
      return firstNotNull && secondEqual && thirdEqual && fourthEqual;
   };
@@ -225,7 +220,7 @@ class GameBox extends Component {
 
     for (let row = 3; row < rows; row++) {
       for (let column = 3; column < columns; column++) {
-        console.log(`row ${row} column ${column}`, board[row][column]);
+   
         if (
           this.checkLine(
             board[row][column],
@@ -234,7 +229,7 @@ class GameBox extends Component {
             board[row - 3][column - 3]
           )
         ) {
-          console.log("diag left check", board[row][column]);
+         
           if (board[row][column].color === "red") {
             winner = 1;
           } else {
@@ -255,7 +250,6 @@ class GameBox extends Component {
   }
 
   createCells() {
-    console.log("start game", this.state.startGame);
 
     if (this.state.startGame) {
       return this.props.game.box.map((row, rowNum) => (
@@ -286,22 +280,13 @@ class GameBox extends Component {
 
   selectPlayer(event) {
     event.preventDefault();
-    console.log(event.target.value);
-    console.log(event.target.name);
 
     try {
       this.setState(
         {
           [event.target.name]: event.target.value,
-        },
-        () => {
-          console.log("state 2 ", this.state.player2Id);
-          console.log("state 1", this.state.player1Id);
         }
       );
-
-      console.log("name is", event.target.name);
-      console.log("value is", event.target.value);
     } catch {
       console.error("error");
     }
@@ -341,7 +326,6 @@ class GameBox extends Component {
                   letterSpacing: "1.5px",
                   textAlign: "center",
                 }}
-                className="btn btn-lg button-hover mb-3"
               >
                 New Game
               </Button>

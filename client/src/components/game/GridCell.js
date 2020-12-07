@@ -36,8 +36,6 @@ class GridCell extends Component {
       }
     }
 
-    // console.log("x is", x);
-    // console.log("y s", y);
     return (
       <div
         className={classes}
