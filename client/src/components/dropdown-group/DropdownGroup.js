@@ -68,7 +68,7 @@ class DropdownGroup extends Component {
             API.getChoreListsWithRewards(user.id)
                 .then(res => resolve(res))
                 .catch(err => reject(Error("API failed")));
-        })
+        });
 
         promisetwo.then(res => {
             const allChoreLists = res.data;
@@ -82,7 +82,7 @@ class DropdownGroup extends Component {
                     choreListToEdit: firstChoreList
                 }
             )
-        })
+        });
 
     }
 
@@ -96,8 +96,31 @@ class DropdownGroup extends Component {
                 // don't include ...this.state so the value changes when the drop-down changes
             }
         );
-
     };
+
+    // Specific function for handling the change in the household member dropdown so that it changes the
+    // choreListToEdit in state.
+    handleMemberChange = event => {
+        event.preventDefault();
+        this.setState(
+            {
+                [event.target.name]: event.target.value,
+                showTasks: false
+                // don't include ...this.state so the value changes when the drop-down changes
+            },
+            () => {
+                const filteredLists = this.state.choreLists.filter(list => list.completedBy === this.state.householdMemberId);
+                const firstChoreList = filteredLists[0] ? filteredLists[0]._id : "";
+
+                // set the chorelist to edit to be the first chorelist in the array
+                this.setState(
+                    {
+                        choreListToEdit: firstChoreList
+                    }
+                )
+            }
+        );
+    }
 
     onClickShowChorelist = async (event) => {
         event.preventDefault();
@@ -193,7 +216,7 @@ class DropdownGroup extends Component {
                                 <br />
                                 <Form.Row>
                                     <DropdownMembers
-                                        handleInputChange={this.handleInputChange}
+                                        handleInputChange={this.handleMemberChange}
                                         householdMemberId={this.state.householdMemberId}
                                         householdMembers={this.state.householdMembers}
                                     />
