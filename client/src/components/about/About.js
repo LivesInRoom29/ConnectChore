@@ -28,13 +28,14 @@ const About = () => {
                                 <p>ConnectChore helps households keep track of and organize chores to be done. In exchange for the completion of chores, household members may earn prizes. 
                                 <br />
                                 <br />
-                                It’s no secret that an orderly household means a happy household. Organizing chores with an element of gamification and a rewards-based system will help make menial tasks more fun. Plus, there is a psychology angle to this as well: 
-                                <ul>
-                                    <li>★Kids will learn real-world skills</li>
-                                    <li>★Instills a sense of responsibility and ownership</li>
-                                    <li>★Greater happiness, self-esteem, and confidence</li>
-                                    <li>★And so much more! <a style={{color: "black"}}href="https://www.psychologytoday.com/us/blog/going-beyond-intelligence/201908/children-chores-and-happy-productivity#:~:text=In%20a%20large%20study%2C%20researchers,Psychological%20adjustment%20and%20career%20success." target="_blank" rel="noreferrer">(source)</a></li>
-                                </ul>
+                                It’s no secret that an orderly household means a happy household. Organizing chores with an element of gamification and a rewards-based system will help make menial tasks more fun. Plus, there is a psychology angle to this as well: </p>
+                                    <ul>
+                                        <li>★Kids will learn real-world skills</li>
+                                        <li>★Instills a sense of responsibility and ownership</li>
+                                        <li>★Greater happiness, self-esteem, and confidence</li>
+                                        <li>★And so much more! <a style={{color: "black"}}href="https://www.psychologytoday.com/us/blog/going-beyond-intelligence/201908/children-chores-and-happy-productivity#:~:text=In%20a%20large%20study%2C%20researchers,Psychological%20adjustment%20and%20career%20success." target="_blank" rel="noreferrer">(source)</a></li>
+                                    </ul>
+                                <p>
                                 <br />
                                 We wanted to create an app that incentivized individuals to get the job done. The idea was straight-forward: users are assigned chores and if they are completed on time, they will be rewarded.
                                 Since there other applications related to chores, we created an application different from the rest. To add a fun and competitive spin, we integrated a game based on ConnectFour™️, thus coining the name ConnectChore. We hope you and your household enjoy it!
