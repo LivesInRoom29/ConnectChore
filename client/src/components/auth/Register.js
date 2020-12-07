@@ -86,7 +86,7 @@ class Register extends Component {
                                 </p>
                                 <br />
                                 {/* Form Group Name */}
-                                <Form.Group as={Row} controlId="registerForm.name">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={12}></Form.Label>
                                     <Col sm={12}>
                                         <Form.Control
@@ -105,7 +105,7 @@ class Register extends Component {
                                     </Col>
                                 </Form.Group>
                                 {/* Form Group Email */}
-                                <Form.Group as={Row} controlId="registerForm.email">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={12}></Form.Label>
                                     <Col sm={12}>
                                         <Form.Control
@@ -124,7 +124,7 @@ class Register extends Component {
                                     </Col>
                                 </Form.Group>
                                 {/* Form Group Password */}
-                                <Form.Group as={Row} controlId="registerForm.password">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={12}></Form.Label>
                                     <Col sm={12}>
                                         <Form.Control
@@ -143,7 +143,7 @@ class Register extends Component {
                                     </Col>
                                 </Form.Group>
                                 {/* Form Group Password Confirm */}
-                                <Form.Group as={Row} controlId="registerForm.password2">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={12}></Form.Label>
                                     <Col sm={12}>
                                         <Form.Control
