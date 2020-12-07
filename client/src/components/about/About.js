@@ -33,7 +33,7 @@ const About = () => {
                                     <li>★Kids will learn real-world skills</li>
                                     <li>★Instills a sense of responsibility and ownership</li>
                                     <li>★Greater happiness, self-esteem, and confidence</li>
-                                    <li>★And so much more! <a href="https://www.psychologytoday.com/us/blog/going-beyond-intelligence/201908/children-chores-and-happy-productivity#:~:text=In%20a%20large%20study%2C%20researchers,Psychological%20adjustment%20and%20career%20success." target="_blank" rel="noreferrer">(source)</a></li>
+                                    <li>★And so much more! <a style={{color: "black"}}href="https://www.psychologytoday.com/us/blog/going-beyond-intelligence/201908/children-chores-and-happy-productivity#:~:text=In%20a%20large%20study%2C%20researchers,Psychological%20adjustment%20and%20career%20success." target="_blank" rel="noreferrer">(source)</a></li>
                                 </ul>
                                 <br />
                                 We wanted to create an app that incentivized individuals to get the job done. The idea was straight-forward: users are assigned chores and if they are completed on time, they will be rewarded.
