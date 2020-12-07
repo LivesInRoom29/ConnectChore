@@ -24,8 +24,8 @@ const About = () => {
                         <Form>
                             <Link to="/" className="text-dark">
                                 <i className="fas fa-arrow-left"></i>
-                        Back to Home
-                    </Link>
+                                Back to Home
+                            </Link>
                             <div>
                                 <br />
                                 <h3 style={{ textAlign: "center" }}>About Us</h3>
