@@ -9,7 +9,7 @@ class Navbar extends Component {
 
       <nav className="navbar navbar-expand-lg navbar-light d-flex justify-content-center">
         <div className="navbar-brand"><Link to="/dashboard"><img src={Logo} alt="Connect Chore Logo" /></Link>
-        <div className="nav-link"><Link to="/about" id="navdesign">About</Link></div>
+        {/* <div className="nav-link"><Link to="/about" id="navdesign">About</Link></div> */}
         </div>
       </nav>
     );

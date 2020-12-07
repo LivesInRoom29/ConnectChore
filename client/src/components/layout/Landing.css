@@ -32,6 +32,10 @@ h5 {
   font-size: 24px !important;
 }
 
+.aboutCC {
+  text-decoration: underline;
+}
+
 .aboutCC:hover {
   color: #ffffff !important;
 }
