@@ -16,7 +16,7 @@ import API from "../../utils/API";
 import { format } from "date-fns";
 import SubNav from "../layout/SubNav";
 // import { Link } from "react-router-dom";
-import { setTasksAction } from "../../actions/chorelistActions";
+// import { setTasksAction } from "../../actions/chorelistActions";
 import ChoreListTasks from "../chorelist-tasks/ChoreListTasks";
 // API calls
 
@@ -216,14 +216,14 @@ MemberChoreList.propTypes = {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    tasks: state.chorelist.tasks
+    // tasks: state.chorelist.tasks
 });
 
-const mapDispatchToProps = (dispatch, props) => (
-    {
-        setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
-    }
-)
+// const mapDispatchToProps = (dispatch, props) => (
+//     {
+//         setTasks: (tasksArray) => dispatch(setTasksAction(tasksArray))
+//     }
+// )
 
 export default connect(
     mapStateToProps
