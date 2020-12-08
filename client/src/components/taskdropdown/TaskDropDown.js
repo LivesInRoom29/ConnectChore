@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 //bootstrap components
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
 import API from "../../utils/API";
 import { setTasksAction } from "../../actions/chorelistActions";
@@ -21,7 +24,8 @@ class TaskDropDown extends Component {
             allTasks: [],
             filteredTasks: [],
             description: "",
-            auth: {}
+            auth: {},
+            showTasks: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -86,6 +90,88 @@ class TaskDropDown extends Component {
 
     //drop down menu for tasklist
     render() {
+
+        const tasks = this.state.filteredTasks;
+
+        const popover = (
+            <Popover id="popover-basic">
+              <Popover.Title as="h3"
+                style={{ backgroundColor: "black" }}
+              >
+                <strong>No Tasks Yet</strong>
+              </Popover.Title>
+              <Popover.Content>
+                <p>
+                  Add <Link to="/tasks" style={{ color: "#42b984", }}>Tasks</Link> First
+                </p>
+              </Popover.Content>
+            </Popover>
+          );
+
+          // Conditionally renders the rewards dropdown with popover if there are no rewards
+    const tasksDropDown = tasks[0] ? (
+        <Form.Row>
+          <Form.Group as={Col} lg="6" controlId="formTask">
+            <Form.Label>Pick a task:</Form.Label>
+            <Form.Control
+              as="select"
+              name="choosetask"
+              value={this.state.choosetask}
+              onChange={this.state.handleInputChange}
+            >
+              {/* Map the household members to the drop-down */}
+              {
+                this.state.filteredTasks.map(task => (
+                  <option
+                    key={task._id}
+                    value={task._id}
+                  >
+                    {task.description}
+                  </option>
+                ))
+              }
+            </Form.Control>
+          </Form.Group>
+        </Form.Row>
+      ) : (
+          <>
+            <Form.Row>
+              <OverlayTrigger
+                placement="top"
+                transition={false}
+                overlay={popover}
+                trigger="click"
+              >
+                {({ ref, ...triggerHandler }) => (
+  
+                  <Form.Group as={Col} lg="6" controlId="formTask" {...triggerHandler}>
+                    <Form.Label>Pick a task:</Form.Label>
+                    <Form.Control
+                      ref={ref}
+                      as="select"
+                      name="choosetask"
+                      value={this.state.choosetask}
+                      onChange={this.state.handleInputChange}
+                    >
+                      {/* Map the tasks to the drop-down */}
+                      {
+                        this.state.filteredTasks.map(task => (
+                          <option
+                            key={task._id}
+                            value={task._id}
+                          >
+                            {task.description}
+                          </option>
+                        ))
+                      }
+                    </Form.Control>
+                  </Form.Group>
+                )}
+              </OverlayTrigger>
+            </Form.Row>
+          </>
+        )
+
         return (
             <>
                 <Form>
@@ -94,7 +180,8 @@ class TaskDropDown extends Component {
                         Add a task to your choreslist.
                     </p>
                 </h4> */}
-                    <Form.Row className="dropdown-row">
+                    {tasksDropDown}
+                    {/* <Form.Row className="dropdown-row">
                         <Form.Group as={Col} md="9" xs="8" controlId="formTask">
                             <Form.Label>Pick a task to add:</Form.Label>
                             <Form.Control
@@ -104,7 +191,7 @@ class TaskDropDown extends Component {
                                 placeholder="Please add tasks first"
                                 onChange={this.handleInputChange}
                             >
-                                {/* Map the tasks to the drop-down */}
+                                Map the tasks to the drop-down
                                 {
                                     this.state.filteredTasks.map(task => (
                                         <option
@@ -116,7 +203,7 @@ class TaskDropDown extends Component {
                                     ))
                                 }
                             </Form.Control>
-                        </Form.Group>
+                        </Form.Group> */}
                         <Button
                             style={{
                                 width: "125px",
@@ -138,8 +225,7 @@ class TaskDropDown extends Component {
                         >
                             Add Task
                     </Button>
-                    </Form.Row>
-
+                    {/* </Form.Row> */}
                 </Form>
             </>
         )
