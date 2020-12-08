@@ -13,7 +13,7 @@ import Col from "react-bootstrap/Col";
 import { resetGame } from "../../actions/gameActions";
 import filterDeleted from "../../utils/filterDeleted";
 import "./game.css";
-import $ from "jquery";
+//import $ from "jquery";
 import Confetti from "../confetti/confetti";
 
 
@@ -382,8 +382,9 @@ class GameBox extends Component {
               </Button>
             </center>
             <br />
-            <p className="message">{this.state.message}</p>
-            <div className="message">{<Confetti />}</div>
+            {/* <p className="message">{this.state.message}</p> */}
+            {this.state.message ? <><p className="message">{this.state.message}</p><div className="message">{<Confetti />}</div></> : null }
+            
            
             <div className="grid">
               <div>{this.createCells()}</div>
