@@ -305,31 +305,7 @@ class GameBox extends Component {
           <div>
             <br />
             <br />
-            <center>
-              <Button
-                as={Col}
-                md="3"
-                onClick={this.initGame}
-                className="Start Game"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  width: "200px",
-                  height: "50px",
-                  fontSize: "15px",
-                  textTransform: "uppercase",
-                  borderRadius: "30px",
-                  border: "none",
-                  padding: "12px",
-                  backgroundColor: "#00adef",
-                  color: "white",
-                  letterSpacing: "1.5px",
-                  textAlign: "center",
-                }}
-              >
-                New Game
-              </Button>
-            </center>
+      
             <center>
               <Container>
                 <Row>
@@ -378,11 +354,35 @@ class GameBox extends Component {
                 </Row>
               </Container>
             </center>
+            <center>
+              <Button
+                as={Col}
+                md="3"
+                onClick={this.initGame}
+                className="Start Game"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "200px",
+                  height: "50px",
+                  fontSize: "15px",
+                  textTransform: "uppercase",
+                  borderRadius: "30px",
+                  border: "none",
+                  padding: "12px",
+                  backgroundColor: "#00adef",
+                  color: "white",
+                  letterSpacing: "1.5px",
+                  textAlign: "center",
+                }}
+              >
+                New Game
+              </Button>
+            </center>
             <br />
             <p className="message">{this.state.message}</p>
-            <br />
-            <br />
-            <br />
+           
+
             <div className="grid">
               <div>{this.createCells()}</div>
             </div>
