@@ -32,7 +32,7 @@ class TaskForm extends Component {
         this.addTaskClick = this.addTaskClick.bind(this);
     }
 
-    // get tasks data from the DB
+    // get tasks data from the DB, set state with undeleted tasks to populate the page
     getUndeletedTasks(userId) {
         API.getTasks(userId)
             .then(res => {
