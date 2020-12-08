@@ -46,6 +46,7 @@ Check out ConnectChore today! https://connectchore.herokuapp.com
 | Redux            |               |                    |                |
 | React-redux      |               |                    |                |
 | Redux-thunk      |               |                    |                |
+| React-use        |               |                    |                |
 
 ## User Stories
 
