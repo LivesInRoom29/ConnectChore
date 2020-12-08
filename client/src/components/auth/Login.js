@@ -115,7 +115,7 @@ class Login extends Component {
                                                 invalid: errors.email || errors.emailnotfound
                                             })}
                                         />
-                                        <span className="text-danger" key={errors.length}>
+                                        <span className="text-danger">
                                             {errors.email}
                                             {errors.emailnotfound}
                                         </span>
