@@ -33,29 +33,24 @@ class Register extends Component {
         }
     }
 
-    // UNSAFE_componentWillReceiveProps(nextProps) {
-    //     if (nextProps.errors) {
-    //         this.setState({
-    //             errors: nextProps.errors
-    //         });
-    //     }
-    // }
-
-    componentDidUpdate(prevProps, prevState) {
-        if(prevProps.errors !== this.state.errors) {
-            this.setState({errors: prevState.errors });
-        }
-    }
-
-    static getDerivedStateFromProps(nextProps,prevState) {
-        if (nextProps.errors !== prevState.errors) {
-            return {
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
                 errors: nextProps.errors
-            }
+            });
         }
-        else return null;
     }
 
+    // Reference to remove UNSAFE code: https://stackoverflow.com/questions/62722407/how-to-change-update-componentwillreceiveprops-to-getderivedstatefromprops-in-re
+
+    // componentDidUpdate(prevProps) {
+    //     //console.log(this.props.history);
+    //     if (prevProps.errors !== this.props.errors) { // <-- Only update error state if value different
+    //       this.setState({
+    //         errors: this.props.errors,
+    //       });
+    //     }
+    //   }
 
     // Every form element has an onChange event that ties its value to our components state
     onChange = e => {
