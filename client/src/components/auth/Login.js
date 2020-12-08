@@ -31,16 +31,45 @@ class Login extends Component {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-            this.props.history.push("/dashboard"); // push user to dashboard when they login
-        }
-        if (nextProps.errors) {
-            this.setState({
+    // UNSAFE_componentWillReceiveProps(nextProps) {
+    //     if (nextProps.auth.isAuthenticated) {
+    //         this.props.history.push("/dashboard"); // push user to dashboard when they login
+    //     }
+    //     if (nextProps.errors) {
+    //         this.setState({
+    //             errors: nextProps.errors
+    //         });
+    //     }
+    // }
+
+    // componentDidUpdate(prevProps, prevState) {
+    //     if(prevProps.errors !== this.state.errors) {
+    //         this.setState({errors: prevState.errors });
+    //     }
+    // }
+
+        
+    // componentDidUpdate(prevProps, prevState) {
+    //     // if (prevState.auth.isAuthenticated) {
+    //     //     this.props.history.push("/dashboard"); // push user to dashboard when they login
+    //     // }
+    //     //if (prevState.errors !== this.state.errors) {
+    //         if (this.state.errors !== prevState.errors) {
+    //         this.setState({
+    //             errors: this.state.errors
+    //         });
+    //     }
+    // }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.errors !== prevState.errors) {
+            return {
                 errors: nextProps.errors
-            });
+            }
         }
+        return null;
     }
+
 
     // Every form element has an onChange event that ties its value to our components state
     onChange = e => {
@@ -99,7 +128,7 @@ class Login extends Component {
                                                 invalid: errors.email || errors.emailnotfound
                                             })}
                                         />
-                                        <span className="text-danger">
+                                        <span className="text-danger" key={errors.length}>
                                             {errors.email}
                                             {errors.emailnotfound}
                                         </span>

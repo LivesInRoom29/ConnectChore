@@ -33,13 +33,29 @@ class Register extends Component {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
+    // UNSAFE_componentWillReceiveProps(nextProps) {
+    //     if (nextProps.errors) {
+    //         this.setState({
+    //             errors: nextProps.errors
+    //         });
+    //     }
+    // }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.errors !== this.state.errors) {
+            this.setState({errors: prevState.errors });
         }
     }
+
+    static getDerivedStateFromProps(nextProps,prevState) {
+        if (nextProps.errors !== prevState.errors) {
+            return {
+                errors: nextProps.errors
+            }
+        }
+        else return null;
+    }
+
 
     // Every form element has an onChange event that ties its value to our components state
     onChange = e => {
