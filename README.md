@@ -39,7 +39,8 @@ Check out ConnectChore today! https://connectchore.herokuapp.com
 | jQuery           | Morgan        | Postman            | Validator      |
 | React            |               | redux-devtools-extension|           |
 | React-bootstrap  |               | Trello             |                |
-| React-datepicker |               | VSCode             |                |
+| React-confetti   |               | VSCode             |                |
+| React-datepicker |               |                    |                |
 | React-router-dom |               |                    |                |
 | React-scroll     |               |                    |                |
 | Redux            |               |                    |                |
