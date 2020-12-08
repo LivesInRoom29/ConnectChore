@@ -30,6 +30,7 @@ class AddChorelist extends Component {
     //const { user } = this.props.auth;
     const choreListID = this.props.choreListToEdit;
     const rewards = this.props.undeletedRewards;
+    const householdMembers = this.props.householdMembers;
 
     const chorelistEditor = choreListID ? (
       <>
@@ -46,9 +47,24 @@ class AddChorelist extends Component {
         <h4>No chore lists to display!</h4>
       );
 
-    //
+    // Popover for household members dropdown
+    const hmPopover = (
+      <Popover id="popover-basic">
+        <Popover.Title as="h3"
+          style={{ backgroundColor: "black" }}
+        >
+          <strong>No Household Members Yet</strong>
+        </Popover.Title>
+        <Popover.Content>
+          <p>
+            Add <Link to="/householdmembers" style={{ color: "#42b984", }}>Household Members</Link> First
+          </p>
+        </Popover.Content>
+      </Popover>
+    )
 
-    const popover = (
+    // Popover for rewards dropdown
+    const rewardsPopover = (
       <Popover id="popover-basic">
         <Popover.Title as="h3"
           style={{ backgroundColor: "black" }}
@@ -62,6 +78,70 @@ class AddChorelist extends Component {
         </Popover.Content>
       </Popover>
     );
+
+    // Conditionally renders the household members dropdown with popover if there are no household members
+    const householdMembersDropDown = householdMembers[0] ? (
+      <Form.Row>
+        <Form.Group as={Col} lg="6" controlId="formHouseholdMember">
+          <Form.Label>Pick someone:</Form.Label>
+          <Form.Control
+            as="select"
+            name="assignedto"
+            value={this.props.assignedto}
+            onChange={this.props.handleInputChange}
+          >
+            {/* Map the household members to the drop-down */}
+            {
+              this.props.householdMembers.map(member => (
+                <option
+                  key={member._id}
+                  value={member._id}
+                >
+                  {member.name}
+                </option>
+              ))
+            }
+          </Form.Control>
+        </Form.Group>
+      </Form.Row>
+    ) : (
+        <>
+          <Form.Row>
+            <OverlayTrigger
+              placement="top"
+              transition={false}
+              overlay={hmPopover}
+              trigger="click"
+            >
+              {({ ref, ...triggerHandler }) => (
+
+                <Form.Group as={Col} lg="6" controlId="formHouseholdMember" {...triggerHandler}>
+                  <Form.Label>Pick someone:</Form.Label>
+                  <Form.Control
+                    ref={ref}
+                    as="select"
+                    name="assignedto"
+                    value={this.props.assignedto}
+                    onChange={this.props.handleInputChange}
+                  >
+                    {/* Map the household members to the drop-down */}
+                    {
+                      this.props.householdMembers.map(member => (
+                        <option
+                          key={member._id}
+                          value={member._id}
+                        >
+                          {member.name}
+                        </option>
+                      ))
+                    }
+                  </Form.Control>
+                </Form.Group>
+              )}
+            </OverlayTrigger>
+          </Form.Row>
+        </>
+      );
 
     // Conditionally renders the rewards dropdown with popover if there are no rewards
     const rewardsDropDown = rewards[0] ? (
@@ -94,7 +174,7 @@ class AddChorelist extends Component {
             <OverlayTrigger
               placement="top"
               transition={false}
-              overlay={popover}
+              overlay={rewardsPopover}
               trigger="click"
             >
               {({ ref, ...triggerHandler }) => (
@@ -125,8 +205,7 @@ class AddChorelist extends Component {
             </OverlayTrigger>
           </Form.Row>
         </>
-      )
-
+      );
 
     return (
       <>
@@ -142,29 +221,10 @@ class AddChorelist extends Component {
                 </p>
               </h4>
               <br />
-              <Form.Row>
-                <Form.Group as={Col} lg="6" controlId="formHouseholdMember">
-                  <Form.Label>Pick someone:</Form.Label>
-                  <Form.Control
-                    as="select"
-                    name="assignedto"
-                    value={this.props.assignedto}
-                    onChange={this.props.handleInputChange}
-                  >
-                    {/* Map the household members to the drop-down */}
-                    {
-                      this.props.householdMembers.map(member => (
-                        <option
-                          key={member._id}
-                          value={member._id}
-                        >
-                          {member.name}
-                        </option>
-                      ))
-                    }
-                  </Form.Control>
-                </Form.Group>
-              </Form.Row>
+              {/* Conditionally renders the household memebrs dropdown */}
+              {/* If there are no household members, a popover appears on click */}
+              {householdMembersDropDown}
+              {/* Date Picker */}
               <Form.Row>
                 <Form.Group as={Col} lg="6" controlId="formDatePicker">
                   <Form.Label className="mr-5">Select a date:</Form.Label>
