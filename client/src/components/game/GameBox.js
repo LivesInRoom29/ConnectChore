@@ -13,6 +13,8 @@ import Col from "react-bootstrap/Col";
 import { resetGame } from "../../actions/gameActions";
 import filterDeleted from "../../utils/filterDeleted";
 import "./game.css";
+import $ from "jquery";
+import Confetti from "../confetti/confetti";
 
 
 class GameBox extends Component {
@@ -381,8 +383,8 @@ class GameBox extends Component {
             </center>
             <br />
             <p className="message">{this.state.message}</p>
+            <div className="message">{<Confetti />}</div>
            
-
             <div className="grid">
               <div>{this.createCells()}</div>
             </div>

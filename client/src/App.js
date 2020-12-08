@@ -25,6 +25,7 @@ import TaskForm from "./components/tasks/TaskForm";
 import GameBox from "./components/game/GameBox";
 import TaskDropDown from "./components/taskdropdown/TaskDropDown";
 import MemberChoreList from "./components/memberchorelist/MemberChoreList";
+import Confetti from "../src/components/confetti/confetti";
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template
@@ -63,6 +64,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/confetti" component={Confetti} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/rewards" component={Rewards} />
