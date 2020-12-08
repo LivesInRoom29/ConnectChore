@@ -45,12 +45,12 @@ class Login extends Component {
     // Reference to remove UNSAFE code: https://stackoverflow.com/questions/62722407/how-to-change-update-componentwillreceiveprops-to-getderivedstatefromprops-in-re
 
     componentDidUpdate(prevProps) {
-        console.log(prevProps.auth, this.props.auth, this.props.history);
+        //console.log(prevProps.auth, this.props.auth, this.props.history);
         if (prevProps.auth.isAuthenticated !== this.props.auth.isAuthenticated) {
           this.props.history.push("/dashboard");
         }
       
-        console.log(this.props.history);
+        //console.log(this.props.history);
         if (prevProps.errors !== this.props.errors) { // <-- Only update error state if value different
           this.setState({
             errors: this.props.errors,
