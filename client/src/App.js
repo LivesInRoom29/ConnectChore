@@ -23,15 +23,15 @@ import HouseholdMemberForm from "./components/householdmembers/HouseholdMemberFo
 import ChoreList from "./components/chorelist/ChoreList";
 import TaskForm from "./components/tasks/TaskForm";
 import GameBox from "./components/game/GameBox";
-import TaskDropDown from "./components/taskdropdown/TaskDropDown";
-import MemberChoreList from "./components/memberchorelist/MemberChoreList";
 import Confetti from "../src/components/confetti/confetti";
+// import TaskDropDown from "./components/taskdropdown/TaskDropDown";
+// import MemberChoreList from "./components/memberchorelist/MemberChoreList";
 
 // TEMPLATE component!
 // To access, log into the the app and go to: http://localhost:3000/template
-import Template from "./components/Template";
-import ChoreListDemo from "./components/chorelist-demo/ChoreListDemo";
-import DropDownDemo from "./components/chorelist-demo/DropDownDemo";
+// import Template from "./components/Template";
+// import ChoreListDemo from "./components/chorelist-demo/ChoreListDemo";
+// import DropDownDemo from "./components/chorelist-demo/DropDownDemo";
 //import ChoreView from "./components/choreview/ChoreView";
 
 // Check for token to keep user logged in
@@ -72,14 +72,14 @@ class App extends Component {
               <PrivateRoute exact path="/householdmembers" component={HouseholdMemberForm} />
               <PrivateRoute exact path="/chorelist" component={ChoreList} />
               <PrivateRoute exact path="/tasks" component={TaskForm} />
-              <PrivateRoute exact path="/taskdropdown" component={TaskDropDown} />
-              <PrivateRoute exact path="/memberchorelist" component={MemberChoreList} />
+              {/* <PrivateRoute exact path="/taskdropdown" component={TaskDropDown} /> */}
+              {/* <PrivateRoute exact path="/memberchorelist" component={MemberChoreList} /> */}
               {/* <PrivateRoute exact path="/chores/:userId/:listId" component={ChoreView} /> */}
 
               {/* TEMPLATE ROUTES */}
-              <PrivateRoute exact path="/template" component={Template} />
+              {/* <PrivateRoute exact path="/template" component={Template} />
               <PrivateRoute exact path="/chorelistdemo" component={ChoreListDemo} />
-              <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} />
+              <PrivateRoute exact path="/dropdowndemo" component={DropDownDemo} /> */}
               {/* <PrivateRoute exact path="/game" component={GameBox} /> */}
 
             </Switch>

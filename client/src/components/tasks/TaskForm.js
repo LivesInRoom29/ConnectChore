@@ -32,12 +32,9 @@ class TaskForm extends Component {
         this.addTaskClick = this.addTaskClick.bind(this);
     }
 
-    // get tasks data from the DB
-    // TEST: will passing in user.id to the API call successfully get us the tasks for the logged in user only?
-    componentDidMount() {
-        const { user } = this.props.auth
-
-        API.getTasks(user.id)
+    // get tasks data from the DB, set state with undeleted tasks to populate the page
+    getUndeletedTasks(userId) {
+        API.getTasks(userId)
             .then(res => {
 
                 const undeletedTasks = filterDeleted(res.data)
@@ -49,6 +46,26 @@ class TaskForm extends Component {
                 )
             })
             .catch(err => console.log(err));
+    }
+
+    // TEST: will passing in user.id to the API call successfully get us the tasks for the logged in user only?
+    componentDidMount() {
+        const { user } = this.props.auth
+
+        this.getUndeletedTasks(user.id);
+
+        // API.getTasks(user.id)
+        //     .then(res => {
+
+        //         const undeletedTasks = filterDeleted(res.data)
+
+        //         this.setState(
+        //             {
+        //                 tasks: undeletedTasks
+        //             }
+        //         )
+        //     })
+        //     .catch(err => console.log(err));
     }
 
     // get the input values and add to state
@@ -84,9 +101,23 @@ class TaskForm extends Component {
 
     };
 
+    handleTaskDelete = async e => {
+        const { user } = this.props.auth;
+        const taskId = e.currentTarget.dataset.id;
+
+        await API.deleteTask(
+            taskId,
+            {
+                isDeleted: true
+            }
+        );
+
+        this.getUndeletedTasks(user.id);
+    }
+
     // RENDER TEST:
-    // Clicking ADD TASK adds reward as expected to DB for the logged in user only?
-    // Clicking the X box successuflly removes the task entry for the logged in user only?
+    // Clicking ADD TASK adds reward as expected to DB for the logged in user only? YES
+    // Clicking the X box successuflly removes the task entry for the logged in user only? YES
 
     render() {
 
@@ -178,20 +209,9 @@ class TaskForm extends Component {
                                             {task.description} (frequency: {task.frequency || 0})
                                             <Button
                                                 variant="light"
+                                                data-id={task._id}
                                                 className="float-right text-danger"
-                                                onClick={
-                                                    () => API.deleteTask(
-                                                        task._id,
-                                                        {
-                                                            isDeleted: true
-                                                        }
-                                                    )
-                                                        .then(res => {
-                                                            console.log(res);
-                                                            window.location.reload();
-                                                        })
-                                                        .catch(err => console.log(err))
-                                                }
+                                                onClick={this.handleTaskDelete}
                                             >
                                                 <span><i className="fas fa-times"></i></span>
                                             </Button>

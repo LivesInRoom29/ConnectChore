@@ -31,12 +31,9 @@ class Rewards extends Component {
         }
     }
 
-    // get rewards data from the DB
-    // TEST-pass: will passing in user.id to the API call successfully get us the rewards for the logged in user only?
-    componentDidMount() {
-        const { user } = this.props.auth
-
-        API.getRewardDescriptions(user.id)
+    // get all rewards for the user from the db, set state with undeleted rewards to populate the page
+    getUndeletedRewards(userId) {
+        API.getRewardDescriptions(userId)
             .then(res => {
                 const undeletedRewards = filterDeleted(res.data);
 
@@ -46,6 +43,14 @@ class Rewards extends Component {
                     })
             })
             .catch(err => console.log(err));
+    }
+
+    // get rewards data from the DB
+    // TEST-pass: will passing in user.id to the API call successfully get us the rewards for the logged in user only?
+    componentDidMount() {
+        const { user } = this.props.auth
+
+        this.getUndeletedRewards(user.id);
     }
 
     // get the input values and add to state
@@ -80,6 +85,20 @@ class Rewards extends Component {
             .catch(err => console.log(err));
 
     };
+
+    handleRewardDelete = async e => {
+        const { user } = this.props.auth;
+        const rewardId = e.currentTarget.dataset.id;
+
+        await API.deleteRewardDescription(
+            rewardId,
+            {
+                isDeleted: true
+            }
+        )
+
+        this.getUndeletedRewards(user.id);
+    }
 
     // RENDER TEST-pass:
     // Clicking ADD REWARD adds reward as expected to DB for the logged in user only?
@@ -159,7 +178,7 @@ class Rewards extends Component {
                             <br />
                             <h3>Household Rewards</h3>
                             <p>A list of the recently added rewards for completing chores.</p>
-                            {/* Eventually filter down to non-deleted and map that array */}
+                            {/* Use undeleted rewards array in state to populate the list of rewards */}
                             {this.state.rewards.length ? (
                                 <ListGroup variant="flush">
                                     {this.state.rewards.map(reward => (
@@ -172,19 +191,8 @@ class Rewards extends Component {
                                             <Button
                                                 variant="light"
                                                 className="float-right text-danger"
-                                                onClick={
-                                                    () => API.deleteRewardDescription(
-                                                        reward._id,
-                                                        {
-                                                            isDeleted: true
-                                                        }
-                                                    )
-                                                        .then(res => {
-                                                            console.log(res);
-                                                            window.location.reload();
-                                                        })
-                                                        .catch(err => console.log(err))
-                                                }
+                                                data-id={reward._id}
+                                                onClick={this.handleRewardDelete}
                                             >
                                                 <span><i className="fas fa-times"></i></span>
                                             </Button>
