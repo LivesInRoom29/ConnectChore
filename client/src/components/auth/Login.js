@@ -42,34 +42,21 @@ class Login extends Component {
     //     }
     // }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if(prevProps.errors !== this.state.errors) {
-    //         this.setState({errors: prevState.errors });
-    //     }
-    // }
+    // Reference to remove UNSAFE code: https://stackoverflow.com/questions/62722407/how-to-change-update-componentwillreceiveprops-to-getderivedstatefromprops-in-re
 
-        
-    // componentDidUpdate(prevProps, prevState) {
-    //     // if (prevState.auth.isAuthenticated) {
-    //     //     this.props.history.push("/dashboard"); // push user to dashboard when they login
-    //     // }
-    //     //if (prevState.errors !== this.state.errors) {
-    //         if (this.state.errors !== prevState.errors) {
-    //         this.setState({
-    //             errors: this.state.errors
-    //         });
-    //     }
-    // }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.errors !== prevState.errors) {
-            return {
-                errors: nextProps.errors
-            }
+    componentDidUpdate(prevProps) {
+        console.log(prevProps.auth, this.props.auth, this.props.history);
+        if (prevProps.auth.isAuthenticated !== this.props.auth.isAuthenticated) {
+          this.props.history.push("/dashboard");
         }
-        return null;
-    }
-
+      
+        console.log(this.props.history);
+        if (prevProps.errors !== this.props.errors) { // <-- Only update error state if value different
+          this.setState({
+            errors: this.props.errors,
+          });
+        }
+      }
 
     // Every form element has an onChange event that ties its value to our components state
     onChange = e => {
