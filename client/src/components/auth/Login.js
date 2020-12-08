@@ -31,16 +31,32 @@ class Login extends Component {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-            this.props.history.push("/dashboard"); // push user to dashboard when they login
+    // UNSAFE_componentWillReceiveProps(nextProps) {
+    //     if (nextProps.auth.isAuthenticated) {
+    //         this.props.history.push("/dashboard"); // push user to dashboard when they login
+    //     }
+    //     if (nextProps.errors) {
+    //         this.setState({
+    //             errors: nextProps.errors
+    //         });
+    //     }
+    // }
+
+    // Reference to remove UNSAFE code: https://stackoverflow.com/questions/62722407/how-to-change-update-componentwillreceiveprops-to-getderivedstatefromprops-in-re
+
+    componentDidUpdate(prevProps) {
+        //console.log(prevProps.auth, this.props.auth, this.props.history);
+        if (prevProps.auth.isAuthenticated !== this.props.auth.isAuthenticated) {
+          this.props.history.push("/dashboard");
         }
-        if (nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
+      
+        //console.log(this.props.history);
+        if (prevProps.errors !== this.props.errors) { // <-- Only update error state if value different
+          this.setState({
+            errors: this.props.errors,
+          });
         }
-    }
+      }
 
     // Every form element has an onChange event that ties its value to our components state
     onChange = e => {
