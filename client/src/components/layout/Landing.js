@@ -117,9 +117,9 @@ class Landing extends Component {
           </Row>
           <br />
           <br />
-          {/* <Row>
+          <Row>
             <Col lg={12} className="d-flex justify-content-center mt-5 text-center"><h3 className="landing">Learn more about <Link to="/about" className="aboutCC">ConnectChore.</Link></h3></Col>
-          </Row> */}
+          </Row>
           <br />
           <br />
           <br />

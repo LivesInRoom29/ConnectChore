@@ -8,7 +8,8 @@ class Navbar extends Component {
     return (
 
       <nav className="navbar navbar-expand-lg navbar-light d-flex justify-content-center">
-        <div className="navbar-brand"><Link to="/dashboard"><img src={Logo} alt="Connect Chore Logo" /></Link></div>
+        <div className="navbar-brand"><Link to="/dashboard"><img src={Logo} alt="Connect Chore Logo" /></Link>
+        </div>
       </nav>
     );
   }

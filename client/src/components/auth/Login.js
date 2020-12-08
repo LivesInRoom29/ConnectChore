@@ -84,7 +84,7 @@ class Login extends Component {
                                 <p className="text-body">
                                     Don't have an account? <Link to="/register" className="text-muted">Register</Link>
                                 </p>
-                                <Form.Group as={Row} controlId="loginForm.email">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={12}></Form.Label>
                                     <Col sm={12}>
                                         <Form.Control
@@ -105,7 +105,7 @@ class Login extends Component {
                                         </span>
                                     </Col>
                                 </Form.Group>
-                                <Form.Group as={Row} controlId="loginForm.password">
+                                <Form.Group as={Row}>
                                     <Form.Label column sm={12}></Form.Label>
                                     <Col sm={12}>
                                         <Form.Control
