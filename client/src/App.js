@@ -23,6 +23,7 @@ import HouseholdMemberForm from "./components/householdmembers/HouseholdMemberFo
 import ChoreList from "./components/chorelist/ChoreList";
 import TaskForm from "./components/tasks/TaskForm";
 import GameBox from "./components/game/GameBox";
+import Confetti from "../src/components/confetti/confetti";
 // import TaskDropDown from "./components/taskdropdown/TaskDropDown";
 // import MemberChoreList from "./components/memberchorelist/MemberChoreList";
 
@@ -63,6 +64,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/confetti" component={Confetti} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/rewards" component={Rewards} />
