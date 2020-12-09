@@ -24,8 +24,8 @@ class TaskDropDown extends Component {
             allTasks: [],
             filteredTasks: [],
             description: "",
-            auth: {},
-            showTasks: false
+            auth: {}
+            // showTasks: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -117,7 +117,7 @@ class TaskDropDown extends Component {
               as="select"
               name="choosetask"
               value={this.state.choosetask}
-              onChange={this.state.handleInputChange}
+              onChange={this.handleInputChange}
             >
               {/* Map the household members to the drop-down */}
               {
@@ -151,7 +151,7 @@ class TaskDropDown extends Component {
                       as="select"
                       name="choosetask"
                       value={this.state.choosetask}
-                      onChange={this.state.handleInputChange}
+                      onChange={this.handleInputChange}
                     >
                       {/* Map the tasks to the drop-down */}
                       {
